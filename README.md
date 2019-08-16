@@ -1,20 +1,30 @@
-Lesson One
+# Lessons in Rust 
 
-Getting started with Rust
+## How to Use 
 
-## Objectives 
+* The individual lessons are in the directories (e.g. lesson_one)  
+* The README in those directories contains instructions for each lesson 
+* The general format of the class requires you to commit code for each lesson.  The instructions for that process are below.
 
-* Get Rust installed
-* Create a new project
-* Add a function to the new project that returns a value
+## Course Objectives
+* Provide a 'gentle' introduction to Rust
+* Understand the basics of the language and provide a foundation for further development
+* Provide some motiviation by looking at some interesting Rust projects 
 
-## Step by Step
+### Checking Homework Assignments 
 
-### Installing
+* First, make sure that you are registered as a 'collaborator' in the project in github.  The course administrator will need a github ID to add you to the project.
 
-* [Installing Rust](https://www.rust-lang.org/) - This installs the toolchain (compiler and package manager (cargo) - Windows, OSX, Linux and other OS's are supported.   
+0) Clone this repository
+1) Crate a git branch with your github id as the name:
+```
+git branch nook
+git checkout nook
+```
 
-## Checking in the assignments 
+2) Read the readme for the lesson and fix the code (on your branch)  The 'master' branch lesson, normally, will not compile.  It has some placeholders like 'xxxxxx' that need to be replaced.  That's a part of the lesson.  All of the lessons are command-line applications.  So, you run it, and it outputs something.  If something is confusing, ask in the chat group.  The content is challenging, but the lesson structure should not be.
 
-All participants will be 'collaborators' in the github project.  That means you have permission to 
+3) Make sure it compiles and runs.  ;)
+
+4) Commit and push to your remote branch.
 
