@@ -85,7 +85,7 @@ After you've fixed the code, commit and push to your remote branch.
 
 ### Homework Notes 
 
-* We talked about 'rustc' above, but for this lesson, just use cargo build.  Cargo requires a manifest (cargo.toml), rustc does not.  
+* We talked about 'rustc' above, but for this lesson, just use ``cargo build``.  Cargo requires a manifest (cargo.toml), rustc does not.  
 
 * The println! function lives in std::io [println](https://doc.rust-lang.org/std/macro.println.html) The std library contains lots of useful modules, functions, types, and macros, but is not strictly necessary. 
 
