@@ -39,6 +39,14 @@ All of the lessons are command-line applications.  So, 1) it runs, and 2) it out
 
 4) Commit and push to your remote branch.
 
+Since this course is 'live' (lessons are being developed) you will need to update your branch from master to get the latest changes/lessons.  So, starting with Lesson 2, from *your* branch:
+
+```
+git fetch -p origin
+git merge origin/master
+
+```
+
 ## Other Notes
 
 * The course assumes you have some development experience
