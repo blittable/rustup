@@ -1,4 +1,4 @@
-# Lesson One: Setup and Calling a Function
+# Lesson One: Setup and returning a string
 
 ## Objectives 
 
@@ -50,7 +50,7 @@ You can switch the active toolchain or compile with a specific toolchain.  Look 
 
 #### Cool Things 
 
-Type 'rustc', and look at the option for 'emit' that specifies the output format, including asm (think web assembly) and llvm-ir (ask Khem)
+Type ``rustc``, and look at the option for ```emit``` that specifies the output format, including asm (think web assembly) and llvm-ir (ask Khem)
 
 ```
 --emit [asm|llvm-bc|llvm-ir|obj|metadata|link|dep-info|mir]
@@ -85,7 +85,7 @@ After you've fixed the code, commit and push to your remote branch.
 
 ### Homework Notes 
 
-* We talked about 'rustc' above, but for this lesson, just use cargo build.  Cargo requires a manifest (cargo.toml), rustc does not.  
+* We talked about ''rustc'' above, but for this lesson, just use ``cargo build``.  Cargo requires a manifest (cargo.toml), rustc does not.  
 
 * The println! function lives in std::io [println](https://doc.rust-lang.org/std/macro.println.html) The std library contains lots of useful modules, functions, types, and macros, but is not strictly necessary. 
 
