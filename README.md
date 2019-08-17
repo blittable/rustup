@@ -11,7 +11,7 @@
 * Understand the basics of the language and provide a foundation for further development
 * Provide some motiviation by looking at some interesting Rust projects 
 
-### Checking Homework Assignments 
+### Committing Homework Assignments 
 
 * First, make sure that you are registered as a 'collaborator' in the project in github.  The course administrator will need a github ID to add you to the project.
 
@@ -22,7 +22,9 @@ git branch nook
 git checkout nook
 ```
 
-2) Read the readme for the lesson and fix the code (on your branch)  The 'master' branch lesson, normally, will not compile.  It has some placeholders like 'xxxxxx' that need to be replaced.  That's a part of the lesson.  All of the lessons are command-line applications.  So, you run it, and it outputs something.  If something is confusing, ask in the chat group.  The content is challenging, but the lesson structure should not be.
+2) Read the README for the lesson and fix the code (on your branch)  The 'master' branch lesson, normally, will not compile.  It has some placeholders like 'xxxxxx' that need to be replaced.  That's a part of the lesson.  
+
+All of the lessons are command-line applications.  So, it runs, and it outputs something.  If something is confusing, ask in the chat group.  The content is challenging, but the lesson structure should not be.
 
 3) Make sure it compiles and runs.  ;)
 
