@@ -19,16 +19,16 @@
 0) Clone this repository
 1) Create a git branch with your github id as the name:
 ```
-git branch nook
-git checkout nook
+git branch yourgithbuid
+git checkout yourgithubid
 ```
 OR
 ```
-git checkout -b nook
+git checkout -b yourgithubid
 ```
 AND THEN
 ```
-git push --set-upstream origin nook
+git push --set-upstream origin yourgithubid
 ```
 
 2) Read the README for the lesson and fix the code (on your branch)  The 'master' branch lesson, normally, will not compile.  It has some placeholders like 'xxxxxx' that need to be replaced.  That's a part of the lesson.  
