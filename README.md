@@ -8,6 +8,7 @@
 
 ## Course Objectives
 * Provide a 'gentle' introduction to Rust
+* Keep the lessons small and focused
 * Understand the basics of the language and provide a foundation for further development
 * Provide some motiviation by looking at some interesting Rust projects 
 
