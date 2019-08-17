@@ -89,7 +89,7 @@ After you've fixed the code, commit and push to your remote branch.
 
 * Read the compile error messages.  They are helpful. 'Consider' what it recommends.
 * The little '!' at the end of println is not 'not' - it means it's a [macro](https://www.siammakro.co.th/index.php).    
-* There are two string types in Rust and there are at least a couple of ways to concatenate strings... stackoverflow is your friend.  Feel free to change the string type between str and String as needed.
+* There are two string types in Rust and there are [many](https://github.com/hoodie/concatenation_benchmarks-rs/blob/master/benches/lib.rs) ways to concatenate strings... stackoverflow is your friend.  Feel free to change the string type between str and String as needed.
 * [Rust Strings](https://doc.rust-lang.org/rust-by-example/std/str.html)
 
 
