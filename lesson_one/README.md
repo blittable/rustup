@@ -78,6 +78,8 @@ After you've cloned this project and created your branch (see README at the root
 
 The objective of the homework is to build a rust project that has one function (main) call another function. You will likely hit a problem.  The problem is an important part of what Rust is all about.  For this lesson, just try to get it to work, and don't worry about trying to understand all the details. (There are many (reference types, borrowing, String vs. &str, etc.)) 
 
+After you've fixed the code, commit and push to your remote branch.
+
 
 ### Homework Notes 
 
@@ -86,7 +88,7 @@ The objective of the homework is to build a rust project that has one function (
 * The println! function lives in std::io [println](https://doc.rust-lang.org/std/macro.println.html) The std library contains lots of useful modules, functions, types, and macros, but is not strictly necessary. 
 
 * Read the compile error messages.  They are helpful. 'Consider' what it recommends.
-* The little '!' at the end of println is not 'not' - it's means it's a [macro](https://www.siammakro.co.th/index.php).    
+* The little '!' at the end of println is not 'not' - it means it's a [macro](https://www.siammakro.co.th/index.php).    
 * There are two string types in Rust and there are at least a couple of ways to concatenate strings... stackoverflow is your friend.  Feel free to change the string type between str and String as needed.
 * [Rust Strings](https://doc.rust-lang.org/rust-by-example/std/str.html)
 
