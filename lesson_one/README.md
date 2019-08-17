@@ -76,7 +76,9 @@ The most important part is the 'dependencies' section.  There are dependencies a
 
 After you've cloned this project and created your branch (see README at the root of repository), fix the lesson code.
 
-The objective of the homework is to build a rust project that has one function (main) call another function. You will likely hit a problem.  The problem is an important part of what Rust is all about.  For this lesson, just try to get it to work, and don't worry about trying to understand all the details. (There are many (reference types, borrowing, String vs. &str, etc.)) 
+The objective of the homework is to build a rust project that has one function (main) call another function.  The second function passes a string as a parameter and that string is contatenated in the second function, which then returns the contatentated string. 
+
+You will likely hit a problem.  The problem is an important part of what Rust is all about.  For this lesson, just try to get it to work, and don't worry about trying to understand all the details. (There are many (reference types, borrowing, String vs. &str, etc.)) 
 
 After you've fixed the code, commit and push to your remote branch.
 
