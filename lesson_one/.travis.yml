@@ -1,4 +1,7 @@
 language: rust
+branches:
+  except:
+  - master
 rust:
   - stable
 cache: cargo
