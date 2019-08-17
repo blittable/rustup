@@ -1,4 +1,4 @@
-# Lesson One: Setup and Calling a Function
+# Lesson One: Setup and returning a string
 
 ## Objectives 
 
