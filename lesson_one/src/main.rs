@@ -1,12 +1,11 @@
 fn main() {
 
-    let name = "Nook";
-    let name_with_description = add_description(name); 
+    let _name = "Nook";
+    let _name_with_description = add_description(_name.to_string()); 
 
-    println!("Name with description: {:?}" xxxxx);
+    println!("{}", _name_with_description);
 }
 
-fn add_description(name: xxxxxx) -> xxxxx {
-
-    //add "is great!" to the name 
+fn add_description(name: String) -> String {
+    return format!("{} {}", name, "is great!");
 }
