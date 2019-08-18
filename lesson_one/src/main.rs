@@ -1,6 +1,11 @@
 fn main() {
-
     let name = "Nook";
-    let name_with_description = &name; 
+    println!("{}", print_name_is_handsome(name));
 }
 
+fn print_name_is_handsome(name: &str) -> String {
+   let mut new_str = name.to_string();
+    new_str.push_str(" is handsome");
+
+    new_str
+}
