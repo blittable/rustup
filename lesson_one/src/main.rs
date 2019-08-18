@@ -1,12 +1,10 @@
 fn main() {
-
-    let name = "Nook";
-    let name_with_description = add_description(name); 
-
-    println!("Name with description: {:?}" xxxxx);
+    let name = "iamkhwan";
+    
+    println!("Hello World!");
+    hello(name);
 }
 
-fn add_description(name: xxxxxx) -> xxxxx {
-
-    //add "is great!" to the name 
+fn hello(name: &str) {
+    println!("Who am i : {}", name);
 }
