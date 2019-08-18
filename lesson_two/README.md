@@ -4,7 +4,7 @@
 
 
 * Rationale for the design
-* Understand immutability and borrowing rules 
+* Understand immutability and basic borrowing rules 
 
 ## Lesson:
 
@@ -21,23 +21,8 @@ Let's say we have a Point of Sales system, and there are many run-time configura
 
 
 
-
-
 ### Task:  
 
-```
-fn main() {let x = 4;    let equal_to_x = |z| z == x;
-    let y = 4;    assert!(equal_to_x(y));}
-}
-```
-
-```
-let x = 5;
-let square_x = move || x * x;
-assert_eq!(square_x(), 25);
-```
-
-[Rust Closures](https://doc.rust-lang.org/1.30.0/book/first-edition/closures.html) 
 
 ### Homework 
 
