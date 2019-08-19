@@ -50,12 +50,19 @@ works because the variable is marked as mutable (changeable)
 
 Let's say we have a Point of Sales system, and there are many run-time configuration options/rules.  A developer writes some code and then updates those options.  Developer B, in a different module, does the same.  When those updating events are called, at runtime, is unknown, as it depends on the system users. That's a basic race condition.  
 
+Rust adds a bit of information to each memory allocation/variable - ownership.  Ownership acts as a means to 1) guard against race conditions, 2) automatically drop memory allocations when a variable goes out of scope.
 
-Rust has an important rule:
+All values in Rust have an owner.  Changing ownership is called a 'Move'  Sharing of values is allowed.  It's called 'borrowing'  
 
 1) ```MyVariable``` can be borrowed by multiple borrowers.
 2) ```mut MyVariable``` can be borrowed by *one* borrower.
 
+The second rule is our guard against race conditions.
+
+
+## Task:
+
+Review borrowing_101 and borrowing_102 in the demos directory.
 
 ## Task:
 
