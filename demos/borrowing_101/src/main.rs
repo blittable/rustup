@@ -1,4 +1,5 @@
 fn main() {
+
     let dollars = 334.33;
 
     //Our exchange rate changes (and needs to be mutable)
