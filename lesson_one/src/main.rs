@@ -1,10 +1,10 @@
 fn main() {
-    let name = "iamkhwan";
-    
-    println!("Hello World!");
-    hello(name);
+    let name = String::from("iamkhwan");    
+    let answer = hello(&name);
+    println!("{}", answer);
 }
 
-fn hello(name: &str) {
-    println!("Who am i : {}", name);
+fn hello(name: &String) -> String {    
+    let result = format!("Who am i : {}", name);
+    return result;
 }
