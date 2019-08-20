@@ -1,7 +1,7 @@
 fn main() {
     //We declare a variable and assign it a value
     let x = 10;
-    let x: i32 = 10;
+    let mut x: i32 = 10;
     println!("Value of x: {:?}", x);
     x = 3;
     println!("Value of x: {:?}", x);
