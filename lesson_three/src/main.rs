@@ -7,13 +7,12 @@ fn main() {
     };
 
     let message = me.say_hi();
-     println!("Me said: {:?}", message);
+    println!("Me said: {:?}", message);
 
     let vee = String::from("Vee");
-    println!(
-        "Anonymous said: {:?}",
-        self::Greeting::say_hi(&vee)
-    );
+    println!("Anonymous said: {:?}", self::Greeting::say_hi(&vee));
+
+    //Nice Work!
     //Extra Credit:
     // 1) create a String value
     // 2) print the same string value returned from the trait above, but without using a struct, hint ::
