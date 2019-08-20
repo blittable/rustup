@@ -1,17 +1,33 @@
 //Basics of Traits - Homework
 
+struct Person {
+    name: String
+}
+
+trait Funny {
+    fn make_fun(&self) -> String;
+}
+
+impl Funny for Person {
+    fn make_fun(&self) -> String {
+        return self.name.chars().rev().collect();
+    }
+}
+
 fn main() {
+    let boss = Person {
+        name: "nimda".to_string()
+    };
+    let haruka = Person {
+        name: "春香".to_string()
+    };
 
-    //Create a struct that has String field
+    let new_name = boss.make_fun();
+    println!("new boss name = {}", new_name);
 
-    //Create a trait that returns a String
+    let new_name = haruka.make_fun();
+    println!("new haruka name = {}", new_name);
 
-    //Implement the trait for your struct
-
-    //Call it from main()
-
-    //Extra Credit:
-    // 1) create a String value
-    // 2) print the same string value returned from the trait above, but without using a struct, hint ::
-
+    let anony = Person::make_fun(&Person { name: "abc".to_string() });
+    println!("{}", anony)
 }
