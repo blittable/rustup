@@ -2,7 +2,8 @@
 
 //Create a struct that has String field
 struct Footballer {
-    name: String
+    name: String,
+    height: u8
 }
 
 //Create a trait that returns a String
@@ -13,17 +14,32 @@ trait Kick {
 //Implement the trait for your struct
 impl Kick for Footballer {
     fn kick(&self) -> String {
-        String::from("Kick... Booomm!!!")
+        let mut _name = self.name.clone();
+
+        if self.height > 180 {
+            _name.push_str(" overhead kick... Booomm!!");
+            return _name.to_string();
+        } else {
+            _name.push_str(" kick... Booomm!!");
+            return _name.to_string();
+        }
     }
 }
 
 fn main() {
 
     //Call it from main()
-    let _footballer = Footballer {
-        name: String::from("Owen")
+    let _owen = Footballer {
+        name: "Owen".to_string(),
+        height: 173
     };
-    println!("{}", _footballer.kick());
+    println!("{}", _owen.kick());
+
+    let _van_dijk = Footballer {
+        name: "Virgil van Dijk".to_string(),
+        height: 193
+    };
+    println!("{}", _van_dijk.kick());
 
     //Extra Credit:
     // 1) create a String value
