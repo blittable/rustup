@@ -4,7 +4,8 @@ fn main() {
     //Our exchange rate changes (and needs to be mutable)
     let mut dollar_baht_exchange_rate: f32 = 31.22;
 
-    let exchange_amount = calculate_exchange(dollars, &dollar_baht_exchange_rate);
+    let exchange_amount = calculate_exchange(dollars, dollar_baht_exchange_rate);
+    println!("Current exchange rate: {:?}", exchange_amount);
 
     println!("Current exchange rate: {:?}", dollar_baht_exchange_rate);
 
@@ -17,6 +18,6 @@ fn main() {
     println!("Updated exchange rate: {:?}", &dollar_baht_exchange_rate);
 }
 
-fn calculate_exchange(amount: f32, exchange_rate: &f32) -> f32 {
+fn calculate_exchange(amount: f32, exchange_rate: f32) -> f32 {
     amount * exchange_rate
 }
