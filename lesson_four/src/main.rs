@@ -1,11 +1,5 @@
-//Basics of Traits - Homework
-
+//Write some code that does the following:
+//1: uses an Option<T>
+//2: uses Result<T, E> type
+//3: uses 'match'
 fn main() {}
-
-//The simplest trait
-trait SayHello {
-    fn say_hello() -> &str;
-}
-fn main() {
-    println!("Hello, world!");
-}

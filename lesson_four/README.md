@@ -1,4 +1,4 @@
-# Lesson Four: Enum Wrappers and Import References
+# Lesson Four: Enum Wrappers and Some Type Basics 
 
 ## Objectives 
 
@@ -32,14 +32,43 @@ So, typically, if it is optional we define it as such:
 ```
 struct Dieter {
     name: String,
-    daily_calories: <Option<u8>>
+    daily_calories: <Option<u8>>   // <- quite a strict diet
 }
 ```
 
-## Homework 
 
+While not required, another built-in enum in the std library is the Result<T, E>  which is used for returning values which can then be 'unwrapped' for errors OR thrown further up the call stack.
 
+The definition, likewise, is simple:
 
+```
+enum Result<T, E> {
+   Ok(T),
+   Err(E),
+}
+```
 
+And the typical usage:
 
+```rust
+
+use std::num::ParseIntError;
+
+fn double_number(number_str: &str) -> Result<i32, ParseIntError> {
+    match number_str.parse::<i32>() {
+        Ok(n) => Ok(2 * n),
+        Err(err) => Err(err),
+    }
+}
+
+fn main() {
+    match double_number("10") {
+        Ok(n) => assert_eq!(n, 20),
+        Err(err) => println!("Error: {:?}", err),
+    }
+}
+
+```
+
+*** See demo match_101 and match_102 for examples 
 
