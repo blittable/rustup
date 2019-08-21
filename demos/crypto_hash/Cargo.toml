@@ -1,5 +1,5 @@
 [package]
-name = "lesson_two"
+name = "merkle"
 version = "0.1.0"
 authors = ["blittable <blittable-bits@gmail.com>"]
 edition = "2018"
@@ -7,3 +7,7 @@ edition = "2018"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
+derive_builder = "0.7.2"
+blake2 = "0.8.0"
+bytes = "0.4.12"
+
