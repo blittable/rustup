@@ -1,9 +1,9 @@
 //Basics of Traits - Homework
-
+// Really Great!
 //Create a struct that has String field
 struct Footballer {
     name: String,
-    height: u8
+    height: u8,
 }
 
 //Create a trait that returns a String
@@ -27,22 +27,20 @@ impl Kick for Footballer {
 }
 
 fn main() {
-
     //Call it from main()
     let _owen = Footballer {
         name: "Owen".to_string(),
-        height: 173
+        height: 173,
     };
     println!("{}", _owen.kick());
 
     let _van_dijk = Footballer {
         name: "Virgil van Dijk".to_string(),
-        height: 193
+        height: 193,
     };
     println!("{}", _van_dijk.kick());
 
     //Extra Credit:
     // 1) create a String value
     // 2) print the same string value returned from the trait above, but without using a struct, hint ::
-
 }
