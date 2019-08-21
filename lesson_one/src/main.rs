@@ -1,3 +1,7 @@
+// ============================
+// Setup and returning a string
+// ============================
+
 static MYCOS: &str = "Mycos ";
 static COMPANY: &str = "Company ";
 static FIRSTAPP: &str = "First appeared";
