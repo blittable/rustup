@@ -6,3 +6,6 @@ fn main() {}
 trait SayHello {
     fn say_hello() -> &str;
 }
+fn main() {
+    println!("Hello, world!");
+}
