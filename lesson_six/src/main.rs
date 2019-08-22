@@ -3,7 +3,7 @@ fn main() {
 
     let a = [1, 2, 3];
 
-    let doubled: Vec<i32> = a.iter().map(|&x| x * 2).collect();
+    a.iter().map(|&x| x * 2);
 
     assert_eq!(vec![2, 4, 6], doubled);
 }
