@@ -28,7 +28,7 @@ fn nice_read_username_from_file() -> Result<String, io::Error> {
 fn main() {
     match read_username_from_file() {
         Ok(n) => {
-            assert_eq!(n, "Jim\n");
+            assert_eq!(n, "Jim");
             println!("Username was found in file");
         }
         Err(err) => println!("Error: {:?}", err),
