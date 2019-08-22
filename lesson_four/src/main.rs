@@ -5,22 +5,21 @@ fn main() {
     let answer = rand::random::<u32>().modulo(60) + 1;
     let mut guessing_count = 0;
     println!("Let's play number guessing game~~");
-    println!("You, guess number from 1 - 60 na~");
+    println!("You, guess number from 1 - 60, for challenge, beat it under 7 times");
 
     loop {
-        let mut guess: u32;
+        let guess: u32;
 
         loop {
-            guess = match get_number() {
+            match get_number() {
                 None => { 
                     println!("Not an number");
-                    0
                 },
-                Some(v) => v    
+                Some(v) => {
+                    guess = v;
+                    break;
+                }
             };
-            if guess != 0 {
-                break;
-            }
         }
 
         guessing_count += 1;
@@ -39,13 +38,13 @@ fn main() {
 
 fn get_number() -> Option<u32>{
     let mut input = String::new();
-    match io::stdin().read_line(&mut input) {
+    return match io::stdin().read_line(&mut input) {
         Ok(_) => {
             match input.trim_end().parse::<u32>() {
-                Ok(v) => return Some(v),
-                Err(__) => return None
-            };
+                Ok(v) => Some(v),
+                Err(__) => None
+            }
         },
-        Err(_) => return None
+        Err(_) => None
     }
 }
