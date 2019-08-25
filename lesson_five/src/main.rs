@@ -19,7 +19,13 @@ fn main() {
                 }
             };
 
-            validate_age(i)
+            //validate_age(i)
+            //Change Here //////////////////////////////////////
+            match validate_age(i) {
+                Ok(n) => println!("Great! {}", n),
+                Err(err) => println!("Error! {}", err),
+            }
+            ///////////////////////////////////////////////////
         }
         _ => {
             eprintln!("Error in parameters");
@@ -27,11 +33,12 @@ fn main() {
     };
 }
 
-fn validate_age(age: i32) {
+fn validate_age(age: i32) -> Result<String, String> {
     println!("Checking Age");
     if age > 125 {
-        panic! {
-            println!("Age cannot be over 125 {:?} and your input age was: ", age)
-        }
+        Err("Age cannot be over 125".to_string())
+    }
+    else {
+        Ok("Your age is ok".to_string())
     }
 }
