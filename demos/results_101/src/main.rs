@@ -9,7 +9,7 @@ fn double_number(number_str: &str) -> Result<i32, ParseIntError> {
 }
 
 fn main() {
-    match double_number("10") {
+    match double_number("Mycos") {
         Ok(n) => assert_eq!(n, 20),
         Err(err) => println!("Error: {:?}", err),
     }
