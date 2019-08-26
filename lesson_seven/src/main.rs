@@ -1,4 +1,5 @@
 pub mod squarelib;
+pub mod randomveclib;
 
 fn main() {
     println!("Hello, world!");
@@ -11,4 +12,9 @@ fn main() {
 
     let (h, w, d) = squarelib::square::generatedimention();
     println!("[Height:{}; Width:{}; Deep:{}]", h, w, d);
+
+    let mut myvec = randomveclib::ramdomvec::generatevec();
+    while let Some(top) = myvec.pop() {
+        println!("one of myvec is {}", top);
+    }
 }
