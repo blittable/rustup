@@ -33,7 +33,7 @@ fn main() {
 fn validate_age(age: i32) -> Result<i32, String> {
     println!("Checking Age");
     if age > 125 {
-        Err(format!("Age cannot be over 125 {:?} and your input age was: ", age))
+        Err(format!("Age cannot be over 125 and your input age was: {:?}", age))
     } else {
         Ok(age)
     }
