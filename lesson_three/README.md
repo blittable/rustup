@@ -54,9 +54,3 @@ impl Pay for Company {
 
 The instructions are in the code (lesson 3) - implement a trait - feel free to do more!
 
-
-
-
-
-
-
