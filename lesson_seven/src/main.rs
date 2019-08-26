@@ -1,9 +1,9 @@
+mod reader;
+mod checker;
+mod writer;
+
 fn main() {
-    println!("Hello, world!");
-
-    let a = [1, 2, 3];
-
-    a.iter().map(|&x| x * 2);
-
-    assert_eq!(vec![2, 4, 6], doubled);
+    let my_vec = reader::from_string("10,13,169,1337,2497,100003");
+    let answer = checker::prime_checker(&my_vec);
+    writer::print_answer(&answer);
 }
