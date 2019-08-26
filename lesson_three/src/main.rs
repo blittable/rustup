@@ -40,3 +40,21 @@ impl Greeting for Person {
         "Hi!".to_string()
     }
 }
+
+//Create a trait that returns a String
+trait Greeting {
+    fn say_hi(&self) -> String;
+}
+
+impl Greeting for String {
+    fn say_hi(&self) -> String {
+        "Hi!".to_string()
+    }
+}
+
+//Implement the trait for your struct
+impl Greeting for Person {
+    fn say_hi(&self) -> String {
+        "Hi!".to_string()
+    }
+}
