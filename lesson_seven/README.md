@@ -57,9 +57,14 @@ Typical Project Structure:
 
       main.rs    or   lib.rs               
                   |      
-  subdirectory_01  subdirectory_02         ^
-         |              |                  |
-       mod.rs         mod.rs            pub xxxx
+  subdirectory_01  subdirectory_02         
+         |              |                  
+       mod.rs         mod.rs            
+
+
+- You can use `mod` to create modules anywhere
+- The *parent* controls the visibility of the children who are public by 'reexposing' them, e.g.:
+```pub mychildmod```
 
 
 ### Importing Macros
