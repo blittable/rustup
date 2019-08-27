@@ -28,6 +28,18 @@ fn chaining() {
             .filter(|x| x.len() < 4)
             .map(|y| y.to_string())
             .collect::<Vec<String>>();
+
+        let num_of_people :&usize =  &vector.clone().into_iter()
+            .count();
+
+        let total_length_of_names :&usize =  &names.clone()
+            .into_iter()
+            .map(|t| t.chars().count())
+            .sum();
         
         println!("What's our result? : {:?}", &vector);
+        println!("Number of people : {:?}", &num_of_people);
+        println!("Total length of names : {:?}", &total_length_of_names);
+
+        
 }
