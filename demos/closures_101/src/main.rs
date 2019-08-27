@@ -26,6 +26,8 @@ fn simple_closure() {
     }
 }
 
+
+
 fn simple_closure_invoked() {
     let x = "mycos".to_string();
 
