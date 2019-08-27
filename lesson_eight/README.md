@@ -58,7 +58,7 @@ which binary you want to run.  In our case, either:
 or
 ```cargo run --bin iterclosures``
 
-The first exercise is to fix a bug in the ```buggy``` app.  See the source file for TODO and details. (extra credit with prize!: there's a big in the simple fix, handle it.)
+The first exercise is to fix a bug in the ```buggy``` app.  See the source file for TODO and details. (extra credit with prize!: there's a bug in the simple fix, handle it.)
 
 The second exercise is to chain some ```iter()``` results and ```collect()``` them.  Play with some of the operators [here](https://danielkeep.github.io/itercheat_baked.html)
 But, make sure you use at least *two closures* in your solution.
