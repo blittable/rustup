@@ -36,16 +36,10 @@ and summarized with *impressive fonts* [here](https://danielkeep.github.io/iterc
 
 We know Rust is good at throwing away things.  Out of scope, out of memory.  That, however, introduces a problem.  We don't always want to get throw away associated values.  We want them to *live* longer.  The compiler tracks the 'lifetime' of values (all of them actually), but when it sees code that uses values beyond the obvious scope (lifetime), it requies an explicit annotation of the lifetime.  The  
 
+For now - just read ```'a``` as 'lifetime annotation' and note (obviously?), that type parameters (like 'a) have to be used. 
 ```rust
 struct Foo<'a> {
     x: &'a i32,
-}
-
-fn main() {
-    let y = &5; // this is the same as `let _y = 5; let y = &_y;`
-    let f = Foo { x: y };
-
-    println!("{}", f.x);
 }
 ```
 
