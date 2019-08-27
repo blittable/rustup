@@ -21,5 +21,5 @@ fn main() {
 //and return the array with all of the values doubled 
 //So, input => [1,2,3] returns [2,4,6]
 fn double_some_values(nums: &[i32; 3]) -> Vec<i32>  {
-    nums.iter().map(|&n| n).collect()
+    nums.iter().map(|&n| n * 2).collect()
 }
