@@ -1,3 +1,3 @@
-pub struct Granular {
+pub struct Ingrediant {
     pub name: String
 }

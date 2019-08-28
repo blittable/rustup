@@ -1,6 +1,5 @@
-pub mod water;
-pub mod milk;
+pub mod is;
 
 pub trait Property {
-    fn state(&self) -> Option<String>;
+    fn state(&self) -> String;
 }
