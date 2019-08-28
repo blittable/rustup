@@ -1,4 +1,4 @@
-# Lesson One: Setup and returning a string
+# Lesson One: Setup and returning a String
 
 ## Objectives 
 
@@ -6,9 +6,8 @@
 * Look at the toolchain (rustc, cargo, rustup)
 * Create a function that returns a value
 
-## Lesson:
 
-### Task: Installing
+### Installing
 
 [Installing Rust](https://www.rust-lang.org/) - This installs the toolchain (compiler and package manager (cargo) - Windows, OSX, Linux and other OS's are supported.   
 
@@ -20,10 +19,9 @@ rustc
 cargo
 ```
 
-### Task: Get to Know the toolchain 
+### Get to Know the toolchain 
 
 rustc is the compiler, but it's normally called by running a 'cargo' command (e.g. cargo build)
-
 
 
 This command:
