@@ -19,3 +19,5 @@ fn main() {
 fn full_name(name: &mut String) {
     name.push_str(" Technology");
 }
+
+//Nice work!

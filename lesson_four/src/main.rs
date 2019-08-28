@@ -26,6 +26,25 @@ fn calculate_unit_price(order: PurchaseOrder) -> Result<Option<f32>, ParseFloatE
     }) 
 }
 
+//Maybe?
+fn refactored_calculate_price(order: PurchaseOrder) -> Result<Option<f32>, ParseFloatError>  {
+    let parsable = order.qty.unwrap().parse::<f32>()?;
+    Ok(Some(0.0/parsable))
+}
+
+#[test]
+fn test_refactored_unit_price_calc() {
+
+    let order :PurchaseOrder = PurchaseOrder {
+        item_name: "Coke".to_string(),
+        price: 229.0,
+        qty: Some("20".to_string()),
+    };
+
+    refactored_calculate_price(order).unwrap();
+    assert_eq!((1+2), 3);
+}
+
 fn main() {
     let order :PurchaseOrder = PurchaseOrder {
         item_name: "Coke".to_string(),
