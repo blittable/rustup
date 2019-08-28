@@ -1,7 +1,8 @@
 #![allow(unused_variables)]
 
 fn main() {
-    chaining();
+    //chaining();
+    homework()
 }
 
 fn chaining() {
@@ -30,4 +31,24 @@ fn chaining() {
             .collect::<Vec<String>>();
         
         println!("What's our result? : {:?}", &vector);
+}
+
+fn homework() {
+    let names = [
+             "Jim".to_string(),
+             "Mariam".to_string(),
+             "Collette".to_string(),
+             "John".to_string(),
+             "Jung".to_string(),
+             "Khwan".to_string(),
+             "Vee".to_string()
+       ];
+
+    let vector: Vec<String> = names
+        .into_iter()
+        .filter(|x| x.starts_with("J"))
+        .map(|y| y.to_string())
+        .collect();
+
+    println!("What's homework result? : {:?}", &vector);
 }
