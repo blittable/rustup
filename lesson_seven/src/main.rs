@@ -1,8 +1,7 @@
-mod lib;
-mod lib2;
+mod sub1;
+mod sub2;
 
 fn main() {
-    // println!("Hello, world!");
 
     // let a = [1, 2, 3];
 
@@ -12,6 +11,6 @@ fn main() {
 
     //hosting::add_to_waitlist();
     
-    lib::drink_coffee();
-    lib2::eat_cake();
+    sub1::drink_coffee();
+    sub2::eat_cake();
 }
