@@ -1,5 +1,7 @@
 use modulo::Mod;
 
+//very nice... might be an interesting map => filter => flatmap? => collect?
+
 pub fn prime_checker(input: &Vec<u32>) -> Vec<(u32, Option<u32>)> {
     let mut answer: Vec<(u32, Option<u32>)> = Vec::new();
 
