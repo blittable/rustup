@@ -102,7 +102,8 @@ for x in xs.iter_mut() {
 ```
 ### Cargo.toml 
 
-The [Cargo.toml manifest](https://doc.rust-lang.org/cargo/reference/manifest.html) is extremely powerful and flexible
+The [Cargo.toml manifest](https://doc.rust-lang.org/cargo/reference/manifest.html) is extremely powerful and flexible.
+
 At a high-level, you can:
 - Split 'features' within your crate to make optional dependencies
 - Split the workspace for multiple crates joined in a single toml.lock
