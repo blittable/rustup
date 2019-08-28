@@ -1,0 +1,9 @@
+Likely helpful to define for non-native speakers of English:
+
+- Convention vs. Configuration
+- Lifetime
+- Elision
+- Heuristic
+- Explicit
+- Lazy
+
