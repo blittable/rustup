@@ -6,9 +6,11 @@
 ## The problem
 
 Look at the code below.  We pass our &str's to a function, that does an evaluation, and then returns one of the str's
-After the function returns, the parameter &str's, go out of scope.  The compiler efficiently wants to drop the references
-at the end of the scoped block, *but* the returned value is referencing one of them.  The compiler neeeds explicit
-instructions.  This is done with a special 'marker' called the 'lifetime annotation.'  
+After the function returns, the parameter &str's, go out of scope.  
+
+The borrow-checker efficiently wants to drop the references at the end of the scoped block, *but* the returned value is referencing one of them.  
+
+The compiler needs explicit instructions.  This is done with a special 'marker' called the 'lifetime annotation.'  
 
 ```rust
 

@@ -1,5 +1,5 @@
 [package]
-name = "closures_101"
+name = "closures_102"
 version = "0.1.0"
 authors = ["blittable <blittable-bits@gmail.com>"]
 edition = "2018"
@@ -8,3 +8,4 @@ edition = "2018"
 
 [dependencies]
 colored = "1.8.0"
+rand = "0.7.0"
