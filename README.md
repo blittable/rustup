@@ -20,18 +20,18 @@
 | Lesson Fourteen | The dereference * operator                          |                                 
 | Lesson Seventeen| Functions vs. methods and impl on structs           |                                 
 | Lesson Eighteen | Slices in Retrospect                                |                                 
-| Lesson Nineteen | If let                                              |                                 
-| Lesson Twenty   | Threads                                             |                                 
+| Lesson Nineteen | Housekeeping: pinning runtime and rnd crate         |                                 
+| Lesson 20       | The Sized Trait                                     |   
 | Lesson 21       | Environment variables and the command line          |                                 
-| Lesson 22       | Housekeeping Part 2                                 |                                 
+| Lesson 22       | Threads                                             |                                 
 | Lesson 23       | Ref Stuff                                           |                                 
 | Lesson 24       | Associated types on traits                          |   
 | Lesson 25       | The Sized Trait                                     |   
 | Lesson 26       | Housekeeping Part 3                                 |                                 
-| Lesson 27       | TBD                                                 |                                 
+| Lesson 27       | Web (and other) Assembly                            |                                 
 | Lesson 28       | TBD                                                 |                                 
 | Lesson 29       | Futures                                             |                                 
-| Lesson 30       | Pluggable Runtimes and Async Await                  |                                 
+| Lesson 30       | Pluggable Runtimes and Async/Await                  |                                 
 
 
 ## How to Use 
@@ -48,6 +48,7 @@
 
 ## Course Format
 [At Mycos](https://www.mycostech.com) we'll have 20 minute discussions/presentations 30x to briefly go through topics and questions   
+
 
 ### Committing Homework Assignments 
 
