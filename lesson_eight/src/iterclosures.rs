@@ -26,6 +26,8 @@ fn chaining() {
         let vector: Vec<String> = names
             .into_iter()
             .filter(|x| x.len() < 4)
+            .filter(|a| *a == "Tod" || *a == "Bob")
+            .take_while(|b| b.to_owned() == "Tod")
             .map(|y| y.to_string())
             .collect::<Vec<String>>();
         
