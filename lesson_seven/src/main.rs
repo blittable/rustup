@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 mod book;
 mod borrow;
 
@@ -13,15 +12,4 @@ fn main() {
 
     let borrow_tuple  = ("Tom".to_string(),"Moby Dick".to_string());
     borrow::borrow::borrowBook(borrow_tuple);
-
-=======
-fn main() {
-    println!("Hello, world!");
-
-    let a = [1, 2, 3];
-
-    a.iter().map(|&x| x * 2);
-
-    assert_eq!(vec![2, 4, 6], doubled);
->>>>>>> origin/master
 }
