@@ -1,8 +1,17 @@
 #[allow(dead_code)]
 
-struct App<'a> {
+
+//Tuple Struct - hybrid
+let origin = Point(0, 0, 0);
+struct Point(i32, i32, i32);
+
+
+let z = ();
+struct App<'a, T, K> {
     data: Vec<(&'a str, u64)>,
+    point: Point,
 }
+
 
 impl<'a> App<'a> {
     fn new() -> App<'a> {
@@ -35,6 +44,9 @@ impl<'a> App<'a> {
 }
 
 fn main() {
+
+
+
     let mut app = App::new();
     app.print();
     app.increment_last_value(2);
