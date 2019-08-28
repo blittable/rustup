@@ -1,47 +1,25 @@
-# Lesson Five: Introduction to Closures 
+# Lesson Five: Error Handling 
 
 ## Objectives 
 
-* Understand when and how to use a closure 
-* Look at the traits Fn, FnOnce, and FnMut 
+* Understand the common error handling patterns 
+* Review matching in the context of error handling
+* Understand how to implement custom errors 
 
 ## Lesson:
 
+This is an excellent article on error handling in rust.  https://blog.burntsushi.net/rust-error-handling/
 
-Comparing Funtions and Closures:
+The Rust Book and Rust By Example are a bit thin in this category, so the article is highly recommended.
 
-```
-	fn  plus_one_v1   (x: i32) -> i32 { x + 1 }
-	let plus_one_v2 = |x: i32| -> i32 { x + 1 };
-	let plus_one_v3 = |x: i32|  x + 1; };
-```
-
-
-
-### Task:  
-
-```
-fn main() {let x = 4;    let equal_to_x = |z| z == x;
-    let y = 4;    assert!(equal_to_x(y));}
-}
-```
-
-```
-let x = 5;
-let square_x = move || x * x;
-assert_eq!(square_x(), 25);
-```
-
-[Rust Closures](https://doc.rust-lang.org/1.30.0/book/first-edition/closures.html) 
 
 ### Homework 
 
+There's a simple command-line application in lesson_five that takes one parameter.  If the parameter is great than 125, the program errors.  Use a Result<T, E> to improve the error handling.
 
 
 ### Homework Notes 
 
-
-
-
+There are some examples in the /demos folder.
 
 
