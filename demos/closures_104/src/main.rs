@@ -1,44 +1,56 @@
-/**
- * Closures 104 
- * Fn, FnOnce, and FnMutable 
- *
- * Source: https://github.com/eliovir/rust-examples
- * The differences here are import, especially for concurrency
- * and shared state.  Think: mutex, thread, options setting
- */
+#![allow(unused_variables)]
+#![allow(unused_must_use)]
+#![allow(unused_mut)]
+use std::mem;
 
-fn ten_times<F>(f: F)
+// A function which takes a closure as an argument and calls it.
+fn apply<F>(f: F)
 where
-    F: Fn(i32),
+    // The closure takes no input and returns nothing.
+    F: FnOnce(),
 {
-    let mut i = 0;
-    while i < 10 {
-        f(i);
-        i += 1;
-    }
+    // ^ TODO: Try changing this to `Fn` or `FnMut`.
+
+    f();
 }
 
-fn not_ten_times<F>(mut f: F)
+// A function which takes a closure and returns an `i32`.
+fn apply_to_3<F>(f: F) -> i32
 where
-    F: FnMut(i32),
+    // The closure takes an `i32` and returns an `i32`.
+    F: Fn(i32) -> i32,
 {
-    let mut i = 0;
-    while i < 10 {
-        f(i);
-        i += 1;
-    }
-}
-
-fn not_even_ten_times<F>(f: F)
-where
-    F: FnOnce(i32),
-{
-    let i = 0;
-    f(i);
+    f(3)
 }
 
 fn main() {
-    ten_times(|j| println!("hello, {}", j));
-    not_ten_times(|j| println!("hello, {}", j));
-    not_even_ten_times(|j| println!("hello, {}", j));
+    let greeting = "hello";
+    // A non-copy type.
+    // `to_owned` creates owned data from borrowed one
+    let mut farewell = "goodbye".to_owned();
+
+    // Capture 2 variables: `greeting` by reference and
+    // `farewell` by value.
+    let diary = || {
+        // `greeting` is by reference: requires `Fn`.
+        println!("I said {}.", greeting);
+
+        // Mutation forces `farewell` to be captured by
+        // mutable reference. Now requires `FnMut`.
+        farewell.push_str("!!!");
+        println!("Then I screamed {}.", farewell);
+        println!("Now I can sleep. zzzzz");
+
+        // Manually calling drop forces `farewell` to
+        // be captured by value. Now requires `FnOnce`.
+        mem::drop(farewell);
+    };
+
+    // Call the function which applies the closure.
+    apply(diary);
+
+    // `double` satisfies `apply_to_3`'s trait bound
+    let double = |x| 2 * x;
+
+    println!("3 doubled: {}", apply_to_3(double));
 }
