@@ -1,5 +1,5 @@
 [package]
-name = "closures_101a"
+name = "lesson_ten"
 version = "0.1.0"
 authors = ["blittable <blittable-bits@gmail.com>"]
 edition = "2018"

@@ -3,7 +3,14 @@
 ## Objectives 
 - Understand and use lifetime annotations
 
-## The problem - For Discussion 
+## The problem
+
+Look at the code below.  We pass our &str's to a function, that does an evaluation, and then returns one of the str's
+After the function returns, the parameter &str's, go out of scope.  
+
+The borrow-checker efficiently wants to drop the references at the end of the scoped block, *but* the returned value is referencing one of them.  
+
+The compiler needs explicit instructions.  This is done with a special 'marker' called the 'lifetime annotation.'  
 
 ```rust
 
@@ -24,7 +31,7 @@ fn main() {
     println!("The longest string is {}", target);
 }
 
-fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
+fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {  // <- without 'a this fails.
     if x.len() > y.len() {
         x
     } else {
@@ -38,8 +45,13 @@ Actually, Rust requires lifetimes on all parameter and return value references, 
 fn longest(x: &'a str, y: &'a str) -> &'a str ... 
 ```
 
-So, they dropped the cases where it was obvious and gave the heruistics a French name, 'lifetime elision rules' so no one would ask anymore questions. 
+So, 'they' dropped the cases where it was obvious and gave the heruistics a French name, 'lifetime elision rules' so no one would ask anymore questions. 
 
 ## Homework 
 
+Create a binary tree datastructure.  Each node may have a parent, a node to the left, and a node to the right.  Add one function/method that allows insertion of a node.
 
+#### Related Fun:
+- For blockchain fans: [merkle-tree:] https://github.com/SpinResearch/merkle.rs/blob/a41e7d15244f422b0c226c1be5a3b8f6a6da7669/src/merkletree.rs#L11
+- A pretty node-free Graph implementation
+[Contest Algorithms, Graph:](https://github.com/EbTech/rust-algorithms/blob/master/src/graph/mod.rs)

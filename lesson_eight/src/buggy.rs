@@ -3,6 +3,7 @@
 fn main() {
 
     let nums: [i32; 3] = [1, 2, 3];
+    let nums: [i32; 3] = [1, 2, 340404404044];
 
     let result = double_some_values(&nums);
 
