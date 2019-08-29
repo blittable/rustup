@@ -1,56 +1,31 @@
 #![allow(unused_variables)]
 #![allow(unused_must_use)]
 #![allow(unused_mut)]
-use std::mem;
-
-// A function which takes a closure as an argument and calls it.
-fn apply<F>(f: F)
-where
-    // The closure takes no input and returns nothing.
-    F: FnOnce(),
-{
-    // ^ TODO: Try changing this to `Fn` or `FnMut`.
-
-    f();
-}
-
-// A function which takes a closure and returns an `i32`.
-fn apply_to_3<F>(f: F) -> i32
-where
-    // The closure takes an `i32` and returns an `i32`.
-    F: Fn(i32) -> i32,
-{
-    f(3)
-}
 
 fn main() {
-    let greeting = "hello";
-    // A non-copy type.
-    // `to_owned` creates owned data from borrowed one
-    let mut farewell = "goodbye".to_owned();
+    closure_captures_borrow();
+}
 
-    // Capture 2 variables: `greeting` by reference and
-    // `farewell` by value.
-    let diary = || {
-        // `greeting` is by reference: requires `Fn`.
-        println!("I said {}.", greeting);
+fn closure_captures_borrow() {
+    //non-copy
+    let mut name: String = "Mycos".to_string();
 
-        // Mutation forces `farewell` to be captured by
-        // mutable reference. Now requires `FnMut`.
-        farewell.push_str("!!!");
-        println!("Then I screamed {}.", farewell);
-        println!("Now I can sleep. zzzzz");
+    //println!("I'm just a name: {}", &name);
 
-        // Manually calling drop forces `farewell` to
-        // be captured by value. Now requires `FnOnce`.
-        mem::drop(farewell);
-    };
+    //The value is moved into the closure
+    let name_joiner_closure = |name_parameter| name;
 
-    // Call the function which applies the closure.
-    apply(diary);
+    println!(
+        "Captured Value: {}",
+        name_joiner_closure(&" rocks!".to_string()),
+    );
 
-    // `double` satisfies `apply_to_3`'s trait bound
-    let double = |x| 2 * x;
+    //Cannot name was consumed
+    //println!("Can we still reference? {}", name);
 
-    println!("3 doubled: {}", apply_to_3(double));
+    let haystack = vec![1, 2, 3];
+    let contains = |needle| haystack.contains(needle);
+
+    println!("{}", contains(&1));
+    println!("{}", contains(&4));
 }
