@@ -3,13 +3,13 @@ fn main() {
     let mut our_vec = vec![1, 2, 3];
 
     //Uh buncho references
-    //crazy_update_vec(&our_vec, &our_vec, &our_vec, &our_vec, &our_vec);
+    crazy_update_vec(&our_vec, &our_vec, &our_vec, &our_vec, &our_vec);
 
     //a borrow and a mutable
     //update_vec_a(& our_vec, & mut our_vec);
 
     //a couple of mutables
-    //update_vec_b(& mut our_vec, & mut our_vec);
+   // update_vec_b(& mut our_vec, & mut our_vec);
 
     //rad simple
     //update_vec_c(& mut our_vec);
@@ -39,7 +39,7 @@ fn update_vec_b(source_vec: &mut Vec<i32>, target_vec: &mut Vec<i32>) {
     }
 }
 
-fn rad_simple(our_vec: &mut Vec<i32>) {
+fn update_vec_c(our_vec: &mut Vec<i32>) {
 
     for i in our_vec.iter_mut() {
         *i = *i+1;
