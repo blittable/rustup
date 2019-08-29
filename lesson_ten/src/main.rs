@@ -6,29 +6,37 @@ fn main() {
     println!("Hello, world!");
 }
 
-fn higher_math() -> i32 {
-    1+2
+fn get_longest_string(input:&[String]) -> String{
+
+    let longest_string = &input
+        .into_iter().max_by(|x, y| x.len().cmp(&y.len()));
+    return longest_string.unwrap().to_string();
 }
 
 #[test]
-fn amazing_test() {
-    assert_eq!(0, 0);
+fn test_pass() {
+     let names = [
+             "Mate".to_string(),
+             "etc3tera".to_string(),
+             "iamkhwan".to_string(),
+             "john".to_string(),
+             "kanoon".to_string(),
+             "toomcutlerz".to_string(),
+             "kevinnel".to_string()
+       ];
+    assert_eq!("toomcutlerz".to_string(), get_longest_string(&names));
 }
 
 #[test]
-fn higher_math_test() {
-    assert_eq!(higher_math(), 3);
+fn test_failed() {
+     let names = [
+             "Mate".to_string(),
+             "etc3tera".to_string(),
+             "iamkhwan".to_string(),
+             "john".to_string(),
+             "kanoon".to_string(),
+             "kevinnel".to_string()
+       ];
+    assert_eq!("toomcutlerz".to_string(), get_longest_string(&names));
 }
 
-//A bit of warning... the tests here are
-//*outside* your module b/c of the ```#[cfg(test)]```
-//and your module will need to be imported
-#[cfg(test)]
-mod tests {
-    use super::*;
-
-    #[test]
-    fn another_amazing_test() {
-        assert_eq!(higher_math(), 3);
-    }
-}
