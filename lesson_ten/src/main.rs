@@ -10,6 +10,10 @@ fn higher_math() -> i32 {
     1+2
 }
 
+fn multiply_int(a: i32, b: i32) -> i32 {
+    a * b
+}
+
 #[test]
 fn amazing_test() {
     assert_eq!(0, 0);
@@ -31,4 +35,10 @@ mod tests {
     fn another_amazing_test() {
         assert_eq!(higher_math(), 3);
     }
+}
+
+//Homework
+#[test]
+fn test_multiply_int() {
+    assert_eq!(multiply_int(2,3), 5);
 }
