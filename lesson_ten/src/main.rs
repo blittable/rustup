@@ -6,8 +6,8 @@ fn main() {
     println!("Hello, world!");
 }
 
-fn higher_math() -> i32 {
-    1+2
+fn higher_math(n: i32) -> i32 {
+    (1+2)/n
 }
 
 #[test]
@@ -17,7 +17,7 @@ fn amazing_test() {
 
 #[test]
 fn higher_math_test() {
-    assert_eq!(higher_math(), 3);
+    assert_eq!(higher_math(1), 3);
 }
 
 //A bit of warning... the tests here are
@@ -29,6 +29,6 @@ mod tests {
 
     #[test]
     fn another_amazing_test() {
-        assert_eq!(higher_math(), 3);
+        assert_eq!(higher_math(0), 3);
     }
 }
