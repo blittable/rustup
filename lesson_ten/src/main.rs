@@ -2,33 +2,30 @@
 //Create a simple function, and writing a failing unit test
 //You can modify and/or delete the samples here
 
-fn main() {
-    println!("Hello, world!");
-}
-
-fn higher_math() -> i32 {
-    1+2
+fn main() {    
+    println!("## Test Homework ##");
 }
 
 #[test]
-fn amazing_test() {
-    assert_eq!(0, 0);
+fn it_works() {
+    assert_ne!("Khwan", "Khwan");
 }
 
 #[test]
-fn higher_math_test() {
-    assert_eq!(higher_math(), 3);
+fn it_fail() {
+    assert_eq!("Mocha", take_a_cup_of_coffee());
 }
 
-//A bit of warning... the tests here are
-//*outside* your module b/c of the ```#[cfg(test)]```
-//and your module will need to be imported
-#[cfg(test)]
-mod tests {
-    use super::*;
+fn take_a_cup_of_coffee() -> String {
+    "Latte".to_string()
+}
 
-    #[test]
-    fn another_amazing_test() {
-        assert_eq!(higher_math(), 3);
+#[test]
+fn it_hello() -> Result<(), String> {
+    if ((5+5) == 9) {
+        Ok(())
+    }
+    else {
+        Err(String::from("It's ten !!!"))
     }
 }
