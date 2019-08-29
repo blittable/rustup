@@ -23,7 +23,6 @@ fn crazy_update_vec(vec_a: &Vec<i32>, vec_b: &Vec<i32>, vec_c: &Vec<i32>, vec_d:
 
     //Get crazy...
     println!("{:?}", "Dogs and Cats living together...");
-
 }
 
 fn update_vec_a(source_vec: &Vec<i32>, target_vec: &mut Vec<i32>) {
@@ -39,7 +38,6 @@ fn update_vec_b(source_vec: &mut Vec<i32>, target_vec: &mut Vec<i32>) {
         target_vec.push(i+1);
     }
 }
-
 
 fn rad_simple(our_vec: &mut Vec<i32>) {
 
