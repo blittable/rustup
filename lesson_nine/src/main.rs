@@ -1,24 +1,24 @@
 //Homework
 //Create a binary tree datastructure. Each node may have a parent, a node to the left, and a node to the right. 
 //Add one function/method that allows insertion of a node.
-
+#[derive(Debug)]
 struct Node{
-    value: 'a &i32,
-    left: 'a Option<Node>,
-    right: 'a  Option<Node>
+    value: i32,
+    left: Option<Box::<Node>>,
+    right: Option<Box::<Node>>
 }
 
-impl Node {
-    pub fn insert(&mut self, new_value: &i32) {
+impl Node{
+    pub fn insert(&mut self, new_value: i32) {
         if self.value == new_value {
             return
         }
-        let target_node = if new_value < self.value { &self.left } else { &self.right };
+        let target_node = if new_value < self.value { &mut self.left } else { &mut self.right };
         match target_node {
-            &Some(subnode) => subnode.insert(new_value),
-            &None => {
-                let new_node = Node { value: new_value, left: None, right: None };
-                let boxed_node = Some(new_node);
+            &mut Some(ref mut subnode) => subnode.insert(new_value.clone()),
+            &mut None => {
+                let new_node = Node { value: new_value.clone(), left: None, right: None };
+                let boxed_node = Some(Box::new(new_node));
                 *target_node = boxed_node;
             }
         }
@@ -26,19 +26,15 @@ impl Node {
 }
 
 fn main() {
-    println!("I'm still in-progress...");
-    // let mut x = Node { value: &2, left: None, right: None };
-    // x.insert(&1);
-    // x.insert(&3);
-    // assert!(x == Node {
-    //     value: 2,
-    //     left: Some(Node { value: 1, left: None, right: None }),
-    //     right: Some(Node { value: 3, left: None, right: None })
-    // });
+    let mut x = Node { value: 2, left: None, right: None };
+    x.insert(1);
+    x.insert(3);
+    //x.insert(4);
+    println!("{:#?}", x);
 }
 
 //Sample on Internet
-//#[derive(PartialEq)]
+// #[derive(PartialEq)]
 // struct Node<'a> {
 //     val: &'a str,
 //     l: Option<Box<Node<'a>>>,
