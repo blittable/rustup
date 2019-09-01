@@ -29,6 +29,15 @@ fn or_else_return_a_result(y: Option<i32>) -> DbResult<i32> {
     y.ok_or_else(|| return DBError)
 }
 
+fn double_with_result_from_option(y: Option<i32>) -> DbResult<i32> {
+
+    validate = |x| x { if x > i32::Max }
+    y.or_else(|| return DBError).and_then(|x| Ok(x*2))
+}
+
+#[test]
+fn or_else_success_test() {
+
 #[test]
 fn or_else_success_test() {
     let test_result = or_else_return_an_option(Some(12));
