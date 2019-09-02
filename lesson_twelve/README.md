@@ -68,8 +68,6 @@ where T: Summary + Display {
 }
 ```
 
-
-
 ## This Week's Project
 
 There will be no homework this week.  Classtime will be used to for the project.
