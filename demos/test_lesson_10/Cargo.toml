@@ -1,7 +1,7 @@
 [package]
-name = "lesson_seven"
+name = "circular_vec_mutation"
 version = "0.1.0"
-authors = ["Mate <patawee@mycostech.com>"]
+authors = ["blittable <blittable-bits@gmail.com>"]
 edition = "2018"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html

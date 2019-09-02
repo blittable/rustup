@@ -29,5 +29,14 @@ fn chaining() {
             .map(|y| y.to_string())
             .collect::<Vec<String>>();
         
+        let longest_name = &names
+        .into_iter().max_by(|x, y| x.len().cmp(&y.len()));
+
+        let longest_position = &names
+        .into_iter().position(|x| x.to_string() == longest_name.unwrap().to_string());
+
+
         println!("What's our result? : {:?}", &vector);
+        println!("The longest name is : {:?}", &longest_name.unwrap());
+        println!("Index of the longest name is : {:?}", &longest_position.unwrap());
 }

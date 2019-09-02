@@ -13,7 +13,7 @@
 | Lesson Seven    | Housekeeping (proj structure, some new types, etc.) |                                 
 | Lesson Eight    | Closures and a Peek at Lifetimes                    |                                 
 | Lesson Nine     | Lifetimes                                           |                                 
-| Lesson Ten      | Unit Testing                                        |                                 
+| Lesson Ten      | Unit Testing and a bit of Housekeeping              |                                 
 | Lesson Eleven   | Box<T>                                              |                                 
 | Lesson Twelve   | Slices in Retrospect                                |                                 
 | Lesson Thirteen | Trait Bounds                                        |                                 

@@ -1,12 +1,3 @@
-<<<<<<< HEAD
-
-=======
->>>>>>> 61e4522af2cd3796f6cb502d33dffc2264500e36
-//Write some code that does the following:
-//1: uses an Option<T>
-//2: uses Result<T, E> type
-//3: uses 'match'
-<<<<<<< HEAD
 enum OperatorWord {
     Plus,
     Minus,
@@ -65,6 +56,3 @@ fn get_display_result(result:Result<i32,String>) -> String
         Err(e) => e
     }
 }
-=======
-fn main() {}
->>>>>>> 61e4522af2cd3796f6cb502d33dffc2264500e36

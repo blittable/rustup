@@ -49,4 +49,9 @@ So, 'they' dropped the cases where it was obvious and gave the heruistics a Fren
 
 ## Homework 
 
+Create a binary tree datastructure.  Each node may have a parent, a node to the left, and a node to the right.  Add one function/method that allows insertion of a node.
 
+#### Related Fun:
+- For blockchain fans: [merkle-tree:] https://github.com/SpinResearch/merkle.rs/blob/a41e7d15244f422b0c226c1be5a3b8f6a6da7669/src/merkletree.rs#L11
+- A pretty node-free Graph implementation
+[Contest Algorithms, Graph:](https://github.com/EbTech/rust-algorithms/blob/master/src/graph/mod.rs)
