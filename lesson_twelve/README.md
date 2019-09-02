@@ -84,7 +84,10 @@ Kevin, Uthen => Performance / Criterion Team
 John, Vincent => Marketing
 ```
 
-# Requirements
+### Project Structure
+[members cargo syntax](https://github.com/crypto-com/chain)
+
+### Requirements
 - Implement a cli-based database that supports, "Upsert" and "Get" operations.
 - The database should store the values on the file system
 
@@ -104,9 +107,8 @@ How do we store and retrieve the data?
 # Architecture Team
 Keep it simple.
 
-# CI/CD
-Keep it simple, we need a shared repository
-
+# Criterion Team 
+Compare ซื่อๆ DB with something (RocksDB?) 
 
 # Marketing
 
