@@ -51,4 +51,5 @@ fn homework() {
         .collect();
 
     println!("What's homework result? : {:?}", &vector);
+    
 }

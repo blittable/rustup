@@ -1,8 +1,6 @@
-#![allow(unused_variables)]
-
+ #[allow(overflowing_literals)]
 fn main() {
-
-    let nums: [i32; 3] = [1, 2, 3];
+    //let nums: [i32; 3] = [1, 2, 3];
     let nums: [i32; 3] = [1, 2, 340404404044];
 
     let result = double_some_values(&nums);
@@ -22,5 +20,8 @@ fn main() {
 //and return the array with all of the values doubled 
 //So, input => [1,2,3] returns [2,4,6]
 fn double_some_values(nums: &[i32; 3]) -> Vec<i32>  {
-    nums.iter().map(|&n| n * 2).collect()
+    let answer: Vec<i32> = nums.iter()
+                                .map(|&n| n.wrapping_mul(2))
+                                .collect();
+    return answer;
 }
