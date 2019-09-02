@@ -15,11 +15,13 @@ But best to think about it in these terms:
 
 With Options:
 
+```
                     Option<T>                                                       
                        |                                                                  
           Some         or               None                                  
             |                             | 
 We know our T and get to work       Missing, handle accordingly 
+```
 
 
 But, with Results:

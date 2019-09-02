@@ -1,5 +1,5 @@
 fn main() {
-    println!("Hello, world!");
+    println!("Good luck!");
 }
 
 #[allow(unused_imports)]
@@ -30,3 +30,4 @@ mod test {
 
     }
 }
+
