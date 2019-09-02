@@ -1,4 +1,4 @@
-# Lesson Nine: Unit Testing and bit of Housekeeping 
+# Lesson Nine: Unit Testing and bit of Housekeeping and a Test!!! 
 
 ## Objectives 
 - Unit Testing
@@ -32,12 +32,13 @@ convention:
 
 ```cargo run --example [example_name]```
 
-
 ### TEST!!!
 
-
+This is a refresher on borrowing and mutablity.
+- In the /demos/test_lesson_10 you will find a set of functions calls commented out.
+- Review the functions and ask yourself, "does this compile?"
 
 ### Homework
 
 This is homework is a short one:
-Create a simple function, and writing a failing unit test
+Create a simple function, and write a unit test for that function
