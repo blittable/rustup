@@ -13,4 +13,5 @@ run-build:
     - susu-db
   script:
   - rustc --version && cargo --version
+  - cd project/susu
   - cargo build --release --jobs 1
