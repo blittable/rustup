@@ -9,6 +9,8 @@ stages:
 run-build:
   stage: build
   image: rust:latest
+  only:
+    - susu-db
   script:
   - rustc --version && cargo --version
   - cargo build --release --jobs 1
