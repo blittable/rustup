@@ -13,3 +13,4 @@ repository = "https://github.com/blittable/rustup.git"
 
 [dependencies]
 clap = "~2.27.0"
+crc32fast = "1.2.0"

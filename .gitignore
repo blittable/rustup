@@ -10,4 +10,5 @@ Cargo.lock
 **/*.rs.bk
 
 main
-project/susu/susu_db.txt
+#project/susu/susu_db.txt
+project/susu/susu_db

@@ -1,10 +1,13 @@
 use std::collections::HashSet;
 use std::error::Error;
+use std::fs;
 use std::fs::File;
 use std::fs::OpenOptions;
 use std::io::prelude::*;
 // use std::io::SeekFrom;
 use std::path::Path;
+
+use crc32fast::Hasher;
 
 #[allow(non_snake_case)]
 pub mod SusuExceptions;
@@ -59,12 +62,20 @@ impl SusuDataTraits for SusuData {
 
 // -- SusuDatabase
 pub struct SusuDatabase {
-    pub db_name: String,
+    pub db_name: String
 }
 
 impl SusuDatabase {
+    fn get_filename(&self, key: &str) -> String {
+        let mut hasher = Hasher::new();
+        hasher.update(key.as_bytes());
+        return hasher.finalize().to_string();
+    }
+
     fn do_add(&self, item: SusuData) -> bool {
         let data = item.to_data_format();
+        let filepath = format!("{}/{}", &self.db_name, &self.get_filename(&item.key));
+        println!("{:?}", filepath);
         match data {
             Ok(mut key_value) => {
                 // Add new line
@@ -73,7 +84,8 @@ impl SusuDatabase {
                 // Open file with append mode
                 let mut file = OpenOptions::new()
                     .append(true)
-                    .open(&self.db_name)
+                    .create(true)
+                    .open(filepath)
                     .expect("Couldn't open file");
 
                 // Write string to file
@@ -93,7 +105,8 @@ impl SusuDatabase {
         }
 
         // Open file with read mode
-        let mut file_reader = File::open(&self.db_name).expect("Couldn't open file");
+        let filepath = format!("{}/{}", &self.db_name, &self.get_filename(&exist_item.key));
+        let mut file_reader = File::open(&filepath).expect("Couldn't open file");
         // Read string content in file
         let mut content_strings = String::new();
         file_reader
@@ -105,7 +118,7 @@ impl SusuDatabase {
         content_strings = content_strings.replace(&exist_string, &update_string);
 
         // Open file with write mode
-        let mut file_writer = File::create(&self.db_name).expect("Couldn't open file");
+        let mut file_writer = File::create(&filepath).expect("Couldn't open file");
         file_writer
             .write_all(content_strings.as_bytes())
             .expect("Couldn't write file");
@@ -115,8 +128,13 @@ impl SusuDatabase {
 
     fn do_get(&self, key: &str) -> Option<SusuData> {
         // Open file
-        let mut file_reader = File::open(&self.db_name).expect("Couldn't open file");
-        // file_reader.seek(SeekFrom::Start(5)).expect("Couldn't read file");
+        let filepath = format!("{}/{}", &self.db_name, &self.get_filename(key));
+        let mut file_reader = OpenOptions::new()
+                    .append(true)
+                    .read(true)
+                    .create(true)
+                    .open(filepath)
+                    .expect("Couldn't open file");
 
         // Read string content in file
         let mut content_strings = String::new();
@@ -159,16 +177,13 @@ impl SusuDatabaseTraits for SusuDatabase {
 
     fn config(&mut self, db_name: &'static str) {
         let mut db: String = db_name.to_string();
-        if !db_name.to_string().ends_with(".txt") {
-            db = format!("{}.txt", db_name);
-        }
 
         let path = Path::new(&db);
         let display = path.display();
         if !path.exists() {
-            match File::create(&path) {
-                Err(err) => panic!("Couldn't create {} file, {}", display, err.description()),
-                Ok(file) => file,
+            match fs::create_dir(&path) {
+                Err(err) => panic!("Couldn't create {}, {}", display, err.description()),
+                Ok(()) => {},
             };
         }
 
