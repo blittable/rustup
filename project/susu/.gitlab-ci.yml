@@ -37,5 +37,5 @@ run_job:
   only:
     - susu-db
   script:
-    - cd project/susu
-    - ./target/release/susu --help
+    - cd project/susu/target/release
+    - susu --help
