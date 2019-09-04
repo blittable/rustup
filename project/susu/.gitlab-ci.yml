@@ -24,4 +24,5 @@ run:
   only:
     - susu-db
   script:
-  - cargo run --release --bin susu
+    - cd project/susu
+    - cargo run --release --bin susu
