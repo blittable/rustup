@@ -14,17 +14,11 @@ pub fn rocksdb_write() {
     //NB: db is automatically closed at end of lifetime
     let db = DB::open_default("path/for/rocksdb/storage").unwrap();
 
-    for i in 0..10 {
+    for i in 0..100 {
         let key = format!("rock{}", i).to_string();
         let value = i.to_string();
         db.put(key, value);
     }
-
-    // match db.get("rock1") {
-    //     Ok(Some(value)) => println!("retrieved value {}", value.to_utf8().unwrap()),
-    //     Ok(None) => println!("value not found"),
-    //     Err(e) => println!("operational problem encountered: {}", e),
-    // }
 
     return;
 }
@@ -34,7 +28,7 @@ pub fn rocksdb_read() {
     //NB: db is automatically closed at end of lifetime
     let db = DB::open_default("path/for/rocksdb/storage").unwrap();
 
-    for i in 0..10 {
+    for i in 0..100 {
         let key = format!("rock{}", i).to_string();
 
         match db.get(key) {
