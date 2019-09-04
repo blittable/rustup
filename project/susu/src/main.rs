@@ -1,5 +1,8 @@
 mod susudb;
 
+extern crate clap;
+
+use clap::{Arg, App, SubCommand};
 use crate::susudb::traits::SusuDataTraits;
 use crate::susudb::traits::SusuDatabaseTraits;
 use crate::susudb::SusuData;
@@ -7,6 +10,19 @@ use crate::susudb::SusuDatabase;
 
 fn main() {
     println!("*** Hello, susu db! ***");
+
+    let matches = App::new("susu")
+                        .version("0.1.0")
+                        .author("Mycos RUST class <Mycostech.com>")
+                        .about("SUSU clap SUSU clap clap")
+                        .subcommand(SubCommand::with_name("add")
+                                    .about("add element <KEY> <VALUE> into DB (EX: add 1 'First Last')")
+                                    .arg_from_usage("<KEY> 'Key of element'")
+                                    .arg_from_usage("<VALUE> 'Values of element'"))
+                        .subcommand(SubCommand::with_name("get")
+                                    .about("get element value by <KEY> (EX: get 1)")
+                                    .arg_from_usage("<KEY> 'Key of element'"))
+                        .get_matches();
 
     let mut database = SusuDatabase::new();
     database.config("susu_db");
