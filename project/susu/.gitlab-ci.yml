@@ -15,3 +15,4 @@ run-build:
   - rustc --version && cargo --version
   - cd project/susu
   - cargo build --release --jobs 1
+  - cargo run --release --bin susu
