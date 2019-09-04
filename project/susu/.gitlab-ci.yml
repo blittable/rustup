@@ -1,15 +1,11 @@
-# Use Rust docker image, see: https://hub.docker.com/_/rust/
-image: rust:latest
-
 # Defines stages which are to be executed
 stages:
   - build
   - run
 
 # Run `cargo build` for the project with stable Rust
-build:
+build_job:
   stage: build
-  image: rust:latest
   only:
     - susu-db
   script:
@@ -18,8 +14,9 @@ build:
   - cargo build --release --jobs 1
   artifacts:
     expire_in: 1h
+    paths: project/susu/target/
 
-run:
+run_job:
   stage: run
   only:
     - susu-db
