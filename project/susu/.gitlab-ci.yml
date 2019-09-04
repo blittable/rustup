@@ -8,6 +8,8 @@ build_job:
   stage: build
   only:
     - susu-db
+  before_script:
+  - rustup default stable
   script:
   - rustc --version && cargo --version
   - cd project/susu
