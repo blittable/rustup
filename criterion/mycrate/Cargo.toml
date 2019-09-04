@@ -1,0 +1,20 @@
+[package]
+name = "mycrate"
+version = "0.1.0"
+authors = ["KevinNel <nel.kevin.147@gmail.com>"]
+edition = "2018"
+
+[lib]
+name = "mycrate"
+path = "src/lib.rs"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+
+[dev-dependencies]
+criterion = "0.3"
+
+[[bench]]
+name = "my_benchmark"
+harness = false
