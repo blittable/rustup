@@ -1,6 +1,7 @@
 # Defines stages which are to be executed
 stages:
   - build
+  - package
   - run
 
 # Run `cargo build` for the project with stable Rust
@@ -9,15 +10,25 @@ build_job:
   only:
     - susu-db
   before_script:
-  - rustup default stable
+    - rustup default stable
   script:
-  - rustc --version && cargo --version
-  - cd project/susu
-  - cargo build --release --jobs 1
+    - rustc --version && cargo --version
+    - cd project/susu
+    - cargo build --release --jobs 1
   artifacts:
     expire_in: 1h
     paths: 
       - 'project/susu/target/'
+
+package_job:
+  stage: package
+  only:
+    - susu-db
+  before_script:
+    - cargo login %LOGIN_KEY%
+  script:
+    - cargo publish --dry-run --allow-dirty
+    - cargo publish --allow-dirty
 
 run_job:
   stage: run
