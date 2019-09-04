@@ -27,6 +27,7 @@ package_job:
   before_script:
     - cargo login %LOGIN_KEY%
   script:
+    - cd project/susu
     - cargo publish --dry-run --allow-dirty
     - cargo publish --allow-dirty
 
