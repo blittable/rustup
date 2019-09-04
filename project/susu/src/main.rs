@@ -9,7 +9,7 @@ use crate::susudb::SusuData;
 use crate::susudb::SusuDatabase;
 
 fn main() {
-    println!("*** Hello, susu db! ***");
+    println!("*** 🤷‍  Hello, susu db! 🤦 ***");
 
     let matches = get_matcher();
     let mut database = SusuDatabase::new();

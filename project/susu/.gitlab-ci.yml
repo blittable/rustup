@@ -38,4 +38,4 @@ run_job:
     - susu-db
   script:
     - cd project/susu
-    - cargo run --release --bin susu
+    - ./target/release/susu --help
