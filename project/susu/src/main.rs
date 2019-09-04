@@ -12,53 +12,26 @@ fn main() {
     println!("*** Hello, susu db! ***");
 
     let matches = get_matcher();
+    let mut database = SusuDatabase::new();
+    database.config("susu_db");
+    
     if let Some(matches) = matches.subcommand_matches("add") {
-        add_element(matches);
+        add_element(database,matches);
     }
     else if let Some(matches) = matches.subcommand_matches("get") {
-        get_value(matches);
+        get_value(database,matches);
     }
     else {
         println!("Please enter command.");
     }
 
-    let mut database = SusuDatabase::new();
-    database.config("susu_db");
-
-    // Test add data
-    for key_temp in 0..100 {
-        let new_data =
-            SusuData::new_data(&format!("key#{}", key_temp), &format!("rust_{}", key_temp));
-        database.add(new_data);
-    }
-
-    // Test update data
-    for key_temp in 0..100 {
-        let new_data = SusuData::new_data(
-            &format!("key#{}", key_temp),
-            &format!("rust_updated_v1_{}", key_temp),
-        );
-        database.add(new_data);
-    }
-
-    // Test get data
-    for key_temp in 0..102 {
-        let value = database.get(&format!("key#{}", key_temp));
-        match value {
-            Some(val) => println!("Found value: {:?}\n", val),
-            None => println!("Not found any data\n"),
-        }
-    }
-
-    // Test add invalid data
-    let new_data = SusuData::new_data(&"", &"rust_empty");
-    database.add(new_data);
+   
 }
 
 fn get_matcher() -> clap::ArgMatches<'static> {
-    App::new("susu")
-                        .version("0.1.0")
-                        .author("Mycos RUST class <Mycostech.com>")
+    App::new(env!("CARGO_PKG_NAME"))
+                        .version(env!("CARGO_PKG_VERSION"))
+                        .author(env!("CARGO_PKG_AUTHORS"))
                         .about("SUSU clap SUSU clap clap")
                         .subcommand(SubCommand::with_name("add")
                                     .about("add element <KEY> <VALUE> into DB (EX: add 1 'First Last')")
@@ -70,13 +43,28 @@ fn get_matcher() -> clap::ArgMatches<'static> {
                         .get_matches()
 }
 
-fn add_element(matches :&clap::ArgMatches<'static>) {
+fn add_element(database:SusuDatabase, matches :&clap::ArgMatches<'static>) {
     let key = matches.value_of("KEY").unwrap();
     let value = matches.value_of("VALUE").unwrap();
-    println!("{} {}", key, value);
+
+    let result = database.add(SusuData{key:key.to_string(),value:Some(value.to_string())});
+    if result == true
+    {
+        println!("> success!");
+    }
+    else
+    {
+        println!("> failed!");
+    }
+    
 }
 
-fn get_value(matches :&clap::ArgMatches<'static>) {
+fn get_value(database:SusuDatabase,matches :&clap::ArgMatches<'static>) {
     let key = matches.value_of("KEY").unwrap();
-    println!("{}", key);
+    match database.get(key)
+    {
+        Some(value) => println!("> The value is: {:?}", value),
+        None => println!("> No return value")
+    }
+    
 }
