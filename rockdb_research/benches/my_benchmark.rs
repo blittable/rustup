@@ -3,21 +3,29 @@ extern crate criterion;
 
 use criterion::Criterion;
 use criterion::black_box;
+use std::time::{Duration, SystemTime};
 
-pub static BENCH_SIZE: isize = 10;
-pub static SAMPLE_SIZE: isize = 10;
-
-//use rockdb_research::fibonacci;
 use rockdb_research::rocksdb_write;
 use rockdb_research::rocksdb_read;
 
-pub fn criterion_benchmark(c: &mut Criterion) {
-    //Todo: first, we need to set the sample_size. 
-    //c.sample_size(10);
+//Defined Benchmark setting
+fn short_benchmark() -> Criterion {
+    Criterion::default()
+        .warm_up_time(Duration::from_millis(3000))
+        .measurement_time(Duration::from_millis(5000))
+        .nresamples(1000)
+        .with_plots()
+}
 
+pub fn criterion_benchmark(c: &mut Criterion) {
     //RocksDB
-    //c.bench_function("rocksdb_write_benchmark", |b| b.iter(|| rocksdb_write()));
-    c.bench_function("rocksdb_read_benchmark", |b| b.iter(|| rocksdb_read()));
+    // short_benchmark()
+    //     .sample_size(10)
+    //     .bench_function("rocksdb_write_benchmark", |b| b.iter(|| rocksdb_write()));
+
+    short_benchmark()
+        .sample_size(10)
+        .bench_function("rocksdb_read_benchmark", |b| b.iter(|| rocksdb_read()));
 
     //SusuDB
     //Todo
