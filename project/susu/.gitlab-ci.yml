@@ -25,6 +25,7 @@ package_job:
   only:
     - susu-db
   before_script:
+    - powershell -Command "(Get-Content project\susu\Cargo.toml).replace('0.1.0', '0.1.%CI_COMMIT_SHA%') | Set-Content project\susu\Cargo.toml"
     - cargo login %LOGIN_KEY%
   script:
     - cd project/susu
