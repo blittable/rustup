@@ -14,7 +14,8 @@ build_job:
   - cargo build --release --jobs 1
   artifacts:
     expire_in: 1h
-    paths: project/susu/target/
+    paths: 
+      - 'project/susu/target/'
 
 run_job:
   stage: run
