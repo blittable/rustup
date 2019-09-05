@@ -1,6 +1,6 @@
-# Lesson Thirteen: Struct Constructors 
+# Lesson Thirteen: Iterator Patterns 
 
-Similar to OO programming, Rust (and C/C++) leverage 'constructors' for instantiation.  The format, however,
+Idomatic Rust uses 
 is different.
 
 Here we'll review some of the main forms.
