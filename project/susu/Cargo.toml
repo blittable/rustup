@@ -20,7 +20,12 @@ name = "susu"
 path = "src/myclap.rs"
 
 [dependencies]
-clap = "~2.30.0"
+clap = "2.33.0"
+criterion = "0.3"
 
 [dependencies.susudb]
 path = "src/susudb"
+
+[[bench]]
+name = "mybench"
+harness = false
