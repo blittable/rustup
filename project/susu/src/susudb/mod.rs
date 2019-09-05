@@ -62,7 +62,7 @@ impl SusuDataTraits for SusuData {
 
 // -- SusuDatabase
 pub struct SusuDatabase {
-    pub db_name: String
+    pub db_name: String,
 }
 
 impl SusuDatabase {
@@ -81,14 +81,15 @@ impl SusuDatabase {
                 key_value.push_str(ITEM_SEPARATOR);
 
                 // Open file with append mode
-                let mut file = OpenOptions::new()
+                let mut file_writer = OpenOptions::new()
                     .append(true)
                     .create(true)
                     .open(filepath)
                     .expect("Couldn't open file");
 
                 // Write string to file
-                file.write_all(key_value.as_bytes())
+                file_writer
+                    .write_all(key_value.as_bytes())
                     .expect("Couldn't write file");
 
                 return true;
@@ -97,20 +98,39 @@ impl SusuDatabase {
         }
     }
 
-    fn do_update(&self, exist_item: SusuData, update_item: SusuData) -> bool {
+    fn do_update(
+        &self,
+        exist_item: SusuData,
+        update_item: SusuData,
+        current_strings: Option<String>,
+    ) -> bool {
         if exist_item.value == update_item.value {
             // Same item no need to update!
+            println!(
+                "duplicate (key: {:?}, value: {:?})",
+                exist_item.key,
+                exist_item.value.unwrap()
+            );
             return false;
         }
 
-        // Open file with read mode
         let filepath = format!("{}/{}", &self.db_name, &self.get_filename(&exist_item.key));
-        let mut file_reader = File::open(&filepath).expect("Couldn't open file");
-        // Read string content in file
         let mut content_strings = String::new();
-        file_reader
-            .read_to_string(&mut content_strings)
-            .expect("Couldn't read file");
+        if current_strings.is_none() {
+            // Open file with read mode
+            let mut file_reader = File::open(&filepath).expect("Couldn't open file");
+            // Read string content in file
+            // let mut content_strings = String::new();
+            file_reader
+                .read_to_string(&mut content_strings)
+                .expect("Couldn't read file");
+        } else {
+            content_strings = current_strings.unwrap();
+        }
+
+        if content_strings.is_empty() {
+            return false;
+        }
 
         let exist_string: String = exist_item.to_data_format().unwrap();
         let update_string: String = update_item.to_data_format().unwrap();
@@ -125,20 +145,19 @@ impl SusuDatabase {
         return true;
     }
 
-    fn do_get(&self, key: &str) -> Option<SusuData> {
+    fn do_get(
+        &self,
+        key: &str,
+        is_get_current_strings: bool,
+    ) -> (Option<SusuData>, Option<String>) {
         // Open file
         let filepath = format!("{}/{}", &self.db_name, &self.get_filename(key));
         let path = Path::new(&filepath);
         if !path.exists() {
-            return None;
+            return (None, None);
         }
 
-        let mut file_reader = OpenOptions::new()
-                    .append(true)
-                    .read(true)
-                    .create(true)
-                    .open(filepath)
-                    .expect("Couldn't open file");
+        let mut file_reader = File::open(&filepath).expect("Couldn't open file");
 
         // Read string content in file
         let mut content_strings = String::new();
@@ -165,7 +184,11 @@ impl SusuDatabase {
             .filter(|s| !s.key.is_empty() && s.key == key)
             .next();
 
-        return susu_result;
+        if is_get_current_strings {
+            return (susu_result, Some(content_strings));
+        } else {
+            return (susu_result, None);
+        }
     }
 }
 
@@ -184,7 +207,7 @@ impl SusuDatabaseTraits for SusuDatabase {
         if !path.exists() {
             match fs::create_dir(&path) {
                 Err(err) => panic!("Couldn't create {}, {}", display, err.description()),
-                Ok(()) => {},
+                Ok(()) => {}
             };
         }
 
@@ -192,29 +215,30 @@ impl SusuDatabaseTraits for SusuDatabase {
     }
 
     fn add(&self, item: SusuData) -> bool {
-        let exist_data = self.do_get(&item.key);
+        let (exist_data, current_strings) = self.do_get(&item.key, true);
 
         if exist_data.is_none() {
+            #[cfg(debug_assertions)]
             println!("> Adding item: {:?}", item);
 
             // Add new data
             return self.do_add(item);
         } else {
+            #[cfg(debug_assertions)]
             println!("> Updating existing item: {:?} to {:?}", &exist_data, &item);
 
             // Update data
-            return self.do_update(exist_data.unwrap(), item);
+            return self.do_update(exist_data.unwrap(), item, current_strings);
         }
     }
 
     fn get(&self, key: &str) -> Option<String> {
+        #[cfg(debug_assertions)]
         println!("> Getting item by key: {:?}", key);
 
-        match self.do_get(key) {
-            Some(s) => match s.value {
-                Some(r) => Some(r),
-                None => None,
-            },
+        let (result, _) = self.do_get(key, false);
+        match result {
+            Some(s) => s.value,
             None => None,
         }
     }
