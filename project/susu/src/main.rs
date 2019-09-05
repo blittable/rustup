@@ -3,7 +3,6 @@ mod susudb;
 extern crate clap;
 
 use clap::{App, SubCommand};
-use crate::susudb::traits::SusuDataTraits;
 use crate::susudb::traits::SusuDatabaseTraits;
 use crate::susudb::SusuData;
 use crate::susudb::SusuDatabase;
@@ -23,9 +22,7 @@ fn main() {
     }
     else {
         println!("Please enter command.");
-    }
-
-   
+    }  
 }
 
 fn get_matcher() -> clap::ArgMatches<'static> {
@@ -66,5 +63,4 @@ fn get_value(database:SusuDatabase,matches :&clap::ArgMatches<'static>) {
         Some(value) => println!("> The value is: {:?}", value),
         None => println!("> No return value")
     }
-    
 }

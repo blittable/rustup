@@ -1,4 +1,4 @@
-use std::collections::HashSet;
+// use std::collections::HashSet;
 use std::error::Error;
 use std::fs;
 use std::fs::File;
@@ -75,7 +75,6 @@ impl SusuDatabase {
     fn do_add(&self, item: SusuData) -> bool {
         let data = item.to_data_format();
         let filepath = format!("{}/{}", &self.db_name, &self.get_filename(&item.key));
-        println!("{:?}", filepath);
         match data {
             Ok(mut key_value) => {
                 // Add new line
@@ -129,6 +128,11 @@ impl SusuDatabase {
     fn do_get(&self, key: &str) -> Option<SusuData> {
         // Open file
         let filepath = format!("{}/{}", &self.db_name, &self.get_filename(key));
+        let path = Path::new(&filepath);
+        if !path.exists() {
+            return None;
+        }
+
         let mut file_reader = OpenOptions::new()
                     .append(true)
                     .read(true)
@@ -154,12 +158,9 @@ impl SusuDatabase {
         };
 
         let susu_result = content_strings
-            //.lines()
             .split(ITEM_SEPARATOR)
-            .filter(|s| s.contains(&key))
+            .filter(|s| s.starts_with(&key))
             .map(|s| s.to_string())
-            .collect::<HashSet<_>>()
-            .into_iter()
             .map(|s| fn_susu_map(s))
             .filter(|s| !s.key.is_empty() && s.key == key)
             .next();
@@ -176,7 +177,7 @@ impl SusuDatabaseTraits for SusuDatabase {
     }
 
     fn config(&mut self, db_name: &'static str) {
-        let mut db: String = db_name.to_string();
+        let db: String = db_name.to_string();
 
         let path = Path::new(&db);
         let display = path.display();
