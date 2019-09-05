@@ -1,19 +1,18 @@
+pub mod susuexceptions;
+pub mod traits;
+
 // use std::collections::HashSet;
+use crate::susuexceptions::SusuDbException;
+use crate::traits::{SusuDataTrait, SusuDatabaseTrait};
+
 use std::error::Error;
 use std::fs;
 use std::fs::File;
 use std::fs::OpenOptions;
 use std::io::prelude::*;
 // use std::io::SeekFrom;
-use std::path::Path;
-
 use crc32fast::Hasher;
-
-#[allow(non_snake_case)]
-pub mod SusuExceptions;
-pub mod traits;
-use crate::susudb::traits::*;
-use crate::susudb::SusuExceptions::SusuDbException;
+use std::path::Path;
 
 const KEY_VALUE_SEPARATOR: &str = "=su=";
 const ITEM_SEPARATOR: &str = "\n";
@@ -25,7 +24,7 @@ pub struct SusuData {
     pub value: Option<String>,
 }
 
-impl SusuDataTraits for SusuData {
+impl SusuDataTrait for SusuData {
     fn new() -> Self {
         Self {
             key: String::new(),
@@ -120,7 +119,6 @@ impl SusuDatabase {
             // Open file with read mode
             let mut file_reader = File::open(&filepath).expect("Couldn't open file");
             // Read string content in file
-            // let mut content_strings = String::new();
             file_reader
                 .read_to_string(&mut content_strings)
                 .expect("Couldn't read file");
@@ -192,7 +190,7 @@ impl SusuDatabase {
     }
 }
 
-impl SusuDatabaseTraits for SusuDatabase {
+impl SusuDatabaseTrait for SusuDatabase {
     fn new() -> Self {
         Self {
             db_name: String::new(),

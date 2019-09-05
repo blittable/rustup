@@ -11,6 +11,16 @@ repository = "https://github.com/blittable/rustup.git"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
+[[bin]]
+name = "bench"
+path = "src/bench.rs"
+
+[[bin]]
+name = "susu"
+path = "src/myclap.rs"
+
 [dependencies]
-clap = "~2.27.0"
-crc32fast = "1.2.0"
+clap = "~2.30.0"
+
+[dependencies.susudb]
+path = "src/susudb"
