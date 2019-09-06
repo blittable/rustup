@@ -26,7 +26,9 @@ package_engine_job:
     - susu-db
   before_script:
     - cargo login %LOGIN_KEY%
-    - powershell -Command "(Get-Content project\susu\engine\Cargo.toml).replace('1.0.0', '1.0.%date:~10,4%%date:~7,2%%date:~4,2%%time:~0,2%%time:~3,2%%time:~6,2%') | Set-Content project\susu\engine\Cargo.toml"
+    - 'set tm=%time:~0,2%'
+    - 'set tm=%tm: =0%'
+    - powershell -Command "(Get-Content project\susu\engine\Cargo.toml).replace('version = \"1.0.0\"', 'version = \"1.0.%date:~10,4%%date:~7,2%%date:~4,2%%tm%%time:~3,2%%time:~6,2%\"') | Set-Content project\susu\engine\Cargo.toml"
   script:
     - cd project/susu/engine
     - cargo publish --allow-dirty
