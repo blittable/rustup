@@ -21,10 +21,10 @@ pub fn criterion_benchmark(c: &mut Criterion) {
     let mut database = susudb::SusuDatabase::new();
     database.config("susu_db");
 
+    //Write
     short_benchmark()
         .sample_size(10)
-        .bench_function("susudb_read_benchmark", |b| b.iter(|| 
-
+        .bench_function("susudb_write_benchmark", |b| b.iter(|| 
             for key_temp in 0..1200 {
                 let new_data =
                     susudb::SusuData::new_data(&format!("key#{}", key_temp), &format!("rust_{}", key_temp));
@@ -32,6 +32,7 @@ pub fn criterion_benchmark(c: &mut Criterion) {
             }
         ));
 
+    //Read
     short_benchmark()
         .sample_size(10)
         .bench_function("susudb_read_benchmark", |b| b.iter(|| 
