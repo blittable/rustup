@@ -1,7 +1,6 @@
 # Defines stages which are to be executed
 stages:
   - build
-  - remove
   - package
   - benchmark
 
@@ -20,21 +19,13 @@ build_job:
     paths: 
       - 'project/susu/src/susudb/target/'
 
-remove_job:
-  stage: remove
-  only:
-    - susu-db
-  before_script:
-    - cargo login %LOGIN_KEY%
-  script:
-    - cd project/susu/src/susudb
-    - cargo yank --vers 1.0.0
-  allow_failure: true
-
 package_job:
   stage: package
   only:
     - susu-db
+  before_script:
+    - cargo login %LOGIN_KEY%
+    - powershell -Command "(Get-Content project\susu\src\susudb\Cargo.toml).replace('1.0.0', '1.0.%date:~10,4%%date:~7,2%%date:~4,2%%time:~0,2%%time:~3,2%%time:~6,2%') | Set-Content project\susu\src\susudb\Cargo.toml"
   script:
     - cd project/susu/src/susudb
     - cargo publish --allow-dirty
