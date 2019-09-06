@@ -1,43 +1,64 @@
 # Defines stages which are to be executed
 stages:
-  - build
-  - package
-  - benchmark
+  - build-engine
+  - package-engine
+  - build-cli
+  - final
 
-build_job:
-  stage: build
+build_engine_job:
+  stage: build-engine
   only:
     - susu-db
   before_script:
     - rustup default stable
-  script:
     - rustc --version && cargo --version
-    - cd project/susu/src/susudb
+  script:
+    - cd project/susu/engine
     - cargo build --release
   artifacts:
     expire_in: 1h
     paths: 
-      - 'project/susu/src/susudb/target/'
+      - 'project/susu/engine/target/'
 
-package_job:
-  stage: package
+package_engine_job:
+  stage: package-engine
   only:
     - susu-db
   before_script:
     - cargo login %LOGIN_KEY%
-    - powershell -Command "(Get-Content project\susu\src\susudb\Cargo.toml).replace('1.0.0', '1.0.%date:~10,4%%date:~7,2%%date:~4,2%%time:~0,2%%time:~3,2%%time:~6,2%') | Set-Content project\susu\src\susudb\Cargo.toml"
+    - powershell -Command "(Get-Content project\susu\engine\Cargo.toml).replace('1.0.0', '1.0.%date:~10,4%%date:~7,2%%date:~4,2%%time:~0,2%%time:~3,2%%time:~6,2%') | Set-Content project\susu\engine\Cargo.toml"
   script:
-    - cd project/susu/src/susudb
+    - cd project/susu/engine
     - cargo publish --allow-dirty
 
-benchmark_job:
-  stage: benchmark
+build_cli_job:
+  stage: build-cli
   only:
     - susu-db
   script:
-    - cd project/susu
+    - cd project/susu/cli
+    - cargo build --release
+  artifacts:
+    expire_in: 1h
+    paths: 
+      - 'project/susu/cli/target/'
+
+benchmark_job:
+  stage: final
+  only:
+    - susu-db
+  script:
+    - cd project/susu/benchmark
     - cargo bench
   artifacts:
     expire_in: 1d
     paths: 
-      - 'project/susu/target/criterion/'
+      - 'project/susu/benchmark/target/'
+
+run_cli_job:
+  stage: final
+  only:
+    - susu-db
+  script:
+    - cd project/susu/cli/target/release
+    - susu --help

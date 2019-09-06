@@ -1,6 +1,6 @@
 [package]
-name = "susudb"
-version = "1.0.0"
+name = "susu-cli"
+version = "0.1.0"
 authors = ["MyCos Tech <sales@mycostech.com>"]
 edition = "2018"
 license = "MIT"
@@ -11,9 +11,10 @@ repository = "https://github.com/blittable/rustup.git"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
-[dependencies]
-crc32fast = "1.2.0"
+[[bin]]
+name = "susu"
+path = "src/main.rs"
 
-[lib]
-name = "susudb"
-path = "lib.rs"
+[dependencies]
+clap = "2.33.0"
+susudb = "1.0.*"
