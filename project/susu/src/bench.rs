@@ -6,14 +6,14 @@ fn main() {
     database.config("susu_db");
 
     // Test add data
-    for key_temp in 0..100 {
+    for key_temp in 0..1200 {
         let new_data =
             susudb::SusuData::new_data(&format!("key#{}", key_temp), &format!("rust_{}", key_temp));
         database.add(new_data);
     }
 
     // Test update data
-    for key_temp in 0..100 {
+    for key_temp in 0..1200 {
         let new_data = susudb::SusuData::new_data(
             &format!("key#{}", key_temp),
             &format!("rust_updated_v1_{}", key_temp),
@@ -22,7 +22,7 @@ fn main() {
     }
 
     // Test get data
-    for key_temp in 0..102 {
+    for key_temp in 0..1200 {
         let value = database.get(&format!("key#{}", key_temp));
         match value {
             Some(val) => println!("Found value: {:?}\n", val),

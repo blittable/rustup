@@ -25,7 +25,7 @@ pub fn criterion_benchmark(c: &mut Criterion) {
         .sample_size(10)
         .bench_function("rocksdb_write_benchmark", |b| b.iter(|| 
 
-            for key_temp in 0..100 {
+            for key_temp in 0..1200 {
                 let new_data =
                     susudb::SusuData::new_data(&format!("key#{}", key_temp), &format!("rust_{}", key_temp));
                 database.add(new_data);
@@ -35,7 +35,7 @@ pub fn criterion_benchmark(c: &mut Criterion) {
     short_benchmark()
         .sample_size(10)
         .bench_function("rocksdb_read_benchmark", |b| b.iter(|| 
-            for key_temp in 0..100 {
+            for key_temp in 0..1200 {
                 let value = database.get(&format!("key#{}", key_temp));
                 match value {
                     Some(val) => println!("Found value: {:?}\n", val),
