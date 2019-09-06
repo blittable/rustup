@@ -28,7 +28,7 @@ remove_job:
     - cargo login %LOGIN_KEY%
   script:
     - cd project/susu/src/susudb
-    - cargo yark --vers 1.0.0
+    - cargo yank --vers 1.0.0
   allow_failure: true
 
 package_job:
