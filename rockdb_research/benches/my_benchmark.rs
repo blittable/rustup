@@ -18,11 +18,12 @@ fn short_benchmark() -> Criterion {
 }
 
 pub fn criterion_benchmark(c: &mut Criterion) {
-    //RocksDB
-    // short_benchmark()
-    //     .sample_size(10)
-    //     .bench_function("rocksdb_write_benchmark", |b| b.iter(|| rocksdb_write()));
+    //Write
+    short_benchmark()
+         .sample_size(10)
+        .bench_function("rocksdb_write_benchmark", |b| b.iter(|| rocksdb_write()));
 
+    //Read
     short_benchmark()
         .sample_size(10)
         .bench_function("rocksdb_read_benchmark", |b| b.iter(|| rocksdb_read()));
