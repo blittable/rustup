@@ -14,7 +14,7 @@ pub fn rocksdb_write() {
     //NB: db is automatically closed at end of lifetime
     let db = DB::open_default("path/for/rocksdb/storage").unwrap();
 
-    for i in 0..100 {
+    for i in 0..1200 {
         let key = format!("rock{}", i).to_string();
         let value = i.to_string();
         db.put(key, value);
@@ -28,7 +28,7 @@ pub fn rocksdb_read() {
     //NB: db is automatically closed at end of lifetime
     let db = DB::open_default("path/for/rocksdb/storage").unwrap();
 
-    for i in 0..100 {
+    for i in 0..1200 {
         let key = format!("rock{}", i).to_string();
 
         match db.get(key) {

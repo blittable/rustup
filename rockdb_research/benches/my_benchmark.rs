@@ -26,9 +26,6 @@ pub fn criterion_benchmark(c: &mut Criterion) {
     short_benchmark()
         .sample_size(10)
         .bench_function("rocksdb_read_benchmark", |b| b.iter(|| rocksdb_read()));
-
-    //SusuDB
-    //Todo
 }
 
 criterion_group!(benches, criterion_benchmark);
