@@ -23,7 +23,7 @@ pub fn criterion_benchmark(c: &mut Criterion) {
 
     short_benchmark()
         .sample_size(10)
-        .bench_function("rocksdb_write_benchmark", |b| b.iter(|| 
+        .bench_function("susudb_read_benchmark", |b| b.iter(|| 
 
             for key_temp in 0..1200 {
                 let new_data =
@@ -34,13 +34,13 @@ pub fn criterion_benchmark(c: &mut Criterion) {
 
     short_benchmark()
         .sample_size(10)
-        .bench_function("rocksdb_read_benchmark", |b| b.iter(|| 
+        .bench_function("susudb_read_benchmark", |b| b.iter(|| 
             for key_temp in 0..1200 {
                 let value = database.get(&format!("key#{}", key_temp));
-                match value {
-                    Some(val) => println!("Found value: {:?}\n", val),
-                    None => println!("Not found any data\n"),
-                }
+                // match value {
+                //     Some(val) => println!("Found value: {:?}\n", val),
+                //     None => println!("Not found any data\n"),
+                // }
             }
         ));
 }

@@ -105,11 +105,11 @@ impl SusuDatabase {
     ) -> bool {
         if exist_item.value == update_item.value {
             // Same item no need to update!
-            println!(
-                "duplicate (key: {:?}, value: {:?})",
-                exist_item.key,
-                exist_item.value.unwrap()
-            );
+            // println!(
+            //     "duplicate (key: {:?}, value: {:?})",
+            //     exist_item.key,
+            //     exist_item.value.unwrap()
+            // );
             return false;
         }
 

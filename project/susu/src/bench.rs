@@ -24,10 +24,10 @@ fn main() {
     // Test get data
     for key_temp in 0..1200 {
         let value = database.get(&format!("key#{}", key_temp));
-        match value {
-            Some(val) => println!("Found value: {:?}\n", val),
-            None => println!("Not found any data\n"),
-        }
+        // match value {
+        //     Some(val) => println!("Found value: {:?}\n", val),
+        //     None => println!("Not found any data\n"),
+        // }
     }
 
     // // Test add invalid data
