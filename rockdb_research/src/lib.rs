@@ -15,7 +15,7 @@ pub fn rocksdb_write() {
     let db = DB::open_default("path/for/rocksdb/storage").unwrap();
 
     for i in 0..1200 {
-        let key = format!("rock{}", i).to_string();
+        let key = format!("key#{}", i).to_string();
         let value = i.to_string();
         db.put(key, value);
     }
@@ -29,7 +29,7 @@ pub fn rocksdb_read() {
     let db = DB::open_default("path/for/rocksdb/storage").unwrap();
 
     for i in 0..1200 {
-        let key = format!("rock{}", i).to_string();
+        let key = format!("key#{}", i).to_string();
 
         match db.get(key) {
             Ok(Some(value)) => return,
