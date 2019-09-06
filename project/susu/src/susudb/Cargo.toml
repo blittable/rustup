@@ -3,6 +3,11 @@ name = "susudb"
 version = "1.0.0"
 authors = ["MyCos Tech <sales@mycostech.com>"]
 edition = "2018"
+license = "MIT"
+description = "Keep It Simple and Naive like a child"
+homepage = "https://github.com/blittable/rustup/tree/susu-db/project/susu"
+documentation = "https://github.com/blittable/rustup/tree/susu-db/project/susu"
+repository = "https://github.com/blittable/rustup.git"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 

@@ -22,11 +22,7 @@ path = "src/myclap.rs"
 [dependencies]
 clap = "2.33.0"
 criterion = "0.3"
-susudb = { path = "src/susudb", version = "1.0.0" }
-
-#[dependencies.susudb]
-#path = "src/susudb"
-#version = "1.0.0"
+susudb = "1.0.0"
 
 [[bench]]
 name = "mybench"

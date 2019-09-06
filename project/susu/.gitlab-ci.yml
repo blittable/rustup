@@ -1,10 +1,10 @@
 # Defines stages which are to be executed
 stages:
   - build
+  - remove
   - package
-  - run
+  - benchmark
 
-# Run `cargo build` for the project with stable Rust
 build_job:
   stage: build
   only:
@@ -13,29 +13,40 @@ build_job:
     - rustup default stable
   script:
     - rustc --version && cargo --version
-    - cd project/susu
-    - cargo build --release --jobs 1
+    - cd project/susu/src/susudb
+    - cargo build --release
   artifacts:
     expire_in: 1h
     paths: 
-      - 'project/susu/target/'
+      - 'project/susu/src/susudb/target/'
+
+remove_job:
+  stage: remove
+  only:
+    - susu-db
+  before_script:
+    - cargo login %LOGIN_KEY%
+  script:
+    - cd project/susu/src/susudb
+    - cargo yark --vers 1.0.0
+  allow_failure: true
 
 package_job:
   stage: package
   only:
     - susu-db
-  before_script:
-    - powershell -Command "(Get-Content project\susu\Cargo.toml).replace('0.1.0', '0.1.%date:~10,4%%date:~7,2%%date:~4,2%%time:~0,2%%time:~3,2%%time:~6,2%') | Set-Content project\susu\Cargo.toml"
-    - cargo login %LOGIN_KEY%
   script:
-    - cd project/susu
-    - cargo publish --dry-run --allow-dirty
+    - cd project/susu/src/susudb
     - cargo publish --allow-dirty
 
-run_job:
-  stage: run
+benchmark_job:
+  stage: benchmark
   only:
     - susu-db
   script:
-    - cd project/susu/target/release
-    - susu --help
+    - cd project/susu
+    - cargo bench
+  artifacts:
+    expire_in: 1d
+    paths: 
+      - 'project/susu/target/criterion/'
