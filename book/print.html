@@ -1,0 +1,738 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Rust for OO Programmers</title>
+        
+        <meta name="robots" content="noindex" />
+        
+
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
+        <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:500" rel="stylesheet" type="text/css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        
+
+        
+    </head>
+    <body class="light">
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "";
+            var default_theme = "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            document.body.className = theme;
+            document.querySelector('html').className = theme + ' js';
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="affix"><a href="index.html">Rust for OO Programmers</a></li><li class="affix"><a href="OVERVIEW.html">Overview from an OO Perspective</a></li><li class="affix"><a href="lessons/LESSONS.html">Lessons</a></li><li><a href="lessons/lesson_one/index.html"><strong aria-hidden="true">1.</strong> Setup And A Function</a></li><li><ol class="section"><li><a href="lessons/lesson_one/index.html"><strong aria-hidden="true">1.1.</strong> Calling a Function</a></li></ol></li><li><a href="lessons/lesson_two/index.html"><strong aria-hidden="true">2.</strong> Standard Lib, Types, Immutability</a></li><li><a href="lessons/lesson_three/index.html"><strong aria-hidden="true">3.</strong> Intro to Traits</a></li><li><a href="lessons/lesson_four/index.html"><strong aria-hidden="true">4.</strong> Enum Wrappers, Option and Matching</a></li><li class="affix"><a href="misc/contributors.html">Contributors</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                
+                <div id="menu-bar" class="menu-bar">
+                    <div id="menu-bar-sticky-container">
+                        <div class="left-buttons">
+                            <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                                <i class="fa fa-bars"></i>
+                            </button>
+                            <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                                <i class="fa fa-paint-brush"></i>
+                            </button>
+                            <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                                <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                            </ul>
+                            
+                            <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                                <i class="fa fa-search"></i>
+                            </button>
+                            
+                        </div>
+
+                        <h1 class="menu-title">Rust for OO Programmers</h1>
+
+                        <div class="right-buttons">
+                            <a href="print.html" title="Print this book" aria-label="Print this book">
+                                <i id="print-button" class="fa fa-print"></i>
+                            </a>
+                            
+                        </div>
+                    </div>
+                </div>
+
+                
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" name="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1><a class="header" href="#rust-for-oo-programmers" id="rust-for-oo-programmers">Rust for OO Programmers</a></h1>
+<p>This is an overview/tutorial of the Rust programming targeting object oriented programmers.</p>
+<p>Rust is best groked from a C++/C perspective, so some content that attends to the background of OO programmers lets us skip a few topics, but more importantly post warning signs 
+where OO thinking may introduce obstacles in the process.  By OO, we mean a statically-typed language where 'Object' sits at the top
+of the type heirarchy, such as any .NET language or Java.</p>
+<p><a href="https://doc.rust-lang.org/book/">The Rust Programming Language - aka 'The Book'</a> is a <em>great</em> resource and should certainly be used in conjuction with the content if you are new to Rust programming.</p>
+<p>Rust code and libraries are also easily 'self-documented', and one of the best examples is the std crate.  (a <code>crate</code> being the equivilant of an npm or nuget package).  <a href="https://doc.rust-lang.org/std/">std</a></p>
+<p>A personal favorite, though spare in parts, is the <a href="https://doc.rust-lang.org/stable/reference/">reference book</a> It's readable and not strictly a formal reference.</p>
+<p>Lest you find a broken link while searching doc, try the local documentation installed with the toolchain <code>rustup doc</code></p>
+<h2><a class="header" href="#how-to-use" id="how-to-use">How to Use</a></h2>
+<ul>
+<li>
+<p>The content/progress is fairly linear, but an attempt has been made to minimize the prerequisite topics where possible. </p>
+</li>
+<li>
+<p>If you clone this repository, most of the exercises are in the /src folder of the lesson.  The README for the individual lesson will detail those.</p>
+</li>
+<li>
+<p>You know how you learn best, but taking the examples, tweeking them, and playing with the problem/topic works well for most. </p>
+</li>
+<li>
+<p>The original content was developed as part of an in-house course on Rust, so you may see some remnants that don't make sense. </p>
+</li>
+</ul>
+<h2><a class="header" href="#objectives" id="objectives">Objectives</a></h2>
+<ul>
+<li>Provide an introduction to Rust that will get you moving, quickly</li>
+<li>Keep the lessons small and focused, one or two topics, max</li>
+<li>Build a solid foundation in Rust for further development</li>
+<li>Provide contextual information for OO programmers looking for a frame of reference</li>
+<li>Provide some motiviation by looking at some interesting Rust projects (mostly during discussions) </li>
+</ul>
+<h2><a class="header" href="#other-notes-and-tips" id="other-notes-and-tips">Other Notes and Tips</a></h2>
+<ul>
+<li>Resist the temptation to skim the Rust documention, jump over to github, pull a random project and start compiling.  A good foundation will get you moving faster.</li>
+<li>Rust code can be a bit intimidating at first glance (and even after a few more glances). However you're not obliged to use the advanced features of the language to get moving.  There are solid applications and libraries that are light on generics, inter-thread communication, macros, unsafe code, etc.</li>
+</ul>
+<h1><a class="header" href="#the-oo-perspective" id="the-oo-perspective">The OO Perspective</a></h1>
+<p>For the OO programmer, the primary differences (and therefore challenges) are the following:</p>
+<ul>
+<li>Functionality (often traits), is decoupled from data structures (structs or enums). </li>
+<li>&quot;You get what you get&quot; - there's very little in the way of 'inherited' functionality.</li>
+<li>NULL is replaced by wrapping <code>Option&lt;T&gt;</code></li>
+<li>You're accountable for the memory life of your allocations, though Rust, through compile-time rules, does most of the heavy lifting. </li>
+<li>Iteration and closures are first-class citizens in code composition. </li>
+<li>Error handling wraps a structure that may be of type error or not.</li>
+<li>Self-referential types (Parent A has a child B and they have references to one-another) require special handling</li>
+</ul>
+<p>There are exceptions to most of the above.  If it sounds challenges, keep in mind that it buys us:</p>
+<ul>
+<li>A garbage-collection free lightweight runtime that is memory safe.</li>
+<li>Incredible performance.</li>
+<li>The ability to go small (embedded devices).</li>
+<li>Granular control over memory allocation.</li>
+<li>Generics</li>
+<li>Fearless concurrency</li>
+</ul>
+<h1><a class="header" href="#lessons" id="lessons">Lessons</a></h1>
+<table><thead><tr><th>Lesson</th><th>Content</th></tr></thead><tbody>
+<tr><td>Lesson One</td><td><a href="lessons/lesson_one">Setup and passing/returning String</a></td></tr>
+<tr><td>Lesson Two</td><td>Standard Lib, Types, Immutability</td></tr>
+<tr><td>Lesson Three</td><td>Introduction To Traits</td></tr>
+<tr><td>Lesson Four</td><td>Enum Wrappers, Option<T>, and Matching</td></tr>
+<tr><td>Lesson Five</td><td>Error Handling Basics</td></tr>
+<tr><td>Lesson Six</td><td>Loops and Almighty Iterators</td></tr>
+<tr><td>Lesson Seven</td><td>Housekeeping (proj structure, some new types, etc.)</td></tr>
+<tr><td>Lesson Eight</td><td>Closures and a Peek at Lifetimes</td></tr>
+<tr><td>Lesson Nine</td><td>Lifetimes</td></tr>
+<tr><td>Lesson Ten</td><td>Unit Testing and a bit of Housekeeping</td></tr>
+<tr><td>Lesson Eleven</td><td>Box<T></td></tr>
+<tr><td>Lesson Twelve</td><td>Patterns of Iteration</td></tr>
+<tr><td>Lesson Thirteen</td><td>Patterns of Constructors</td></tr>
+<tr><td>Lesson Fourteen</td><td>Deref Syntax</td></tr>
+<tr><td>Lesson Fifteen</td><td>Rc<T>, RcCell<T>, Box<T> (again)</td></tr>
+<tr><td>Lesson Sixteen</td><td>Trait Bounds and returning Traits</td></tr>
+<tr><td>Lesson Seventeen</td><td>Functions vs. methods and impl on structs</td></tr>
+<tr><td>Lesson Eighteen</td><td>Slices in Retrospect</td></tr>
+<tr><td>Lesson Nineteen</td><td>Housekeeping: pinning runtime and rnd crate</td></tr>
+<tr><td>Lesson 20</td><td>The Sized Trait</td></tr>
+<tr><td>Lesson 21</td><td>Environment variables and the command line</td></tr>
+<tr><td>Lesson 22</td><td>Threads</td></tr>
+<tr><td>Lesson 23</td><td>Ref Stuff</td></tr>
+<tr><td>Lesson 24</td><td>Associated types on traits</td></tr>
+<tr><td>Lesson 25</td><td>The Sized Trait</td></tr>
+<tr><td>Lesson 26</td><td>Housekeeping Part 3</td></tr>
+<tr><td>Lesson 27</td><td>Web (and other) Assembly</td></tr>
+<tr><td>Lesson 28</td><td>TBD</td></tr>
+<tr><td>Lesson 29</td><td>Futures</td></tr>
+<tr><td>Lesson 30</td><td>Pluggable Runtimes and Async/Await</td></tr>
+</tbody></table>
+<h1><a class="header" href="#lesson-one-setup-and-returning-a-string" id="lesson-one-setup-and-returning-a-string">Lesson One: Setup and returning a String</a></h1>
+<h2><a class="header" href="#objectives-1" id="objectives-1">Objectives</a></h2>
+<ul>
+<li>Get Rust installed</li>
+<li>Look at the toolchain (rustc, cargo, rustup)</li>
+<li>Create a function that returns a value</li>
+</ul>
+<h3><a class="header" href="#installing" id="installing">Installing</a></h3>
+<p><a href="https://www.rust-lang.org/">Installing Rust</a> - This installs the toolchain (compiler and package manager (cargo) - Windows, OSX, Linux and other OS's are supported.</p>
+<ul>
+<li>Verify your installation worked by opening a command/terminal prompt and typing:</li>
+</ul>
+<pre><code>rustup
+rustc
+cargo
+</code></pre>
+<h3><a class="header" href="#get-to-know-the-toolchain" id="get-to-know-the-toolchain">Get to Know the toolchain</a></h3>
+<p>rustc is the compiler, but it's normally called by running a 'cargo' command (e.g. cargo build)</p>
+<p>This command:</p>
+<pre><code>rustup show
+</code></pre>
+<p>shows you your default / active toolchain.  Something like:</p>
+<pre><code>installed toolchains
+--------------------
+
+stable-x86_64-unknown-linux-gnu (default)
+nightly-x86_64-unknown-linux-gnu
+
+active toolchain
+----------------
+
+stable-x86_64-unknown-linux-gnu (default)
+rustc 1.37.0 (eae3437df 2019-08-13)
+</code></pre>
+<p>You can switch the active toolchain or compile with a specific toolchain.  Look at the 'rustup' command for details. </p>
+<h4><a class="header" href="#cool-note" id="cool-note">Cool Note</a></h4>
+<p>Type <code>rustc</code>, and look at the option for <code>emit</code> that specifies the output format, including asm (think web assembly) and llvm-ir </p>
+<pre><code>--emit [asm|llvm-bc|llvm-ir|obj|metadata|link|dep-info|mir]
+                        Comma separated list of types of output for the
+                        compiler to emit
+</code></pre>
+<h3><a class="header" href="#tool-summary" id="tool-summary">Tool Summary</a></h3>
+<p>So, there are three tools to get straight:</p>
+<table><thead><tr><th>Tool</th><th>Purpose</th></tr></thead><tbody>
+<tr><td><code>rustup</code></td><td>Doc and toolchain related</td></tr>
+<tr><td><code>cargo</code></td><td>Rust project builder, runner, invoker sort of like ~npm</td></tr>
+<tr><td><code>rustc</code></td><td>The rust compiler, though you will likely invoke it via <code>cargo</code></td></tr>
+</tbody></table>
+<h2><a class="header" href="#launch-the-local-doc" id="launch-the-local-doc">Launch the Local Doc</a></h2>
+<p>You're going to need it.  ;)</p>
+<p><code>rustup doc</code></p>
+<h2><a class="header" href="#review-the-cargotoml" id="review-the-cargotoml">Review the Cargo.toml</a></h2>
+<p>Take a look at the format of the Cargo.toml.  That's the package.json / .proj  manifest file for Rust.</p>
+<p>The most important part is the 'dependencies' section.  There are dependencies and dev-dependencies and many other options  <a href="https://rurust.github.io/cargo-docs-ru/manifest.html">Rust manifest</a> </p>
+<h2><a class="header" href="#exercises" id="exercises">Exercises</a></h2>
+<p>You have some choices on runnning the exercises:</p>
+<ul>
+<li>Run inside of the doc via playpen (look for the play button)</li>
+<li>Clone or fork this repository and navigate to the lesson directory and run with <code>cargo run</code> </li>
+<li>Brew your own repo, optionally copying-pasting code</li>
+</ul>
+<table><thead><tr><th>Exercise</th><th>Purpose</th></tr></thead><tbody>
+<tr><td><a href="lessons/lesson_one/./ex_function_parameter_return.html">Calling a Function</a></td><td>Doc and toolchain related</td></tr>
+<tr><td>1) <a href="lessons/lesson_one/ex_function_parameter_return">Calling A Function</a></td><td></td></tr>
+</tbody></table>
+<h3><a class="header" href="#a-function-a-parameter-and-a-return-type" id="a-function-a-parameter-and-a-return-type">A Function, A Parameter, and a Return Type</a></h3>
+<pre><pre class="playpen"><code class="language-rust">fn main() {
+    let name = &quot;Rustican&quot;;
+    let function_result = greetings(name);
+    println!(&quot;{}&quot;, function_result);
+}
+
+fn greetings(name: &amp;str) -&gt; String {
+    &quot;Hello &quot;.to_string() + name
+}
+</code></pre></pre>
+<p>Or, if you need a bit more real-estate: <a href="https://play.rust-lang.org/?gist=417001759b501f8058ebb10c7404101d">Playpen 1</a></p>
+<h4><a class="header" href="#code-dissection" id="code-dissection">Code Dissection</a></h4>
+<pre><pre class="playpen"><code class="language-rust">
+# #![allow(unused_variables)]
+#fn main() {
+println!(&quot;{}&quot;, function_result);
+#}</code></pre></pre>
+<ul>
+<li>The println! function lives in <a href="https://doc.rust-lang.org/std/macro.println.html">std::io::println</a> The std library contains lots of useful modules, functions, types, and macros, but is not strictly necessary. </li>
+</ul>
+<pre><pre class="playpen"><code class="language-rust">
+# #![allow(unused_variables)]
+#fn main() {
+fn greetings(name: &amp;str) -&gt; String 
+#}</code></pre></pre>
+<pre><pre class="playpen"><code class="language-rust">#fn main() {
+#    let name = &quot;Rustican&quot;;
+#    let function_result = greetings(name);
+    println!(&quot;{}&quot;, function_result);
+#}
+
+fn greetings(name: &amp;str) -&gt; String {
+#    &quot;Hello &quot;.to_string() + name
+#}
+</code></pre></pre>
+<ul>
+<li>The little '!' at the end of println is not 'not' - it means it's a <a href="https://www.siammakro.co.th/index.php">macro</a>.</li>
+<li>There are two string types in Rust and there are <a href="https://github.com/hoodie/concatenation_benchmarks-rs/blob/master/benches/lib.rs">many</a> ways to concatenate strings... stackoverflow is your friend.  Feel free to change the string type between str and String as needed.</li>
+<li><a href="https://doc.rust-lang.org/rust-by-example/std/str.html">Rust Strings</a></li>
+<li>This function returns a value</li>
+</ul>
+<pre><code>fn return_something() -&gt; i32 {
+    1
+} 
+</code></pre>
+<ul>
+<li>This function does not, and fails to compile</li>
+</ul>
+<pre><code>fn return_something() -&gt; i32 {
+    1;
+} 
+</code></pre>
+<h1><a class="header" href="#lesson-one-setup-and-returning-a-string-1" id="lesson-one-setup-and-returning-a-string-1">Lesson One: Setup and returning a String</a></h1>
+<h2><a class="header" href="#objectives-2" id="objectives-2">Objectives</a></h2>
+<ul>
+<li>Get Rust installed</li>
+<li>Look at the toolchain (rustc, cargo, rustup)</li>
+<li>Create a function that returns a value</li>
+</ul>
+<h3><a class="header" href="#installing-1" id="installing-1">Installing</a></h3>
+<p><a href="https://www.rust-lang.org/">Installing Rust</a> - This installs the toolchain (compiler and package manager (cargo) - Windows, OSX, Linux and other OS's are supported.</p>
+<ul>
+<li>Verify your installation worked by opening a command/terminal prompt and typing:</li>
+</ul>
+<pre><code>rustup
+rustc
+cargo
+</code></pre>
+<h3><a class="header" href="#get-to-know-the-toolchain-1" id="get-to-know-the-toolchain-1">Get to Know the toolchain</a></h3>
+<p>rustc is the compiler, but it's normally called by running a 'cargo' command (e.g. cargo build)</p>
+<p>This command:</p>
+<pre><code>rustup show
+</code></pre>
+<p>shows you your default / active toolchain.  Something like:</p>
+<pre><code>installed toolchains
+--------------------
+
+stable-x86_64-unknown-linux-gnu (default)
+nightly-x86_64-unknown-linux-gnu
+
+active toolchain
+----------------
+
+stable-x86_64-unknown-linux-gnu (default)
+rustc 1.37.0 (eae3437df 2019-08-13)
+</code></pre>
+<p>You can switch the active toolchain or compile with a specific toolchain.  Look at the 'rustup' command for details. </p>
+<h4><a class="header" href="#cool-note-1" id="cool-note-1">Cool Note</a></h4>
+<p>Type <code>rustc</code>, and look at the option for <code>emit</code> that specifies the output format, including asm (think web assembly) and llvm-ir </p>
+<pre><code>--emit [asm|llvm-bc|llvm-ir|obj|metadata|link|dep-info|mir]
+                        Comma separated list of types of output for the
+                        compiler to emit
+</code></pre>
+<h3><a class="header" href="#tool-summary-1" id="tool-summary-1">Tool Summary</a></h3>
+<p>So, there are three tools to get straight:</p>
+<table><thead><tr><th>Tool</th><th>Purpose</th></tr></thead><tbody>
+<tr><td><code>rustup</code></td><td>Doc and toolchain related</td></tr>
+<tr><td><code>cargo</code></td><td>Rust project builder, runner, invoker sort of like ~npm</td></tr>
+<tr><td><code>rustc</code></td><td>The rust compiler, though you will likely invoke it via <code>cargo</code></td></tr>
+</tbody></table>
+<h2><a class="header" href="#launch-the-local-doc-1" id="launch-the-local-doc-1">Launch the Local Doc</a></h2>
+<p>You're going to need it.  ;)</p>
+<p><code>rustup doc</code></p>
+<h2><a class="header" href="#review-the-cargotoml-1" id="review-the-cargotoml-1">Review the Cargo.toml</a></h2>
+<p>Take a look at the format of the Cargo.toml.  That's the package.json / .proj  manifest file for Rust.</p>
+<p>The most important part is the 'dependencies' section.  There are dependencies and dev-dependencies and many other options  <a href="https://rurust.github.io/cargo-docs-ru/manifest.html">Rust manifest</a> </p>
+<h2><a class="header" href="#exercises-1" id="exercises-1">Exercises</a></h2>
+<p>You have some choices on runnning the exercises:</p>
+<ul>
+<li>Run inside of the doc via playpen (look for the play button)</li>
+<li>Clone or fork this repository and navigate to the lesson directory and run with <code>cargo run</code> </li>
+<li>Brew your own repo, optionally copying-pasting code</li>
+</ul>
+<table><thead><tr><th>Exercise</th><th>Purpose</th></tr></thead><tbody>
+<tr><td><a href="lessons/lesson_one/./ex_function_parameter_return.html">Calling a Function</a></td><td>Doc and toolchain related</td></tr>
+<tr><td>1) <a href="lessons/lesson_one/ex_function_parameter_return">Calling A Function</a></td><td></td></tr>
+</tbody></table>
+<h3><a class="header" href="#a-function-a-parameter-and-a-return-type-1" id="a-function-a-parameter-and-a-return-type-1">A Function, A Parameter, and a Return Type</a></h3>
+<pre><pre class="playpen"><code class="language-rust">fn main() {
+    let name = &quot;Rustican&quot;;
+    let function_result = greetings(name);
+    println!(&quot;{}&quot;, function_result);
+}
+
+fn greetings(name: &amp;str) -&gt; String {
+    &quot;Hello &quot;.to_string() + name
+}
+</code></pre></pre>
+<p>Or, if you need a bit more real-estate: <a href="https://play.rust-lang.org/?gist=417001759b501f8058ebb10c7404101d">Playpen 1</a></p>
+<h4><a class="header" href="#code-dissection-1" id="code-dissection-1">Code Dissection</a></h4>
+<pre><pre class="playpen"><code class="language-rust">
+# #![allow(unused_variables)]
+#fn main() {
+println!(&quot;{}&quot;, function_result);
+#}</code></pre></pre>
+<ul>
+<li>The println! function lives in <a href="https://doc.rust-lang.org/std/macro.println.html">std::io::println</a> The std library contains lots of useful modules, functions, types, and macros, but is not strictly necessary. </li>
+</ul>
+<pre><pre class="playpen"><code class="language-rust">
+# #![allow(unused_variables)]
+#fn main() {
+fn greetings(name: &amp;str) -&gt; String 
+#}</code></pre></pre>
+<pre><pre class="playpen"><code class="language-rust">#fn main() {
+#    let name = &quot;Rustican&quot;;
+#    let function_result = greetings(name);
+    println!(&quot;{}&quot;, function_result);
+#}
+
+fn greetings(name: &amp;str) -&gt; String {
+#    &quot;Hello &quot;.to_string() + name
+#}
+</code></pre></pre>
+<ul>
+<li>The little '!' at the end of println is not 'not' - it means it's a <a href="https://www.siammakro.co.th/index.php">macro</a>.</li>
+<li>There are two string types in Rust and there are <a href="https://github.com/hoodie/concatenation_benchmarks-rs/blob/master/benches/lib.rs">many</a> ways to concatenate strings... stackoverflow is your friend.  Feel free to change the string type between str and String as needed.</li>
+<li><a href="https://doc.rust-lang.org/rust-by-example/std/str.html">Rust Strings</a></li>
+<li>This function returns a value</li>
+</ul>
+<pre><code>fn return_something() -&gt; i32 {
+    1
+} 
+</code></pre>
+<ul>
+<li>This function does not, and fails to compile</li>
+</ul>
+<pre><code>fn return_something() -&gt; i32 {
+    1;
+} 
+</code></pre>
+<h1><a class="header" href="#lesson-two-the-standard-library-basic-types-and-immutability" id="lesson-two-the-standard-library-basic-types-and-immutability">Lesson Two: The Standard Library, Basic Types and Immutability</a></h1>
+<h2><a class="header" href="#objectives-3" id="objectives-3">Objectives</a></h2>
+<ul>
+<li>Understand basic variable assignments, types and fundamental borrowing rules </li>
+<li>Understand what the standard library is and when it might not be used</li>
+</ul>
+<h2><a class="header" href="#the-foundation-we-are-standing-on-normally-std" id="the-foundation-we-are-standing-on-normally-std">The Foundation We are Standing on (normally): std</a></h2>
+<p>Take a look at the Rust standard library <a href="https://doc.rust-lang.org/std/">std</a> </p>
+<p>Normally, we'll be using the standard library but it's not required. Embedded devices, may or may not have a file system, for example, and sans std lib, we can stillwcode Rust for those devices. </p>
+<p>Libraries or binaries/executables with:</p>
+<pre><code>#![no_std]
+</code></pre>
+<p>instruct the compiler to reject any use of the standard library.</p>
+<p>Some good resources on embedded programming with Rust:</p>
+<ul>
+<li>[Discover embedded programming with Rust (good for getting started)] https://docs.rust-embedded.org/discovery/</li>
+<li>[The Embedded Rust Book] (https://docs.rust-embedded.org/book/) </li>
+</ul>
+<h2><a class="header" href="#immutability" id="immutability">Immutability</a></h2>
+<p>By default Rust values are immutable and the compiler enforces compliance.</p>
+<pre><pre class="playpen"><code class="language-rust">
+# #![allow(unused_variables)]
+#fn main() {
+let x = 10;
+x = 12;
+#}</code></pre></pre>
+<p>produces a compile error.</p>
+<pre><pre class="playpen"><code class="language-rust">
+# #![allow(unused_variables)]
+#fn main() {
+let mut x = 10;
+x = 12;
+#}</code></pre></pre>
+<p>works because the variable is marked as mutable (changeable)</p>
+<h2><a class="header" href="#race-conditions-fearless-concurrency-and-why-rust-helps" id="race-conditions-fearless-concurrency-and-why-rust-helps">Race Conditions, Fearless Concurrency and Why Rust Helps:</a></h2>
+<p>Let's say we have a Point of Sales system, and there are many run-time configuration options/rules.  A developer writes some code and then updates those options.  Developer B, in a different module, does the same.  When those updating events are called, at runtime, is unknown, as it depends on the system users. That's a basic race condition.</p>
+<p>Rust adds a bit of information to each memory allocation/variable - ownership.  Race conditions are not all bad (e.g. a multi-player game), but hidden race conditions are frequent source of bugs.  Rust's ownership and compile-time enforcement of ownership rules effectively 'outs' those race conditions.</p>
+<p>Ownership is a central concept in Rust and all heap allocated data has an owner.  Changing ownership is called a 'Move'  Sharing of values is allowed.  Sharing a reference is called 'borrowing'.   Mutability comes in to play.</p>
+<ol>
+<li><code>MyVariable</code> can be borrowed by multiple borrowers.</li>
+<li><code>mut MyVariable</code> can be borrowed by <em>one</em> borrower.</li>
+</ol>
+<p>The second rule is our guard against unwittingly introducing or exposing a race condition.</p>
+<h2><a class="header" href="#task" id="task">Task:</a></h2>
+<p>Review borrowing_101 and borrowing_102 in the demos directory.</p>
+<h2><a class="header" href="#task-1" id="task-1">Task:</a></h2>
+<p>This section of chapter 4 from the Rust book is great.  Highly recommended:
+<a href="https://doc.rust-lang.org/book/ch04-01-what-is-ownership.html">The stack, heap, ownership and borrowing</a></p>
+<h2><a class="header" href="#general-notes" id="general-notes">General Notes</a></h2>
+<p>Borrowing gets us control over the scope and lifetime of memory allocations.  But, there is a price.  Recursive functions, when optimized, become an exercise in handling the borrows.  That's why a fibonacci sequence in a dynamically typed language can look like this:</p>
+<p>(Lua)</p>
+<pre><code class="language-lua">function fib(n)
+ if n == 0 or n == 1 then
+ return n
+ else
+ return fib(n - 1) + fib(n - 2)
+end
+</code></pre>
+<p>and in Rust, look like this:</p>
+<p>(Rust)</p>
+<pre><pre class="playpen"><code class="language-rust">
+# #![allow(unused_variables)]
+#fn main() {
+fn fib(n_dyn: Rc&lt;Any&gt;) -&gt; Rc&lt;Any&gt; {
+ let n_static: &amp;i32 =
+    n_dyn.downcast_ref::&lt;i32&gt;().unwrap();
+    if *n_static == 0 {
+        Rc::new(Box::new(*n_static))
+    } else {
+    let n1 = fib(Rc::new(Box::new(n_static - 1)));
+    let n2 = fib(Rc::new(Box::new(n_static - 2)));
+    Rc::new(
+        n1.downcast_ref::&lt;i32&gt;().unwrap() +
+        n2.downcast_ref::&lt;i32&gt;().unwrap())
+    }
+}
+#}</code></pre></pre>
+<ul>
+<li><a href="http://cs242.stanford.edu/f18/assets/lectures/09-2-future-of-pl.pdf">source</a></li>
+</ul>
+<h2><a class="header" href="#homework" id="homework">Homework</a></h2>
+<p>Playtime!  Lesson 2 src is empty.  Try working with stack and heap assigned variables. Try to break the rules and review the compiler messages.</p>
+<h1><a class="header" href="#lesson-three-pay-for-what-you-use-introduction-to-traits-and-enum-wrappers" id="lesson-three-pay-for-what-you-use-introduction-to-traits-and-enum-wrappers">Lesson Three: Pay for What You Use, Introduction to Traits and Enum Wrappers</a></h1>
+<h2><a class="header" href="#objectives-4" id="objectives-4">Objectives</a></h2>
+<ul>
+<li>Look back at Lesson 2 and to_owned() and clone()</li>
+<li>Understand types and what they implement - Traits </li>
+</ul>
+<h2><a class="header" href="#pay-for-what-you-use" id="pay-for-what-you-use">Pay for What you Use</a></h2>
+<p>One of the philosophies of Rust is 'Pay only for what you use'.  That means means many types have 'limited' functionality
+to keep them efficient. Some of the 'basic' functions you might expect to be there, will not be! </p>
+<p>The functionality that is on a type is normally available from a <code>trait</code>.</p>
+<p>In an OO language like .NET, the root object <code>Object</code> implements <code>Object.MemberwiseClone</code> and is accessible to all classes/objects.</p>
+<p>Not so in Rust:</p>
+<pre><pre class="playpen"><code class="language-rust">
+# #![allow(unused_variables)]
+#fn main() {
+  let name: &amp;'static str = &quot;Mycos&quot;;
+
+    let mut name_borrower = String::default();
+    let name: String = String::from(&quot;Mycos&quot;);
+
+    name_borrower = name.to_owned();    &lt;--- Our String can do to_owned 
+    name_borrower = name.clone();       &lt;--- AND clone() 
+
+    //BUT, not all types can be .clone() 'd
+    //Not all types implement the trait
+    let v: &amp;[i32] = &amp;[1, 2];
+    let vv: Vec&lt;i32&gt; = v.to_owned();
+    let vv: Vec&lt;i32&gt; = v.clone()        &lt;---  Compile Error, the clone trait is not implemented
+#}</code></pre></pre>
+<h2><a class="header" href="#simple-traits-demos--traits_101" id="simple-traits-demos--traits_101">Simple Traits (demos / traits_101)</a></h2>
+<pre><pre class="playpen"><code class="language-rust">
+# #![allow(unused_variables)]
+#fn main() {
+trait Pay {
+  fn pay() -&gt; i32; 
+}
+
+struct Company {
+  name: String
+}
+
+impl Pay for Company {
+  fn pay(&amp;self) -&gt; i32 {
+    10
+  }
+}
+#}</code></pre></pre>
+<h2><a class="header" href="#homework-1" id="homework-1">Homework</a></h2>
+<p>The instructions are in the code (lesson 3) - implement a trait - feel free to do more!</p>
+<h1><a class="header" href="#lesson-four-enum-wrappers-and-some-type-basics" id="lesson-four-enum-wrappers-and-some-type-basics">Lesson Four: Enum Wrappers and Some Type Basics</a></h1>
+<h2><a class="header" href="#objectives-5" id="objectives-5">Objectives</a></h2>
+<ul>
+<li>Understand working without NULL (you won't miss it) and the std lib enum wrappers Option<T> Result&lt;Err, T&gt; </li>
+<li>Understand how to import a library/crate and reference it in a source file </li>
+</ul>
+<h2><a class="header" href="#null-stdoption-and-enum-wrappers" id="null-stdoption-and-enum-wrappers">NULL, std::option and Enum Wrappers</a></h2>
+<p>But, we still have uninitialized values, right?   Our data structures need a placeholder for runtime initialized values without arbitrary results.</p>
+<p>There's no NULL in Rust. </p>
+<pre><code>if (x == null) ... is gone.
+</code></pre>
+<p>The std::option crate has an std::option::Option type and it is used <em>very</em> often in Rust. In fact, we do not need to import it. </p>
+<pre><pre class="playpen"><code class="language-rust">
+# #![allow(unused_variables)]
+#fn main() {
+pub enum Option&lt;T&gt; {
+    /// No value
+    None,
+    /// Some value `T`
+    Some(T),
+}
+
+#}</code></pre></pre>
+<p>So, typically, if it is optional we define it as such:</p>
+<pre><code>struct Dieter {
+    name: String,
+    daily_calories: &lt;Option&lt;u8&gt;&gt;   // &lt;- quite a strict diet
+}
+</code></pre>
+<p>While not required, another built-in enum in the std library is the Result&lt;T, E&gt;  which is used for returning values which can then be 'unwrapped' for errors OR thrown further up the call stack.</p>
+<p>The definition, likewise, is simple:</p>
+<pre><code>enum Result&lt;T, E&gt; {
+   Ok(T),
+   Err(E),
+}
+</code></pre>
+<p>And the typical usage:</p>
+<pre><pre class="playpen"><code class="language-rust">
+use std::num::ParseIntError;
+
+fn double_number(number_str: &amp;str) -&gt; Result&lt;i32, ParseIntError&gt; {
+    match number_str.parse::&lt;i32&gt;() {
+        Ok(n) =&gt; Ok(2 * n),
+        Err(err) =&gt; Err(err),
+    }
+}
+
+fn main() {
+    match double_number(&quot;10&quot;) {
+        Ok(n) =&gt; assert_eq!(n, 20),
+        Err(err) =&gt; println!(&quot;Error: {:?}&quot;, err),
+    }
+}
+
+</code></pre></pre>
+<p>*** See demo match_101 and match_102 for examples </p>
+<h1><a class="header" href="#contributors" id="contributors">Contributors</a></h1>
+<p><a href="https://mycostech.com">The Mycos Team</a></p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                        
+
+                        
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                
+
+                
+            </nav>
+
+        </div>
+
+        
+        <!-- Livereload script (if served using the cli tool) -->
+        <script type="text/javascript">
+            var socket = new WebSocket("ws://localhost:3001");
+            socket.onmessage = function (event) {
+                if (event.data === "reload") {
+                    socket.close();
+                    location.reload(true); // force reload from server (not from cache)
+                }
+            };
+
+            window.onbeforeunload = function() {
+                socket.close();
+            }
+        </script>
+        
+
+        
+
+        
+        <script src="ace.js" type="text/javascript" charset="utf-8"></script>
+        <script src="editor.js" type="text/javascript" charset="utf-8"></script>
+        <script src="mode-rust.js" type="text/javascript" charset="utf-8"></script>
+        <script src="theme-dawn.js" type="text/javascript" charset="utf-8"></script>
+        <script src="theme-tomorrow_night.js" type="text/javascript" charset="utf-8"></script>
+        
+
+        
+        <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
+        
+
+        <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        
+
+        
+        
+        <script type="text/javascript">
+        window.addEventListener('load', function() {
+            window.setTimeout(window.print, 100);
+        });
+        </script>
+        
+        
+
+    </body>
+</html>

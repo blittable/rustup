@@ -1,0 +1,347 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Calling a Function - Rust for OO Programmers</title>
+        
+
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="shortcut icon" href="../../favicon.png">
+        <link rel="stylesheet" href="../../css/variables.css">
+        <link rel="stylesheet" href="../../css/general.css">
+        <link rel="stylesheet" href="../../css/chrome.css">
+        <link rel="stylesheet" href="../../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../../FontAwesome/css/font-awesome.css">
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
+        <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:500" rel="stylesheet" type="text/css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../../highlight.css">
+        <link rel="stylesheet" href="../../tomorrow-night.css">
+        <link rel="stylesheet" href="../../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        
+
+        
+    </head>
+    <body class="light">
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "../../";
+            var default_theme = "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            document.body.className = theme;
+            document.querySelector('html').className = theme + ' js';
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="affix"><a href="../../index.html">Rust for OO Programmers</a></li><li class="affix"><a href="../../OVERVIEW.html">Overview from an OO Perspective</a></li><li class="affix"><a href="../../lessons/LESSONS.html">Lessons</a></li><li><a href="../../lessons/lesson_one/index.html" class="active"><strong aria-hidden="true">1.</strong> Setup And A Function</a></li><li><ol class="section"><li><a href="../../lessons/lesson_one/index.html" class="active"><strong aria-hidden="true">1.1.</strong> Calling a Function</a></li></ol></li><li><a href="../../lessons/lesson_two/index.html"><strong aria-hidden="true">2.</strong> Standard Lib, Types, Immutability</a></li><li><a href="../../lessons/lesson_three/index.html"><strong aria-hidden="true">3.</strong> Intro to Traits</a></li><li><a href="../../lessons/lesson_four/index.html"><strong aria-hidden="true">4.</strong> Enum Wrappers, Option and Matching</a></li><li class="affix"><a href="../../misc/contributors.html">Contributors</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                
+                <div id="menu-bar" class="menu-bar">
+                    <div id="menu-bar-sticky-container">
+                        <div class="left-buttons">
+                            <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                                <i class="fa fa-bars"></i>
+                            </button>
+                            <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                                <i class="fa fa-paint-brush"></i>
+                            </button>
+                            <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                                <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                            </ul>
+                            
+                            <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                                <i class="fa fa-search"></i>
+                            </button>
+                            
+                        </div>
+
+                        <h1 class="menu-title">Rust for OO Programmers</h1>
+
+                        <div class="right-buttons">
+                            <a href="../../print.html" title="Print this book" aria-label="Print this book">
+                                <i id="print-button" class="fa fa-print"></i>
+                            </a>
+                            
+                        </div>
+                    </div>
+                </div>
+
+                
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" name="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1><a class="header" href="#lesson-one-setup-and-returning-a-string" id="lesson-one-setup-and-returning-a-string">Lesson One: Setup and returning a String</a></h1>
+<h2><a class="header" href="#objectives" id="objectives">Objectives</a></h2>
+<ul>
+<li>Get Rust installed</li>
+<li>Look at the toolchain (rustc, cargo, rustup)</li>
+<li>Create a function that returns a value</li>
+</ul>
+<h3><a class="header" href="#installing" id="installing">Installing</a></h3>
+<p><a href="https://www.rust-lang.org/">Installing Rust</a> - This installs the toolchain (compiler and package manager (cargo) - Windows, OSX, Linux and other OS's are supported.</p>
+<ul>
+<li>Verify your installation worked by opening a command/terminal prompt and typing:</li>
+</ul>
+<pre><code>rustup
+rustc
+cargo
+</code></pre>
+<h3><a class="header" href="#get-to-know-the-toolchain" id="get-to-know-the-toolchain">Get to Know the toolchain</a></h3>
+<p>rustc is the compiler, but it's normally called by running a 'cargo' command (e.g. cargo build)</p>
+<p>This command:</p>
+<pre><code>rustup show
+</code></pre>
+<p>shows you your default / active toolchain.  Something like:</p>
+<pre><code>installed toolchains
+--------------------
+
+stable-x86_64-unknown-linux-gnu (default)
+nightly-x86_64-unknown-linux-gnu
+
+active toolchain
+----------------
+
+stable-x86_64-unknown-linux-gnu (default)
+rustc 1.37.0 (eae3437df 2019-08-13)
+</code></pre>
+<p>You can switch the active toolchain or compile with a specific toolchain.  Look at the 'rustup' command for details. </p>
+<h4><a class="header" href="#cool-note" id="cool-note">Cool Note</a></h4>
+<p>Type <code>rustc</code>, and look at the option for <code>emit</code> that specifies the output format, including asm (think web assembly) and llvm-ir </p>
+<pre><code>--emit [asm|llvm-bc|llvm-ir|obj|metadata|link|dep-info|mir]
+                        Comma separated list of types of output for the
+                        compiler to emit
+</code></pre>
+<h3><a class="header" href="#tool-summary" id="tool-summary">Tool Summary</a></h3>
+<p>So, there are three tools to get straight:</p>
+<table><thead><tr><th>Tool</th><th>Purpose</th></tr></thead><tbody>
+<tr><td><code>rustup</code></td><td>Doc and toolchain related</td></tr>
+<tr><td><code>cargo</code></td><td>Rust project builder, runner, invoker sort of like ~npm</td></tr>
+<tr><td><code>rustc</code></td><td>The rust compiler, though you will likely invoke it via <code>cargo</code></td></tr>
+</tbody></table>
+<h2><a class="header" href="#launch-the-local-doc" id="launch-the-local-doc">Launch the Local Doc</a></h2>
+<p>You're going to need it.  ;)</p>
+<p><code>rustup doc</code></p>
+<h2><a class="header" href="#review-the-cargotoml" id="review-the-cargotoml">Review the Cargo.toml</a></h2>
+<p>Take a look at the format of the Cargo.toml.  That's the package.json / .proj  manifest file for Rust.</p>
+<p>The most important part is the 'dependencies' section.  There are dependencies and dev-dependencies and many other options  <a href="https://rurust.github.io/cargo-docs-ru/manifest.html">Rust manifest</a> </p>
+<h2><a class="header" href="#exercises" id="exercises">Exercises</a></h2>
+<p>You have some choices on runnning the exercises:</p>
+<ul>
+<li>Run inside of the doc via playpen (look for the play button)</li>
+<li>Clone or fork this repository and navigate to the lesson directory and run with <code>cargo run</code> </li>
+<li>Brew your own repo, optionally copying-pasting code</li>
+</ul>
+<table><thead><tr><th>Exercise</th><th>Purpose</th></tr></thead><tbody>
+<tr><td><a href="./ex_function_parameter_return.html">Calling a Function</a></td><td>Doc and toolchain related</td></tr>
+<tr><td>1) <a href="ex_function_parameter_return">Calling A Function</a></td><td></td></tr>
+</tbody></table>
+<h3><a class="header" href="#a-function-a-parameter-and-a-return-type" id="a-function-a-parameter-and-a-return-type">A Function, A Parameter, and a Return Type</a></h3>
+<pre><pre class="playpen"><code class="language-rust">fn main() {
+    let name = &quot;Rustican&quot;;
+    let function_result = greetings(name);
+    println!(&quot;{}&quot;, function_result);
+}
+
+fn greetings(name: &amp;str) -&gt; String {
+    &quot;Hello &quot;.to_string() + name
+}
+</code></pre></pre>
+<p>Or, if you need a bit more real-estate: <a href="https://play.rust-lang.org/?gist=417001759b501f8058ebb10c7404101d">Playpen 1</a></p>
+<h4><a class="header" href="#code-dissection" id="code-dissection">Code Dissection</a></h4>
+<pre><pre class="playpen"><code class="language-rust">
+# #![allow(unused_variables)]
+#fn main() {
+println!(&quot;{}&quot;, function_result);
+#}</code></pre></pre>
+<ul>
+<li>The println! function lives in <a href="https://doc.rust-lang.org/std/macro.println.html">std::io::println</a> The std library contains lots of useful modules, functions, types, and macros, but is not strictly necessary. </li>
+</ul>
+<pre><pre class="playpen"><code class="language-rust">
+# #![allow(unused_variables)]
+#fn main() {
+fn greetings(name: &amp;str) -&gt; String 
+#}</code></pre></pre>
+<pre><pre class="playpen"><code class="language-rust">#fn main() {
+#    let name = &quot;Rustican&quot;;
+#    let function_result = greetings(name);
+    println!(&quot;{}&quot;, function_result);
+#}
+
+fn greetings(name: &amp;str) -&gt; String {
+#    &quot;Hello &quot;.to_string() + name
+#}
+</code></pre></pre>
+<ul>
+<li>The little '!' at the end of println is not 'not' - it means it's a <a href="https://www.siammakro.co.th/index.php">macro</a>.</li>
+<li>There are two string types in Rust and there are <a href="https://github.com/hoodie/concatenation_benchmarks-rs/blob/master/benches/lib.rs">many</a> ways to concatenate strings... stackoverflow is your friend.  Feel free to change the string type between str and String as needed.</li>
+<li><a href="https://doc.rust-lang.org/rust-by-example/std/str.html">Rust Strings</a></li>
+<li>This function returns a value</li>
+</ul>
+<pre><code>fn return_something() -&gt; i32 {
+    1
+} 
+</code></pre>
+<ul>
+<li>This function does not, and fails to compile</li>
+</ul>
+<pre><code>fn return_something() -&gt; i32 {
+    1;
+} 
+</code></pre>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                        
+                            <a rel="prev" href="../../lessons/LESSONS.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                        
+
+                        
+                            <a rel="next" href="../../lessons/lesson_one/index.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                
+                    <a href="../../lessons/LESSONS.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                
+
+                
+                    <a href="../../lessons/lesson_one/index.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+                
+            </nav>
+
+        </div>
+
+        
+        <!-- Livereload script (if served using the cli tool) -->
+        <script type="text/javascript">
+            var socket = new WebSocket("ws://localhost:3001");
+            socket.onmessage = function (event) {
+                if (event.data === "reload") {
+                    socket.close();
+                    location.reload(true); // force reload from server (not from cache)
+                }
+            };
+
+            window.onbeforeunload = function() {
+                socket.close();
+            }
+        </script>
+        
+
+        
+
+        
+        <script src="../../ace.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../../editor.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../../mode-rust.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../../theme-dawn.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../../theme-tomorrow_night.js" type="text/javascript" charset="utf-8"></script>
+        
+
+        
+        <script src="../../elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../../mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../../searcher.js" type="text/javascript" charset="utf-8"></script>
+        
+
+        <script src="../../clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../../highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../../book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        
+
+        
+
+    </body>
+</html>

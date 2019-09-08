@@ -5,3 +5,9 @@
 
 let x: str = "foo";
 let y: mut str = "foo";
+
+
+Nice Things:
+
+- Package management
+

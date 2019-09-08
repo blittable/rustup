@@ -6,4 +6,5 @@ Likely helpful to define for non-native speakers of English:
 - Heuristic
 - Explicit
 - Lazy
+- Interior / Exterior in the context of mutability
 
