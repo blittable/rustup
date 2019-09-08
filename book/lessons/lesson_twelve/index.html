@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Enum Wrappers, Option and Matching - Rust for OO Programmers</title>
+        <title>Trait Bounds - Rust for OO Programmers</title>
         
 
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
@@ -78,7 +78,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="affix"><a href="../../index.html">Rust for OO Programmers</a></li><li class="affix"><a href="../../OVERVIEW.html">Overview from an OO Perspective</a></li><li class="affix"><a href="../../lessons/LESSONS.html">Lessons</a></li><li><a href="../../lessons/lesson_one/index.html"><strong aria-hidden="true">1.</strong> Setup And A Function</a></li><li><ol class="section"><li><a href="../../lessons/lesson_one/ex_function_parameter_return.html"><strong aria-hidden="true">1.1.</strong> Calling a Function</a></li></ol></li><li><a href="../../lessons/lesson_two/index.html"><strong aria-hidden="true">2.</strong> Standard Lib, Types, Immutability</a></li><li><a href="../../lessons/lesson_three/index.html"><strong aria-hidden="true">3.</strong> Intro to Traits</a></li><li><a href="../../lessons/lesson_four/index.html" class="active"><strong aria-hidden="true">4.</strong> Enum Wrappers, Option and Matching</a></li><li><a href="../../lessons/lesson_five/index.html"><strong aria-hidden="true">5.</strong> Error Handling</a></li><li><a href="../../lessons/lesson_six/index.html"><strong aria-hidden="true">6.</strong> Almighty Iterators</a></li><li><a href="../../lessons/lesson_seven/index.html"><strong aria-hidden="true">7.</strong> Housekeeping #1</a></li><li><a href="../../lessons/lesson_eight/index.html"><strong aria-hidden="true">8.</strong> Closures and Lifetime Preview</a></li><li><a href="../../lessons/lesson_nine/index.html"><strong aria-hidden="true">9.</strong> Lifetime Annotations</a></li><li><a href="../../lessons/lesson_ten/index.html"><strong aria-hidden="true">10.</strong> Unit Testing</a></li><li><a href="../../lessons/lesson_eleven/index.html"><strong aria-hidden="true">11.</strong> TBD</a></li><li><a href="../../lessons/lesson_twelve/index.html"><strong aria-hidden="true">12.</strong> Trait Bounds</a></li><li><a href="../../lessons/lesson_thirteen/index.html"><strong aria-hidden="true">13.</strong> Constructor Patterns</a></li><li><a href="../../lessons/lesson_fourteen/index.html"><strong aria-hidden="true">14.</strong> Iterator Patterns</a></li><li><a href="../../lessons/lesson_fifteen/index.html"><strong aria-hidden="true">15.</strong> Box, Rc, RefCell</a></li><li><a href="../../lessons/lesson_sixteen/index.html"><strong aria-hidden="true">16.</strong> Generics and Associated Types</a></li><li><a href="../../lessons/lesson_seventeen/index.html"><strong aria-hidden="true">17.</strong> Bit Fiddling</a></li><li class="affix"><a href="../../misc/contributors.html">Contributors</a></li></ol>
+                <ol class="chapter"><li class="affix"><a href="../../index.html">Rust for OO Programmers</a></li><li class="affix"><a href="../../OVERVIEW.html">Overview from an OO Perspective</a></li><li class="affix"><a href="../../lessons/LESSONS.html">Lessons</a></li><li><a href="../../lessons/lesson_one/index.html"><strong aria-hidden="true">1.</strong> Setup And A Function</a></li><li><ol class="section"><li><a href="../../lessons/lesson_one/ex_function_parameter_return.html"><strong aria-hidden="true">1.1.</strong> Calling a Function</a></li></ol></li><li><a href="../../lessons/lesson_two/index.html"><strong aria-hidden="true">2.</strong> Standard Lib, Types, Immutability</a></li><li><a href="../../lessons/lesson_three/index.html"><strong aria-hidden="true">3.</strong> Intro to Traits</a></li><li><a href="../../lessons/lesson_four/index.html"><strong aria-hidden="true">4.</strong> Enum Wrappers, Option and Matching</a></li><li><a href="../../lessons/lesson_five/index.html"><strong aria-hidden="true">5.</strong> Error Handling</a></li><li><a href="../../lessons/lesson_six/index.html"><strong aria-hidden="true">6.</strong> Almighty Iterators</a></li><li><a href="../../lessons/lesson_seven/index.html"><strong aria-hidden="true">7.</strong> Housekeeping #1</a></li><li><a href="../../lessons/lesson_eight/index.html"><strong aria-hidden="true">8.</strong> Closures and Lifetime Preview</a></li><li><a href="../../lessons/lesson_nine/index.html"><strong aria-hidden="true">9.</strong> Lifetime Annotations</a></li><li><a href="../../lessons/lesson_ten/index.html"><strong aria-hidden="true">10.</strong> Unit Testing</a></li><li><a href="../../lessons/lesson_eleven/index.html"><strong aria-hidden="true">11.</strong> TBD</a></li><li><a href="../../lessons/lesson_twelve/index.html" class="active"><strong aria-hidden="true">12.</strong> Trait Bounds</a></li><li><a href="../../lessons/lesson_thirteen/index.html"><strong aria-hidden="true">13.</strong> Constructor Patterns</a></li><li><a href="../../lessons/lesson_fourteen/index.html"><strong aria-hidden="true">14.</strong> Iterator Patterns</a></li><li><a href="../../lessons/lesson_fifteen/index.html"><strong aria-hidden="true">15.</strong> Box, Rc, RefCell</a></li><li><a href="../../lessons/lesson_sixteen/index.html"><strong aria-hidden="true">16.</strong> Generics and Associated Types</a></li><li><a href="../../lessons/lesson_seventeen/index.html"><strong aria-hidden="true">17.</strong> Bit Fiddling</a></li><li class="affix"><a href="../../misc/contributors.html">Contributors</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -145,79 +145,118 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1><a class="header" href="#lesson-four-enum-wrappers-and-some-type-basics" id="lesson-four-enum-wrappers-and-some-type-basics">Lesson Four: Enum Wrappers and Some Type Basics</a></h1>
+                        <h1><a class="header" href="#lesson-twelve--trait-bounds" id="lesson-twelve--trait-bounds">Lesson Twelve:  Trait Bounds</a></h1>
 <h2><a class="header" href="#objectives" id="objectives">Objectives</a></h2>
 <ul>
-<li>Understand working without NULL (you won't miss it) </li>
-<li>The std lib enum wrappers <code>Option&lt;T&gt;</code> <code>Result&lt;Err, T&gt;</code> </li>
-<li>Understand how to import a library/crate and reference it in a source file </li>
+<li>Trait Bounds Basics</li>
 </ul>
-<h2><a class="header" href="#null-stdoption-and-enum-wrappers" id="null-stdoption-and-enum-wrappers">NULL, std::option and Enum Wrappers</a></h2>
-<p>There's no NULL type in Rust. </p>
-<pre><code>if (x == null) ... is gone.
-</code></pre>
-<p>The <code>std::option::Option</code> type (no need to import) is used <em>very</em> often in Rust, typically to handle our NULL scenario - indicated the presence or absence of data. </p>
-<pre><pre class="playpen"><code class="language-rust no_run">
-# #![allow(unused_variables)]
-#fn main() {
-pub enum Option&lt;T&gt; {
-    /// No value
-    None,
-    /// Some value `T`
-    Some(T),
-}
-
-#}</code></pre></pre>
-<p>So, typically, if it is optional we define it as such:</p>
-<pre><pre class="playpen"><code class="language-rust no_run">
-# #![allow(unused_variables)]
-#fn main() {
-struct Dieter {
-    name: String,
-    daily_calories: &lt;Option&lt;u8&gt;&gt;   // &lt;- tough diet, u8 is an unsigned 8 bit byte
-}
-#}</code></pre></pre>
-<p>The dieter object may or may not have a defined amount of <code>daily_calories</code> and access to the value (if defined) must be preceded by a check for its presence (Some or None).</p>
-<p>Another built-in enum in the std library is the Result&lt;T, E&gt;  which is used for returning values which can then be 'unwrapped' for errors OR propograted/thrown further up the call stack.</p>
-<p>The definition, likewise, is simple:</p>
-<pre><code>enum Result&lt;T, E&gt; {
-   Ok(T),
-   Err(E),
-}
-</code></pre>
-<p>And the typical usage:</p>
+<h3><a class="header" href="#trait-bounds" id="trait-bounds">Trait Bounds</a></h3>
+<p>As an OO programmer, you already know generics (hopefully!).  It's quite similar in Rust. But, what about 'traits'?</p>
+<p>You can pass a trait <code>impl</code> as a parameter:</p>
 <pre><pre class="playpen"><code class="language-rust">
-use std::num::ParseIntError;
-
-fn double_number(number_str: &amp;str) -&gt; Result&lt;i32, ParseIntError&gt; {
-    match number_str.parse::&lt;i32&gt;() {
-        Ok(n) =&gt; Ok(2 * n),
-        Err(err) =&gt; Err(err),
-    }
+# #![allow(unused_variables)]
+#fn main() {
+pub fn notify(item: impl Summary) {
+    println!(&quot;Breaking news! {}&quot;, item.summarize());
 }
-
-fn main() {
-    match double_number(&quot;10&quot;) {
-        Ok(n) =&gt; assert_eq!(n, 20),
-        Err(err) =&gt; println!(&quot;Error: {:?}&quot;, err),
-    }
+#}</code></pre></pre>
+<p>But, what about traits as <em>generics</em>?  Perhaps:</p>
+<pre><pre class="playpen"><code class="language-rust">
+# #![allow(unused_variables)]
+#fn main() {
+pub fn notify&lt;T&gt;(item: T) {
+    println!(&quot;Breaking news! {}&quot;, item.summarize()); //&lt;- what's a summarize?
 }
+#}</code></pre></pre>
+<p>In the code below, the Rust toolchain has <em>no</em> information on the types' functions, etc. and will not compile. It needs more information. </p>
+<p>To solve the issue in the context of generics, Rust uses <code>trait bounds</code> </p>
+<pre><pre class="playpen"><code class="language-rust">
+# #![allow(unused_variables)]
+#fn main() {
+pub fn notify&lt;T: Summary&gt;(item: T) {
+    ...
+}
+#}</code></pre></pre>
+<p>which is the same as:</p>
+<pre><pre class="playpen"><code class="language-rust">
+# #![allow(unused_variables)]
+#fn main() {
+pub fn notify(item: impl Summary) {
+}
+#}</code></pre></pre>
+<p>For better clarity, this can also be written as:</p>
+<pre><pre class="playpen"><code class="language-rust">
+# #![allow(unused_variables)]
+#fn main() {
+pub fn notify&lt;T&gt;(item: T) 
+where T: Summary {
+    ...
+}
+#}</code></pre></pre>
+<p>And, applied across multiple traits with:</p>
+<pre><pre class="playpen"><code class="language-rust">
+# #![allow(unused_variables)]
+#fn main() {
+pub fn notify&lt;T: Summary + Display&gt;(item: T) 
+where T: Summary + Display {
+    ...
+}
+#}</code></pre></pre>
+<p>Read the above, &quot;the notify function is bound by the behavior of the Summary and Display traits.&quot;</p>
+<h2><a class="header" href="#this-weeks-project" id="this-weeks-project">This Week's Project</a></h2>
+<p>There will be no homework this week.  Class with cover one quick topic (5 minutes) and the remainder will be focused on the project effort.</p>
+<p>We will split into teams and create a database.</p>
+<p>Mate, Nook, Aong =&gt; Clap Team
+Kanoon, Xenirio, Kim =&gt; Architecture Team
+Toom, Neng, Khem =&gt; Persistence Team
+Kevin, Uthen, Khwan =&gt; Performance / Criterion Team
+John, Vincent =&gt; Marketing</p>
+<pre><code>
+### Project Structure
 
-</code></pre></pre>
-<p>*** See demo match_101 and match_102 for examples </p>
+For larger projects, a parent Cargo.toml can reference N other projects via the 'members' 
+syntax.  See the following project as an example:
+[members cargo syntax](https://github.com/crypto-com/chain)
+
+
+
+### Requirements
+- Implement a cli-based database that supports, &quot;Upsert&quot; and &quot;Get&quot; operations.
+- The database should store the values on the file system
+
+These operations (or something close) need to be supported:
+
+</code></pre>
+<p>susu add key=&quot;susan_salary&quot; value=&quot;1200&quot;
+susu get key=&quot;susan_salary&quot;</p>
+<pre><code>
+# Clap Team (This is not a cheerleading team: clap: Command Line Argument Parser)
+Look at Clap. Clap can get complicated.  Keep it simple. [Clap Crate on crates.io](https://crates.io/crates/clap)   
+
+# Persistence Team
+How do we store and retrieve the data?
+
+# Architecture Team
+Keep it simple.
+
+# Criterion Team 
+Compare ซื่อๆ DB with something (RocksDB?) 
+
+
+</code></pre>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
                         
-                            <a rel="prev" href="../../lessons/lesson_three/index.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                            <a rel="prev" href="../../lessons/lesson_eleven/index.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <i class="fa fa-angle-left"></i>
                             </a>
                         
 
                         
-                            <a rel="next" href="../../lessons/lesson_five/index.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                            <a rel="next" href="../../lessons/lesson_thirteen/index.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <i class="fa fa-angle-right"></i>
                             </a>
                         
@@ -229,13 +268,13 @@ fn main() {
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
                 
-                    <a href="../../lessons/lesson_three/index.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <a href="../../lessons/lesson_eleven/index.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
                     </a>
                 
 
                 
-                    <a href="../../lessons/lesson_five/index.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                    <a href="../../lessons/lesson_thirteen/index.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
                 

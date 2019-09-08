@@ -2,15 +2,13 @@
 
 ## Objectives 
 
-* Look back at Lesson 2 and to_owned() and clone()
 * Understand types and what they implement - Traits 
 
 ## Pay for What you Use 
 
-One of the philosophies of Rust is 'Pay only for what you use'.  That means means many types have 'limited' functionality
-to keep them efficient. Some of the 'basic' functions you might expect to be there, will not be! 
+One of the philosophies of Rust is 'Pay only for what you use'.  Make no assumptions about what a type does - dive into the api doc.
 
-The functionality that is on a type is normally available from a ```trait```.
+The functionality that is on a type is from a ```trait```.
 
 In an OO language like .NET, the root object ```Object``` implements ```Object.MemberwiseClone``` and is accessible to all classes/objects.
 
@@ -32,7 +30,7 @@ Not so in Rust:
     let vv: Vec<i32> = v.clone()        <---  Compile Error, the clone trait is not implemented
 ```
 
-## Simple Traits (demos / traits_101)
+## Simple Trait Syntax
 
 ```rust
 trait Pay {

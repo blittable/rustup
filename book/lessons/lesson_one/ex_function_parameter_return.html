@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Enum Wrappers, Option and Matching - Rust for OO Programmers</title>
+        <title>Calling a Function - Rust for OO Programmers</title>
         
 
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
@@ -78,7 +78,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="affix"><a href="../../index.html">Rust for OO Programmers</a></li><li class="affix"><a href="../../OVERVIEW.html">Overview from an OO Perspective</a></li><li class="affix"><a href="../../lessons/LESSONS.html">Lessons</a></li><li><a href="../../lessons/lesson_one/index.html"><strong aria-hidden="true">1.</strong> Setup And A Function</a></li><li><ol class="section"><li><a href="../../lessons/lesson_one/ex_function_parameter_return.html"><strong aria-hidden="true">1.1.</strong> Calling a Function</a></li></ol></li><li><a href="../../lessons/lesson_two/index.html"><strong aria-hidden="true">2.</strong> Standard Lib, Types, Immutability</a></li><li><a href="../../lessons/lesson_three/index.html"><strong aria-hidden="true">3.</strong> Intro to Traits</a></li><li><a href="../../lessons/lesson_four/index.html" class="active"><strong aria-hidden="true">4.</strong> Enum Wrappers, Option and Matching</a></li><li><a href="../../lessons/lesson_five/index.html"><strong aria-hidden="true">5.</strong> Error Handling</a></li><li><a href="../../lessons/lesson_six/index.html"><strong aria-hidden="true">6.</strong> Almighty Iterators</a></li><li><a href="../../lessons/lesson_seven/index.html"><strong aria-hidden="true">7.</strong> Housekeeping #1</a></li><li><a href="../../lessons/lesson_eight/index.html"><strong aria-hidden="true">8.</strong> Closures and Lifetime Preview</a></li><li><a href="../../lessons/lesson_nine/index.html"><strong aria-hidden="true">9.</strong> Lifetime Annotations</a></li><li><a href="../../lessons/lesson_ten/index.html"><strong aria-hidden="true">10.</strong> Unit Testing</a></li><li><a href="../../lessons/lesson_eleven/index.html"><strong aria-hidden="true">11.</strong> TBD</a></li><li><a href="../../lessons/lesson_twelve/index.html"><strong aria-hidden="true">12.</strong> Trait Bounds</a></li><li><a href="../../lessons/lesson_thirteen/index.html"><strong aria-hidden="true">13.</strong> Constructor Patterns</a></li><li><a href="../../lessons/lesson_fourteen/index.html"><strong aria-hidden="true">14.</strong> Iterator Patterns</a></li><li><a href="../../lessons/lesson_fifteen/index.html"><strong aria-hidden="true">15.</strong> Box, Rc, RefCell</a></li><li><a href="../../lessons/lesson_sixteen/index.html"><strong aria-hidden="true">16.</strong> Generics and Associated Types</a></li><li><a href="../../lessons/lesson_seventeen/index.html"><strong aria-hidden="true">17.</strong> Bit Fiddling</a></li><li class="affix"><a href="../../misc/contributors.html">Contributors</a></li></ol>
+                <ol class="chapter"><li class="affix"><a href="../../index.html">Rust for OO Programmers</a></li><li class="affix"><a href="../../OVERVIEW.html">Overview from an OO Perspective</a></li><li class="affix"><a href="../../lessons/LESSONS.html">Lessons</a></li><li><a href="../../lessons/lesson_one/index.html"><strong aria-hidden="true">1.</strong> Setup And A Function</a></li><li><ol class="section"><li><a href="../../lessons/lesson_one/ex_function_parameter_return.html" class="active"><strong aria-hidden="true">1.1.</strong> Calling a Function</a></li></ol></li><li><a href="../../lessons/lesson_two/index.html"><strong aria-hidden="true">2.</strong> Standard Lib, Types, Immutability</a></li><li><a href="../../lessons/lesson_three/index.html"><strong aria-hidden="true">3.</strong> Intro to Traits</a></li><li><a href="../../lessons/lesson_four/index.html"><strong aria-hidden="true">4.</strong> Enum Wrappers, Option and Matching</a></li><li><a href="../../lessons/lesson_five/index.html"><strong aria-hidden="true">5.</strong> Error Handling</a></li><li><a href="../../lessons/lesson_six/index.html"><strong aria-hidden="true">6.</strong> Almighty Iterators</a></li><li><a href="../../lessons/lesson_seven/index.html"><strong aria-hidden="true">7.</strong> Housekeeping #1</a></li><li><a href="../../lessons/lesson_eight/index.html"><strong aria-hidden="true">8.</strong> Closures and Lifetime Preview</a></li><li><a href="../../lessons/lesson_nine/index.html"><strong aria-hidden="true">9.</strong> Lifetime Annotations</a></li><li><a href="../../lessons/lesson_ten/index.html"><strong aria-hidden="true">10.</strong> Unit Testing</a></li><li><a href="../../lessons/lesson_eleven/index.html"><strong aria-hidden="true">11.</strong> TBD</a></li><li><a href="../../lessons/lesson_twelve/index.html"><strong aria-hidden="true">12.</strong> Trait Bounds</a></li><li><a href="../../lessons/lesson_thirteen/index.html"><strong aria-hidden="true">13.</strong> Constructor Patterns</a></li><li><a href="../../lessons/lesson_fourteen/index.html"><strong aria-hidden="true">14.</strong> Iterator Patterns</a></li><li><a href="../../lessons/lesson_fifteen/index.html"><strong aria-hidden="true">15.</strong> Box, Rc, RefCell</a></li><li><a href="../../lessons/lesson_sixteen/index.html"><strong aria-hidden="true">16.</strong> Generics and Associated Types</a></li><li><a href="../../lessons/lesson_seventeen/index.html"><strong aria-hidden="true">17.</strong> Bit Fiddling</a></li><li class="affix"><a href="../../misc/contributors.html">Contributors</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -145,79 +145,97 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1><a class="header" href="#lesson-four-enum-wrappers-and-some-type-basics" id="lesson-four-enum-wrappers-and-some-type-basics">Lesson Four: Enum Wrappers and Some Type Basics</a></h1>
-<h2><a class="header" href="#objectives" id="objectives">Objectives</a></h2>
-<ul>
-<li>Understand working without NULL (you won't miss it) </li>
-<li>The std lib enum wrappers <code>Option&lt;T&gt;</code> <code>Result&lt;Err, T&gt;</code> </li>
-<li>Understand how to import a library/crate and reference it in a source file </li>
-</ul>
-<h2><a class="header" href="#null-stdoption-and-enum-wrappers" id="null-stdoption-and-enum-wrappers">NULL, std::option and Enum Wrappers</a></h2>
-<p>There's no NULL type in Rust. </p>
-<pre><code>if (x == null) ... is gone.
-</code></pre>
-<p>The <code>std::option::Option</code> type (no need to import) is used <em>very</em> often in Rust, typically to handle our NULL scenario - indicated the presence or absence of data. </p>
-<pre><pre class="playpen"><code class="language-rust no_run">
-# #![allow(unused_variables)]
-#fn main() {
-pub enum Option&lt;T&gt; {
-    /// No value
-    None,
-    /// Some value `T`
-    Some(T),
+                        <h2><a class="header" href="#calling-a-function" id="calling-a-function">Calling a Function</a></h2>
+<pre><pre class="playpen"><code class="language-rust">fn main() {
+    let name = &quot;Rustican&quot;;
+    let function_result = greetings(name);
+    println!(&quot;{}&quot;, function_result);
 }
 
-#}</code></pre></pre>
-<p>So, typically, if it is optional we define it as such:</p>
-<pre><pre class="playpen"><code class="language-rust no_run">
-# #![allow(unused_variables)]
-#fn main() {
-struct Dieter {
-    name: String,
-    daily_calories: &lt;Option&lt;u8&gt;&gt;   // &lt;- tough diet, u8 is an unsigned 8 bit byte
+fn greetings(name: &amp;str) -&gt; String {
+    &quot;Hello &quot;.to_string() + name
 }
-#}</code></pre></pre>
-<p>The dieter object may or may not have a defined amount of <code>daily_calories</code> and access to the value (if defined) must be preceded by a check for its presence (Some or None).</p>
-<p>Another built-in enum in the std library is the Result&lt;T, E&gt;  which is used for returning values which can then be 'unwrapped' for errors OR propograted/thrown further up the call stack.</p>
-<p>The definition, likewise, is simple:</p>
-<pre><code>enum Result&lt;T, E&gt; {
-   Ok(T),
-   Err(E),
-}
-</code></pre>
-<p>And the typical usage:</p>
-<pre><pre class="playpen"><code class="language-rust">
-use std::num::ParseIntError;
-
-fn double_number(number_str: &amp;str) -&gt; Result&lt;i32, ParseIntError&gt; {
-    match number_str.parse::&lt;i32&gt;() {
-        Ok(n) =&gt; Ok(2 * n),
-        Err(err) =&gt; Err(err),
-    }
-}
-
-fn main() {
-    match double_number(&quot;10&quot;) {
-        Ok(n) =&gt; assert_eq!(n, 20),
-        Err(err) =&gt; println!(&quot;Error: {:?}&quot;, err),
-    }
-}
-
 </code></pre></pre>
-<p>*** See demo match_101 and match_102 for examples </p>
+<p>Try running this with the play button above.</p>
+<h4><a class="header" href="#code-dissection" id="code-dissection">Code Dissection</a></h4>
+<p>Two elements jump out here: <code>println!</code> and <code>&amp;str</code>:</p>
+<p>One-by-one: </p>
+<p>The <code>println!</code></p>
+<pre><pre class="playpen"><code class="language-rust no_run">
+# #![allow(unused_variables)]
+#fn main() {
+println!(function_result);
+#}</code></pre></pre>
+<p>The println! 'function' lives in <a href="https://doc.rust-lang.org/std/macro.println.html">std::io::println</a> But, it's not a function, it's a macro. </p>
+<p>The little '!' at the end of println is not 'not.' It means it's a macro. </p>
+<p>A macro is a meta-code generation feature that lets macro authors expand simple syntax (hopefully), into something that would otherwise be unduly complex or repetitive. </p>
+<p>A macro author writes the rules (the macro) for the expansion.</p>
+<p>You needn't author macros to code in Rust, but you will use them.</p>
+<br>
+<pre><pre class="playpen"><code class="language-rust no_run">
+# #![allow(unused_variables)]
+#fn main() {
+fn greetings(name: &amp;str) -&gt; String 
+#}</code></pre></pre>
+<p>The <code>&amp;str</code></p>
+<ul>
+<li>There are two string types in Rust. <a href="https://doc.rust-lang.org/rust-by-example/std/str.html">Rust Strings</a></li>
+<li>The <code>&amp;str</code> type is a string slice.  It's a pointer to some UTF-8 bytes, so we know it's length, precisely.</li>
+<li>The <code>String</code> type is dynamically sized, and is conceptually close to a Java or .NET String class.</li>
+</ul>
+<p>The challenge is that we frequently move back and forth between the two.</p>
+<p>The secret-sauce of Rust, compile-time checks, requires that all types allocated have a known-size.  Consequently, many of the operations on strings are done on the <code>&amp;str</code> type and there are reasons (forthcoming) to prefer the &amp;str as a parameter. </p>
+<p>So, in the code:</p>
+<ul>
+<li><code>name</code> is actually a string slice <code>&amp;str</code> and is passed accordingly to the <code>greetings</code> function</li>
+<li>The <code>to_string</code> function makes our <code>&amp;str</code> a String.  (Think to_String() with a big S). </li>
+<li>Our concatenation operator <code>+</code> takes a <code>&amp;str</code> and a <code>String</code> and returns a <code>String</code>.</li>
+<li>That String is returned and used as the parameter to the println! macro. </li>
+</ul>
+<p>Again:</p>
+<pre><pre class="playpen"><code class="language-rust">fn main() {
+    let name = &quot;Rustican&quot;;
+    let function_result = greetings(name);
+    println!(&quot;{}&quot;, function_result);
+}
+
+fn greetings(name: &amp;str) -&gt; String {
+    &quot;Hello &quot;.to_string() + name
+}
+</code></pre></pre>
+<h3><a class="header" href="#implicit-return" id="implicit-return">Implicit Return</a></h3>
+<p>The <code>return</code> keyword is not specified and <code>;</code> is not required in this case. </p>
+<p>This works: </p>
+<pre><pre class="playpen"><code class="language-rust no_run">
+# #![allow(unused_variables)]
+#fn main() {
+fn return_something() -&gt; i32 {
+    1
+} 
+#}</code></pre></pre>
+<p>But, this fails to compile (but would with a <code>return 1;</code> statement)</p>
+<pre><pre class="playpen"><code class="language-rust no_run">
+# #![allow(unused_variables)]
+#fn main() {
+fn return_something() -&gt; i32 {
+    1;
+} 
+#}</code></pre></pre>
+<h4><a class="header" href="#task" id="task">Task</a></h4>
+<p>Play around with the code block.  Don't worry if you hit errors at this point.</p>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
                         
-                            <a rel="prev" href="../../lessons/lesson_three/index.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                            <a rel="prev" href="../../lessons/lesson_one/index.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <i class="fa fa-angle-left"></i>
                             </a>
                         
 
                         
-                            <a rel="next" href="../../lessons/lesson_five/index.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                            <a rel="next" href="../../lessons/lesson_two/index.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <i class="fa fa-angle-right"></i>
                             </a>
                         
@@ -229,13 +247,13 @@ fn main() {
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
                 
-                    <a href="../../lessons/lesson_three/index.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <a href="../../lessons/lesson_one/index.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
                     </a>
                 
 
                 
-                    <a href="../../lessons/lesson_five/index.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                    <a href="../../lessons/lesson_two/index.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
                 

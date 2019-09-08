@@ -2,11 +2,12 @@
 
 ## Objectives 
 
-We've covered quite a bit of the fundamentals, so a few notes on building projects with Rust and a few other Helpful Details
+We've covered quite a few of the fundamentals. Housekeeping lessons are quick visit on a series of topics.
+
 ## Import/Use syntax
 
-Rust 2018 (a major release from, surprise, 2018), does not require 'extern crate in most cases' If the dependency is 
-listed in the Cargo.toml, only 'use crate_name' is needed.
+Rust 2018 (a major release from, surprise, 2018), does not require 'extern crate' in most cases. If the dependency is 
+listed in the Cargo.toml, only 'use crate_name' is needed.  Older sample code may indicate otherwise.
 
 ```rust
  extern crate colored; // not needed in Rust 2018
@@ -75,7 +76,7 @@ This needs to happen at the top level of the crate
 extern crate criterion;
 ```
 
-### Tuples - Multiple Types - One datastructure
+### Tuples: Multiple Types - One Data Structure
 
 ```rust
 let (a, b, c, d) = ("I'm".to_string(), "a".to_string(), "tuple".to_string(), 32);
@@ -94,7 +95,7 @@ let mut xs = vec![1i32, 2, 3];
 println!("Initial vector: {:?}", xs);
 
 // Thanks to `iter_mut`, mutable `Vector`s can also be iterated
-// over in a way that allows modifying each value, note the derference operator
+// over in a way that allows modifying each value, note the dereference operator
 for x in xs.iter_mut() {
     *x *= 3;
     println!("Updated vector: {:?}", xs);

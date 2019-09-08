@@ -2,22 +2,21 @@
 
 ## Objectives 
 
-* Understand working without NULL (you won't miss it) and the std lib enum wrappers Option<T> Result<Err, T> 
+* Understand working without NULL (you won't miss it) 
+* The std lib enum wrappers `Option<T>` `Result<Err, T>` 
 * Understand how to import a library/crate and reference it in a source file 
 
 ## NULL, std::option and Enum Wrappers
 
-But, we still have uninitialized values, right?   Our data structures need a placeholder for runtime initialized values without arbitrary results.
-
-There's no NULL in Rust. 
+There's no NULL type in Rust. 
 
 ```
 if (x == null) ... is gone.
 ```
 
-The std::option crate has an std::option::Option type and it is used *very* often in Rust. In fact, we do not need to import it. 
+The `std::option::Option` type (no need to import) is used *very* often in Rust, typically to handle our NULL scenario - indicated the presence or absence of data. 
 
-```rust
+```rust,no_run
 pub enum Option<T> {
     /// No value
     None,
@@ -29,15 +28,16 @@ pub enum Option<T> {
 
 So, typically, if it is optional we define it as such:
 
-```
+```rust,no_run
 struct Dieter {
     name: String,
-    daily_calories: <Option<u8>>   // <- quite a strict diet
+    daily_calories: <Option<u8>>   // <- tough diet, u8 is an unsigned 8 bit byte
 }
 ```
 
+The dieter object may or may not have a defined amount of `daily_calories` and access to the value (if defined) must be preceded by a check for its presence (Some or None).  
 
-While not required, another built-in enum in the std library is the Result<T, E>  which is used for returning values which can then be 'unwrapped' for errors OR thrown further up the call stack.
+Another built-in enum in the std library is the Result<T, E>  which is used for returning values which can then be 'unwrapped' for errors OR propograted/thrown further up the call stack.
 
 The definition, likewise, is simple:
 

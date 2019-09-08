@@ -1,22 +1,7 @@
-# Lesson Twelve:  Midterm!, Trait Bounds, and ซื่อๆ DB
+# Lesson Twelve:  Trait Bounds 
 
 ## Objectives 
-- Debug with output
-- Trait Bounds
-- Week's Project
-
-### The Mid-Term Exam  ;)
-
-A code snippet for thinking about references and borrowing: [Two Questions](../demos/trait_bounds/src/main.rs)
-
-
-### Running Unit Tests with Output
-
-If you use output in unit tests, like println!(), the output is hidden unless you add --no-capture
-
-```
-cargo test -- --nocapture
-```
+- Trait Bounds Basics
 
 ### Trait Bounds
 

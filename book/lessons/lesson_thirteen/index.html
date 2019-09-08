@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Enum Wrappers, Option and Matching - Rust for OO Programmers</title>
+        <title>Constructor Patterns - Rust for OO Programmers</title>
         
 
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
@@ -78,7 +78,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="affix"><a href="../../index.html">Rust for OO Programmers</a></li><li class="affix"><a href="../../OVERVIEW.html">Overview from an OO Perspective</a></li><li class="affix"><a href="../../lessons/LESSONS.html">Lessons</a></li><li><a href="../../lessons/lesson_one/index.html"><strong aria-hidden="true">1.</strong> Setup And A Function</a></li><li><ol class="section"><li><a href="../../lessons/lesson_one/ex_function_parameter_return.html"><strong aria-hidden="true">1.1.</strong> Calling a Function</a></li></ol></li><li><a href="../../lessons/lesson_two/index.html"><strong aria-hidden="true">2.</strong> Standard Lib, Types, Immutability</a></li><li><a href="../../lessons/lesson_three/index.html"><strong aria-hidden="true">3.</strong> Intro to Traits</a></li><li><a href="../../lessons/lesson_four/index.html" class="active"><strong aria-hidden="true">4.</strong> Enum Wrappers, Option and Matching</a></li><li><a href="../../lessons/lesson_five/index.html"><strong aria-hidden="true">5.</strong> Error Handling</a></li><li><a href="../../lessons/lesson_six/index.html"><strong aria-hidden="true">6.</strong> Almighty Iterators</a></li><li><a href="../../lessons/lesson_seven/index.html"><strong aria-hidden="true">7.</strong> Housekeeping #1</a></li><li><a href="../../lessons/lesson_eight/index.html"><strong aria-hidden="true">8.</strong> Closures and Lifetime Preview</a></li><li><a href="../../lessons/lesson_nine/index.html"><strong aria-hidden="true">9.</strong> Lifetime Annotations</a></li><li><a href="../../lessons/lesson_ten/index.html"><strong aria-hidden="true">10.</strong> Unit Testing</a></li><li><a href="../../lessons/lesson_eleven/index.html"><strong aria-hidden="true">11.</strong> TBD</a></li><li><a href="../../lessons/lesson_twelve/index.html"><strong aria-hidden="true">12.</strong> Trait Bounds</a></li><li><a href="../../lessons/lesson_thirteen/index.html"><strong aria-hidden="true">13.</strong> Constructor Patterns</a></li><li><a href="../../lessons/lesson_fourteen/index.html"><strong aria-hidden="true">14.</strong> Iterator Patterns</a></li><li><a href="../../lessons/lesson_fifteen/index.html"><strong aria-hidden="true">15.</strong> Box, Rc, RefCell</a></li><li><a href="../../lessons/lesson_sixteen/index.html"><strong aria-hidden="true">16.</strong> Generics and Associated Types</a></li><li><a href="../../lessons/lesson_seventeen/index.html"><strong aria-hidden="true">17.</strong> Bit Fiddling</a></li><li class="affix"><a href="../../misc/contributors.html">Contributors</a></li></ol>
+                <ol class="chapter"><li class="affix"><a href="../../index.html">Rust for OO Programmers</a></li><li class="affix"><a href="../../OVERVIEW.html">Overview from an OO Perspective</a></li><li class="affix"><a href="../../lessons/LESSONS.html">Lessons</a></li><li><a href="../../lessons/lesson_one/index.html"><strong aria-hidden="true">1.</strong> Setup And A Function</a></li><li><ol class="section"><li><a href="../../lessons/lesson_one/ex_function_parameter_return.html"><strong aria-hidden="true">1.1.</strong> Calling a Function</a></li></ol></li><li><a href="../../lessons/lesson_two/index.html"><strong aria-hidden="true">2.</strong> Standard Lib, Types, Immutability</a></li><li><a href="../../lessons/lesson_three/index.html"><strong aria-hidden="true">3.</strong> Intro to Traits</a></li><li><a href="../../lessons/lesson_four/index.html"><strong aria-hidden="true">4.</strong> Enum Wrappers, Option and Matching</a></li><li><a href="../../lessons/lesson_five/index.html"><strong aria-hidden="true">5.</strong> Error Handling</a></li><li><a href="../../lessons/lesson_six/index.html"><strong aria-hidden="true">6.</strong> Almighty Iterators</a></li><li><a href="../../lessons/lesson_seven/index.html"><strong aria-hidden="true">7.</strong> Housekeeping #1</a></li><li><a href="../../lessons/lesson_eight/index.html"><strong aria-hidden="true">8.</strong> Closures and Lifetime Preview</a></li><li><a href="../../lessons/lesson_nine/index.html"><strong aria-hidden="true">9.</strong> Lifetime Annotations</a></li><li><a href="../../lessons/lesson_ten/index.html"><strong aria-hidden="true">10.</strong> Unit Testing</a></li><li><a href="../../lessons/lesson_eleven/index.html"><strong aria-hidden="true">11.</strong> TBD</a></li><li><a href="../../lessons/lesson_twelve/index.html"><strong aria-hidden="true">12.</strong> Trait Bounds</a></li><li><a href="../../lessons/lesson_thirteen/index.html" class="active"><strong aria-hidden="true">13.</strong> Constructor Patterns</a></li><li><a href="../../lessons/lesson_fourteen/index.html"><strong aria-hidden="true">14.</strong> Iterator Patterns</a></li><li><a href="../../lessons/lesson_fifteen/index.html"><strong aria-hidden="true">15.</strong> Box, Rc, RefCell</a></li><li><a href="../../lessons/lesson_sixteen/index.html"><strong aria-hidden="true">16.</strong> Generics and Associated Types</a></li><li><a href="../../lessons/lesson_seventeen/index.html"><strong aria-hidden="true">17.</strong> Bit Fiddling</a></li><li class="affix"><a href="../../misc/contributors.html">Contributors</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -145,79 +145,129 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1><a class="header" href="#lesson-four-enum-wrappers-and-some-type-basics" id="lesson-four-enum-wrappers-and-some-type-basics">Lesson Four: Enum Wrappers and Some Type Basics</a></h1>
+                        <h1><a class="header" href="#lesson-thirteen-constructors-patterns" id="lesson-thirteen-constructors-patterns">Lesson Thirteen: Constructors Patterns</a></h1>
+<p>OO programmers often think of Objects as the launching point of code, particularly, 'newing up' an object.</p>
+<p>Although powerful, this approach can lead to monolithic 'engine' classes and that become black-boxes when the API or surface is exposed to other developers (though it needn't - we are aware). </p>
+<p>Rust programmers often think first in terms of shared behavior or functionality, so it's at least worth asking, &quot;Is this shared functionality and is it best abstracted into a trait?&quot;</p>
+<p>Here we'll peek at some of the patterns (mostly from std::lib) used to construct things.</p>
 <h2><a class="header" href="#objectives" id="objectives">Objectives</a></h2>
 <ul>
-<li>Understand working without NULL (you won't miss it) </li>
-<li>The std lib enum wrappers <code>Option&lt;T&gt;</code> <code>Result&lt;Err, T&gt;</code> </li>
-<li>Understand how to import a library/crate and reference it in a source file </li>
+<li>Understand Constructor/Initalization Forms </li>
 </ul>
-<h2><a class="header" href="#null-stdoption-and-enum-wrappers" id="null-stdoption-and-enum-wrappers">NULL, std::option and Enum Wrappers</a></h2>
-<p>There's no NULL type in Rust. </p>
-<pre><code>if (x == null) ... is gone.
-</code></pre>
-<p>The <code>std::option::Option</code> type (no need to import) is used <em>very</em> often in Rust, typically to handle our NULL scenario - indicated the presence or absence of data. </p>
-<pre><pre class="playpen"><code class="language-rust no_run">
-# #![allow(unused_variables)]
-#fn main() {
-pub enum Option&lt;T&gt; {
-    /// No value
-    None,
-    /// Some value `T`
-    Some(T),
+<h3><a class="header" href="#constructor-patterns-comments-in-code" id="constructor-patterns-comments-in-code">Constructor Patterns (Comments in code)</a></h3>
+<p>Notes: </p>
+<pre><pre class="playpen"><code class="language-rust">//PATTERN ONE: static, default impl 
+//This is the default impl for the struct 
+//There's nothing special about `new` as function name here.
+//`Self` or `&amp;self` is never used. 
+#[derive(Debug, PartialEq)]
+struct Counter {
+    count: u32,
 }
 
-#}</code></pre></pre>
-<p>So, typically, if it is optional we define it as such:</p>
-<pre><pre class="playpen"><code class="language-rust no_run">
-# #![allow(unused_variables)]
-#fn main() {
-struct Dieter {
-    name: String,
-    daily_calories: &lt;Option&lt;u8&gt;&gt;   // &lt;- tough diet, u8 is an unsigned 8 bit byte
+impl Counter {
+    fn new() -&gt; Counter {
+        Counter { count: 0 }
+    }
 }
-#}</code></pre></pre>
-<p>The dieter object may or may not have a defined amount of <code>daily_calories</code> and access to the value (if defined) must be preceded by a check for its presence (Some or None).</p>
-<p>Another built-in enum in the std library is the Result&lt;T, E&gt;  which is used for returning values which can then be 'unwrapped' for errors OR propograted/thrown further up the call stack.</p>
-<p>The definition, likewise, is simple:</p>
-<pre><code>enum Result&lt;T, E&gt; {
-   Ok(T),
-   Err(E),
-}
-</code></pre>
-<p>And the typical usage:</p>
-<pre><pre class="playpen"><code class="language-rust">
-use std::num::ParseIntError;
 
-fn double_number(number_str: &amp;str) -&gt; Result&lt;i32, ParseIntError&gt; {
-    match number_str.parse::&lt;i32&gt;() {
-        Ok(n) =&gt; Ok(2 * n),
-        Err(err) =&gt; Err(err),
+//PATTERN TWO: static, Self
+//Exactly the same. Basic struct, but with 'Self' as return type
+struct SelfishCounter {
+    count: u32,
+}
+
+impl SelfishCounter {
+    fn new() -&gt; Self {
+        SelfishCounter { count: 0 }
+    }
+}
+
+//PATTERN THREE: Self -&gt; Self
+//Exactly the same as above, but `Self` is used for the 
+//return value and return type, rather than the struct name 
+struct ABitSelfishCounter {
+    count: u32,
+}
+
+//Using the 'Self' constructor
+impl ABitSelfishCounter {
+    fn new() -&gt; Self {
+        Self { count: 0 }
     }
 }
 
 fn main() {
-    match double_number(&quot;10&quot;) {
-        Ok(n) =&gt; assert_eq!(n, 20),
-        Err(err) =&gt; println!(&quot;Error: {:?}&quot;, err),
-    }
+    //PATTERN ONE
+    let counter = Counter::new();
+    assert_eq!(counter.count, 0);
+
+    //PATTERN TWO 
+    let selfish_counter = SelfishCounter::new();
+    assert_eq!(selfish_counter.count, 0);
+
+    //PATTERN THREE 
+    let a_bit_selfish_counter = ABitSelfishCounter::new();
+    assert_eq!(a_bit_selfish_counter.count, 0);
+
+}
+</code></pre></pre>
+<h3><a class="header" href="#tuple-struct" id="tuple-struct">Tuple Struct</a></h3>
+<pre><pre class="playpen"><code class="language-rust no_run">
+# #![allow(unused_variables)]
+#fn main() {
+//PATTERN FOUR: Tuple Struct
+pub struct Fingerprint(u64, u64);
+
+impl Fingerprint {
+    pub const ZERO: Fingerprint = Fingerprint(0, 0);
+    pub fn hi() {} //... more code
 }
 
+
+#}</code></pre></pre>
+<p>Usage:</p>
+<pre><code>let zero_zero_tuple_struct = Fingerprint::ZERO;
+</code></pre>
+<p>or, equivilantly:</p>
+<pre><pre class="playpen"><code class="language-rust no_run">
+# #![allow(unused_variables)]
+#fn main() {
+let zero_zero_tuple_struct = Fingerprint(0, 0);
+#}</code></pre></pre>
+<pre><pre class="playpen"><code class="language-rust">
+#[derive(Debug, PartialEq)]
+pub struct Fingerprint(u64, u64);
+
+impl Fingerprint {
+    pub const ZERO: Fingerprint = Fingerprint(0, 0);
+    pub fn hi() {} //... more code
+}
+
+fn main() {
+    let fp = Fingerprint(7, 7);
+    assert_eq!(fp.0, 7);
+
+    let zeroed = Fingerprint::ZERO;
+    assert_ne!(zeroed.0, fp.0);
+
+    let zeroed_two = Fingerprint(0, 0);
+    assert_eq!(zeroed, zeroed_two);
+}
 </code></pre></pre>
-<p>*** See demo match_101 and match_102 for examples </p>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
                         
-                            <a rel="prev" href="../../lessons/lesson_three/index.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                            <a rel="prev" href="../../lessons/lesson_twelve/index.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <i class="fa fa-angle-left"></i>
                             </a>
                         
 
                         
-                            <a rel="next" href="../../lessons/lesson_five/index.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                            <a rel="next" href="../../lessons/lesson_fourteen/index.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <i class="fa fa-angle-right"></i>
                             </a>
                         
@@ -229,13 +279,13 @@ fn main() {
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
                 
-                    <a href="../../lessons/lesson_three/index.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <a href="../../lessons/lesson_twelve/index.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
                     </a>
                 
 
                 
-                    <a href="../../lessons/lesson_five/index.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                    <a href="../../lessons/lesson_fourteen/index.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
                 

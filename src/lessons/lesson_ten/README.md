@@ -1,4 +1,4 @@
-# Lesson Nine: Unit Testing and bit of Housekeeping and a Test!!! 
+# Lesson Nine: Unit Testing 
 
 ## Objectives 
 - Unit Testing
@@ -24,6 +24,15 @@ assert_ne!(left, right)
 ```
 
 And run with ```cargo test```
+
+### Running Unit Tests with Output
+
+If you use output in unit tests, like println!(), the output is hidden unless you add --no-capture
+
+```
+cargo test -- --nocapture
+```
+
 
 ## Examples
 

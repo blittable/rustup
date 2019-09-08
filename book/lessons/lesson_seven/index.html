@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Enum Wrappers, Option and Matching - Rust for OO Programmers</title>
+        <title>Housekeeping #1 - Rust for OO Programmers</title>
         
 
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
@@ -78,7 +78,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="affix"><a href="../../index.html">Rust for OO Programmers</a></li><li class="affix"><a href="../../OVERVIEW.html">Overview from an OO Perspective</a></li><li class="affix"><a href="../../lessons/LESSONS.html">Lessons</a></li><li><a href="../../lessons/lesson_one/index.html"><strong aria-hidden="true">1.</strong> Setup And A Function</a></li><li><ol class="section"><li><a href="../../lessons/lesson_one/ex_function_parameter_return.html"><strong aria-hidden="true">1.1.</strong> Calling a Function</a></li></ol></li><li><a href="../../lessons/lesson_two/index.html"><strong aria-hidden="true">2.</strong> Standard Lib, Types, Immutability</a></li><li><a href="../../lessons/lesson_three/index.html"><strong aria-hidden="true">3.</strong> Intro to Traits</a></li><li><a href="../../lessons/lesson_four/index.html" class="active"><strong aria-hidden="true">4.</strong> Enum Wrappers, Option and Matching</a></li><li><a href="../../lessons/lesson_five/index.html"><strong aria-hidden="true">5.</strong> Error Handling</a></li><li><a href="../../lessons/lesson_six/index.html"><strong aria-hidden="true">6.</strong> Almighty Iterators</a></li><li><a href="../../lessons/lesson_seven/index.html"><strong aria-hidden="true">7.</strong> Housekeeping #1</a></li><li><a href="../../lessons/lesson_eight/index.html"><strong aria-hidden="true">8.</strong> Closures and Lifetime Preview</a></li><li><a href="../../lessons/lesson_nine/index.html"><strong aria-hidden="true">9.</strong> Lifetime Annotations</a></li><li><a href="../../lessons/lesson_ten/index.html"><strong aria-hidden="true">10.</strong> Unit Testing</a></li><li><a href="../../lessons/lesson_eleven/index.html"><strong aria-hidden="true">11.</strong> TBD</a></li><li><a href="../../lessons/lesson_twelve/index.html"><strong aria-hidden="true">12.</strong> Trait Bounds</a></li><li><a href="../../lessons/lesson_thirteen/index.html"><strong aria-hidden="true">13.</strong> Constructor Patterns</a></li><li><a href="../../lessons/lesson_fourteen/index.html"><strong aria-hidden="true">14.</strong> Iterator Patterns</a></li><li><a href="../../lessons/lesson_fifteen/index.html"><strong aria-hidden="true">15.</strong> Box, Rc, RefCell</a></li><li><a href="../../lessons/lesson_sixteen/index.html"><strong aria-hidden="true">16.</strong> Generics and Associated Types</a></li><li><a href="../../lessons/lesson_seventeen/index.html"><strong aria-hidden="true">17.</strong> Bit Fiddling</a></li><li class="affix"><a href="../../misc/contributors.html">Contributors</a></li></ol>
+                <ol class="chapter"><li class="affix"><a href="../../index.html">Rust for OO Programmers</a></li><li class="affix"><a href="../../OVERVIEW.html">Overview from an OO Perspective</a></li><li class="affix"><a href="../../lessons/LESSONS.html">Lessons</a></li><li><a href="../../lessons/lesson_one/index.html"><strong aria-hidden="true">1.</strong> Setup And A Function</a></li><li><ol class="section"><li><a href="../../lessons/lesson_one/ex_function_parameter_return.html"><strong aria-hidden="true">1.1.</strong> Calling a Function</a></li></ol></li><li><a href="../../lessons/lesson_two/index.html"><strong aria-hidden="true">2.</strong> Standard Lib, Types, Immutability</a></li><li><a href="../../lessons/lesson_three/index.html"><strong aria-hidden="true">3.</strong> Intro to Traits</a></li><li><a href="../../lessons/lesson_four/index.html"><strong aria-hidden="true">4.</strong> Enum Wrappers, Option and Matching</a></li><li><a href="../../lessons/lesson_five/index.html"><strong aria-hidden="true">5.</strong> Error Handling</a></li><li><a href="../../lessons/lesson_six/index.html"><strong aria-hidden="true">6.</strong> Almighty Iterators</a></li><li><a href="../../lessons/lesson_seven/index.html" class="active"><strong aria-hidden="true">7.</strong> Housekeeping #1</a></li><li><a href="../../lessons/lesson_eight/index.html"><strong aria-hidden="true">8.</strong> Closures and Lifetime Preview</a></li><li><a href="../../lessons/lesson_nine/index.html"><strong aria-hidden="true">9.</strong> Lifetime Annotations</a></li><li><a href="../../lessons/lesson_ten/index.html"><strong aria-hidden="true">10.</strong> Unit Testing</a></li><li><a href="../../lessons/lesson_eleven/index.html"><strong aria-hidden="true">11.</strong> TBD</a></li><li><a href="../../lessons/lesson_twelve/index.html"><strong aria-hidden="true">12.</strong> Trait Bounds</a></li><li><a href="../../lessons/lesson_thirteen/index.html"><strong aria-hidden="true">13.</strong> Constructor Patterns</a></li><li><a href="../../lessons/lesson_fourteen/index.html"><strong aria-hidden="true">14.</strong> Iterator Patterns</a></li><li><a href="../../lessons/lesson_fifteen/index.html"><strong aria-hidden="true">15.</strong> Box, Rc, RefCell</a></li><li><a href="../../lessons/lesson_sixteen/index.html"><strong aria-hidden="true">16.</strong> Generics and Associated Types</a></li><li><a href="../../lessons/lesson_seventeen/index.html"><strong aria-hidden="true">17.</strong> Bit Fiddling</a></li><li class="affix"><a href="../../misc/contributors.html">Contributors</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -145,79 +145,133 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1><a class="header" href="#lesson-four-enum-wrappers-and-some-type-basics" id="lesson-four-enum-wrappers-and-some-type-basics">Lesson Four: Enum Wrappers and Some Type Basics</a></h1>
+                        <h1><a class="header" href="#lesson-seven-housekeeping" id="lesson-seven-housekeeping">Lesson Seven: HouseKeeping</a></h1>
 <h2><a class="header" href="#objectives" id="objectives">Objectives</a></h2>
-<ul>
-<li>Understand working without NULL (you won't miss it) </li>
-<li>The std lib enum wrappers <code>Option&lt;T&gt;</code> <code>Result&lt;Err, T&gt;</code> </li>
-<li>Understand how to import a library/crate and reference it in a source file </li>
-</ul>
-<h2><a class="header" href="#null-stdoption-and-enum-wrappers" id="null-stdoption-and-enum-wrappers">NULL, std::option and Enum Wrappers</a></h2>
-<p>There's no NULL type in Rust. </p>
-<pre><code>if (x == null) ... is gone.
-</code></pre>
-<p>The <code>std::option::Option</code> type (no need to import) is used <em>very</em> often in Rust, typically to handle our NULL scenario - indicated the presence or absence of data. </p>
-<pre><pre class="playpen"><code class="language-rust no_run">
-# #![allow(unused_variables)]
-#fn main() {
-pub enum Option&lt;T&gt; {
-    /// No value
-    None,
-    /// Some value `T`
-    Some(T),
-}
-
-#}</code></pre></pre>
-<p>So, typically, if it is optional we define it as such:</p>
-<pre><pre class="playpen"><code class="language-rust no_run">
-# #![allow(unused_variables)]
-#fn main() {
-struct Dieter {
-    name: String,
-    daily_calories: &lt;Option&lt;u8&gt;&gt;   // &lt;- tough diet, u8 is an unsigned 8 bit byte
-}
-#}</code></pre></pre>
-<p>The dieter object may or may not have a defined amount of <code>daily_calories</code> and access to the value (if defined) must be preceded by a check for its presence (Some or None).</p>
-<p>Another built-in enum in the std library is the Result&lt;T, E&gt;  which is used for returning values which can then be 'unwrapped' for errors OR propograted/thrown further up the call stack.</p>
-<p>The definition, likewise, is simple:</p>
-<pre><code>enum Result&lt;T, E&gt; {
-   Ok(T),
-   Err(E),
-}
-</code></pre>
-<p>And the typical usage:</p>
+<p>We've covered quite a few of the fundamentals. Housekeeping lessons are quick visit on a series of topics.</p>
+<h2><a class="header" href="#importuse-syntax" id="importuse-syntax">Import/Use syntax</a></h2>
+<p>Rust 2018 (a major release from, surprise, 2018), does not require 'extern crate' in most cases. If the dependency is 
+listed in the Cargo.toml, only 'use crate_name' is needed.  Older sample code may indicate otherwise.</p>
 <pre><pre class="playpen"><code class="language-rust">
-use std::num::ParseIntError;
+# #![allow(unused_variables)]
+#fn main() {
+ extern crate colored; // not needed in Rust 2018
+    
+use colored::*;
+#}</code></pre></pre>
+<h2><a class="header" href="#syntax-variations-for-crates-and-modules" id="syntax-variations-for-crates-and-modules">Syntax variations for crates and modules</a></h2>
+<p>For  somecrate::somemodule::somesubmodule::somefunction</p>
+<pre><pre class="playpen"><code class="language-rust">
+# #![allow(unused_variables)]
+#fn main() {
+use somecrate::*;
+#}</code></pre></pre>
+<p>Syntax will be:</p>
+<pre><pre class="playpen"><code class="language-rust">
+# #![allow(unused_variables)]
+#fn main() {
+somemodule::somesubmodule::somefunction()
+#}</code></pre></pre>
+<p>The invocation starts where the the use ends.</p>
+<p>We can also: </p>
+<pre><pre class="playpen"><code class="language-rust">
+# #![allow(unused_variables)]
+#fn main() {
+use somecrate::{SomeStruct, somefunction};
+#}</code></pre></pre>
+<p>Or:</p>
+<pre><pre class="playpen"><code class="language-rust">
+# #![allow(unused_variables)]
+#fn main() {
+use somecrate::{SomeStruct, somefunction};
+#}</code></pre></pre>
+<p>Or:</p>
+<pre><pre class="playpen"><code class="language-rust">
+# #![allow(unused_variables)]
+#fn main() {
+use somecrate::somesubmodule::{SomeStruct, somefunction};
+#}</code></pre></pre>
+<h2><a class="header" href="#project-structure" id="project-structure">Project Structure</a></h2>
+<p>There is a 'top level' to any library or binary (executable)
+and it is named in the cargo.toml</p>
+<p>The 'top level' is also responsible for exporting public members (using the <code>pub</code> keyword)</p>
+<p>Typical Project Structure:</p>
+<pre><code>  main.rs    or   lib.rs               
+              |      
+</code></pre>
+<p>subdirectory_01  subdirectory_02<br />
+|              |<br />
+mod.rs         mod.rs</p>
+<ul>
+<li>You can use <code>mod</code> to create modules anywhere</li>
+<li>The <em>parent</em> controls the visibility of the children who are public by 'reexposing' them, e.g.:
+<code>pub mychildmod</code></li>
+</ul>
+<h3><a class="header" href="#importing-macros" id="importing-macros">Importing Macros</a></h3>
+<p>This needs to happen at the top level of the crate</p>
+<pre><code>#[macro_use]
+extern crate criterion;
+</code></pre>
+<h3><a class="header" href="#tuples-multiple-types---one-data-structure" id="tuples-multiple-types---one-data-structure">Tuples: Multiple Types - One Data Structure</a></h3>
+<pre><pre class="playpen"><code class="language-rust">
+# #![allow(unused_variables)]
+#fn main() {
+let (a, b, c, d) = (&quot;I'm&quot;.to_string(), &quot;a&quot;.to_string(), &quot;tuple&quot;.to_string(), 32);
+#}</code></pre></pre>
+<h3><a class="header" href="#vectors---a-common-rust-datastructure" id="vectors---a-common-rust-datastructure">Vectors - A Common Rust Datastructure</a></h3>
+<p>For vectors, we get some 'standard' operations: push, pop, index (e.g. our_vector[0])</p>
+<pre><pre class="playpen"><code class="language-rust">
+# #![allow(unused_variables)]
+#fn main() {
+let mut collected_iterator: Vec&lt;i32&gt; = (0..10).collect();
+println!(&quot;Collected (0..10) into: {:?}&quot;, collected_iterator);
 
-fn double_number(number_str: &amp;str) -&gt; Result&lt;i32, ParseIntError&gt; {
-    match number_str.parse::&lt;i32&gt;() {
-        Ok(n) =&gt; Ok(2 * n),
-        Err(err) =&gt; Err(err),
-    }
+// The `vec!` macro can be used to initialize a vector
+let mut xs = vec![1i32, 2, 3];
+println!(&quot;Initial vector: {:?}&quot;, xs);
+
+// Thanks to `iter_mut`, mutable `Vector`s can also be iterated
+// over in a way that allows modifying each value, note the dereference operator
+for x in xs.iter_mut() {
+    *x *= 3;
+    println!(&quot;Updated vector: {:?}&quot;, xs);
 }
-
-fn main() {
-    match double_number(&quot;10&quot;) {
-        Ok(n) =&gt; assert_eq!(n, 20),
-        Err(err) =&gt; println!(&quot;Error: {:?}&quot;, err),
-    }
-}
-
-</code></pre></pre>
-<p>*** See demo match_101 and match_102 for examples </p>
+#}</code></pre></pre>
+<h3><a class="header" href="#cargotoml" id="cargotoml">Cargo.toml</a></h3>
+<p>The <a href="https://doc.rust-lang.org/cargo/reference/manifest.html">Cargo.toml manifest</a> is extremely powerful and flexible.</p>
+<p>At a high-level, you can:</p>
+<ul>
+<li>Split 'features' within your crate to make optional dependencies</li>
+<li>Split the workspace for multiple crates joined in a single toml.lock</li>
+<li>Override dependencies</li>
+<li>Use files or git repositories as the source of dependencies</li>
+<li>Support multiple libraries or binaries</li>
+</ul>
+<p>one example:</p>
+<pre><pre class="playpen"><code class="language-rust">
+# #![allow(unused_variables)]
+#fn main() {
+[dependencies]
+rand = { git = &quot;https://github.com/rust-lang-nursery/rand.git&quot; }
+#}</code></pre></pre>
+<p>Homework:</p>
+<ol>
+<li>Create a project that has multiple directories (more than 2!) with separate modules.</li>
+<li>Use a Vec in the project</li>
+<li>Use a tuple in the project</li>
+</ol>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
                         
-                            <a rel="prev" href="../../lessons/lesson_three/index.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                            <a rel="prev" href="../../lessons/lesson_six/index.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <i class="fa fa-angle-left"></i>
                             </a>
                         
 
                         
-                            <a rel="next" href="../../lessons/lesson_five/index.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                            <a rel="next" href="../../lessons/lesson_eight/index.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <i class="fa fa-angle-right"></i>
                             </a>
                         
@@ -229,13 +283,13 @@ fn main() {
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
                 
-                    <a href="../../lessons/lesson_three/index.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <a href="../../lessons/lesson_six/index.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
                     </a>
                 
 
                 
-                    <a href="../../lessons/lesson_five/index.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                    <a href="../../lessons/lesson_eight/index.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
                 
