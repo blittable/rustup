@@ -5,6 +5,10 @@
 - Trait Bounds
 - Week's Project
 
+### The Mid-Term Exam  ;)
+
+A code snippet for thinking about references and borrowing: [Two Questions](../demos/trait_bounds/src/main.rs)
+
 
 ### Running Unit Tests with Output
 
@@ -16,7 +20,7 @@ cargo test -- --nocapture
 
 ### Trait Bounds
 
-As an OO programmer, you already know generics.  It's quite similar in Rust. But, what about Traits?
+As an OO programmer, you already know generics (hopefully!).  It's quite similar in Rust. But, what about 'traits'?
 
 You can pass a trait `impl` as a parameter:
 
@@ -26,10 +30,8 @@ pub fn notify(item: impl Summary) {
 }
 ```
 
-But, what about traits as *generics*?
+But, what about traits as *generics*?  Perhaps:
 
-
-In the code below, the Rust toolchain has *no* information on the types functions, etc. and will not compile. 
 
 ```rust
 pub fn notify<T>(item: T) {
@@ -37,7 +39,11 @@ pub fn notify<T>(item: T) {
 }
 ```
 
+In the code below, the Rust toolchain has *no* information on the types' functions, etc. and will not compile. It needs more information. 
+
+
 To solve the issue in the context of generics, Rust uses `trait bounds` 
+
 ```rust
 pub fn notify<T: Summary>(item: T) {
     ...
@@ -47,11 +53,11 @@ pub fn notify<T: Summary>(item: T) {
 which is the same as:
 ```rust
 pub fn notify(item: impl Summary) {
-    ...
 }
 ```
 
-which is the same as:
+For better clarity, this can also be written as:
+
 ```rust
 pub fn notify<T>(item: T) 
 where T: Summary {
@@ -59,7 +65,7 @@ where T: Summary {
 }
 ```
 
-which can be extended, applying other traits with:
+And, applied across multiple traits with:
 
 ```rust
 pub fn notify<T: Summary + Display>(item: T) 
@@ -68,9 +74,12 @@ where T: Summary + Display {
 }
 ```
 
+Read the above, "the notify function is bound by the behavior of the Summary and Display traits."
+
+
 ## This Week's Project
 
-There will be no homework this week.  Classtime will be used to for the project.
+There will be no homework this week.  Class with cover one quick topic (5 minutes) and the remainder will be focused on the project effort.
 
 
 We will split into teams and create a database.
@@ -78,12 +87,17 @@ We will split into teams and create a database.
 Mate, Nook, Aong => Clap Team
 Kanoon, Xenirio, Kim => Architecture Team
 Toom, Neng, Khem => Persistence Team
-Kevin, Uthen => Performance / Criterion Team
+Kevin, Uthen, Khwan => Performance / Criterion Team
 John, Vincent => Marketing
 ```
 
 ### Project Structure
+
+For larger projects, a parent Cargo.toml can reference N other projects via the 'members' 
+syntax.  See the following project as an example:
 [members cargo syntax](https://github.com/crypto-com/chain)
+
+
 
 ### Requirements
 - Implement a cli-based database that supports, "Upsert" and "Get" operations.
@@ -96,7 +110,7 @@ susu add key="susan_salary" value="1200"
 susu get key="susan_salary"
 ```
 
-# Clap Team
+# Clap Team (This is not a cheerleading team: clap: Command Line Argument Parser)
 Look at Clap. Clap can get complicated.  Keep it simple. [Clap Crate on crates.io](https://crates.io/crates/clap)   
 
 # Persistence Team
@@ -107,12 +121,5 @@ Keep it simple.
 
 # Criterion Team 
 Compare ซื่อๆ DB with something (RocksDB?) 
-
-# Marketing
-
-# **"ซื่อๆ DB, Saving Your Data... Usually"** 
-
-![DB Logo](https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSpXHfXT9o3HfiKSg8n4tZxvEgLhsI8mbK3R7aVkVpnNKZaUojP)
-
 
 
