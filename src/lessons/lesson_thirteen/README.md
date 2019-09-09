@@ -73,6 +73,8 @@ fn main() {
     let a_bit_selfish_counter = ABitSelfishCounter::new();
     assert_eq!(a_bit_selfish_counter.count, 0);
 
+    #println!("If we ran to here without an error in the asserts, it was successful.");
+
 }
 ```
 
@@ -117,5 +119,7 @@ fn main() {
 
     let zeroed_two = Fingerprint(0, 0);
     assert_eq!(zeroed, zeroed_two);
+
+    #println!("If we ran to here without an error in the asserts, it was successful.");
 }
 ```

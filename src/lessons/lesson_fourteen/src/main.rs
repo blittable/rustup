@@ -10,7 +10,6 @@
 fn main() {
     standard_iteration();
     iteration_with_enumerate();
-    enumerate_to_pair();
     iterate_with_into_iter();
     iter_little_things();
 }
@@ -39,12 +38,13 @@ fn iterate_with_into_iter() {
 
     //Standard iter() iterates over the reference &T
     for name in q.iter() {
-        println!("Name is: {:?}", *name);
+        println!("Name is: {:?}", *name);   // <- Dereferencing (*) here, is equivilant 
+                                            //    to .into_iter() below
     }
 
     //into_iter() iterates over just T
     //This code will error if
-    for name in q.into_iter() {
+    for name in q.into_iter() {            // <- into_iter here is equivilant to * above 
         println!("Name is: {:?}", name);
     }
 }
@@ -54,8 +54,10 @@ fn iter_little_things() {
     let semantic_version_number = "1.2.3";
 
     //1 - Take the elements from the split method and return a new iterator
-    //2 - take that iterator and use .map to create another iterator
-    //3 - create a closure that takes an iterator and invokes the next method
+    //2 - Take that iterator and use .map to create another iterator
+    //3 - Create a closure that takes an iterator and invokes the next method
+    //4 - The iterator holds our state and when the function of the closure exceeds
+    //    the bounds of the mapped string, an error is returned 
 
     let mut iterator = semantic_version_number
         .split('.')
@@ -64,13 +66,13 @@ fn iter_little_things() {
     let mut part = || {
         match iterator.next() {
             None => println!("Error in referencing semantic version number.  Be sure the parts are split with '.', are integer types, and that there are no more than 3."),
-            Some(e) => println!("{:?}", e), 
+            Some(e) => println!("{:?}", e.unwrap()), 
         };
     };
 
-    println!("Major Version: {:?}", part());
-    println!("Minor Version: {:?}", part());
-    println!("Build Version: {:?}", part());
-    println!("Not what you're looking for: {:?}", part());
+    part();
+    part();
+    part();
+    part(); // <- greater than 3 bombs 
 }
 

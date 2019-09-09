@@ -146,27 +146,90 @@
                 <div id="content" class="content">
                     <main>
                         <h1><a class="header" href="#lesson-thirteen-iterator-patterns" id="lesson-thirteen-iterator-patterns">Lesson Thirteen: Iterator Patterns</a></h1>
-<p>Idomatic Rust uses 
-is different.</p>
-<p>Here we'll review some of the main forms.</p>
 <h2><a class="header" href="#objectives" id="objectives">Objectives</a></h2>
 <ul>
-<li>Understand Constructor Forms </li>
+<li>Understand Some of the main patterns used for iteration </li>
 </ul>
-<p>(https://doc.rust-lang.org/rust-by-example/fn/methods.html)</p>
-<pre><pre class="playpen"><code class="language-rust">
-# #![allow(unused_variables)]
-#fn main() {
-struct Counter {
-    count: u32,
+<pre><pre class="playpen"><code class="language-rust">///Working with iterators
+///
+/// An iterator has an associated type and a next method
+///
+///trait Iterator {
+///  type Item;
+///  fn next(&amp;mut self) -&gt; Option&lt;Self::Item&gt;;
+///}
+///
+fn main() {
+    standard_iteration();
+    iteration_with_enumerate();
+    iterate_with_into_iter();
+    iter_little_things();
 }
 
-impl Counter {
-    fn new() -&gt; Counter {
-        Counter { count: 0 }
+fn standard_iteration() {
+    for i in 0..3 {
+        println!(&quot;Standard Iterator: {:?}&quot;, i);
     }
 }
-#}</code></pre></pre>
+
+///enumerate() takes an iterator and returns the value and index of the iteration
+///increment the index
+fn iteration_with_enumerate() {
+    for (mut i, j) in (5..8).enumerate() {
+        i += 1;
+        println!(
+            &quot;Enumerate with increment on value - value {:?}, loop iteration: {:?}&quot;,
+            i, j
+        );
+    }
+}
+
+///into_iter iterates the value instead of the reference
+fn iterate_with_into_iter() {
+    let q = vec![&quot;Jim&quot;, &quot;John&quot;, &quot;Mary&quot;, &quot;Kim&quot;, &quot;Marcus&quot;];
+
+    //Standard iter() iterates over the reference &amp;T
+    for name in q.iter() {
+        println!(&quot;Name is: {:?}&quot;, *name);   // &lt;- Dereferencing (*) here, is equivilant 
+                                            //    to .into_iter() below
+    }
+
+    //into_iter() iterates over just T
+    //This code will error if
+    for name in q.into_iter() {            // &lt;- into_iter here is equivilant to * above 
+        println!(&quot;Name is: {:?}&quot;, name);
+    }
+}
+
+//A good example of iterators in an idomatic rust style from tools::tidy
+fn iter_little_things() {
+    let semantic_version_number = &quot;1.2.3&quot;;
+
+    //1 - Take the elements from the split method and return a new iterator
+    //2 - Take that iterator and use .map to create another iterator
+    //3 - Create a closure that takes an iterator and invokes the next method
+    //4 - The iterator holds our state and when the function of the closure exceeds
+    //    the bounds of the mapped string, an error is returned 
+
+    let mut iterator = semantic_version_number
+        .split('.')
+        .map(|part| part.parse::&lt;u32&gt;());
+
+    let mut part = || {
+        match iterator.next() {
+            None =&gt; println!(&quot;Error in referencing semantic version number.  Be sure the parts are split with '.', are integer types, and that there are no more than 3.&quot;),
+            Some(e) =&gt; println!(&quot;{:?}&quot;, e.unwrap()), 
+        };
+    };
+
+    part();
+    part();
+    part();
+    part(); // &lt;- greater than 3 bombs 
+}
+
+
+</code></pre></pre>
 
                     </main>
 

@@ -58,23 +58,8 @@ fn main() {
     let zeroed = Fingerprint::ZERO;
     assert_ne!(zeroed.0, fp.0);
 
+    println!("If we ran to here without an error in the assets, it was successful.");
 }
 
 
-///Fingerprint tuple struct
-pub struct Fingerprint(u64, u64);
-
-impl Fingerprint {
-    pub const ZERO: Fingerprint = Fingerprint(0, 0);
-    pub fn hi() {}
-}
-
-#[test]
-fn fingerprint_test() {
-    let fp = Fingerprint(7, 7);
-    assert_eq!(fp.0, 7);
-
-    let zeroed = Fingerprint::ZERO;
-    assert_ne!(zeroed.0, fp.0);
-}
 

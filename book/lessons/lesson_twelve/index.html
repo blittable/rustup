@@ -151,9 +151,24 @@
 <li>Trait Bounds Basics</li>
 </ul>
 <h3><a class="header" href="#trait-bounds" id="trait-bounds">Trait Bounds</a></h3>
-<p>As an OO programmer, you already know generics (hopefully!).  It's quite similar in Rust. But, what about 'traits'?</p>
+<p>As an OO programmer, you already know generics (hopefully!).  It's quite similar in Rust. </p>
+<pre><code class="language-c#">  class Program
+    {
+        static void Main(string[] args)
+        {
+            //Covariant 
+            IEnumerable&lt;Base&gt; d = new List&lt;Derive&gt;();
+        }
+    }
+
+    interface Base { };
+    class Derive : Base {
+        public Derive(){}
+    }
+</code></pre>
+<p>But, what about 'traits'?</p>
 <p>You can pass a trait <code>impl</code> as a parameter:</p>
-<pre><pre class="playpen"><code class="language-rust">
+<pre><pre class="playpen"><code class="language-rust no_run">
 # #![allow(unused_variables)]
 #fn main() {
 pub fn notify(item: impl Summary) {
@@ -161,7 +176,7 @@ pub fn notify(item: impl Summary) {
 }
 #}</code></pre></pre>
 <p>But, what about traits as <em>generics</em>?  Perhaps:</p>
-<pre><pre class="playpen"><code class="language-rust">
+<pre><pre class="playpen"><code class="language-rust no_run">
 # #![allow(unused_variables)]
 #fn main() {
 pub fn notify&lt;T&gt;(item: T) {
@@ -170,7 +185,7 @@ pub fn notify&lt;T&gt;(item: T) {
 #}</code></pre></pre>
 <p>In the code below, the Rust toolchain has <em>no</em> information on the types' functions, etc. and will not compile. It needs more information. </p>
 <p>To solve the issue in the context of generics, Rust uses <code>trait bounds</code> </p>
-<pre><pre class="playpen"><code class="language-rust">
+<pre><pre class="playpen"><code class="language-rust no_run">
 # #![allow(unused_variables)]
 #fn main() {
 pub fn notify&lt;T: Summary&gt;(item: T) {
@@ -178,14 +193,14 @@ pub fn notify&lt;T: Summary&gt;(item: T) {
 }
 #}</code></pre></pre>
 <p>which is the same as:</p>
-<pre><pre class="playpen"><code class="language-rust">
+<pre><pre class="playpen"><code class="language-rust no_run">
 # #![allow(unused_variables)]
 #fn main() {
 pub fn notify(item: impl Summary) {
 }
 #}</code></pre></pre>
 <p>For better clarity, this can also be written as:</p>
-<pre><pre class="playpen"><code class="language-rust">
+<pre><pre class="playpen"><code class="language-rust no_run">
 # #![allow(unused_variables)]
 #fn main() {
 pub fn notify&lt;T&gt;(item: T) 
@@ -194,7 +209,7 @@ where T: Summary {
 }
 #}</code></pre></pre>
 <p>And, applied across multiple traits with:</p>
-<pre><pre class="playpen"><code class="language-rust">
+<pre><pre class="playpen"><code class="language-rust no_run">
 # #![allow(unused_variables)]
 #fn main() {
 pub fn notify&lt;T: Summary + Display&gt;(item: T) 
@@ -203,47 +218,6 @@ where T: Summary + Display {
 }
 #}</code></pre></pre>
 <p>Read the above, &quot;the notify function is bound by the behavior of the Summary and Display traits.&quot;</p>
-<h2><a class="header" href="#this-weeks-project" id="this-weeks-project">This Week's Project</a></h2>
-<p>There will be no homework this week.  Class with cover one quick topic (5 minutes) and the remainder will be focused on the project effort.</p>
-<p>We will split into teams and create a database.</p>
-<p>Mate, Nook, Aong =&gt; Clap Team
-Kanoon, Xenirio, Kim =&gt; Architecture Team
-Toom, Neng, Khem =&gt; Persistence Team
-Kevin, Uthen, Khwan =&gt; Performance / Criterion Team
-John, Vincent =&gt; Marketing</p>
-<pre><code>
-### Project Structure
-
-For larger projects, a parent Cargo.toml can reference N other projects via the 'members' 
-syntax.  See the following project as an example:
-[members cargo syntax](https://github.com/crypto-com/chain)
-
-
-
-### Requirements
-- Implement a cli-based database that supports, &quot;Upsert&quot; and &quot;Get&quot; operations.
-- The database should store the values on the file system
-
-These operations (or something close) need to be supported:
-
-</code></pre>
-<p>susu add key=&quot;susan_salary&quot; value=&quot;1200&quot;
-susu get key=&quot;susan_salary&quot;</p>
-<pre><code>
-# Clap Team (This is not a cheerleading team: clap: Command Line Argument Parser)
-Look at Clap. Clap can get complicated.  Keep it simple. [Clap Crate on crates.io](https://crates.io/crates/clap)   
-
-# Persistence Team
-How do we store and retrieve the data?
-
-# Architecture Team
-Keep it simple.
-
-# Criterion Team 
-Compare ซื่อๆ DB with something (RocksDB?) 
-
-
-</code></pre>
 
                     </main>
 
