@@ -204,30 +204,66 @@ where T: Summary + Display {
 }
 #}</code></pre></pre>
 <p>Read the above, &quot;the notify function is bound by the behavior of the Summary and Display traits.&quot;</p>
-<h3><a class="header" href="#dyn-keword" id="dyn-keword">dyn Keword</a></h3>
-<p>Traits used as return types need to be marked with <code>dyn</code></p>
-<pre><pre class="playpen"><code class="language-rust">#![allow(unused_variables)]
-fn main() {
-}
-trait Bigger&lt;T&gt;{
-    fn bigger&lt;T&gt;(i: T, j: T) -&gt; T;
+<h3><a class="header" href="#function-overloading--ish" id="function-overloading--ish">Function Overloading -ish</a></h3>
+<p>As an OO programmer, note that no-inhertiance != no-indirection:</p>
+<pre><pre class="playpen"><code class="language-rust">fn main() {
+    let usa = USA {
+        tax_calculator: Box::new(SimpleTaxer {}),
+    };
+
+    let thailand = Thailand {
+        tax_calculator: Box::new(SimpleTaxer {}),
+    };
+
+    println!(
+        &quot;USA tax: {}&quot;,
+        usa.tax_calculator.compound_tax(333.0, 2.3, 3.3)
+    );
+    println!(
+        &quot;Thailand tax: {}&quot;,
+        thailand.tax_calculator.calculate_tax(333.0, 2.3)
+    );
 }
 
-impl Bigger for i32 {
-    fn bigger&lt;T&gt;(i: i32, j: i32) -&gt; i32
-    {
-        if i &gt; j {
-            i
-        }
+trait SimpleTax {
+    fn calculate_tax(&amp;self, amount: f32, rate: f32) -&gt; f32;
+}
 
-        j
+trait CompoundTax: SimpleTax {
+    fn compound_tax(&amp;self, amount: f32, base_rate: f32, rate: f32) -&gt; f32;
+}
+
+struct USA {
+    pub tax_calculator: Box&lt;dyn CompoundTax&gt;,
+}
+
+struct Thailand {
+    pub tax_calculator: Box&lt;dyn SimpleTax&gt;,
+}
+
+struct SimpleTaxer {}
+
+impl SimpleTax for SimpleTaxer {
+    fn calculate_tax(&amp;self, amount: f32, rate: f32) -&gt; f32 {
+        amount * rate
+    }
+}
+impl CompoundTax for SimpleTaxer {
+    fn compound_tax(&amp;self, amount: f32, base_rate: f32, compound_rate: f32) -&gt; f32 {
+        let base_tax = &amp;self.calculate_tax(amount, base_rate);
+        base_tax + amount * compound_rate
     }
 }
 
-fn GetBigger() -&gt; Box&lt;dyn Trait&gt; {
-
-}
 </code></pre></pre>
+<h3><a class="header" href="#dyn-keword" id="dyn-keword">dyn Keword</a></h3>
+<ul>
+<li>As a side note, if the content here, the API doc, and 'The Book' still leave you unclear on a topic,
+try <a href="https://doc.rust-lang.org/stable/reference/">The Reference</a> Some of the explanations are excellent.  Remarkably
+similar to some of the content here.  ;)</li>
+</ul>
+<p>Trait objects are dynamically sized and are behind a reference of some type.</p>
+<p>Traits used as return types need to be marked with <code>dyn</code></p>
 <h3><a class="header" href="#exercise" id="exercise">Exercise</a></h3>
 <p>In the below code, using a trait, create a converter between Kilos, Pounds, and Stone</p>
 <pre><pre class="playpen"><code class="language-rust">enum Uom_Weight { Kilos, Pounds, Stone }  //UOM -&gt; Unit of Measure
@@ -283,21 +319,6 @@ fn main() {
 
         </div>
 
-        
-        <!-- Livereload script (if served using the cli tool) -->
-        <script type="text/javascript">
-            var socket = new WebSocket("ws://localhost:3001");
-            socket.onmessage = function (event) {
-                if (event.data === "reload") {
-                    socket.close();
-                    location.reload(true); // force reload from server (not from cache)
-                }
-            };
-
-            window.onbeforeunload = function() {
-                socket.close();
-            }
-        </script>
         
 
         

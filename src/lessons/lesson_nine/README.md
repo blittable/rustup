@@ -1,9 +1,13 @@
 # Lesson Nine: Lifetime Annotations 
 
 ## Objectives 
-- Understand and use lifetime annotations
+- Understand the basics of Lifetime Annotations
 
 ## The problem
+
+Java, .NET, Go and others use garbage collection to manage the 'generations' of object references and release them.  
+
+Rust does not use a garbage collection process. Consequently, memory utilization is extremely efficient.  One of the trade-off's, however, is that we sometimes need to explictly provide instructions regarding how long objects are intended to live.   
 
 Look at the code below.  We pass our &str's to a function, that does an evaluation, and then returns one of the str's
 After the function returns, the parameter &str's, go out of scope.  
@@ -47,11 +51,17 @@ fn longest(x: &'a str, y: &'a str) -> &'a str ...
 
 So, 'they' dropped the cases where it was obvious and gave the heruistics a French name, 'lifetime elision rules' so no one would ask anymore questions. 
 
-## Homework 
+## Exercise 
 
-Create a binary tree datastructure.  Each node may have a parent, a node to the left, and a node to the right.  Add one function/method that allows insertion of a node.
+Create a binary tree datastructure.  
+
+Each node may have a parent, a node to the left, and a node to the right.  
+
+Add one function/method that allows insertion of a node.
+
+You will almost certainly need to use lifetime annotations and possibly Box<T>.  If you cannot complete the exercise, have no fear and keep moving forward.
 
 #### Related Fun:
-- For blockchain fans: [merkle-tree:] https://github.com/SpinResearch/merkle.rs/blob/a41e7d15244f422b0c226c1be5a3b8f6a6da7669/src/merkletree.rs#L11
+
 - A pretty node-free Graph implementation
 [Contest Algorithms, Graph:](https://github.com/EbTech/rust-algorithms/blob/master/src/graph/mod.rs)

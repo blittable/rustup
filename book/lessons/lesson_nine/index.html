@@ -148,9 +148,11 @@
                         <h1><a class="header" href="#lesson-nine-lifetime-annotations" id="lesson-nine-lifetime-annotations">Lesson Nine: Lifetime Annotations</a></h1>
 <h2><a class="header" href="#objectives" id="objectives">Objectives</a></h2>
 <ul>
-<li>Understand and use lifetime annotations</li>
+<li>Understand the basics of Lifetime Annotations</li>
 </ul>
 <h2><a class="header" href="#the-problem" id="the-problem">The problem</a></h2>
+<p>Java, .NET, Go and others use garbage collection to manage the 'generations' of object references and release them.</p>
+<p>Rust does not use a garbage collection process. Consequently, memory utilization is extremely efficient.  One of the trade-off's, however, is that we sometimes need to explictly provide instructions regarding how long objects are intended to live.</p>
 <p>Look at the code below.  We pass our &amp;str's to a function, that does an evaluation, and then returns one of the str's
 After the function returns, the parameter &amp;str's, go out of scope.</p>
 <p>The borrow-checker efficiently wants to drop the references at the end of the scoped block, <em>but</em> the returned value is referencing one of them.</p>
@@ -186,11 +188,13 @@ fn longest&lt;'a&gt;(x: &amp;'a str, y: &amp;'a str) -&gt; &amp;'a str {  // &lt
 <pre><code>fn longest(x: &amp;'a str, y: &amp;'a str) -&gt; &amp;'a str ... 
 </code></pre>
 <p>So, 'they' dropped the cases where it was obvious and gave the heruistics a French name, 'lifetime elision rules' so no one would ask anymore questions. </p>
-<h2><a class="header" href="#homework" id="homework">Homework</a></h2>
-<p>Create a binary tree datastructure.  Each node may have a parent, a node to the left, and a node to the right.  Add one function/method that allows insertion of a node.</p>
+<h2><a class="header" href="#exercise" id="exercise">Exercise</a></h2>
+<p>Create a binary tree datastructure.</p>
+<p>Each node may have a parent, a node to the left, and a node to the right.</p>
+<p>Add one function/method that allows insertion of a node.</p>
+<p>You will almost certainly need to use lifetime annotations and possibly Box<T>.  If you cannot complete the exercise, have no fear and keep moving forward.</p>
 <h4><a class="header" href="#related-fun" id="related-fun">Related Fun:</a></h4>
 <ul>
-<li>For blockchain fans: [merkle-tree:] https://github.com/SpinResearch/merkle.rs/blob/a41e7d15244f422b0c226c1be5a3b8f6a6da7669/src/merkletree.rs#L11</li>
 <li>A pretty node-free Graph implementation
 <a href="https://github.com/EbTech/rust-algorithms/blob/master/src/graph/mod.rs">Contest Algorithms, Graph:</a></li>
 </ul>
@@ -232,21 +236,6 @@ fn longest&lt;'a&gt;(x: &amp;'a str, y: &amp;'a str) -&gt; &amp;'a str {  // &lt
 
         </div>
 
-        
-        <!-- Livereload script (if served using the cli tool) -->
-        <script type="text/javascript">
-            var socket = new WebSocket("ws://localhost:3001");
-            socket.onmessage = function (event) {
-                if (event.data === "reload") {
-                    socket.close();
-                    location.reload(true); // force reload from server (not from cache)
-                }
-            };
-
-            window.onbeforeunload = function() {
-                socket.close();
-            }
-        </script>
         
 
         

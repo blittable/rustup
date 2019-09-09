@@ -18,7 +18,7 @@
 | Lesson Thirteen | Patterns of Constructors                            |
 | Lesson Fourteen | Patterns of Iterators                               |                                 
 | Lesson Fifteen  | Rc<T>, RcCell<T>, Box<T> (again)                    |                                 
-| Lesson Sixteen  | Trait Bounds and returning Traits                   |                                 
+| Lesson Sixteen  | and returning Traits                   |                                 
 | Lesson Seventeen| Functions vs. methods and impl on structs           |                                 
 | Lesson Eighteen | Slices in Retrospect                                |                                 
 | Lesson Nineteen | Housekeeping: pinning runtime and rnd crate         |                                 

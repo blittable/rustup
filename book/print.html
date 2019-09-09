@@ -221,7 +221,7 @@ of the type heirarchy, such as any .NET language or Java.</p>
 <tr><td>Lesson Thirteen</td><td>Patterns of Constructors</td></tr>
 <tr><td>Lesson Fourteen</td><td>Patterns of Iterators</td></tr>
 <tr><td>Lesson Fifteen</td><td>Rc<T>, RcCell<T>, Box<T> (again)</td></tr>
-<tr><td>Lesson Sixteen</td><td>Trait Bounds and returning Traits</td></tr>
+<tr><td>Lesson Sixteen</td><td>and returning Traits</td></tr>
 <tr><td>Lesson Seventeen</td><td>Functions vs. methods and impl on structs</td></tr>
 <tr><td>Lesson Eighteen</td><td>Slices in Retrospect</td></tr>
 <tr><td>Lesson Nineteen</td><td>Housekeeping: pinning runtime and rnd crate</td></tr>
@@ -882,9 +882,11 @@ But, make sure you use at least <em>two closures</em> in your solution.</p>
 <h1><a class="header" href="#lesson-nine-lifetime-annotations" id="lesson-nine-lifetime-annotations">Lesson Nine: Lifetime Annotations</a></h1>
 <h2><a class="header" href="#objectives-9" id="objectives-9">Objectives</a></h2>
 <ul>
-<li>Understand and use lifetime annotations</li>
+<li>Understand the basics of Lifetime Annotations</li>
 </ul>
 <h2><a class="header" href="#the-problem" id="the-problem">The problem</a></h2>
+<p>Java, .NET, Go and others use garbage collection to manage the 'generations' of object references and release them.</p>
+<p>Rust does not use a garbage collection process. Consequently, memory utilization is extremely efficient.  One of the trade-off's, however, is that we sometimes need to explictly provide instructions regarding how long objects are intended to live.</p>
 <p>Look at the code below.  We pass our &amp;str's to a function, that does an evaluation, and then returns one of the str's
 After the function returns, the parameter &amp;str's, go out of scope.</p>
 <p>The borrow-checker efficiently wants to drop the references at the end of the scoped block, <em>but</em> the returned value is referencing one of them.</p>
@@ -920,11 +922,13 @@ fn longest&lt;'a&gt;(x: &amp;'a str, y: &amp;'a str) -&gt; &amp;'a str {  // &lt
 <pre><code>fn longest(x: &amp;'a str, y: &amp;'a str) -&gt; &amp;'a str ... 
 </code></pre>
 <p>So, 'they' dropped the cases where it was obvious and gave the heruistics a French name, 'lifetime elision rules' so no one would ask anymore questions. </p>
-<h2><a class="header" href="#homework-3" id="homework-3">Homework</a></h2>
-<p>Create a binary tree datastructure.  Each node may have a parent, a node to the left, and a node to the right.  Add one function/method that allows insertion of a node.</p>
+<h2><a class="header" href="#exercise-1" id="exercise-1">Exercise</a></h2>
+<p>Create a binary tree datastructure.</p>
+<p>Each node may have a parent, a node to the left, and a node to the right.</p>
+<p>Add one function/method that allows insertion of a node.</p>
+<p>You will almost certainly need to use lifetime annotations and possibly Box<T>.  If you cannot complete the exercise, have no fear and keep moving forward.</p>
 <h4><a class="header" href="#related-fun" id="related-fun">Related Fun:</a></h4>
 <ul>
-<li>For blockchain fans: [merkle-tree:] https://github.com/SpinResearch/merkle.rs/blob/a41e7d15244f422b0c226c1be5a3b8f6a6da7669/src/merkletree.rs#L11</li>
 <li>A pretty node-free Graph implementation
 <a href="https://github.com/EbTech/rust-algorithms/blob/master/src/graph/mod.rs">Contest Algorithms, Graph:</a></li>
 </ul>
@@ -962,7 +966,7 @@ convention:</p>
 <li>In the /demos/test_lesson_10 you will find a set of functions calls commented out.</li>
 <li>Review the functions and ask yourself, &quot;does this compile?&quot;</li>
 </ul>
-<h3><a class="header" href="#homework-4" id="homework-4">Homework</a></h3>
+<h3><a class="header" href="#homework-3" id="homework-3">Homework</a></h3>
 <p>This is homework is a short one:
 Create a simple function, and write a unit test for that function</p>
 <h1><a class="header" href="#lesson-eleven-boxt-and-optiont-resultt-err-again" id="lesson-eleven-boxt-and-optiont-resultt-err-again">Lesson Eleven: Box<T> and Option<T> Result&lt;T, Err&gt; (Again!)</a></h1>
@@ -971,7 +975,7 @@ Create a simple function, and write a unit test for that function</p>
 <li>Drive home Option and Result Usage </li>
 <li>How to use dyn and boxing </li>
 </ul>
-<h2><a class="header" href="#homework-5" id="homework-5">Homework:</a></h2>
+<h2><a class="header" href="#homework-4" id="homework-4">Homework:</a></h2>
 <p>Catchup day 2.  No new assignment.</p>
 <h1><a class="header" href="#lesson-twelve--trait-bounds" id="lesson-twelve--trait-bounds">Lesson Twelve:  Trait Bounds</a></h1>
 <h2><a class="header" href="#objectives-12" id="objectives-12">Objectives</a></h2>
@@ -1032,31 +1036,67 @@ where T: Summary + Display {
 }
 #}</code></pre></pre>
 <p>Read the above, &quot;the notify function is bound by the behavior of the Summary and Display traits.&quot;</p>
-<h3><a class="header" href="#dyn-keword" id="dyn-keword">dyn Keword</a></h3>
-<p>Traits used as return types need to be marked with <code>dyn</code></p>
-<pre><pre class="playpen"><code class="language-rust">#![allow(unused_variables)]
-fn main() {
-}
-trait Bigger&lt;T&gt;{
-    fn bigger&lt;T&gt;(i: T, j: T) -&gt; T;
+<h3><a class="header" href="#function-overloading--ish" id="function-overloading--ish">Function Overloading -ish</a></h3>
+<p>As an OO programmer, note that no-inhertiance != no-indirection:</p>
+<pre><pre class="playpen"><code class="language-rust">fn main() {
+    let usa = USA {
+        tax_calculator: Box::new(SimpleTaxer {}),
+    };
+
+    let thailand = Thailand {
+        tax_calculator: Box::new(SimpleTaxer {}),
+    };
+
+    println!(
+        &quot;USA tax: {}&quot;,
+        usa.tax_calculator.compound_tax(333.0, 2.3, 3.3)
+    );
+    println!(
+        &quot;Thailand tax: {}&quot;,
+        thailand.tax_calculator.calculate_tax(333.0, 2.3)
+    );
 }
 
-impl Bigger for i32 {
-    fn bigger&lt;T&gt;(i: i32, j: i32) -&gt; i32
-    {
-        if i &gt; j {
-            i
-        }
+trait SimpleTax {
+    fn calculate_tax(&amp;self, amount: f32, rate: f32) -&gt; f32;
+}
 
-        j
+trait CompoundTax: SimpleTax {
+    fn compound_tax(&amp;self, amount: f32, base_rate: f32, rate: f32) -&gt; f32;
+}
+
+struct USA {
+    pub tax_calculator: Box&lt;dyn CompoundTax&gt;,
+}
+
+struct Thailand {
+    pub tax_calculator: Box&lt;dyn SimpleTax&gt;,
+}
+
+struct SimpleTaxer {}
+
+impl SimpleTax for SimpleTaxer {
+    fn calculate_tax(&amp;self, amount: f32, rate: f32) -&gt; f32 {
+        amount * rate
+    }
+}
+impl CompoundTax for SimpleTaxer {
+    fn compound_tax(&amp;self, amount: f32, base_rate: f32, compound_rate: f32) -&gt; f32 {
+        let base_tax = &amp;self.calculate_tax(amount, base_rate);
+        base_tax + amount * compound_rate
     }
 }
 
-fn GetBigger() -&gt; Box&lt;dyn Trait&gt; {
-
-}
 </code></pre></pre>
-<h3><a class="header" href="#exercise-1" id="exercise-1">Exercise</a></h3>
+<h3><a class="header" href="#dyn-keword" id="dyn-keword">dyn Keword</a></h3>
+<ul>
+<li>As a side note, if the content here, the API doc, and 'The Book' still leave you unclear on a topic,
+try <a href="https://doc.rust-lang.org/stable/reference/">The Reference</a> Some of the explanations are excellent.  Remarkably
+similar to some of the content here.  ;)</li>
+</ul>
+<p>Trait objects are dynamically sized and are behind a reference of some type.</p>
+<p>Traits used as return types need to be marked with <code>dyn</code></p>
+<h3><a class="header" href="#exercise-2" id="exercise-2">Exercise</a></h3>
 <p>In the below code, using a trait, create a converter between Kilos, Pounds, and Stone</p>
 <pre><pre class="playpen"><code class="language-rust">enum Uom_Weight { Kilos, Pounds, Stone }  //UOM -&gt; Unit of Measure
 
@@ -1334,21 +1374,6 @@ fn main() {
 
         </div>
 
-        
-        <!-- Livereload script (if served using the cli tool) -->
-        <script type="text/javascript">
-            var socket = new WebSocket("ws://localhost:3001");
-            socket.onmessage = function (event) {
-                if (event.data === "reload") {
-                    socket.close();
-                    location.reload(true); // force reload from server (not from cache)
-                }
-            };
-
-            window.onbeforeunload = function() {
-                socket.close();
-            }
-        </script>
         
 
         
