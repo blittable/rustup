@@ -12,11 +12,11 @@
 | Lesson Seven    | Housekeeping (proj structure, some new types, etc.) |                                 
 | Lesson Eight    | Closures and a Peek at Lifetimes                    |                                 
 | Lesson Nine     | Lifetimes                                           |                                 
-| Lesson Ten      | Unit Testing                       2              |                                 
-| Lesson Eleven   | TBD                                              |                                 
-| Lesson Twelve   | Trait Bounds|
+| Lesson Ten      | Unit Testing                                        |                                 
+| Lesson Eleven   | TBD                                                 |                                 
+| Lesson Twelve   | Trait Bounds                                        |
 | Lesson Thirteen | Patterns of Constructors                            |
-| Lesson Fourteen | Deref Syntax                                        |                                 
+| Lesson Fourteen | Patterns of Iterators                               |                                 
 | Lesson Fifteen  | Rc<T>, RcCell<T>, Box<T> (again)                    |                                 
 | Lesson Sixteen  | Trait Bounds and returning Traits                   |                                 
 | Lesson Seventeen| Functions vs. methods and impl on structs           |                                 

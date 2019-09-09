@@ -1,5 +1,5 @@
 [package]
-name = "generics_not"
+name = "trait_dyn"
 version = "0.1.0"
 authors = ["blittable <blittable-bits@gmail.com>"]
 edition = "2018"

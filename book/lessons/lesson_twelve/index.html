@@ -204,23 +204,41 @@ where T: Summary + Display {
 }
 #}</code></pre></pre>
 <p>Read the above, &quot;the notify function is bound by the behavior of the Summary and Display traits.&quot;</p>
-<h3><a class="header" href="#exercise" id="exercise">Exercise</a></h3>
-<p>In the below code, using a trait, create a converter between Kilos, Pounds, and Stone</p>
-<pre><pre class="playpen"><code class="language-rust">fn main() {
-    println!(&quot;Hello, world!&quot;);
+<h3><a class="header" href="#dyn-keword" id="dyn-keword">dyn Keword</a></h3>
+<p>Traits used as return types need to be marked with <code>dyn</code></p>
+<pre><pre class="playpen"><code class="language-rust">#![allow(unused_variables)]
+fn main() {
+}
+trait Bigger&lt;T&gt;{
+    fn bigger&lt;T&gt;(i: T, j: T) -&gt; T;
 }
 
-enum Uom_Weight { Kilos, Pounds, Stone }  //UOM -&gt; Unit of Measure
+impl Bigger for i32 {
+    fn bigger&lt;T&gt;(i: i32, j: i32) -&gt; i32
+    {
+        if i &gt; j {
+            i
+        }
+
+        j
+    }
+}
+
+fn GetBigger() -&gt; Box&lt;dyn Trait&gt; {
+
+}
+</code></pre></pre>
+<h3><a class="header" href="#exercise" id="exercise">Exercise</a></h3>
+<p>In the below code, using a trait, create a converter between Kilos, Pounds, and Stone</p>
+<pre><pre class="playpen"><code class="language-rust">enum Uom_Weight { Kilos, Pounds, Stone }  //UOM -&gt; Unit of Measure
 
 // 2.20462 =&gt; Kilos to Pounds
 // 0.157473 =&gt; Kilos to Stone
 
-struct InventoryItem {}
+struct InventoryItem {} //...more code
 
 fn main() {
-
     //1: create an inventory item
-    //2: call .convert() function (with types and or other parameters)
     //3: output the converted value 
     // Use a trait
 }

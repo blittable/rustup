@@ -65,6 +65,35 @@ where T: Summary + Display {
 Read the above, "the notify function is bound by the behavior of the Summary and Display traits."
 
 
+### dyn Keword
+
+Traits used as return types need to be marked with ```dyn```
+
+```rust
+#![allow(unused_variables)]
+fn main() {
+}
+trait Bigger<T>{
+    fn bigger<T>(i: T, j: T) -> T;
+}
+
+impl Bigger for i32 {
+    fn bigger<T>(i: i32, j: i32) -> i32
+    {
+        if i > j {
+            i
+        }
+
+        j
+    }
+}
+
+fn GetBigger() -> Box<dyn Trait> {
+
+}
+```
+
+
 ### Exercise
 
 In the below code, using a trait, create a converter between Kilos, Pounds, and Stone
