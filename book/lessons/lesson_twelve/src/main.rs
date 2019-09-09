@@ -1,24 +1,19 @@
 fn main() {
     println!("Hello, world!");
-
-    //let 
 }
 
-enum Uom_Weight { Kilos, Pounds, Stones }  //UOM -> Unit of Measure
+enum Uom_Weight { Kilos, Pounds, Stone }  //UOM -> Unit of Measure
 
-trait ConvertableWeight {
-    fn convert<T>(from: T, to: T) -> f32;
-} 
+// 2.20462 => Kilos to Pounds
+// 0.157473 => Kilos to Stone
 
-struct InventoryItem<T>
-where T: ConvertableWeight {}
+struct InventoryItem {}
 
-impl<T> InventoryItem<T> {
-    fn convert<T>(from: T, to: T) -> f32 {
-        Uom::Kilos * Uom::Pounds
-    } 
+fn main() {
+
+    //1: create an inventory item
+    //2: call .convert() function (with types and or other parameters)
+    //3: output the converted value 
+    // Use a trait
 }
 
-fn amazing_code<T> (passport: T) {
-
-} 

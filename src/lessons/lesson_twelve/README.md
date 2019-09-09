@@ -8,23 +8,6 @@
 As an OO programmer, you already know generics (hopefully!).  It's quite similar in Rust. 
 
 
-```c#
-  class Program
-    {
-        static void Main(string[] args)
-        {
-            //Covariant 
-            IEnumerable<Base> d = new List<Derive>();
-        }
-    }
-
-    interface Base { };
-    class Derive : Base {
-        public Derive(){}
-    }
-```
-
-
 But, what about 'traits'?
 
 You can pass a trait `impl` as a parameter:
@@ -80,4 +63,12 @@ where T: Summary + Display {
 ```
 
 Read the above, "the notify function is bound by the behavior of the Summary and Display traits."
+
+
+### Exercise
+
+In the below code, using a trait, create a converter between Kilos, Pounds, and Stone
+
+{{#playpen src/main.rs}}
+
 

@@ -152,20 +152,6 @@
 </ul>
 <h3><a class="header" href="#trait-bounds" id="trait-bounds">Trait Bounds</a></h3>
 <p>As an OO programmer, you already know generics (hopefully!).  It's quite similar in Rust. </p>
-<pre><code class="language-c#">  class Program
-    {
-        static void Main(string[] args)
-        {
-            //Covariant 
-            IEnumerable&lt;Base&gt; d = new List&lt;Derive&gt;();
-        }
-    }
-
-    interface Base { };
-    class Derive : Base {
-        public Derive(){}
-    }
-</code></pre>
 <p>But, what about 'traits'?</p>
 <p>You can pass a trait <code>impl</code> as a parameter:</p>
 <pre><pre class="playpen"><code class="language-rust no_run">
@@ -218,6 +204,29 @@ where T: Summary + Display {
 }
 #}</code></pre></pre>
 <p>Read the above, &quot;the notify function is bound by the behavior of the Summary and Display traits.&quot;</p>
+<h3><a class="header" href="#exercise" id="exercise">Exercise</a></h3>
+<p>In the below code, using a trait, create a converter between Kilos, Pounds, and Stone</p>
+<pre><pre class="playpen"><code class="language-rust">fn main() {
+    println!(&quot;Hello, world!&quot;);
+}
+
+enum Uom_Weight { Kilos, Pounds, Stone }  //UOM -&gt; Unit of Measure
+
+// 2.20462 =&gt; Kilos to Pounds
+// 0.157473 =&gt; Kilos to Stone
+
+struct InventoryItem {}
+
+fn main() {
+
+    //1: create an inventory item
+    //2: call .convert() function (with types and or other parameters)
+    //3: output the converted value 
+    // Use a trait
+}
+
+
+</code></pre></pre>
 
                     </main>
 
