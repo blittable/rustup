@@ -27,7 +27,7 @@ pub fn notify<T>(item: T) {
 }
 ```
 
-In the code below, the Rust toolchain has *no* information on the types' functions, etc. and will not compile. It needs more information. 
+In the code above, the Rust toolchain has *no* information on the types' functions, etc. and will not compile. It needs more information. 
 
 
 To solve the issue in the context of generics, Rust uses `trait bounds` 
@@ -64,10 +64,13 @@ where T: Summary + Display {
 
 Read the above, "the notify function is bound by the behavior of the Summary and Display traits."
 
+### Key Points on Traits
+* Trait objects are dynamically sized and are behind a reference of some type.  
+* Consequently, and unlike generics and plain functions/methods, they are dynamically dispatched at runtime. 
 
-### Function Overloading -ish
+### Function Overloading-ish
 
-As an OO programmer, note that no-inhertiance != no-indirection:
+As an OO programmer, note that no-inhertiance != no-indirection.  The ```SimpleTaxer``` resolves the appropriate calculation method.
 
 ```rust
 fn main() {
@@ -118,23 +121,16 @@ impl CompoundTax for SimpleTaxer {
         base_tax + amount * compound_rate
     }
 }
-
 ```
-
-### dyn Keword
 
 * As a side note, if the content here, the API doc, and 'The Book' still leave you unclear on a topic,
 try [The Reference](https://doc.rust-lang.org/stable/reference/) Some of the explanations are excellent.  Remarkably
 similar to some of the content here.  ;)
 
-Trait objects are dynamically sized and are behind a reference of some type.  
-
-Traits used as return types need to be marked with ```dyn```
-
 
 ### Exercise
 
-In the below code, using a trait, create a converter between Kilos, Pounds, and Stone
+In the below below, using a trait, create a converter between Kilos, Pounds, and Stone
 
 {{#playpen src/main.rs}}
 
