@@ -78,6 +78,15 @@ fn main() {
 }
 ```
 
+### Builder Pattern
+
+
+https://docs.rs/derive_builder/0.7.2/derive_builder/
+
+```rust,no_run
+ let person = PersonBuilder::default().name("krishnab").build();
+ ```
+
 ### Tuple Struct
 
 ```rust,no_run
