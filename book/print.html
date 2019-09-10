@@ -1001,7 +1001,7 @@ pub fn notify&lt;T&gt;(item: T) {
     println!(&quot;Breaking news! {}&quot;, item.summarize()); //&lt;- what's a summarize?
 }
 #}</code></pre></pre>
-<p>In the code below, the Rust toolchain has <em>no</em> information on the types' functions, etc. and will not compile. It needs more information. </p>
+<p>In the code above, the Rust toolchain has <em>no</em> information on the types' functions, etc. and will not compile. It needs more information. </p>
 <p>To solve the issue in the context of generics, Rust uses <code>trait bounds</code> </p>
 <pre><pre class="playpen"><code class="language-rust no_run">
 # #![allow(unused_variables)]
@@ -1036,8 +1036,13 @@ where T: Summary + Display {
 }
 #}</code></pre></pre>
 <p>Read the above, &quot;the notify function is bound by the behavior of the Summary and Display traits.&quot;</p>
-<h3><a class="header" href="#function-overloading--ish" id="function-overloading--ish">Function Overloading -ish</a></h3>
-<p>As an OO programmer, note that no-inhertiance != no-indirection:</p>
+<h3><a class="header" href="#key-points-on-traits" id="key-points-on-traits">Key Points on Traits</a></h3>
+<ul>
+<li>Trait objects are dynamically sized and are behind a reference of some type.</li>
+<li>Consequently, and unlike generics and plain functions/methods, they are dynamically dispatched at runtime. </li>
+</ul>
+<h3><a class="header" href="#function-overloading-ish" id="function-overloading-ish">Function Overloading-ish</a></h3>
+<p>As an OO programmer, note that no-inhertiance != no-indirection.  The <code>SimpleTaxer</code> resolves the appropriate calculation method.</p>
 <pre><pre class="playpen"><code class="language-rust">fn main() {
     let usa = USA {
         tax_calculator: Box::new(SimpleTaxer {}),
@@ -1086,18 +1091,14 @@ impl CompoundTax for SimpleTaxer {
         base_tax + amount * compound_rate
     }
 }
-
 </code></pre></pre>
-<h3><a class="header" href="#dyn-keword" id="dyn-keword">dyn Keword</a></h3>
 <ul>
 <li>As a side note, if the content here, the API doc, and 'The Book' still leave you unclear on a topic,
 try <a href="https://doc.rust-lang.org/stable/reference/">The Reference</a> Some of the explanations are excellent.  Remarkably
 similar to some of the content here.  ;)</li>
 </ul>
-<p>Trait objects are dynamically sized and are behind a reference of some type.</p>
-<p>Traits used as return types need to be marked with <code>dyn</code></p>
 <h3><a class="header" href="#exercise-2" id="exercise-2">Exercise</a></h3>
-<p>In the below code, using a trait, create a converter between Kilos, Pounds, and Stone</p>
+<p>In the below below, using a trait, create a converter between Kilos, Pounds, and Stone</p>
 <pre><pre class="playpen"><code class="language-rust">enum Uom_Weight { Kilos, Pounds, Stone }  //UOM -&gt; Unit of Measure
 
 // 2.20462 =&gt; Kilos to Pounds
