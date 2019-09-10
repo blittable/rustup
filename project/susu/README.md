@@ -1,6 +1,6 @@
-## SuSu DB
+## SuSu DB  (Test Project)
 
-#### Keep It Simple and Naive like a child
+#### Keep It Simple and Naive Like a Child
 
 ![DB Logo](https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSpXHfXT9o3HfiKSg8n4tZxvEgLhsI8mbK3R7aVkVpnNKZaUojP)
 
