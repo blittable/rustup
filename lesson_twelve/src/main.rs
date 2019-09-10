@@ -1,32 +1,50 @@
-fn main() {
-    println!("Hello, world!");
+enum Uom_Weight { Kilos, Pounds, Stone }  //UOM -> Unit of Measure
+
+// 2.20462 => Kilos to Pounds
+// 0.157473 => Kilos to Stone
+
+trait ConvertToPounds {
+    fn calculate_kilos_to_pounds(&self, amount: f32, unit: f32) -> f32;
 }
 
-#[allow(unused_imports)]
-mod test {
-    use std::mem;
+trait ConvertToStone {
+    fn calculate_kilos_to_stone(&self, amount: f32, unit: f32) -> f32;
+}
 
-    //MID-TERM!
-    #[test]
-    fn size_test() {
-        let slice = "C";
-        let word = "Cat";
-        let words = "Cats eat dog food at the sea when the weather is good, but should it turn foul, they turn to the finer indoor delicacies.";
+struct InventoryPounds {
+    pub weight_calculator: Box<dyn ConvertToPounds>
+}
 
-        let slice_size_demo = mem::size_of_val(&slice);
-        println!("slice for \"C\" size: {:?}", &slice_size_demo);
+struct InventoryStone {
+    pub weight_calculator: Box<dyn ConvertToStone>
+}
 
-        //mem::size_of_val
-        //signature: pub fn size_of_val<T: ?Sized>(val: &T) -> usize
-        //doc: Returns the size of the pointed-to value in bytes.
-        let slice_size = mem::size_of_val(&slice);
-        let word_size = mem::size_of_val(&word);
-        let sentence_size = mem::size_of_val(&words);
+struct InventoryItem { } 
 
-        //Question One: Does this assert pass?
-        assert!(slice_size == word_size); 
-        //Question Two: Does this assert pass?
-        assert!(word_size == sentence_size);
-
+impl ConvertToPounds for InventoryItem {
+    fn calculate_kilos_to_pounds(&self, amount: f32, unit: f32) -> f32 {
+        amount * unit
     }
+}
+
+impl ConvertToStone for InventoryItem {
+    fn calculate_kilos_to_stone(&self, amount: f32, unit: f32) -> f32 {
+        amount * unit
+    }
+}
+
+fn main() {
+
+    let item_a = InventoryPounds {
+        weight_calculator: Box::new(InventoryItem {})
+    };
+
+    let item_b = InventoryStone {
+        weight_calculator: Box::new(InventoryItem {})
+    };
+
+    println!("item A weight: {} km --> convert to {} pounds", 50.0, item_a.weight_calculator.calculate_kilos_to_pounds(50.0, 2.20462));
+
+    println!("item B weight: {} km --> convert to {} stone", 50.0, item_b.weight_calculator.calculate_kilos_to_stone(50.0, 0.157473));
+
 }
