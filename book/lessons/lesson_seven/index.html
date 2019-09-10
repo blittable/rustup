@@ -1,0 +1,328 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Housekeeping #1 - Rust for OO Programmers</title>
+        
+
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="shortcut icon" href="../../favicon.png">
+        <link rel="stylesheet" href="../../css/variables.css">
+        <link rel="stylesheet" href="../../css/general.css">
+        <link rel="stylesheet" href="../../css/chrome.css">
+        <link rel="stylesheet" href="../../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../../FontAwesome/css/font-awesome.css">
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
+        <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:500" rel="stylesheet" type="text/css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../../highlight.css">
+        <link rel="stylesheet" href="../../tomorrow-night.css">
+        <link rel="stylesheet" href="../../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        
+
+        
+    </head>
+    <body class="light">
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "../../";
+            var default_theme = "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            document.body.className = theme;
+            document.querySelector('html').className = theme + ' js';
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="affix"><a href="../../index.html">Rust for OO Programmers</a></li><li class="affix"><a href="../../OVERVIEW.html">Overview from an OO Perspective</a></li><li class="affix"><a href="../../lessons/LESSONS.html">Lessons</a></li><li><a href="../../lessons/lesson_one/index.html"><strong aria-hidden="true">1.</strong> Setup And A Function</a></li><li><ol class="section"><li><a href="../../lessons/lesson_one/ex_function_parameter_return.html"><strong aria-hidden="true">1.1.</strong> Calling a Function</a></li></ol></li><li><a href="../../lessons/lesson_two/index.html"><strong aria-hidden="true">2.</strong> Standard Lib, Types, Immutability</a></li><li><a href="../../lessons/lesson_three/index.html"><strong aria-hidden="true">3.</strong> Intro to Traits</a></li><li><a href="../../lessons/lesson_four/index.html"><strong aria-hidden="true">4.</strong> Enum Wrappers, Option and Matching</a></li><li><a href="../../lessons/lesson_five/index.html"><strong aria-hidden="true">5.</strong> Error Handling</a></li><li><a href="../../lessons/lesson_six/index.html"><strong aria-hidden="true">6.</strong> Almighty Iterators</a></li><li><a href="../../lessons/lesson_seven/index.html" class="active"><strong aria-hidden="true">7.</strong> Housekeeping #1</a></li><li><a href="../../lessons/lesson_eight/index.html"><strong aria-hidden="true">8.</strong> Closures and Lifetime Preview</a></li><li><a href="../../lessons/lesson_nine/index.html"><strong aria-hidden="true">9.</strong> Lifetime Annotations</a></li><li><a href="../../lessons/lesson_ten/index.html"><strong aria-hidden="true">10.</strong> Unit Testing</a></li><li><a href="../../lessons/lesson_eleven/index.html"><strong aria-hidden="true">11.</strong> TBD</a></li><li><a href="../../lessons/lesson_twelve/index.html"><strong aria-hidden="true">12.</strong> Trait Bounds</a></li><li><a href="../../lessons/lesson_thirteen/index.html"><strong aria-hidden="true">13.</strong> Constructor Patterns</a></li><li><a href="../../lessons/lesson_fourteen/index.html"><strong aria-hidden="true">14.</strong> Iterator Patterns</a></li><li><a href="../../lessons/lesson_fifteen/index.html"><strong aria-hidden="true">15.</strong> Box, Rc, RefCell</a></li><li><a href="../../lessons/lesson_sixteen/index.html"><strong aria-hidden="true">16.</strong> Generics and Associated Types</a></li><li><a href="../../lessons/lesson_seventeen/index.html"><strong aria-hidden="true">17.</strong> Bit Fiddling</a></li><li class="affix"><a href="../../misc/contributors.html">Contributors</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                
+                <div id="menu-bar" class="menu-bar">
+                    <div id="menu-bar-sticky-container">
+                        <div class="left-buttons">
+                            <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                                <i class="fa fa-bars"></i>
+                            </button>
+                            <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                                <i class="fa fa-paint-brush"></i>
+                            </button>
+                            <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                                <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                            </ul>
+                            
+                            <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                                <i class="fa fa-search"></i>
+                            </button>
+                            
+                        </div>
+
+                        <h1 class="menu-title">Rust for OO Programmers</h1>
+
+                        <div class="right-buttons">
+                            <a href="../../print.html" title="Print this book" aria-label="Print this book">
+                                <i id="print-button" class="fa fa-print"></i>
+                            </a>
+                            
+                        </div>
+                    </div>
+                </div>
+
+                
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" name="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1><a class="header" href="#lesson-seven-housekeeping" id="lesson-seven-housekeeping">Lesson Seven: HouseKeeping</a></h1>
+<h2><a class="header" href="#objectives" id="objectives">Objectives</a></h2>
+<p>We've covered quite a few of the fundamentals. Housekeeping lessons are quick visit on a series of topics.</p>
+<h2><a class="header" href="#importuse-syntax" id="importuse-syntax">Import/Use syntax</a></h2>
+<p>Rust 2018 (a major release from, surprise, 2018), does not require 'extern crate' in most cases. If the dependency is 
+listed in the Cargo.toml, only 'use crate_name' is needed.  Older sample code may indicate otherwise.</p>
+<pre><pre class="playpen"><code class="language-rust">
+# #![allow(unused_variables)]
+#fn main() {
+ extern crate colored; // not needed in Rust 2018
+    
+use colored::*;
+#}</code></pre></pre>
+<h2><a class="header" href="#syntax-variations-for-crates-and-modules" id="syntax-variations-for-crates-and-modules">Syntax variations for crates and modules</a></h2>
+<p>For  somecrate::somemodule::somesubmodule::somefunction</p>
+<pre><pre class="playpen"><code class="language-rust">
+# #![allow(unused_variables)]
+#fn main() {
+use somecrate::*;
+#}</code></pre></pre>
+<p>Syntax will be:</p>
+<pre><pre class="playpen"><code class="language-rust">
+# #![allow(unused_variables)]
+#fn main() {
+somemodule::somesubmodule::somefunction()
+#}</code></pre></pre>
+<p>The invocation starts where the the use ends.</p>
+<p>We can also: </p>
+<pre><pre class="playpen"><code class="language-rust">
+# #![allow(unused_variables)]
+#fn main() {
+use somecrate::{SomeStruct, somefunction};
+#}</code></pre></pre>
+<p>Or:</p>
+<pre><pre class="playpen"><code class="language-rust">
+# #![allow(unused_variables)]
+#fn main() {
+use somecrate::{SomeStruct, somefunction};
+#}</code></pre></pre>
+<p>Or:</p>
+<pre><pre class="playpen"><code class="language-rust">
+# #![allow(unused_variables)]
+#fn main() {
+use somecrate::somesubmodule::{SomeStruct, somefunction};
+#}</code></pre></pre>
+<h2><a class="header" href="#project-structure" id="project-structure">Project Structure</a></h2>
+<p>There is a 'top level' to any library or binary (executable)
+and it is named in the cargo.toml</p>
+<p>The 'top level' is also responsible for exporting public members (using the <code>pub</code> keyword)</p>
+<p>Typical Project Structure:</p>
+<pre><code>  main.rs    or   lib.rs               
+              |      
+</code></pre>
+<p>subdirectory_01  subdirectory_02<br />
+|              |<br />
+mod.rs         mod.rs</p>
+<ul>
+<li>You can use <code>mod</code> to create modules anywhere</li>
+<li>The <em>parent</em> controls the visibility of the children who are public by 'reexposing' them, e.g.:
+<code>pub mychildmod</code></li>
+</ul>
+<h3><a class="header" href="#importing-macros" id="importing-macros">Importing Macros</a></h3>
+<p>This needs to happen at the top level of the crate</p>
+<pre><code>#[macro_use]
+extern crate criterion;
+</code></pre>
+<h3><a class="header" href="#tuples-multiple-types---one-data-structure" id="tuples-multiple-types---one-data-structure">Tuples: Multiple Types - One Data Structure</a></h3>
+<pre><pre class="playpen"><code class="language-rust">
+# #![allow(unused_variables)]
+#fn main() {
+let (a, b, c, d) = (&quot;I'm&quot;.to_string(), &quot;a&quot;.to_string(), &quot;tuple&quot;.to_string(), 32);
+#}</code></pre></pre>
+<h3><a class="header" href="#vectors---a-common-rust-datastructure" id="vectors---a-common-rust-datastructure">Vectors - A Common Rust Datastructure</a></h3>
+<p>For vectors, we get some 'standard' operations: push, pop, index (e.g. our_vector[0])</p>
+<pre><pre class="playpen"><code class="language-rust">
+# #![allow(unused_variables)]
+#fn main() {
+let mut collected_iterator: Vec&lt;i32&gt; = (0..10).collect();
+println!(&quot;Collected (0..10) into: {:?}&quot;, collected_iterator);
+
+// The `vec!` macro can be used to initialize a vector
+let mut xs = vec![1i32, 2, 3];
+println!(&quot;Initial vector: {:?}&quot;, xs);
+
+// Thanks to `iter_mut`, mutable `Vector`s can also be iterated
+// over in a way that allows modifying each value, note the dereference operator
+for x in xs.iter_mut() {
+    *x *= 3;
+    println!(&quot;Updated vector: {:?}&quot;, xs);
+}
+#}</code></pre></pre>
+<h3><a class="header" href="#cargotoml" id="cargotoml">Cargo.toml</a></h3>
+<p>The <a href="https://doc.rust-lang.org/cargo/reference/manifest.html">Cargo.toml manifest</a> is extremely powerful and flexible.</p>
+<p>At a high-level, you can:</p>
+<ul>
+<li>Split 'features' within your crate to make optional dependencies</li>
+<li>Split the workspace for multiple crates joined in a single toml.lock</li>
+<li>Override dependencies</li>
+<li>Use files or git repositories as the source of dependencies</li>
+<li>Support multiple libraries or binaries</li>
+</ul>
+<p>one example:</p>
+<pre><pre class="playpen"><code class="language-rust">
+# #![allow(unused_variables)]
+#fn main() {
+[dependencies]
+rand = { git = &quot;https://github.com/rust-lang-nursery/rand.git&quot; }
+#}</code></pre></pre>
+<p>Homework:</p>
+<ol>
+<li>Create a project that has multiple directories (more than 2!) with separate modules.</li>
+<li>Use a Vec in the project</li>
+<li>Use a tuple in the project</li>
+</ol>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                        
+                            <a rel="prev" href="../../lessons/lesson_six/index.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                        
+
+                        
+                            <a rel="next" href="../../lessons/lesson_eight/index.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                
+                    <a href="../../lessons/lesson_six/index.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                
+
+                
+                    <a href="../../lessons/lesson_eight/index.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+                
+            </nav>
+
+        </div>
+
+        
+
+        
+
+        
+        <script src="../../ace.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../../editor.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../../mode-rust.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../../theme-dawn.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../../theme-tomorrow_night.js" type="text/javascript" charset="utf-8"></script>
+        
+
+        
+        <script src="../../elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../../mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../../searcher.js" type="text/javascript" charset="utf-8"></script>
+        
+
+        <script src="../../clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../../highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../../book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        
+
+        
+
+    </body>
+</html>

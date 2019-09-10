@@ -5,3 +5,16 @@
 
 let x: str = "foo";
 let y: mut str = "foo";
+
+
+Nice Things:
+
+- Package management
+
+WT:
+
+trait Add<RHS=Self> {
+    type Output;
+
+    fn add(self, rhs: RHS) -> Self::Output;
+}
