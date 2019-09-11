@@ -32,7 +32,6 @@ impl ConvertWeight for ItemWeight {
     }
 }
 
-
 #[derive(Debug, Copy, Clone)]
 pub struct ItemWeight {
     weight: f64,

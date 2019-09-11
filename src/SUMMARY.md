@@ -18,8 +18,9 @@
 - [Trait Bounds](./lessons/lesson_twelve/README.md))
 - [Constructor Patterns](./lessons/lesson_thirteen/README.md))
 - [Iterator Patterns](./lessons/lesson_fourteen/README.md))
-- [Box<T>, Rc<T>, RefCell<T>](./lessons/lesson_fifteen/README.md))
-- [Generics and Associated Types](./lessons/lesson_sixteen/README.md))
+- [Copy/Clone Traits](./lessons/lesson_fifteen/README.md))
+- [Box<T>, Rc<T>, RefCell<T>](./lessons/lesson_sixteen/README.md))
+- [Generics and Associated Types](./lessons/lesson_seventeen/README.md))
 - [Bit Fiddling](./lessons/lesson_seventeen/README.md))
 
 

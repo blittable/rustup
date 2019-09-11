@@ -1,3 +1,5 @@
+#[allow(dead_code)]
+
 ///
 /// We have a hypothetical neighborhood that looks like this:
 ///
@@ -33,6 +35,7 @@ fn main() {
     let house_e = House::new().setup_house(3, 2);
     let house_d = House::new().setup_house(3, 2);
 
+    //Create the streets
     let mut street_0 = Street { houses: Vec::new() };
     let mut street_1 = Street { houses: Vec::new() };
 
@@ -41,7 +44,7 @@ fn main() {
 
     //house_d is on both streets
     street_1.houses.push(house_d);
-    //street_1.houses.push(house_d);
+    street_0.houses.push(house_d);
 }
 
 struct Room {
