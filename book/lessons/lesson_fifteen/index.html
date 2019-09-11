@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Box, Rc, RefCell - Rust for OO Programmers</title>
+        <title>Copy/Clone Traits - Rust for OO Programmers</title>
         
 
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
@@ -78,7 +78,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="affix"><a href="../../index.html">Rust for OO Programmers</a></li><li class="affix"><a href="../../OVERVIEW.html">Overview from an OO Perspective</a></li><li class="affix"><a href="../../lessons/LESSONS.html">Lessons</a></li><li><a href="../../lessons/lesson_one/index.html"><strong aria-hidden="true">1.</strong> Setup And A Function</a></li><li><ol class="section"><li><a href="../../lessons/lesson_one/ex_function_parameter_return.html"><strong aria-hidden="true">1.1.</strong> Calling a Function</a></li></ol></li><li><a href="../../lessons/lesson_two/index.html"><strong aria-hidden="true">2.</strong> Standard Lib, Types, Immutability</a></li><li><a href="../../lessons/lesson_three/index.html"><strong aria-hidden="true">3.</strong> Intro to Traits</a></li><li><a href="../../lessons/lesson_four/index.html"><strong aria-hidden="true">4.</strong> Enum Wrappers, Option and Matching</a></li><li><a href="../../lessons/lesson_five/index.html"><strong aria-hidden="true">5.</strong> Error Handling</a></li><li><a href="../../lessons/lesson_six/index.html"><strong aria-hidden="true">6.</strong> Almighty Iterators</a></li><li><a href="../../lessons/lesson_seven/index.html"><strong aria-hidden="true">7.</strong> Housekeeping #1</a></li><li><a href="../../lessons/lesson_eight/index.html"><strong aria-hidden="true">8.</strong> Closures and Lifetime Preview</a></li><li><a href="../../lessons/lesson_nine/index.html"><strong aria-hidden="true">9.</strong> Lifetime Annotations</a></li><li><a href="../../lessons/lesson_ten/index.html"><strong aria-hidden="true">10.</strong> Unit Testing</a></li><li><a href="../../lessons/lesson_eleven/index.html"><strong aria-hidden="true">11.</strong> TBD</a></li><li><a href="../../lessons/lesson_twelve/index.html"><strong aria-hidden="true">12.</strong> Trait Bounds</a></li><li><a href="../../lessons/lesson_thirteen/index.html"><strong aria-hidden="true">13.</strong> Constructor Patterns</a></li><li><a href="../../lessons/lesson_fourteen/index.html"><strong aria-hidden="true">14.</strong> Iterator Patterns</a></li><li><a href="../../lessons/lesson_fifteen/index.html" class="active"><strong aria-hidden="true">15.</strong> Box, Rc, RefCell</a></li><li><a href="../../lessons/lesson_sixteen/index.html"><strong aria-hidden="true">16.</strong> Generics and Associated Types</a></li><li><a href="../../lessons/lesson_seventeen/index.html"><strong aria-hidden="true">17.</strong> Bit Fiddling</a></li><li class="affix"><a href="../../misc/contributors.html">Contributors</a></li></ol>
+                <ol class="chapter"><li class="affix"><a href="../../index.html">Rust for OO Programmers</a></li><li class="affix"><a href="../../OVERVIEW.html">Overview from an OO Perspective</a></li><li class="affix"><a href="../../lessons/LESSONS.html">Lessons</a></li><li><a href="../../lessons/lesson_one/index.html"><strong aria-hidden="true">1.</strong> Setup And A Function</a></li><li><ol class="section"><li><a href="../../lessons/lesson_one/ex_function_parameter_return.html"><strong aria-hidden="true">1.1.</strong> Calling a Function</a></li></ol></li><li><a href="../../lessons/lesson_two/index.html"><strong aria-hidden="true">2.</strong> Standard Lib, Types, Immutability</a></li><li><a href="../../lessons/lesson_three/index.html"><strong aria-hidden="true">3.</strong> Intro to Traits</a></li><li><a href="../../lessons/lesson_four/index.html"><strong aria-hidden="true">4.</strong> Enum Wrappers, Option and Matching</a></li><li><a href="../../lessons/lesson_five/index.html"><strong aria-hidden="true">5.</strong> Error Handling</a></li><li><a href="../../lessons/lesson_six/index.html"><strong aria-hidden="true">6.</strong> Almighty Iterators</a></li><li><a href="../../lessons/lesson_seven/index.html"><strong aria-hidden="true">7.</strong> Housekeeping #1</a></li><li><a href="../../lessons/lesson_eight/index.html"><strong aria-hidden="true">8.</strong> Closures and Lifetime Preview</a></li><li><a href="../../lessons/lesson_nine/index.html"><strong aria-hidden="true">9.</strong> Lifetime Annotations</a></li><li><a href="../../lessons/lesson_ten/index.html"><strong aria-hidden="true">10.</strong> Unit Testing</a></li><li><a href="../../lessons/lesson_eleven/index.html"><strong aria-hidden="true">11.</strong> TBD</a></li><li><a href="../../lessons/lesson_twelve/index.html"><strong aria-hidden="true">12.</strong> Trait Bounds</a></li><li><a href="../../lessons/lesson_thirteen/index.html"><strong aria-hidden="true">13.</strong> Constructor Patterns</a></li><li><a href="../../lessons/lesson_fourteen/index.html"><strong aria-hidden="true">14.</strong> Iterator Patterns</a></li><li><a href="../../lessons/lesson_fifteen/index.html" class="active"><strong aria-hidden="true">15.</strong> Copy/Clone Traits</a></li><li><a href="../../lessons/lesson_sixteen/index.html"><strong aria-hidden="true">16.</strong> Box, Rc, RefCell</a></li><li><a href="../../lessons/lesson_seventeen/index.html"><strong aria-hidden="true">17.</strong> Generics and Associated Types</a></li><li><a href="../../lessons/lesson_seventeen/index.html"><strong aria-hidden="true">18.</strong> Bit Fiddling</a></li><li class="affix"><a href="../../misc/contributors.html">Contributors</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -145,12 +145,129 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1><a class="header" href="#lesson-fifteen-boxt-rct-refcellt" id="lesson-fifteen-boxt-rct-refcellt">Lesson Fifteen: Box<T>, Rc<T>, RefCell<T></a></h1>
+                        <h1><a class="header" href="#lesson-fifteen-copy-and-clone-traits-problem-preview" id="lesson-fifteen-copy-and-clone-traits-problem-preview">Lesson Fifteen: Copy and Clone Traits, Problem Preview</a></h1>
 <h2><a class="header" href="#objectives" id="objectives">Objectives</a></h2>
 <ul>
-<li>Understand the single-threaded options for reference types </li>
+<li>Understand The Copy and Clone Traits </li>
 </ul>
-<p>WIP</p>
+<h3><a class="header" href="#lesson-12-assignment-reviewdiscussion" id="lesson-12-assignment-reviewdiscussion">Lesson 12 Assignment Review/Discussion</a></h3>
+<p><a href="https://play.rust-lang.org/?version=stable&amp;mode=debug&amp;edition=2018&amp;gist=183d5e20941f9d96071260c036c12e10">One Solution</a></p>
+<h3><a class="header" href="#two-special-traits-copy-clone" id="two-special-traits-copy-clone">Two Special Traits: Copy, Clone</a></h3>
+<p>The <code>Copy</code> trait uses mem::copy underneath and is implicit (you can use = operator),  <code>Clone</code> is explicit (.clone()) </p>
+<pre><pre class="playpen"><code class="language-rust">
+# #![allow(unused_variables)]
+#fn main() {
+#[derive(Copy, Clone)]
+struct Motocy;
+#}</code></pre></pre>
+<pre><pre class="playpen"><code class="language-rust">
+# #![allow(unused_variables)]
+#fn main() {
+struct Motorcy;
+
+impl Copy for Motorcy { }
+
+impl Clone for Motorcy {
+    fn clone(&amp;self) -&gt; Motorcy {
+        *self
+    }
+}
+#}</code></pre></pre>
+<p><a href="https://play.rust-lang.org/?version=stable&amp;mode=debug&amp;edition=2018&amp;gist=291d8a0f3d018fd84909a45475b1af57">Copy/Clone Playground</a></p>
+<h3><a class="header" href="#problem-preview-box-ref-refcell" id="problem-preview-box-ref-refcell">Problem Preview (Box, Ref, RefCell)</a></h3>
+<p>The exercise/assigment is to review the problem presented in this code.</p>
+<pre><pre class="playpen"><code class="language-rust">#[allow(dead_code)]
+
+///
+/// We have a hypothetical neighborhood that looks like this:
+///
+///                   HOUSE_A   HOUSE_B    HOUSE_C     HOUS
+///                   ---------------------------------   E
+///                            SOI 13                  |  _
+///                   ---------------------------|     |  D
+///                                              |     |  
+///                                              |  S  |  
+///                                              |  O  |
+///                                              |  I  |
+///                                              |     |  H
+///                                              |  1  |  O
+///                                              |  2  |  U
+///                                              |     |  S
+///                                              |     |  E
+///                                              |     |  _
+///                                              |     |  E
+///
+///
+/// Noteably, HOUSE_D, is on both Soi 12 and 13
+///
+/// If street contains N houses, we have a problem with this simple implementation.
+///
+/// We have 3 first solutions to consider:
+/// 1: Box&lt;T&gt;: Heap allocate and wrap with a stack reference
+/// 2: Rc&lt;T&gt;: Wrap with a counted, shareable immutable reference, compile-time checked, for single threaded scenarios
+/// 3: RcCell&lt;T&gt; Wrap with a counted, shareable mutable reference, runtime checked
+
+fn main() {
+    //setup a house
+    let house_a = House::new().setup_house(5, 2);
+    let house_e = House::new().setup_house(3, 2);
+    let house_d = House::new().setup_house(3, 2);
+
+    //Create the streets
+    let mut street_0 = Street { houses: Vec::new() };
+    let mut street_1 = Street { houses: Vec::new() };
+
+    street_0.houses.push(house_a);
+    street_0.houses.push(house_e);
+
+    //house_d is on both streets
+    street_1.houses.push(house_d);
+    street_0.houses.push(house_d);
+}
+
+struct Room {
+    name: String,
+    room_size: i32,
+}
+
+struct House {
+    rooms: Vec&lt;Room&gt;,
+}
+
+struct Street {
+    houses: Vec&lt;House&gt;,
+}
+
+impl House {
+    pub fn new() -&gt; House {
+        House { rooms: Vec::new() }
+    }
+
+    pub fn get_house_size(&amp;self) -&gt; i32 {
+        self.rooms.iter().map(|x| x.room_size).sum()
+    }
+
+    pub fn setup_house(mut self, bedrooms: i8, living_rooms: i8) -&gt; House {
+        for i in 0..bedrooms {
+            let bedroom: Room = Room {
+                name: format!(&quot;bedroom number {}&quot;, i),
+                room_size: 20,
+            };
+            self.rooms.push(bedroom);
+        }
+
+        for i in 0..living_rooms {
+            let living_room: Room = Room {
+                name: format!(&quot;living room number {}&quot;, i),
+                room_size: 34,
+            };
+            self.rooms.push(living_room);
+        }
+        self
+    }
+}
+
+</code></pre></pre>
 
                     </main>
 
@@ -189,21 +306,6 @@
 
         </div>
 
-        
-        <!-- Livereload script (if served using the cli tool) -->
-        <script type="text/javascript">
-            var socket = new WebSocket("ws://localhost:3001");
-            socket.onmessage = function (event) {
-                if (event.data === "reload") {
-                    socket.close();
-                    location.reload(true); // force reload from server (not from cache)
-                }
-            };
-
-            window.onbeforeunload = function() {
-                socket.close();
-            }
-        </script>
         
 
         

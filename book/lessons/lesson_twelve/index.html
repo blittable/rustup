@@ -78,7 +78,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="affix"><a href="../../index.html">Rust for OO Programmers</a></li><li class="affix"><a href="../../OVERVIEW.html">Overview from an OO Perspective</a></li><li class="affix"><a href="../../lessons/LESSONS.html">Lessons</a></li><li><a href="../../lessons/lesson_one/index.html"><strong aria-hidden="true">1.</strong> Setup And A Function</a></li><li><ol class="section"><li><a href="../../lessons/lesson_one/ex_function_parameter_return.html"><strong aria-hidden="true">1.1.</strong> Calling a Function</a></li></ol></li><li><a href="../../lessons/lesson_two/index.html"><strong aria-hidden="true">2.</strong> Standard Lib, Types, Immutability</a></li><li><a href="../../lessons/lesson_three/index.html"><strong aria-hidden="true">3.</strong> Intro to Traits</a></li><li><a href="../../lessons/lesson_four/index.html"><strong aria-hidden="true">4.</strong> Enum Wrappers, Option and Matching</a></li><li><a href="../../lessons/lesson_five/index.html"><strong aria-hidden="true">5.</strong> Error Handling</a></li><li><a href="../../lessons/lesson_six/index.html"><strong aria-hidden="true">6.</strong> Almighty Iterators</a></li><li><a href="../../lessons/lesson_seven/index.html"><strong aria-hidden="true">7.</strong> Housekeeping #1</a></li><li><a href="../../lessons/lesson_eight/index.html"><strong aria-hidden="true">8.</strong> Closures and Lifetime Preview</a></li><li><a href="../../lessons/lesson_nine/index.html"><strong aria-hidden="true">9.</strong> Lifetime Annotations</a></li><li><a href="../../lessons/lesson_ten/index.html"><strong aria-hidden="true">10.</strong> Unit Testing</a></li><li><a href="../../lessons/lesson_eleven/index.html"><strong aria-hidden="true">11.</strong> TBD</a></li><li><a href="../../lessons/lesson_twelve/index.html" class="active"><strong aria-hidden="true">12.</strong> Trait Bounds</a></li><li><a href="../../lessons/lesson_thirteen/index.html"><strong aria-hidden="true">13.</strong> Constructor Patterns</a></li><li><a href="../../lessons/lesson_fourteen/index.html"><strong aria-hidden="true">14.</strong> Iterator Patterns</a></li><li><a href="../../lessons/lesson_fifteen/index.html"><strong aria-hidden="true">15.</strong> Box, Rc, RefCell</a></li><li><a href="../../lessons/lesson_sixteen/index.html"><strong aria-hidden="true">16.</strong> Generics and Associated Types</a></li><li><a href="../../lessons/lesson_seventeen/index.html"><strong aria-hidden="true">17.</strong> Bit Fiddling</a></li><li class="affix"><a href="../../misc/contributors.html">Contributors</a></li></ol>
+                <ol class="chapter"><li class="affix"><a href="../../index.html">Rust for OO Programmers</a></li><li class="affix"><a href="../../OVERVIEW.html">Overview from an OO Perspective</a></li><li class="affix"><a href="../../lessons/LESSONS.html">Lessons</a></li><li><a href="../../lessons/lesson_one/index.html"><strong aria-hidden="true">1.</strong> Setup And A Function</a></li><li><ol class="section"><li><a href="../../lessons/lesson_one/ex_function_parameter_return.html"><strong aria-hidden="true">1.1.</strong> Calling a Function</a></li></ol></li><li><a href="../../lessons/lesson_two/index.html"><strong aria-hidden="true">2.</strong> Standard Lib, Types, Immutability</a></li><li><a href="../../lessons/lesson_three/index.html"><strong aria-hidden="true">3.</strong> Intro to Traits</a></li><li><a href="../../lessons/lesson_four/index.html"><strong aria-hidden="true">4.</strong> Enum Wrappers, Option and Matching</a></li><li><a href="../../lessons/lesson_five/index.html"><strong aria-hidden="true">5.</strong> Error Handling</a></li><li><a href="../../lessons/lesson_six/index.html"><strong aria-hidden="true">6.</strong> Almighty Iterators</a></li><li><a href="../../lessons/lesson_seven/index.html"><strong aria-hidden="true">7.</strong> Housekeeping #1</a></li><li><a href="../../lessons/lesson_eight/index.html"><strong aria-hidden="true">8.</strong> Closures and Lifetime Preview</a></li><li><a href="../../lessons/lesson_nine/index.html"><strong aria-hidden="true">9.</strong> Lifetime Annotations</a></li><li><a href="../../lessons/lesson_ten/index.html"><strong aria-hidden="true">10.</strong> Unit Testing</a></li><li><a href="../../lessons/lesson_eleven/index.html"><strong aria-hidden="true">11.</strong> TBD</a></li><li><a href="../../lessons/lesson_twelve/index.html" class="active"><strong aria-hidden="true">12.</strong> Trait Bounds</a></li><li><a href="../../lessons/lesson_thirteen/index.html"><strong aria-hidden="true">13.</strong> Constructor Patterns</a></li><li><a href="../../lessons/lesson_fourteen/index.html"><strong aria-hidden="true">14.</strong> Iterator Patterns</a></li><li><a href="../../lessons/lesson_fifteen/index.html"><strong aria-hidden="true">15.</strong> Copy/Clone Traits</a></li><li><a href="../../lessons/lesson_sixteen/index.html"><strong aria-hidden="true">16.</strong> Box, Rc, RefCell</a></li><li><a href="../../lessons/lesson_seventeen/index.html"><strong aria-hidden="true">17.</strong> Generics and Associated Types</a></li><li><a href="../../lessons/lesson_seventeen/index.html"><strong aria-hidden="true">18.</strong> Bit Fiddling</a></li><li class="affix"><a href="../../misc/contributors.html">Contributors</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -169,7 +169,7 @@ pub fn notify&lt;T&gt;(item: T) {
     println!(&quot;Breaking news! {}&quot;, item.summarize()); //&lt;- what's a summarize?
 }
 #}</code></pre></pre>
-<p>In the code below, the Rust toolchain has <em>no</em> information on the types' functions, etc. and will not compile. It needs more information. </p>
+<p>In the code above, the Rust toolchain has <em>no</em> information on the types' functions, etc. and will not compile. It needs more information. </p>
 <p>To solve the issue in the context of generics, Rust uses <code>trait bounds</code> </p>
 <pre><pre class="playpen"><code class="language-rust no_run">
 # #![allow(unused_variables)]
@@ -204,32 +204,69 @@ where T: Summary + Display {
 }
 #}</code></pre></pre>
 <p>Read the above, &quot;the notify function is bound by the behavior of the Summary and Display traits.&quot;</p>
-<h3><a class="header" href="#dyn-keword" id="dyn-keword">dyn Keword</a></h3>
-<p>Traits used as return types need to be marked with <code>dyn</code></p>
-<pre><pre class="playpen"><code class="language-rust">#![allow(unused_variables)]
-fn main() {
-}
-trait Bigger&lt;T&gt;{
-    fn bigger&lt;T&gt;(i: T, j: T) -&gt; T;
+<h3><a class="header" href="#key-points-on-traits" id="key-points-on-traits">Key Points on Traits</a></h3>
+<ul>
+<li>Trait objects are dynamically sized and are behind a reference of some type.</li>
+<li>Consequently, and unlike generics and plain functions/methods, they are dynamically dispatched at runtime. </li>
+</ul>
+<h3><a class="header" href="#function-overloading-ish" id="function-overloading-ish">Function Overloading-ish</a></h3>
+<p>As an OO programmer, note that no-inhertiance != no-indirection.  The <code>SimpleTaxer</code> resolves the appropriate calculation method.</p>
+<pre><pre class="playpen"><code class="language-rust">fn main() {
+    let usa = USA {
+        tax_calculator: Box::new(SimpleTaxer {}),
+    };
+
+    let thailand = Thailand {
+        tax_calculator: Box::new(SimpleTaxer {}),
+    };
+
+    println!(
+        &quot;USA tax: {}&quot;,
+        usa.tax_calculator.compound_tax(333.0, 2.3, 3.3)
+    );
+    println!(
+        &quot;Thailand tax: {}&quot;,
+        thailand.tax_calculator.calculate_tax(333.0, 2.3)
+    );
 }
 
-impl Bigger for i32 {
-    fn bigger&lt;T&gt;(i: i32, j: i32) -&gt; i32
-    {
-        if i &gt; j {
-            i
-        }
+trait SimpleTax {
+    fn calculate_tax(&amp;self, amount: f32, rate: f32) -&gt; f32;
+}
 
-        j
+trait CompoundTax: SimpleTax {
+    fn compound_tax(&amp;self, amount: f32, base_rate: f32, rate: f32) -&gt; f32;
+}
+
+struct USA {
+    pub tax_calculator: Box&lt;dyn CompoundTax&gt;,
+}
+
+struct Thailand {
+    pub tax_calculator: Box&lt;dyn SimpleTax&gt;,
+}
+
+struct SimpleTaxer {}
+
+impl SimpleTax for SimpleTaxer {
+    fn calculate_tax(&amp;self, amount: f32, rate: f32) -&gt; f32 {
+        amount * rate
     }
 }
-
-fn GetBigger() -&gt; Box&lt;dyn Trait&gt; {
-
+impl CompoundTax for SimpleTaxer {
+    fn compound_tax(&amp;self, amount: f32, base_rate: f32, compound_rate: f32) -&gt; f32 {
+        let base_tax = &amp;self.calculate_tax(amount, base_rate);
+        base_tax + amount * compound_rate
+    }
 }
 </code></pre></pre>
+<ul>
+<li>As a side note, if the content here, the API doc, and 'The Book' still leave you unclear on a topic,
+try <a href="https://doc.rust-lang.org/stable/reference/">The Reference</a> Some of the explanations are excellent.  Remarkably
+similar to some of the content here.  ;)</li>
+</ul>
 <h3><a class="header" href="#exercise" id="exercise">Exercise</a></h3>
-<p>In the below code, using a trait, create a converter between Kilos, Pounds, and Stone</p>
+<p>In the below below, using a trait, create a converter between Kilos, Pounds, and Stone</p>
 <pre><pre class="playpen"><code class="language-rust">enum Uom_Weight { Kilos, Pounds, Stone }  //UOM -&gt; Unit of Measure
 
 // 2.20462 =&gt; Kilos to Pounds
@@ -283,21 +320,6 @@ fn main() {
 
         </div>
 
-        
-        <!-- Livereload script (if served using the cli tool) -->
-        <script type="text/javascript">
-            var socket = new WebSocket("ws://localhost:3001");
-            socket.onmessage = function (event) {
-                if (event.data === "reload") {
-                    socket.close();
-                    location.reload(true); // force reload from server (not from cache)
-                }
-            };
-
-            window.onbeforeunload = function() {
-                socket.close();
-            }
-        </script>
         
 
         
