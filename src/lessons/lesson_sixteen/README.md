@@ -3,7 +3,7 @@
 
 ## Objectives 
 
-- Look at Rc, and RcCell in the context of a problem
+- Look at Rc, and RefCell in the context of a problem
 
 | Option                            | Details       | Issue             | 
 | --------------------------------- | ------------- | ----------------- |
@@ -12,3 +12,5 @@
 | Box<T>                            | Content Cell  | Even Better       |
 | Rc<T>                             | Even Better   |                   |
  
+
+let boxed: Box<u8> = Box::new(val);

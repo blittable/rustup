@@ -136,8 +136,9 @@ pub fn build_it() -> Result<()> {
     street_0.houses.push(house_e);
 
     street_1.houses.push(house_d);
+
     //house_d is on both streets
-    street_0.houses.push(house_d);
+    //street_0.houses.push(house_d);
 
     let mut moo_baan_0: MooBaan = MooBaan::new(01, "PuntCoolVille 88".to_string());
 
@@ -149,15 +150,6 @@ pub fn build_it() -> Result<()> {
 
     let mut big_corp_parent: HoldingCompany = HoldingCompany::new(1, "Big Corp".to_string());
     big_corp_parent.subsidiaries.push(kv_company);
-
-    // let full_structure = HoldingCompany {
-    //     company_id: 1,
-    //     name: "Mega Holdings, Co., Ltd.".to_owned(),
-    // };
-
-    // // Serialize it to a JSON string.
-
-    let house: House = House::new(22);
 
     //Test pull back from Vec
     let company_structure = serde_json::to_string(&big_corp_parent)?;
