@@ -1,5 +1,5 @@
 #[allow(dead_code)]
-
+use std::cell::{ Ref, RefCell};
 ///
 /// We have a hypothetical neighborhood that looks like this:
 ///
@@ -31,90 +31,78 @@
 
 fn main() {
     //setup a house
-    let house_a = House::new().setup_house(5, 2);
+    let house_a = House::new().setup_house(1, 2);
     let house_e = House::new().setup_house(3, 2);
-    let house_d = House::new().setup_house(3, 2);
+    let house_d = House::new().setup_house(2, 1);
 
     //Create the streets
     let mut street_0 = Street { houses: Vec::new() };
     let mut street_1 = Street { houses: Vec::new() };
 
-    street_0.houses.push(house_a);
-    street_0.houses.push(house_e);
+    street_1.houses.push(house_a.borrow());
+    street_0.houses.push(house_e.borrow());
 
     //house_d is on both streets
-    street_1.houses.push(house_d);
-    street_0.houses.push(house_d);
+    street_1.houses.push(house_d.borrow());
+    street_0.houses.push(house_d.borrow());
 
-    println!("House A\t: Size {:?}", house_a.get_house_size());
-    println!("\t: {:?}", house_a.details());
-    println!("House D\t: Size {:?}", house_d.get_house_size());
-    println!("\t: {:?}", house_d.details());
-    println!("House E\t: Size {:?}", house_e.get_house_size());
-    println!("\t: {:?}", house_e.details());
+    println!("Street 0:\t\t");
+    for h in street_0.houses {
+        println!("\tHouse Size\t:{:?}", &h.get_house_size());
+        println!("\tHouse Plan\t:{:?}", &h.details());
+    }
+    println!("Street 1:\t\t");
+    for h in street_1.houses {
+        println!("\tHouse Size\t:{:?}", &h.get_house_size());
+        println!("\tHouse Plan\t:{:?}", &h.details());
+    }
 }
 
-#[derive(Copy, Clone)]
+#[derive(Debug)]
 struct Room {
-    name: *mut String,
+    name: String,
     room_size: i32,
 }
 
-#[derive(Copy, Clone)]
+#[derive(Debug)]
 struct House {
-    rooms: *mut Vec<Room>,
+    rooms: Vec<Room>,
 }
 
-struct Street {
-    houses: Vec<House>,
-}
-
-impl Room {
-    pub fn details(mut self) -> String {
-        let name = unsafe { Box::from_raw(self.name) };
-        let details = format!("{}: {}", name, self.room_size);
-        self.name = Box::into_raw(name);
-        details
-    }
+#[derive(Debug)]
+struct Street<'a> {
+    houses: Vec<Ref<'a,House>>,
 }
 
 impl House {
     pub fn new() -> House {
-        House { rooms: Box::into_raw(Box::new(Vec::new())) }
+        House { rooms: Vec::new() }
     }
 
-    pub fn get_house_size(mut self) -> i32 {
-        let rooms = unsafe { Box::from_raw(self.rooms) };
-        let size = rooms.iter().map(|x| x.room_size).sum();
-        self.rooms = Box::into_raw(rooms);
-        size
+    pub fn get_house_size(&self) -> i32 {
+        self.rooms.iter().map(|x| x.room_size).sum()
     }
 
-    pub fn setup_house(mut self, bedrooms: i8, living_rooms: i8) -> House {
+    pub fn setup_house(mut self, bedrooms: i8, living_rooms: i8) -> RefCell<House> {
         for i in 0..bedrooms {
             let bedroom: Room = Room {
-                name: Box::into_raw(Box::new(format!("bedroom number {}", i))),
+                name: format!("bedroom number {}", i),
                 room_size: 20,
             };
-            let mut rooms = unsafe { Box::from_raw(self.rooms) };
-            rooms.push(bedroom);
-            self.rooms = Box::into_raw(rooms);
+            self.rooms.push(bedroom);
         }
 
         for i in 0..living_rooms {
             let living_room: Room = Room {
-                name: Box::into_raw(Box::new(format!("living room number {}", i))),
+                name: format!("living room number {}", i),
                 room_size: 34,
             };
-            let mut rooms = unsafe { Box::from_raw(self.rooms) };
-            rooms.push(living_room);
-            self.rooms = Box::into_raw(rooms);
+            self.rooms.push(living_room);
         }
-        self
+        RefCell::new(self)
     }
 
     pub fn details(&self) -> Vec<String> {
-        let rooms = unsafe { Box::from_raw(self.rooms) };
-        rooms.iter().map(|r| r.details()).collect()
+        self.rooms.iter().map(|r| format!("{}: {}", &r.name, &r.room_size)).collect()
     }
 }
