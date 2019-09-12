@@ -44,7 +44,7 @@ fn main() {
 
     //house_d is on both streets
     street_1.houses.push(house_d);
-    street_0.houses.push(house_d);
+    street_0.houses.push(house_d); // <- Here's where the trouble begins
 }
 
 struct Room {

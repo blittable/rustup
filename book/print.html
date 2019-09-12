@@ -1397,7 +1397,7 @@ fn main() {
 
     //house_d is on both streets
     street_1.houses.push(house_d);
-    street_0.houses.push(house_d);
+    street_0.houses.push(house_d); // &lt;- Here's where the trouble begins
 }
 
 struct Room {
@@ -1443,9 +1443,43 @@ impl House {
 }
 
 </code></pre></pre>
-<h1><a class="header" href="#generics-and-associated-types" id="generics-and-associated-types">Generics and Associated Types</a></h1>
-<h1><a class="header" href="#lesson-seventeen-bit-fiddling" id="lesson-seventeen-bit-fiddling">Lesson Seventeen: Bit Fiddling</a></h1>
+<h1><a class="header" href="#lesson-sixteen-serde-rc-refcell" id="lesson-sixteen-serde-rc-refcell">Lesson Sixteen: Serde, Rc, RefCell</a></h1>
 <h2><a class="header" href="#objectives-16" id="objectives-16">Objectives</a></h2>
+<ul>
+<li>Look at Serde, Rc, and RefCell </li>
+</ul>
+<p><a href="https://play.rust-lang.org/?version=stable&amp;mode=debug&amp;edition=2018&amp;gist=72755f28f99afc95e01d63174b28c1f5">Serde Sample</a></p>
+<table><thead><tr><th>Option</th><th>Details</th><th>Issue</th></tr></thead><tbody>
+<tr><td>Clone</td><td>Makes a Copy</td><td>Lose shared state</td></tr>
+<tr><td>Borrow with Lifetime Annotations</td><td>&amp;'a structs</td><td>None</td></tr>
+<tr><td>Rc<T></td><td></td><td></td></tr>
+</tbody></table>
+<h3><a class="header" href="#rct" id="rct">Rc<T></a></h3>
+<pre><pre class="playpen"><code class="language-rust">
+# #![allow(unused_variables)]
+#fn main() {
+  --&gt; src/main.rs:47:26
+   |
+36 |     let house_d = House::new(2, &quot;Douglas&quot;.to_string());
+   |         ------- move occurs because `house_d` has type `House`, which does not implement the `Copy` trait
+...
+44 |     street_0.houses.push(house_d);
+   |                          ------- value moved here
+...
+47 |     street_1.houses.push(house_d);
+   |                          ^^^^^^^ value used here after move
+
+#}</code></pre></pre>
+<h2><a class="header" href="#solution-one-lifetime-annoations" id="solution-one-lifetime-annoations">Solution One: Lifetime Annoations</a></h2>
+<h2><a class="header" href="#solution-two-rct-reference-counting" id="solution-two-rct-reference-counting">Solution Two: Rc<T> Reference Counting</a></h2>
+<p>The type Rc<T> provides shared ownership of a value of type T</p>
+<p>{#playpen src/main.rs}}</p>
+<p>Exercise</p>
+<ul>
+<li>Create a sample that mutates the contents of something behind a Rc<T></li>
+</ul>
+<h1><a class="header" href="#lesson-seventeen-bit-fiddling" id="lesson-seventeen-bit-fiddling">Lesson Seventeen: Bit Fiddling</a></h1>
+<h2><a class="header" href="#objectives-17" id="objectives-17">Objectives</a></h2>
 <ul>
 <li>Understand bit operations </li>
 </ul>
@@ -1476,7 +1510,7 @@ fn main() {
 
 </code></pre></pre>
 <h1><a class="header" href="#lesson-seventeen-bit-fiddling-1" id="lesson-seventeen-bit-fiddling-1">Lesson Seventeen: Bit Fiddling</a></h1>
-<h2><a class="header" href="#objectives-17" id="objectives-17">Objectives</a></h2>
+<h2><a class="header" href="#objectives-18" id="objectives-18">Objectives</a></h2>
 <ul>
 <li>Understand bit operations </li>
 </ul>
