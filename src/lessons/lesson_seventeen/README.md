@@ -3,6 +3,8 @@
 ## Objectives 
 - Understand bit operations 
 
+
+
 ### Binary 
 ```
 //0 -> 0b00000000

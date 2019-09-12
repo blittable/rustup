@@ -26,3 +26,16 @@ trait Add<RHS=Self> {
 
 ---
  value: 4f32
+
+ ---
+
+## Static 
+
+static N: i32 = 5;
+
+Unlike let bindings, you must annotate the type of a static.
+Statics live for the entire lifetime of a program, and therefore any reference stored in a constant has a 'static lifetime:
+
+static NAME: &'static str = "Steve";
+---
+
