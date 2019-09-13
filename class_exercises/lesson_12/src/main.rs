@@ -10,7 +10,6 @@ pub enum UomWeight {
 }
 
 
-
 lazy_static! {
     static ref CONVERSION_MAP: HashMap<UomWeight, f64> = {
         let mut m = HashMap::new();
@@ -33,8 +32,6 @@ impl ConvertWeight for ItemWeight {
 
     }
 }
-
-//WarehouseItem -> Impl Weighable + Stockable + Countable 
 
 
 #[derive(Debug, Copy, Clone)]
