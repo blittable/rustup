@@ -10,7 +10,7 @@ of the type heirarchy, such as any .NET language or Java.
 
 Rust code and libraries are also easily 'self-documented', and one of the best examples is the std crate.  (a `crate` being the equivilant of an npm or nuget package).  [std](https://doc.rust-lang.org/std/)  For core concepts (e.g. references, types, etc.), the api documentation often provides conceptual context that is very helpful. 
 
-A personal favorite, though sparse in parts, is the [reference book](https://doc.rust-lang.org/stable/reference/) It's readable and not strictly a formal reference.
+A personal favorite, though sparse in parts, is the [reference book].(https://doc.rust-lang.org/stable/reference/) It's readable and not strictly a formal reference.
 
 Keep in mind that post-install, you have the core documentation installed locally.  Launch with ```rustup doc```
 
