@@ -1,28 +1,30 @@
 # Rust for OO Programmers
 
-This is an overview/tutorial of the Rust programming targeting object oriented programmers.  
+This is an overview/tutorial of the Rust programming language targeting object oriented programmers.  
 
 Rust is best groked from a C++/C perspective, so some content that attends to the background of OO programmers lets us skip a few topics, but more importantly post warning signs 
-where OO thinking may introduce obstacles in the process.  By OO, we mean a statically-typed language where 'Object' sits at the top
+where OO thinking may introduce obstacles to success.  By OO, we mean a statically-typed language where 'Object' sits at the top
 of the type heirarchy, such as any .NET language or Java.
 
 [The Rust Programming Language - aka 'The Book'](https://doc.rust-lang.org/book/) is a *great* resource and should certainly be used in conjuction with the content if you are new to Rust programming.  
 
-Rust code and libraries are also easily 'self-documented', and one of the best examples is the std crate.  (a `crate` being the equivilant of an npm or nuget package).  [std](https://doc.rust-lang.org/std/)
+Rust code and libraries are also easily 'self-documented', and one of the best examples is the std crate.  (a `crate` being the equivilant of an npm or nuget package).  [std](https://doc.rust-lang.org/std/)  For core concepts (e.g. references, types, etc.), the api documentation often provides conceptual context that is very helpful. 
 
-A personal favorite, though spare in parts, is the [reference book](https://doc.rust-lang.org/stable/reference/) It's readable and not strictly a formal reference.
+A personal favorite, though sparse in parts, is the [reference book](https://doc.rust-lang.org/stable/reference/) It's readable and not strictly a formal reference.
 
-Lest you find a broken link while searching doc, try the local documentation installed with the toolchain ```rustup doc```
+Keep in mind that post-install, you have the core documentation installed locally.  Launch with ```rustup doc```
 
 ## How to Use 
 
-* The content/progress is fairly linear, but an attempt has been made to minimize the prerequisite topics where possible. 
+* The content/progress is fairly linear.
 
-* If you clone this repository, most of the exercises are in the /src folder of the lesson.  The README for the individual lesson will detail those.
+* The README for each chapter explains concepts and then typically presents an exercise.
 
-* You know how you learn best, but taking the examples, tweeking them, and playing with the problem/topic works well for most. 
+* If you fork or clone this repository, most of the exercises are in the /src folder.  
 
-* The original content was developed as part of an in-house course on Rust, so you may see some remnants that don't make sense. 
+* You know how you learn best, but taking the examples, tweeking them, and playing with the problem/topics works well for most. 
+
+* The original content was developed as part of an in-house course on Rust, and is a WIP, so some oddities may appear. 
 
 
 ## Objectives
@@ -30,7 +32,6 @@ Lest you find a broken link while searching doc, try the local documentation ins
 * Keep the lessons small and focused, one or two topics, max
 * Build a solid foundation in Rust for further development
 * Provide contextual information for OO programmers looking for a frame of reference
-* Provide some motiviation by looking at some interesting Rust projects (mostly during discussions) 
 
 ## Other Notes and Tips
 

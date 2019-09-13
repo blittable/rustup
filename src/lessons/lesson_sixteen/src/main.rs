@@ -1,49 +1,83 @@
 #[allow(dead_code)]
 use std::rc::Rc;
 
-struct House {
-    id: u32,
-    owner: String,
-    street: Vec<Rc<Street>>,
+struct FamilyMember {
+    name: RefCell<String>,
+    is_parent: bool,
 }
 
-struct Street {
+impl FamilyMember {
+    pub fn new(new_name: &'static str, parent: bool) -> FamilyMember {
+        FamilyMember {
+            name: new_name,
+            is_parent: parent,
+        }
+    }
+    pub fn new_rc(new_name: &'static str, parent: bool) -> Rc<FamilyMember> {
+        Rc::new(FamilyMember {
+            name: new_name,
+            is_parent: parent,
+        })
+    }
+}
+
+struct Car {
     number: u16,
-    houses: Vec<House>, // <- Add a lifetime annotation
+    make: &'static str,
+    is_clean: bool,
+    drivers: Vec<Rc<FamilyMember>>,
 }
 
-impl Street {
-    pub fn new(new_number: u16) -> Street {
-        Street {
+impl Car {
+    pub fn new(new_number: u16, car_make: &'static str) -> Car {
+        Car {
             number: new_number,
-            houses: Vec::new(),
+            make: car_make,
+            is_clean: false,
+            drivers: Vec::<Rc<FamilyMember>>::new(),
         }
     }
 }
 
-impl House {
-    pub fn new(new_id: u32, new_owner: String, associated_street: Vec<Rc<Street>>) -> House {
-        House {
-            id: new_id,
-            owner: new_owner,
-            street: associated_street,
-        }
-    }
+
+fn count_drivers(car: & Car) -> usize {
+    car.drivers.iter().fold(0, |cumul, x| cumul + (Rc::strong_count(x)/2)) // <- (Strong Count has a Self reference so 2 for every referant)
 }
 
 pub fn main() {
-    //Create the streets
-    let mut street_0 = Rc::new(Street::new(10));
-    let mut street_1 = Rc::new(Street::new(13));
+    //Create the family
+    let bobby = FamilyMember::new_rc("Bob", false);
+    let john = FamilyMember::new_rc("John", false);
+    let connie = FamilyMember::new_rc("Connie", false);
+    let chris = FamilyMember::new_rc("Chris", true);
+    let laura = FamilyMember::new_rc("Laura", true);
 
-    let mut single_street = Vec::new();
-    single_street.push(Rc::clone(&street_0));
+    //Create the cars
+    let mut mira = Car::new(0, "Mira");
+    let mut subaru = Car::new(1, "Subaru");
+    let mut ferrari = Car::new(1, "Ferrari");
 
-    let mut street_pair = Vec::new();
-    street_pair.push(Rc::clone(&street_0));
-    street_pair.push(Rc::clone(&street_1));
+    // Everyone can drive the Mira!
+    // shared ownership with Rc<T> and Rc::clone
+    mira.drivers.push(Rc::clone(&bobby));
+    mira.drivers.push(Rc::clone(&john));
+    mira.drivers.push(Rc::clone(&connie));
+    mira.drivers.push(Rc::clone(&chris));
+    mira.drivers.push(Rc::clone(&laura));
 
-    //setup three houses
-    let house_a = House::new(0, "Smith".to_string(), single_street);
-    let house_d = House::new(2, "Douglas".to_string(), street_pair);
+    // Only two drivers for Ferrari!
+    ferrari.drivers.push(Rc::clone(&chris));
+    ferrari.drivers.push(Rc::clone(&laura));
+
+    let b = bobby.borrow_mut();
+    b.name = 
+
+    println!("Mira driver count {}", count_drivers(&mira));
+    println!("Ferrari driver count {}", count_drivers(&ferrari));
+
+    //Drop the reference to bobby
+    drop(bobby);
+
+    println!("Post drop bobby driver count {}", count_drivers(&mira));
+
 }
