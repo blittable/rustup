@@ -1,11 +1,20 @@
 
-# Lesson Sixteen: Serde, Rc, RefCell 
+# Lesson Sixteen: Rc, RefCell 
 
 ## Objectives 
 
-- Look at Serde, Rc, and RefCell 
+- Look at Rc, and RefCell 
 
-[Serde Sample](https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&gist=72755f28f99afc95e01d63174b28c1f5)
+Consider the following scenario:
+
+A family of five has two parents and three grown-children.  
+The grown-children all drive.  
+The family has 3 cars: a Subaru, a Ferrari, and a Daihatsu Mira.
+
+All members of the family can drive the Mira.
+All members of the family can drive the Subaru.
+Only the parents can drive the Ferrari.
+
 
 
 | Option                            | Details       | Issue             | 

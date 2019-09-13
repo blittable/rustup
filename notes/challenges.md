@@ -39,3 +39,16 @@ Statics live for the entire lifetime of a program, and therefore any reference s
 static NAME: &'static str = "Steve";
 ---
 
+# Representations
+
+https://doc.rust-lang.org/reference/type-layout.html#representations
+
+#[repr(C)]
+struct ThreeInts {
+    first: i16,
+    second: i8,
+    third: i32
+}
+
+Type Alias and _: identifier
+let _: F = E::A;
