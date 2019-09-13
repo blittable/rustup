@@ -1,8 +1,5 @@
 ## SuSu DB  (Test Project)
 
-#### Keep It Simple and Naive Like a Child
+#### Keep It Simple 
 
-![DB Logo](https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSpXHfXT9o3HfiKSg8n4tZxvEgLhsI8mbK3R7aVkVpnNKZaUojP)
-
-### Features
-![DB Features](https://github.com/blittable/rustup/blob/susu-db/project/susu/features.png)
+(this is a class project)
