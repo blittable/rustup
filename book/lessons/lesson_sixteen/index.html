@@ -145,12 +145,18 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1><a class="header" href="#lesson-sixteen-serde-rc-refcell" id="lesson-sixteen-serde-rc-refcell">Lesson Sixteen: Serde, Rc, RefCell</a></h1>
+                        <h1><a class="header" href="#lesson-sixteen-rc-refcell" id="lesson-sixteen-rc-refcell">Lesson Sixteen: Rc, RefCell</a></h1>
 <h2><a class="header" href="#objectives" id="objectives">Objectives</a></h2>
 <ul>
-<li>Look at Serde, Rc, and RefCell </li>
+<li>Look at Rc, and RefCell </li>
 </ul>
-<p><a href="https://play.rust-lang.org/?version=stable&amp;mode=debug&amp;edition=2018&amp;gist=72755f28f99afc95e01d63174b28c1f5">Serde Sample</a></p>
+<p>Consider the following scenario:</p>
+<p>A family of five has two parents and three grown-children.<br />
+The grown-children all drive.<br />
+The family has 3 cars: a Subaru, a Ferrari, and a Daihatsu Mira.</p>
+<p>All members of the family can drive the Mira.
+All members of the family can drive the Subaru.
+Only the parents can drive the Ferrari.</p>
 <table><thead><tr><th>Option</th><th>Details</th><th>Issue</th></tr></thead><tbody>
 <tr><td>Clone</td><td>Makes a Copy</td><td>Lose shared state</td></tr>
 <tr><td>Borrow with Lifetime Annotations</td><td>&amp;'a structs</td><td>None</td></tr>

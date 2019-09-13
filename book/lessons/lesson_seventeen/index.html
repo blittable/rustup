@@ -145,37 +145,47 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1><a class="header" href="#lesson-seventeen-bit-fiddling" id="lesson-seventeen-bit-fiddling">Lesson Seventeen: Bit Fiddling</a></h1>
+                        <h1><a class="header" href="#lesson-sixteen-rc-refcell" id="lesson-sixteen-rc-refcell">Lesson Sixteen: Rc, RefCell</a></h1>
 <h2><a class="header" href="#objectives" id="objectives">Objectives</a></h2>
 <ul>
-<li>Understand bit operations </li>
+<li>Look at Rc, and RefCell </li>
 </ul>
-<h3><a class="header" href="#binary" id="binary">Binary</a></h3>
-<pre><code>//0 -&gt; 0b00000000
-//1 -&gt; 0b00000001
-//2 -&gt; 0b00000010
-//3 -&gt; 0b00000011
-</code></pre>
-<pre><pre class="playpen"><code class="language-rust">fn enumerate_to_pair() {
-    for (i, j) in (0..3).enumerate() {
-        println!(
-            &quot;Enumerated Iterator - exclusive OR  ^ - value {:?}, loop iteration: {:?}&quot;,
-            i + 1 ^ 3,
-            j
-        );
-        println!(
-            &quot;Enumerated Iterator - inclusive OR | value {:?}, loop iteration: {:?}&quot;,
-            i | 3,
-            j
-        );
-    }
-}
+<p>Consider the following scenario:</p>
+<p>A family of five has two parents and three grown-children.<br />
+The grown-children all drive.<br />
+The family has 3 cars: a Subaru, a Ferrari, and a Daihatsu Mira.</p>
+<p>All members of the family can drive the Mira.
+All members of the family can drive the Subaru.
+Only the parents can drive the Ferrari.</p>
+<table><thead><tr><th>Option</th><th>Details</th><th>Issue</th></tr></thead><tbody>
+<tr><td>Clone</td><td>Makes a Copy</td><td>Lose shared state</td></tr>
+<tr><td>Borrow with Lifetime Annotations</td><td>&amp;'a structs</td><td>None</td></tr>
+<tr><td>Rc<T></td><td></td><td></td></tr>
+</tbody></table>
+<h3><a class="header" href="#rct" id="rct">Rc<T></a></h3>
+<pre><pre class="playpen"><code class="language-rust">
+# #![allow(unused_variables)]
+#fn main() {
+  --&gt; src/main.rs:47:26
+   |
+36 |     let house_d = House::new(2, &quot;Douglas&quot;.to_string());
+   |         ------- move occurs because `house_d` has type `House`, which does not implement the `Copy` trait
+...
+44 |     street_0.houses.push(house_d);
+   |                          ------- value moved here
+...
+47 |     street_1.houses.push(house_d);
+   |                          ^^^^^^^ value used here after move
 
-fn main() {
-    enumerate_to_pair(); 
-}
-
-</code></pre></pre>
+#}</code></pre></pre>
+<h2><a class="header" href="#solution-one-lifetime-annoations" id="solution-one-lifetime-annoations">Solution One: Lifetime Annoations</a></h2>
+<h2><a class="header" href="#solution-two-rct-reference-counting" id="solution-two-rct-reference-counting">Solution Two: Rc<T> Reference Counting</a></h2>
+<p>The type Rc<T> provides shared ownership of a value of type T</p>
+<p>{#playpen src/main.rs}}</p>
+<p>Exercise</p>
+<ul>
+<li>Create a sample that mutates the contents of something behind a Rc<T></li>
+</ul>
 
                     </main>
 
