@@ -18,8 +18,10 @@
 - [Trait Bounds](./lessons/lesson_twelve/README.md))
 - [Constructor Patterns](./lessons/lesson_thirteen/README.md))
 - [Iterator Patterns](./lessons/lesson_fourteen/README.md))
-- [Copy/Clone Traits](./lessons/lesson_fifteen/README.md))
-- [Box<T>, Rc<T>, RefCell<T>](./lessons/lesson_sixteen/README.md))
+- [Copy/Clone/Sized Traits](./lessons/lesson_fifteen/README.md))
+- [Shared Ownership with Rc<T>](./lessons/lesson_sixteen/README.md))
+- [Interior Mutability with RefCell<T> and Rc<T>](./lessons/lesson_seventeen/README.md))
+- [Multi-Threaded Scenarios with Arc<T>](./lessons/lesson_eithteen/README.md))
 - [Generics and Associated Types](./lessons/lesson_seventeen/README.md))
 - [Bit Fiddling](./lessons/lesson_seventeen/README.md))
 

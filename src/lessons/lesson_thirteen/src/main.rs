@@ -1,65 +1,52 @@
-//PATTERN ONE:
-//This is the default impl for the struct 
-//There's nothing special about `new` as function name here.
-//`Self` or `&self` is never used. 
+
 struct Counter {
     count: u32,
 }
 
+
+// 3 identical ways to 'new up' a Counter
 impl Counter {
     fn new() -> Counter {
-        Counter { count: 0 }
+        Counter { count: 8 }
+    }
+    fn new_self() -> Self {
+        Self { count: 8 }
+    }
+    fn new_self_named_return() -> Counter {
+        Self { count: 8 }
     }
 }
 
-//PATTERN TWO:
-//This is the default impl for the struct 
-//There's nothing special about `new` as function name here.
-//Exactly the same. Basic struct, but with 'Self' as return type
-struct SelfishCounter {
-    count: u32,
+// Creating a generic counter
+struct CounterGeneric<T> {
+    count: T,
 }
 
-impl SelfishCounter {
-    fn new() -> Self {
-        SelfishCounter { count: 0 }
-    }
-}
-
-//PATTERN THREE:
-//This is the default impl for the struct 
-//There's nothing special about `new` as function name here.
-//Exactly the same as above, but `Self` is used for the 
-//return rather than the struct name 
-struct ABitSelfishCounter {
-    count: u32,
-}
-
-//Using the 'Self' constructor
-impl ABitSelfishCounter {
-    fn new() -> Self {
-        Self { count: 0 }
+impl<T> CounterGeneric<T> {
+    fn new(t: T) -> CounterGeneric<T> {
+        CounterGeneric { count: t }
     }
 }
 
 fn main() {
-    let counter = Counter::new();
-    assert_eq!(counter.count, 0);
+    let counter_0 = Counter::new();
+    assert_eq!(counter_0.count, 8);
 
-    let selfish_counter = SelfishCounter::new();
-    assert_eq!(selfish_counter.count, 0);
+    let counter_1 = Counter::new_self();
+    assert_eq!(counter_1.count, 8);
 
-    let a_bit_selfish_counter = ABitSelfishCounter::new();
-    assert_eq!(a_bit_selfish_counter.count, 0);
+    let counter_2 = Counter::new_self_named_return();
+    assert_eq!(counter_2.count, 8);
 
-    let fp = Fingerprint(7, 7);
-    assert_eq!(fp.0, 7);
+    let counter_3 = CounterGeneric::new(8);
+    assert_eq!(counter_3.count, 8);
 
-    let zeroed = Fingerprint::ZERO;
-    assert_ne!(zeroed.0, fp.0);
+    let counter_4_u32 = CounterGeneric::new(8_u32);
+    assert_eq!(counter_4_u32.count, 8);
+
+    let counter_5_u64 = CounterGeneric::new(8_u64);
+    assert_eq!(counter_5_u64.count, 8);
+    
 
     println!("If we ran to here without an error in the assets, it was successful.");
 }
-
-
-
