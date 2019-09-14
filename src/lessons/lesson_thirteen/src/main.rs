@@ -46,7 +46,14 @@ fn main() {
 
     let counter_5_u64 = CounterGeneric::new(8_u64);
     assert_eq!(counter_5_u64.count, 8);
-    
+
+
+    //in-line sample 
+    // struct InventoryItem {
+    //     name: &'static str,
+    // }
+
+    // let aaa = &InventoryItem { name: "cart" }; 
 
     println!("If we ran to here without an error in the assets, it was successful.");
 }
