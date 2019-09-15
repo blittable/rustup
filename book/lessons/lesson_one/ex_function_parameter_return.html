@@ -1,0 +1,292 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Calling a Function - Rust for OO Programmers</title>
+        
+
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="shortcut icon" href="../../favicon.png">
+        <link rel="stylesheet" href="../../css/variables.css">
+        <link rel="stylesheet" href="../../css/general.css">
+        <link rel="stylesheet" href="../../css/chrome.css">
+        <link rel="stylesheet" href="../../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../../FontAwesome/css/font-awesome.css">
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
+        <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:500" rel="stylesheet" type="text/css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../../highlight.css">
+        <link rel="stylesheet" href="../../tomorrow-night.css">
+        <link rel="stylesheet" href="../../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        
+
+        
+    </head>
+    <body class="light">
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "../../";
+            var default_theme = "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            document.body.className = theme;
+            document.querySelector('html').className = theme + ' js';
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="affix"><a href="../../index.html">Rust for OO Programmers</a></li><li class="affix"><a href="../../OVERVIEW.html">Overview from an OO Perspective</a></li><li class="affix"><a href="../../lessons/LESSONS.html">Lessons</a></li><li><a href="../../lessons/lesson_one/index.html"><strong aria-hidden="true">1.</strong> Setup And A Function</a></li><li><ol class="section"><li><a href="../../lessons/lesson_one/ex_function_parameter_return.html" class="active"><strong aria-hidden="true">1.1.</strong> Calling a Function</a></li></ol></li><li><a href="../../lessons/lesson_two/index.html"><strong aria-hidden="true">2.</strong> Standard Lib, Types, Immutability</a></li><li><a href="../../lessons/lesson_three/index.html"><strong aria-hidden="true">3.</strong> Intro to Traits</a></li><li><a href="../../lessons/lesson_four/index.html"><strong aria-hidden="true">4.</strong> Enum Wrappers, Option and Matching</a></li><li><a href="../../lessons/lesson_five/index.html"><strong aria-hidden="true">5.</strong> Error Handling</a></li><li><a href="../../lessons/lesson_six/index.html"><strong aria-hidden="true">6.</strong> Almighty Iterators</a></li><li><a href="../../lessons/lesson_seven/index.html"><strong aria-hidden="true">7.</strong> Housekeeping #1</a></li><li><a href="../../lessons/lesson_eight/index.html"><strong aria-hidden="true">8.</strong> Closures and Lifetime Preview</a></li><li><a href="../../lessons/lesson_nine/index.html"><strong aria-hidden="true">9.</strong> Lifetime Annotations</a></li><li><a href="../../lessons/lesson_ten/index.html"><strong aria-hidden="true">10.</strong> Unit Testing</a></li><li><a href="../../lessons/lesson_eleven/index.html"><strong aria-hidden="true">11.</strong> TBD</a></li><li><a href="../../lessons/lesson_twelve/index.html"><strong aria-hidden="true">12.</strong> Trait Bounds</a></li><li><a href="../../lessons/lesson_thirteen/index.html"><strong aria-hidden="true">13.</strong> Constructor Patterns</a></li><li><a href="../../lessons/lesson_fourteen/index.html"><strong aria-hidden="true">14.</strong> Iterator Patterns</a></li><li><a href="../../lessons/lesson_fifteen/index.html"><strong aria-hidden="true">15.</strong> Copy/Clone Traits</a></li><li><a href="../../lessons/lesson_sixteen/index.html"><strong aria-hidden="true">16.</strong> Box, Rc, RefCell</a></li><li><a href="../../lessons/lesson_seventeen/index.html"><strong aria-hidden="true">17.</strong> Generics and Associated Types</a></li><li><a href="../../lessons/lesson_seventeen/index.html"><strong aria-hidden="true">18.</strong> Bit Fiddling</a></li><li class="affix"><a href="../../misc/contributors.html">Contributors</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                
+                <div id="menu-bar" class="menu-bar">
+                    <div id="menu-bar-sticky-container">
+                        <div class="left-buttons">
+                            <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                                <i class="fa fa-bars"></i>
+                            </button>
+                            <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                                <i class="fa fa-paint-brush"></i>
+                            </button>
+                            <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                                <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                            </ul>
+                            
+                            <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                                <i class="fa fa-search"></i>
+                            </button>
+                            
+                        </div>
+
+                        <h1 class="menu-title">Rust for OO Programmers</h1>
+
+                        <div class="right-buttons">
+                            <a href="../../print.html" title="Print this book" aria-label="Print this book">
+                                <i id="print-button" class="fa fa-print"></i>
+                            </a>
+                            
+                        </div>
+                    </div>
+                </div>
+
+                
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" name="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h2><a class="header" href="#calling-a-function" id="calling-a-function">Calling a Function</a></h2>
+<pre><pre class="playpen"><code class="language-rust">fn main() {
+    let name = &quot;Rustican&quot;;
+    let function_result = greetings(name);
+    println!(&quot;{}&quot;, function_result);
+}
+
+fn greetings(name: &amp;str) -&gt; String {
+    &quot;Hello &quot;.to_string() + name
+}
+</code></pre></pre>
+<p>Try running this with the play button above.</p>
+<h4><a class="header" href="#code-dissection" id="code-dissection">Code Dissection</a></h4>
+<p>Two elements jump out here: <code>println!</code> and <code>&amp;str</code>:</p>
+<p>One-by-one: </p>
+<p>The <code>println!</code></p>
+<pre><pre class="playpen"><code class="language-rust no_run">
+# #![allow(unused_variables)]
+#fn main() {
+println!(function_result);
+#}</code></pre></pre>
+<p>The println! 'function' lives in <a href="https://doc.rust-lang.org/std/macro.println.html">std::io::println</a> But, it's not a function, it's a macro. </p>
+<p>The little '!' at the end of println is not 'not.' It means it's a macro. </p>
+<p>A macro is a meta-code generation feature that lets macro authors expand simple syntax (hopefully), into something that would otherwise be unduly complex or repetitive. </p>
+<p>A macro author writes the rules (the macro) for the expansion.</p>
+<p>You needn't author macros to code in Rust, but you will use them.</p>
+<br>
+<pre><pre class="playpen"><code class="language-rust no_run">
+# #![allow(unused_variables)]
+#fn main() {
+fn greetings(name: &amp;str) -&gt; String 
+#}</code></pre></pre>
+<p>The <code>&amp;str</code></p>
+<ul>
+<li>There are two string types in Rust. <a href="https://doc.rust-lang.org/rust-by-example/std/str.html">Rust Strings</a></li>
+<li>The <code>&amp;str</code> type is a string slice.  It's a pointer to some UTF-8 bytes, so we know it's length, precisely.</li>
+<li>The <code>String</code> type is dynamically sized, and is conceptually close to a Java or .NET String class.</li>
+</ul>
+<p>The challenge is that we frequently move back and forth between the two.</p>
+<p>The secret-sauce of Rust, compile-time checks, requires that all types allocated have a known-size.  Consequently, many of the operations on strings are done on the <code>&amp;str</code> type and there are reasons (forthcoming) to prefer the &amp;str as a parameter. </p>
+<p>So, in the code:</p>
+<ul>
+<li><code>name</code> is actually a string slice <code>&amp;str</code> and is passed accordingly to the <code>greetings</code> function</li>
+<li>The <code>to_string</code> function makes our <code>&amp;str</code> a String.  (Think to_String() with a big S). </li>
+<li>Our concatenation operator <code>+</code> takes a <code>&amp;str</code> and a <code>String</code> and returns a <code>String</code>.</li>
+<li>That String is returned and used as the parameter to the println! macro. </li>
+</ul>
+<p>Again:</p>
+<pre><pre class="playpen"><code class="language-rust">fn main() {
+    let name = &quot;Rustican&quot;;
+    let function_result = greetings(name);
+    println!(&quot;{}&quot;, function_result);
+}
+
+fn greetings(name: &amp;str) -&gt; String {
+    &quot;Hello &quot;.to_string() + name
+}
+</code></pre></pre>
+<h3><a class="header" href="#implicit-return" id="implicit-return">Implicit Return</a></h3>
+<p>The <code>return</code> keyword is not specified and <code>;</code> is not required in this case. </p>
+<p>This works: </p>
+<pre><pre class="playpen"><code class="language-rust no_run">
+# #![allow(unused_variables)]
+#fn main() {
+fn return_something() -&gt; i32 {
+    1
+} 
+#}</code></pre></pre>
+<p>But, this fails to compile (but would with a <code>return 1;</code> statement)</p>
+<pre><pre class="playpen"><code class="language-rust no_run">
+# #![allow(unused_variables)]
+#fn main() {
+fn return_something() -&gt; i32 {
+    1;
+} 
+#}</code></pre></pre>
+<h4><a class="header" href="#task" id="task">Task</a></h4>
+<p>Play around with the code block.  Don't worry if you hit errors at this point.</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                        
+                            <a rel="prev" href="../../lessons/lesson_one/index.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                        
+
+                        
+                            <a rel="next" href="../../lessons/lesson_two/index.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                
+                    <a href="../../lessons/lesson_one/index.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                
+
+                
+                    <a href="../../lessons/lesson_two/index.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+                
+            </nav>
+
+        </div>
+
+        
+
+        
+
+        
+        <script src="../../ace.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../../editor.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../../mode-rust.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../../theme-dawn.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../../theme-tomorrow_night.js" type="text/javascript" charset="utf-8"></script>
+        
+
+        
+        <script src="../../elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../../mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../../searcher.js" type="text/javascript" charset="utf-8"></script>
+        
+
+        <script src="../../clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../../highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../../book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        
+
+        
+
+    </body>
+</html>

@@ -14,9 +14,6 @@ fn main() {
         "Message from anonymous Kwan: {:?}",
         self::SayHello::say_hello(&kwan)
     );
-
-
-    //That's a huge amount of work (boilerplate code) - so macros let us  
 }
 
 struct FriendlyGuy {
