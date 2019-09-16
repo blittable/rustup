@@ -1,0 +1,10 @@
+[book]
+authors = ["Mycos Technologies"]
+language = "en"
+multilingual = true 
+src = "src"
+title = "Rust for OO Programmers"
+categories = "tutorial, oo, learning rust"
+
+[output.html.playpen]
+editable = true

@@ -1,0 +1,27 @@
+# Summary
+
+[Rust for OO Programmers](README.md)
+[Overview from an OO Perspective](OVERVIEW.md)
+[Lessons](lessons/LESSONS.md) 
+- [Setup And A Function](lessons/lesson_one/README.md)
+    - [Calling a Function](lessons/lesson_one/ex_function_parameter_return.md)
+- [Standard Lib, Types, Immutability](./lessons/lesson_two/README.md)
+- [Intro to Traits](./lessons/lesson_three/README.md)
+- [Enum Wrappers, Option<T> and Matching](./lessons/lesson_four/README.md)
+- [Error Handling](./lessons/lesson_five/README.md)
+- [Almighty Iterators](./lessons/lesson_six/README.md))
+- [Housekeeping #1](./lessons/lesson_seven/README.md))
+- [Closures and Lifetime Preview](./lessons/lesson_eight/README.md))
+- [Lifetime Annotations](./lessons/lesson_nine/README.md))
+- [Unit Testing](./lessons/lesson_ten/README.md))
+- [TBD](./lessons/lesson_eleven/README.md))
+- [Trait Bounds](./lessons/lesson_twelve/README.md))
+- [Constructor Patterns](./lessons/lesson_thirteen/README.md))
+- [Iterator Patterns](./lessons/lesson_fourteen/README.md))
+- [Copy/Clone Traits](./lessons/lesson_fifteen/README.md))
+- [Box<T>, Rc<T>, RefCell<T>](./lessons/lesson_sixteen/README.md))
+- [Generics and Associated Types](./lessons/lesson_seventeen/README.md))
+- [Bit Fiddling](./lessons/lesson_seventeen/README.md))
+
+
+[Contributors](misc/contributors.md)

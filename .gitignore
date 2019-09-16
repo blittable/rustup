@@ -11,3 +11,4 @@ Cargo.lock
 
 main
 project
+.vscode/settings.json

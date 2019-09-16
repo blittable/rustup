@@ -1,0 +1,1645 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Rust for OO Programmers</title>
+        
+        <meta name="robots" content="noindex" />
+        
+
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
+        <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:500" rel="stylesheet" type="text/css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        
+
+        
+    </head>
+    <body class="light">
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "";
+            var default_theme = "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            document.body.className = theme;
+            document.querySelector('html').className = theme + ' js';
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="affix"><a href="index.html">Rust for OO Programmers</a></li><li class="affix"><a href="OVERVIEW.html">Overview from an OO Perspective</a></li><li class="affix"><a href="lessons/LESSONS.html">Lessons</a></li><li><a href="lessons/lesson_one/index.html"><strong aria-hidden="true">1.</strong> Setup And A Function</a></li><li><ol class="section"><li><a href="lessons/lesson_one/ex_function_parameter_return.html"><strong aria-hidden="true">1.1.</strong> Calling a Function</a></li></ol></li><li><a href="lessons/lesson_two/index.html"><strong aria-hidden="true">2.</strong> Standard Lib, Types, Immutability</a></li><li><a href="lessons/lesson_three/index.html"><strong aria-hidden="true">3.</strong> Intro to Traits</a></li><li><a href="lessons/lesson_four/index.html"><strong aria-hidden="true">4.</strong> Enum Wrappers, Option and Matching</a></li><li><a href="lessons/lesson_five/index.html"><strong aria-hidden="true">5.</strong> Error Handling</a></li><li><a href="lessons/lesson_six/index.html"><strong aria-hidden="true">6.</strong> Almighty Iterators</a></li><li><a href="lessons/lesson_seven/index.html"><strong aria-hidden="true">7.</strong> Housekeeping #1</a></li><li><a href="lessons/lesson_eight/index.html"><strong aria-hidden="true">8.</strong> Closures and Lifetime Preview</a></li><li><a href="lessons/lesson_nine/index.html"><strong aria-hidden="true">9.</strong> Lifetime Annotations</a></li><li><a href="lessons/lesson_ten/index.html"><strong aria-hidden="true">10.</strong> Unit Testing</a></li><li><a href="lessons/lesson_eleven/index.html"><strong aria-hidden="true">11.</strong> TBD</a></li><li><a href="lessons/lesson_twelve/index.html"><strong aria-hidden="true">12.</strong> Trait Bounds</a></li><li><a href="lessons/lesson_thirteen/index.html"><strong aria-hidden="true">13.</strong> Constructor Patterns</a></li><li><a href="lessons/lesson_fourteen/index.html"><strong aria-hidden="true">14.</strong> Iterator Patterns</a></li><li><a href="lessons/lesson_fifteen/index.html"><strong aria-hidden="true">15.</strong> Copy/Clone Traits</a></li><li><a href="lessons/lesson_sixteen/index.html"><strong aria-hidden="true">16.</strong> Box, Rc, RefCell</a></li><li><a href="lessons/lesson_seventeen/index.html"><strong aria-hidden="true">17.</strong> Generics and Associated Types</a></li><li><a href="lessons/lesson_seventeen/index.html"><strong aria-hidden="true">18.</strong> Bit Fiddling</a></li><li class="affix"><a href="misc/contributors.html">Contributors</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                
+                <div id="menu-bar" class="menu-bar">
+                    <div id="menu-bar-sticky-container">
+                        <div class="left-buttons">
+                            <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                                <i class="fa fa-bars"></i>
+                            </button>
+                            <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                                <i class="fa fa-paint-brush"></i>
+                            </button>
+                            <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                                <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                            </ul>
+                            
+                            <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                                <i class="fa fa-search"></i>
+                            </button>
+                            
+                        </div>
+
+                        <h1 class="menu-title">Rust for OO Programmers</h1>
+
+                        <div class="right-buttons">
+                            <a href="print.html" title="Print this book" aria-label="Print this book">
+                                <i id="print-button" class="fa fa-print"></i>
+                            </a>
+                            
+                        </div>
+                    </div>
+                </div>
+
+                
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" name="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1><a class="header" href="#rust-for-oo-programmers" id="rust-for-oo-programmers">Rust for OO Programmers</a></h1>
+<p>This is an overview/tutorial of the Rust programming language targeting object oriented programmers.</p>
+<p>Rust is best groked from a C++/C perspective, so some content that attends to the background of OO programmers lets us skip a few topics, but more importantly post warning signs 
+where OO thinking may introduce obstacles to success.  By OO, we mean a statically-typed language where 'Object' sits at the top
+of the type heirarchy, such as any .NET language or Java.</p>
+<p><a href="https://doc.rust-lang.org/book/">The Rust Programming Language - aka 'The Book'</a> is a <em>great</em> resource and should certainly be used in conjuction with the content if you are new to Rust programming.</p>
+<p>Rust code and libraries are also easily 'self-documented', and one of the best examples is the std crate.  (a <code>crate</code> being the equivilant of an npm or nuget package).  <a href="https://doc.rust-lang.org/std/">std</a>  For core concepts (e.g. references, types, etc.), the api documentation often provides conceptual context that is very helpful. </p>
+<p>A personal favorite, though sparse in parts, is the <a href="https://doc.rust-lang.org/stable/reference/">reference book</a> It's readable and not strictly a formal reference.</p>
+<p>Keep in mind that post-install, you have the core documentation installed locally.  Launch with <code>rustup doc</code></p>
+<h2><a class="header" href="#how-to-use" id="how-to-use">How to Use</a></h2>
+<ul>
+<li>
+<p>The content/progress is fairly linear.</p>
+</li>
+<li>
+<p>The README for each chapter explains concepts and then typically presents an exercise.</p>
+</li>
+<li>
+<p>If you fork or clone this repository, most of the exercises are in the /src folder.</p>
+</li>
+<li>
+<p>You know how you learn best, but taking the examples, tweeking them, and playing with the problem/topics works well for most. </p>
+</li>
+<li>
+<p>The original content was developed as part of an in-house course on Rust, and is a WIP, so some oddities may appear. </p>
+</li>
+</ul>
+<h2><a class="header" href="#objectives" id="objectives">Objectives</a></h2>
+<ul>
+<li>Provide an introduction to Rust that will get you moving, quickly</li>
+<li>Keep the lessons small and focused, one or two topics, max</li>
+<li>Build a solid foundation in Rust for further development</li>
+<li>Provide contextual information for OO programmers looking for a frame of reference</li>
+</ul>
+<h2><a class="header" href="#other-notes-and-tips" id="other-notes-and-tips">Other Notes and Tips</a></h2>
+<ul>
+<li>Resist the temptation to skim the Rust documention, jump over to github, pull a random project and start compiling.  A good foundation will get you moving faster.</li>
+<li>Rust code can be a bit intimidating at first glance (and even after a few more glances). However you're not obliged to use the advanced features of the language to get moving.  There are solid applications and libraries that are light on generics, inter-thread communication, macros, unsafe code, etc.</li>
+</ul>
+<h1><a class="header" href="#the-oo-perspective" id="the-oo-perspective">The OO Perspective</a></h1>
+<p>For the OO programmer:</p>
+<ul>
+<li>
+<p>Functionality (often traits), is decoupled from data structures (structs or enums). </p>
+</li>
+<li>
+<p>&quot;You get what you get&quot; - there's very little in the way of 'inherited' functionality.</p>
+</li>
+<li>
+<p>There is no NULL.  It is replaced, by convention, by wrapping <code>None</code> in an <code>Option&lt;T&gt;</code></p>
+</li>
+<li>
+<p>You're accountable for the memory life of your allocations, though Rust, through compile-time rules, assists, vigorously. </p>
+</li>
+<li>
+<p>Iteration and closures are first-class citizens in code composition. </p>
+</li>
+<li>
+<p>The allocation-related rules above have significant consequences, especially for recursive-types (e.g. graph nodes), associated types, and thread-safe types. </p>
+</li>
+<li>
+<p>A garbage-collection free, lightweight runtime that is memory safe.</p>
+</li>
+<li>
+<p>Incredible performance.</p>
+</li>
+<li>
+<p>Generics</p>
+</li>
+<li>
+<p>Fearless concurrency</p>
+</li>
+</ul>
+<h1><a class="header" href="#lessons" id="lessons">Lessons</a></h1>
+<table><thead><tr><th>Lesson</th><th>Content</th></tr></thead><tbody>
+<tr><td>Lesson One</td><td><a href="lessons/lesson_one">Setup and passing/returning String</a></td></tr>
+<tr><td>Lesson Two</td><td>Standard Lib, Types, Immutability</td></tr>
+<tr><td>Lesson Three</td><td>Introduction To Traits</td></tr>
+<tr><td>Lesson Four</td><td>Enum Wrappers, Option<T>, and Matching</td></tr>
+<tr><td>Lesson Five</td><td>Error Handling Basics</td></tr>
+<tr><td>Lesson Six</td><td>Loops and Almighty Iterators</td></tr>
+<tr><td>Lesson Seven</td><td>Housekeeping (proj structure, some new types, etc.)</td></tr>
+<tr><td>Lesson Eight</td><td>Closures and a Peek at Lifetimes</td></tr>
+<tr><td>Lesson Nine</td><td>Lifetimes</td></tr>
+<tr><td>Lesson Ten</td><td>Unit Testing</td></tr>
+<tr><td>Lesson Eleven</td><td>TBD</td></tr>
+<tr><td>Lesson Twelve</td><td>Trait Bounds</td></tr>
+<tr><td>Lesson Thirteen</td><td>Patterns of Constructors</td></tr>
+<tr><td>Lesson Fourteen</td><td>Patterns of Iterators</td></tr>
+<tr><td>Lesson Fifteen</td><td>Rc<T>, RcCell<T>, Box<T> (again)</td></tr>
+<tr><td>Lesson Sixteen</td><td>and returning Traits</td></tr>
+<tr><td>Lesson Seventeen</td><td>Functions vs. methods and impl on structs</td></tr>
+<tr><td>Lesson Eighteen</td><td>Slices in Retrospect</td></tr>
+<tr><td>Lesson Nineteen</td><td>Housekeeping: pinning runtime and rnd crate</td></tr>
+<tr><td>Lesson 20</td><td>The Sized Trait</td></tr>
+<tr><td>Lesson 21</td><td>Environment variables and the command line</td></tr>
+<tr><td>Lesson 22</td><td>Threads</td></tr>
+<tr><td>Lesson 23</td><td>Ref Stuff</td></tr>
+<tr><td>Lesson 24</td><td>Associated types on traits</td></tr>
+<tr><td>Lesson 25</td><td>The Sized Trait</td></tr>
+<tr><td>Lesson 26</td><td>Housekeeping Part 3</td></tr>
+<tr><td>Lesson 27</td><td>Web (and other) Assembly</td></tr>
+<tr><td>Lesson 28</td><td>TBD</td></tr>
+<tr><td>Lesson 29</td><td>Futures</td></tr>
+<tr><td>Lesson 30</td><td>Pluggable Runtimes and Async/Await</td></tr>
+</tbody></table>
+<h1><a class="header" href="#lesson-one-setup-and-returning-a-string" id="lesson-one-setup-and-returning-a-string">Lesson One: Setup and returning a String</a></h1>
+<h2><a class="header" href="#objectives-1" id="objectives-1">Objectives</a></h2>
+<ul>
+<li>Get Rust installed</li>
+<li>Look at the toolchain (rustc, cargo, rustup)</li>
+<li>Create a function that returns a value</li>
+</ul>
+<h3><a class="header" href="#installing" id="installing">Installing</a></h3>
+<p><a href="https://www.rust-lang.org/">Installing Rust</a> - This installs the toolchain (compiler and package manager (cargo) - Windows, OSX, Linux and other OS's are supported.</p>
+<ul>
+<li>Verify your installation worked by opening a command/terminal prompt and typing:</li>
+</ul>
+<pre><code>rustup
+rustc
+cargo
+</code></pre>
+<h3><a class="header" href="#get-to-know-the-toolchain" id="get-to-know-the-toolchain">Get to Know the toolchain</a></h3>
+<p>rustc is the compiler, but it's normally called by running a 'cargo' command (e.g. cargo build)</p>
+<p>This command:</p>
+<pre><code>rustup show
+</code></pre>
+<p>shows you your default / active toolchain.  Something like:</p>
+<pre><code>installed toolchains
+--------------------
+
+stable-x86_64-unknown-linux-gnu (default)
+nightly-x86_64-unknown-linux-gnu
+
+active toolchain
+----------------
+
+stable-x86_64-unknown-linux-gnu (default)
+rustc 1.37.0 (eae3437df 2019-08-13)
+</code></pre>
+<p>You can switch the active toolchain or compile with a specific toolchain.  Look at the 'rustup' command for details. </p>
+<h4><a class="header" href="#cool-note" id="cool-note">Cool Note</a></h4>
+<p>Type <code>rustc</code>, and look at the option for <code>emit</code> that specifies the output format, including asm (think web assembly) and llvm-ir </p>
+<pre><code>--emit [asm|llvm-bc|llvm-ir|obj|metadata|link|dep-info|mir]
+                        Comma separated list of types of output for the
+                        compiler to emit
+</code></pre>
+<h3><a class="header" href="#tool-summary" id="tool-summary">Tool Summary</a></h3>
+<p>So, there are three tools to get straight:</p>
+<table><thead><tr><th>Tool</th><th>Purpose</th></tr></thead><tbody>
+<tr><td><code>rustup</code></td><td>Doc and toolchain related</td></tr>
+<tr><td><code>cargo</code></td><td>Rust project builder, runner, invoker sort of like ~npm</td></tr>
+<tr><td><code>rustc</code></td><td>The rust compiler, though you will likely invoke it via <code>cargo</code></td></tr>
+</tbody></table>
+<h2><a class="header" href="#launch-the-local-doc" id="launch-the-local-doc">Launch the Local Doc</a></h2>
+<p>You're going to need it.  ;)</p>
+<p><code>rustup doc</code></p>
+<h2><a class="header" href="#review-the-cargotoml" id="review-the-cargotoml">Review the Cargo.toml</a></h2>
+<p>Take a look at the format of the Cargo.toml.  That's the package.json / .proj  manifest file for Rust.</p>
+<p>The most important part is the 'dependencies' section.  There are dependencies and dev-dependencies and many other options  <a href="https://rurust.github.io/cargo-docs-ru/manifest.html">Rust manifest</a> </p>
+<h2><a class="header" href="#exercises" id="exercises">Exercises</a></h2>
+<p>You have some choices on runnning the exercises:</p>
+<ul>
+<li>Run inside of the doc via playpen (look for the play button)</li>
+<li>Clone or fork this repository and navigate to the lesson directory and run with <code>cargo run</code> </li>
+<li>Brew your own repo, optionally copying-pasting code</li>
+</ul>
+<table><thead><tr><th>Exercise</th><th>Purpose</th></tr></thead><tbody>
+<tr><td><a href="lessons/lesson_one/ex_function_parameter_return.html">Calling a Function</a></td><td>Kicking the Tires</td></tr>
+</tbody></table>
+<h2><a class="header" href="#calling-a-function" id="calling-a-function">Calling a Function</a></h2>
+<pre><pre class="playpen"><code class="language-rust">fn main() {
+    let name = &quot;Rustican&quot;;
+    let function_result = greetings(name);
+    println!(&quot;{}&quot;, function_result);
+}
+
+fn greetings(name: &amp;str) -&gt; String {
+    &quot;Hello &quot;.to_string() + name
+}
+</code></pre></pre>
+<p>Try running this with the play button above.</p>
+<h4><a class="header" href="#code-dissection" id="code-dissection">Code Dissection</a></h4>
+<p>Two elements jump out here: <code>println!</code> and <code>&amp;str</code>:</p>
+<p>One-by-one: </p>
+<p>The <code>println!</code></p>
+<pre><pre class="playpen"><code class="language-rust no_run">
+# #![allow(unused_variables)]
+#fn main() {
+println!(function_result);
+#}</code></pre></pre>
+<p>The println! 'function' lives in <a href="https://doc.rust-lang.org/std/macro.println.html">std::io::println</a> But, it's not a function, it's a macro. </p>
+<p>The little '!' at the end of println is not 'not.' It means it's a macro. </p>
+<p>A macro is a meta-code generation feature that lets macro authors expand simple syntax (hopefully), into something that would otherwise be unduly complex or repetitive. </p>
+<p>A macro author writes the rules (the macro) for the expansion.</p>
+<p>You needn't author macros to code in Rust, but you will use them.</p>
+<br>
+<pre><pre class="playpen"><code class="language-rust no_run">
+# #![allow(unused_variables)]
+#fn main() {
+fn greetings(name: &amp;str) -&gt; String 
+#}</code></pre></pre>
+<p>The <code>&amp;str</code></p>
+<ul>
+<li>There are two string types in Rust. <a href="https://doc.rust-lang.org/rust-by-example/std/str.html">Rust Strings</a></li>
+<li>The <code>&amp;str</code> type is a string slice.  It's a pointer to some UTF-8 bytes, so we know it's length, precisely.</li>
+<li>The <code>String</code> type is dynamically sized, and is conceptually close to a Java or .NET String class.</li>
+</ul>
+<p>The challenge is that we frequently move back and forth between the two.</p>
+<p>The secret-sauce of Rust, compile-time checks, requires that all types allocated have a known-size.  Consequently, many of the operations on strings are done on the <code>&amp;str</code> type and there are reasons (forthcoming) to prefer the &amp;str as a parameter. </p>
+<p>So, in the code:</p>
+<ul>
+<li><code>name</code> is actually a string slice <code>&amp;str</code> and is passed accordingly to the <code>greetings</code> function</li>
+<li>The <code>to_string</code> function makes our <code>&amp;str</code> a String.  (Think to_String() with a big S). </li>
+<li>Our concatenation operator <code>+</code> takes a <code>&amp;str</code> and a <code>String</code> and returns a <code>String</code>.</li>
+<li>That String is returned and used as the parameter to the println! macro. </li>
+</ul>
+<p>Again:</p>
+<pre><pre class="playpen"><code class="language-rust">fn main() {
+    let name = &quot;Rustican&quot;;
+    let function_result = greetings(name);
+    println!(&quot;{}&quot;, function_result);
+}
+
+fn greetings(name: &amp;str) -&gt; String {
+    &quot;Hello &quot;.to_string() + name
+}
+</code></pre></pre>
+<h3><a class="header" href="#implicit-return" id="implicit-return">Implicit Return</a></h3>
+<p>The <code>return</code> keyword is not specified and <code>;</code> is not required in this case. </p>
+<p>This works: </p>
+<pre><pre class="playpen"><code class="language-rust no_run">
+# #![allow(unused_variables)]
+#fn main() {
+fn return_something() -&gt; i32 {
+    1
+} 
+#}</code></pre></pre>
+<p>But, this fails to compile (but would with a <code>return 1;</code> statement)</p>
+<pre><pre class="playpen"><code class="language-rust no_run">
+# #![allow(unused_variables)]
+#fn main() {
+fn return_something() -&gt; i32 {
+    1;
+} 
+#}</code></pre></pre>
+<h4><a class="header" href="#task" id="task">Task</a></h4>
+<p>Play around with the code block.  Don't worry if you hit errors at this point.</p>
+<h1><a class="header" href="#lesson-two-the-standard-library-basic-types-and-immutability" id="lesson-two-the-standard-library-basic-types-and-immutability">Lesson Two: The Standard Library, Basic Types and Immutability</a></h1>
+<h2><a class="header" href="#objectives-2" id="objectives-2">Objectives</a></h2>
+<ul>
+<li>Understand basic variable assignments, types and fundamental borrowing rules </li>
+<li>Understand what the standard library is and when it might not be used</li>
+</ul>
+<h2><a class="header" href="#the-foundation-we-are-standing-on-normally-std" id="the-foundation-we-are-standing-on-normally-std">The Foundation We are Standing on (normally): std</a></h2>
+<p>Take a look at the Rust standard library <a href="https://doc.rust-lang.org/std/">std</a> </p>
+<p>Normally, we'll be using the standard library but it's not required. Embedded devices, may or may not have a file system, for example, and sans std lib, we can stillwcode Rust for those devices. </p>
+<p>Libraries or binaries/executables with:</p>
+<pre><code>#![no_std]
+</code></pre>
+<p>instruct the compiler to reject any use of the standard library.</p>
+<p>Some good resources on embedded programming with Rust:</p>
+<ul>
+<li>[Discover embedded programming with Rust (good for getting started)] https://docs.rust-embedded.org/discovery/</li>
+<li>[The Embedded Rust Book] (https://docs.rust-embedded.org/book/) </li>
+</ul>
+<h2><a class="header" href="#immutability" id="immutability">Immutability</a></h2>
+<p>By default Rust values are immutable and the compiler enforces compliance.</p>
+<pre><pre class="playpen"><code class="language-rust">
+# #![allow(unused_variables)]
+#fn main() {
+let x = 10;
+x = 12;
+#}</code></pre></pre>
+<p>produces a compile error.</p>
+<pre><pre class="playpen"><code class="language-rust">
+# #![allow(unused_variables)]
+#fn main() {
+let mut x = 10;
+x = 12;
+#}</code></pre></pre>
+<p>works because the variable is marked as mutable (changeable)</p>
+<h2><a class="header" href="#race-conditions-fearless-concurrency-and-why-rust-helps" id="race-conditions-fearless-concurrency-and-why-rust-helps">Race Conditions, Fearless Concurrency and Why Rust Helps:</a></h2>
+<p>Let's say we have a Point of Sales system, and there are many run-time configuration options/rules.  A developer writes some code and then updates those options.  Developer B, in a different module, does the same.  When those updating events are called, at runtime, is unknown, as it depends on the system users. That's a basic race condition.</p>
+<p>Rust adds a bit of information to each memory allocation/variable - ownership.  Race conditions are not all bad (e.g. a multi-player game), but hidden race conditions are frequent source of bugs.  Rust's ownership and compile-time enforcement of ownership rules effectively 'outs' those race conditions.</p>
+<p>Ownership is a central concept in Rust and all heap allocated data has an owner.  Changing ownership is called a 'Move'  Sharing of values is allowed.  Sharing a reference is called 'borrowing'.   Mutability comes in to play.</p>
+<ol>
+<li><code>MyVariable</code> can be borrowed by multiple borrowers.</li>
+<li><code>mut MyVariable</code> can be borrowed by <em>one</em> borrower.</li>
+</ol>
+<p>The second rule is our guard against unwittingly introducing or exposing a race condition.</p>
+<h2><a class="header" href="#task-1" id="task-1">Task:</a></h2>
+<p>Review borrowing_101 and borrowing_102 in the demos directory.</p>
+<h2><a class="header" href="#task-2" id="task-2">Task:</a></h2>
+<p>This section of chapter 4 from the Rust book is great.  Highly recommended:
+<a href="https://doc.rust-lang.org/book/ch04-01-what-is-ownership.html">The stack, heap, ownership and borrowing</a></p>
+<h2><a class="header" href="#general-notes" id="general-notes">General Notes</a></h2>
+<p>Borrowing gets us control over the scope and lifetime of memory allocations.  But, there is a price.  Recursive functions, when optimized, become an exercise in handling the borrows.  That's why a fibonacci sequence in a dynamically typed language can look like this:</p>
+<p>(Lua)</p>
+<pre><code class="language-lua">function fib(n)
+ if n == 0 or n == 1 then
+ return n
+ else
+ return fib(n - 1) + fib(n - 2)
+end
+</code></pre>
+<p>and in Rust, look like this:</p>
+<p>(Rust)</p>
+<pre><pre class="playpen"><code class="language-rust">
+# #![allow(unused_variables)]
+#fn main() {
+fn fib(n_dyn: Rc&lt;Any&gt;) -&gt; Rc&lt;Any&gt; {
+ let n_static: &amp;i32 =
+    n_dyn.downcast_ref::&lt;i32&gt;().unwrap();
+    if *n_static == 0 {
+        Rc::new(Box::new(*n_static))
+    } else {
+    let n1 = fib(Rc::new(Box::new(n_static - 1)));
+    let n2 = fib(Rc::new(Box::new(n_static - 2)));
+    Rc::new(
+        n1.downcast_ref::&lt;i32&gt;().unwrap() +
+        n2.downcast_ref::&lt;i32&gt;().unwrap())
+    }
+}
+#}</code></pre></pre>
+<ul>
+<li><a href="http://cs242.stanford.edu/f18/assets/lectures/09-2-future-of-pl.pdf">source</a></li>
+</ul>
+<h2><a class="header" href="#homework" id="homework">Homework</a></h2>
+<p>Playtime!  Lesson 2 src is empty.  Try working with stack and heap assigned variables. Try to break the rules and review the compiler messages.</p>
+<h1><a class="header" href="#lesson-three-pay-for-what-you-use-introduction-to-traits-and-enum-wrappers" id="lesson-three-pay-for-what-you-use-introduction-to-traits-and-enum-wrappers">Lesson Three: Pay for What You Use, Introduction to Traits and Enum Wrappers</a></h1>
+<h2><a class="header" href="#objectives-3" id="objectives-3">Objectives</a></h2>
+<ul>
+<li>Understand types and what they implement - Traits </li>
+</ul>
+<h2><a class="header" href="#pay-for-what-you-use" id="pay-for-what-you-use">Pay for What you Use</a></h2>
+<p>One of the philosophies of Rust is 'Pay only for what you use'.  Make no assumptions about what a type does - dive into the api doc.</p>
+<p>The functionality that is on a type is from a <code>trait</code>.</p>
+<p>In an OO language like .NET, the root object <code>Object</code> implements <code>Object.MemberwiseClone</code> and is accessible to all classes/objects.</p>
+<p>Not so in Rust:</p>
+<pre><pre class="playpen"><code class="language-rust">
+# #![allow(unused_variables)]
+#fn main() {
+  let name: &amp;'static str = &quot;Mycos&quot;;
+
+    let mut name_borrower = String::default();
+    let name: String = String::from(&quot;Mycos&quot;);
+
+    name_borrower = name.to_owned();    &lt;--- Our String can do to_owned 
+    name_borrower = name.clone();       &lt;--- AND clone() 
+
+    //BUT, not all types can be .clone() 'd
+    //Not all types implement the trait
+    let v: &amp;[i32] = &amp;[1, 2];
+    let vv: Vec&lt;i32&gt; = v.to_owned();
+    let vv: Vec&lt;i32&gt; = v.clone()        &lt;---  Compile Error, the clone trait is not implemented
+#}</code></pre></pre>
+<h2><a class="header" href="#simple-trait-syntax" id="simple-trait-syntax">Simple Trait Syntax</a></h2>
+<pre><pre class="playpen"><code class="language-rust">
+# #![allow(unused_variables)]
+#fn main() {
+trait Pay {
+  fn pay() -&gt; i32; 
+}
+
+struct Company {
+  name: String
+}
+
+impl Pay for Company {
+  fn pay(&amp;self) -&gt; i32 {
+    10
+  }
+}
+#}</code></pre></pre>
+<h2><a class="header" href="#homework-1" id="homework-1">Homework</a></h2>
+<p>The instructions are in the code (lesson 3) - implement a trait - feel free to do more!</p>
+<h1><a class="header" href="#lesson-four-enum-wrappers-and-some-type-basics" id="lesson-four-enum-wrappers-and-some-type-basics">Lesson Four: Enum Wrappers and Some Type Basics</a></h1>
+<h2><a class="header" href="#objectives-4" id="objectives-4">Objectives</a></h2>
+<ul>
+<li>Understand working without NULL (you won't miss it) </li>
+<li>The std lib enum wrappers <code>Option&lt;T&gt;</code> <code>Result&lt;Err, T&gt;</code> </li>
+<li>Understand how to import a library/crate and reference it in a source file </li>
+</ul>
+<h2><a class="header" href="#null-stdoption-and-enum-wrappers" id="null-stdoption-and-enum-wrappers">NULL, std::option and Enum Wrappers</a></h2>
+<p>There's no NULL type in Rust. </p>
+<pre><code>if (x == null) ... is gone.
+</code></pre>
+<p>The <code>std::option::Option</code> type (no need to import) is used <em>very</em> often in Rust, typically to handle our NULL scenario - indicated the presence or absence of data. </p>
+<pre><pre class="playpen"><code class="language-rust no_run">
+# #![allow(unused_variables)]
+#fn main() {
+pub enum Option&lt;T&gt; {
+    /// No value
+    None,
+    /// Some value `T`
+    Some(T),
+}
+
+#}</code></pre></pre>
+<p>So, typically, if it is optional we define it as such:</p>
+<pre><pre class="playpen"><code class="language-rust no_run">
+# #![allow(unused_variables)]
+#fn main() {
+struct Dieter {
+    name: String,
+    daily_calories: &lt;Option&lt;u8&gt;&gt;   // &lt;- tough diet, u8 is an unsigned 8 bit byte
+}
+#}</code></pre></pre>
+<p>The dieter object may or may not have a defined amount of <code>daily_calories</code> and access to the value (if defined) must be preceded by a check for its presence (Some or None).</p>
+<p>Another built-in enum in the std library is the Result&lt;T, E&gt;  which is used for returning values which can then be 'unwrapped' for errors OR propograted/thrown further up the call stack.</p>
+<p>The definition, likewise, is simple:</p>
+<pre><code>enum Result&lt;T, E&gt; {
+   Ok(T),
+   Err(E),
+}
+</code></pre>
+<p>And the typical usage:</p>
+<pre><pre class="playpen"><code class="language-rust">
+use std::num::ParseIntError;
+
+fn double_number(number_str: &amp;str) -&gt; Result&lt;i32, ParseIntError&gt; {
+    match number_str.parse::&lt;i32&gt;() {
+        Ok(n) =&gt; Ok(2 * n),
+        Err(err) =&gt; Err(err),
+    }
+}
+
+fn main() {
+    match double_number(&quot;10&quot;) {
+        Ok(n) =&gt; assert_eq!(n, 20),
+        Err(err) =&gt; println!(&quot;Error: {:?}&quot;, err),
+    }
+}
+
+</code></pre></pre>
+<p>*** See demo match_101 and match_102 for examples </p>
+<h1><a class="header" href="#lesson-five-error-handling" id="lesson-five-error-handling">Lesson Five: Error Handling</a></h1>
+<h2><a class="header" href="#objectives-5" id="objectives-5">Objectives</a></h2>
+<ul>
+<li>Understand the common error handling patterns </li>
+<li>Review matching in the context of error handling</li>
+</ul>
+<h2><a class="header" href="#errors" id="errors">Errors:</a></h2>
+<p>This is an excellent article on error handling in Rust.  https://blog.burntsushi.net/rust-error-handling/</p>
+<p>The Rust Book and Rust By Example are a bit thin in this category, so the article is highly recommended.</p>
+<p>Frankly, handling errors in Rust requires more effort than OO programmers are accustomed to. </p>
+<p>There are efforts like the <a href="https://github.com/rust-lang-nursery/failure">Failure</a> library which attempt to make it more ergonomic/friendly to use.</p>
+<p>Here are the basics: </p>
+<h2><a class="header" href="#error-propogation" id="error-propogation">Error Propogation</a></h2>
+<p>Like <code>Options</code>, <code>Results</code> can use <code>.unwrap()</code>  As of Rust 2018, a nicer way to handle errors is to propogate via the <code>?</code> operator.</p>
+<p>It's analogous to throwing an Exception in an OO language. If it unwraps to an <code>Err</code>, throw it up the chain. </p>
+<h2><a class="header" href="#the-flow-of-options-and-results" id="the-flow-of-options-and-results">The Flow of Options and Results</a></h2>
+<p><code>Result&lt;T, E&gt;</code>, for OO programmers, <em>looks like</em> like a 'parent' return type.  OO programmers can use parent types to easily return the more specific errors in sub-class instances.  <code>Result&lt;T, E&gt;</code> doesn't do this.</p>
+<ol>
+<li>Exactly, like <code>Option&lt;T&gt;</code>, Results are unwrapped, typically with a <code>match</code> statement.</li>
+<li>But, the reasoning process for Results vs. Options is not the not the same and introduces one additional step </li>
+</ol>
+<p>With Options:</p>
+<pre><code>                    Option&lt;T&gt;                                                       
+                       |                                                                  
+          Some         or               None                                  
+            |                             | 
+We know our T and get to work       Missing, handle accordingly 
+</code></pre>
+<p>But, with Results:</p>
+<pre><code>                    Result&lt;T, E&gt;                                                       
+                       |                                                                  
+           Ok          or                Err                                  
+            |                             | 
+We know our T and get to work       We *might* have an Error (a trait)
+                                          |
+                                    We find the specific error for return type size
+                                          |
+                                    We return Result handling the content behind Err
+                                    with full knowledge of its underlying type
+</code></pre>
+<p>In OO programming we have the luxury of handling errors without knowing all the details, because if an error is thrown or I throw an error, we at least know it derives from an Error (typically an Exception class).</p>
+<p>In Rust, however, we <em>must</em> know the exact content of the Result's Err in order to handle it.  In fact the <code>E</code> in <code>Result&lt;T, E&gt;</code> needn't be an <code>Error</code> (deriving from the Error trait) at all (a String here for illustrative purpose):</p>
+<pre><pre class="playpen"><code class="language-rust">
+fn main() -&gt; Result&lt;(), Box&lt;String&gt;&gt; {
+    let function_result = is_positive(-2);
+    println!(&quot;{:?}&quot;, function_result?);
+    Ok(())
+}
+
+fn is_positive(number: i64) -&gt; Result&lt;(), String&gt; {
+    if number &lt; 0 {
+        return Err(&quot;emergency failure&quot;.to_string());
+    }
+    Ok(())
+}
+</code></pre></pre>
+<p>An additional layer of digging is often required because, aside from the above, types including
+<code>Result&lt;T, E&gt;</code> are frequently aliased, e.g.: </p>
+<pre><pre class="playpen"><code class="language-rust no_run">
+# #![allow(unused_variables)]
+#fn main() {
+type AliasedResult&lt;T&gt; = Result&lt;T, String&gt;;
+#}</code></pre></pre>
+<pre><pre class="playpen"><code class="language-rust">
+fn main() -&gt; AliasedResult&lt;()&gt; {
+    let function_result = is_positive(-2);
+    println!(&quot;{:?}&quot;, function_result?);
+    Ok(())
+}
+
+
+type AliasedResult&lt;T&gt; = Result&lt;T, String&gt;;
+
+fn is_positive(number: i64) -&gt; AliasedResult&lt;()&gt; {
+    if number &lt; 0 {
+        return Err(&quot;emergency failure&quot;.to_string());
+    }
+    Ok(())
+}
+
+</code></pre></pre>
+<p>To summarize:</p>
+<ol>
+<li>Using the <code>?</code> makes errors easier to read and makes higher-level code flow more sensibly.</li>
+<li>If you are using a Result (your own or from a function you invoke), first determine the type behind the Err.</li>
+<li>Make no assumptions that the Err wraps a type implementing the Error trait.</li>
+</ol>
+<h3><a class="header" href="#exercise" id="exercise">Exercise</a></h3>
+<p>There's a simple command-line application in lesson_five that takes one parameter.  If the parameter is great than 125, the program errors.  Use a Result&lt;T, E&gt; to improve the error handling.</p>
+<h1><a class="header" href="#lesson-six-almighty-iterators" id="lesson-six-almighty-iterators">Lesson Six: Almighty Iterators</a></h1>
+<h2><a class="header" href="#objectives-6" id="objectives-6">Objectives</a></h2>
+<ul>
+<li>Look at some looping, enumerate constructs </li>
+<li>Understand when and how to use an iterator</li>
+</ul>
+<pre><pre class="playpen"><code class="language-rust">
+fn main() {
+
+
+}
+
+
+fn simple_range() {
+
+	for i in 0..30 {
+		println!(&quot;{}&quot;, i);
+	}
+}
+
+
+TODO: Enumerate Sample
+
+</code></pre></pre>
+<h3><a class="header" href="#homework-notes" id="homework-notes">Homework Notes</a></h3>
+<h1><a class="header" href="#lesson-seven-housekeeping" id="lesson-seven-housekeeping">Lesson Seven: HouseKeeping</a></h1>
+<h2><a class="header" href="#objectives-7" id="objectives-7">Objectives</a></h2>
+<p>We've covered quite a few of the fundamentals. Housekeeping lessons are quick visit on a series of topics.</p>
+<h2><a class="header" href="#importuse-syntax" id="importuse-syntax">Import/Use syntax</a></h2>
+<p>Rust 2018 (a major release from, surprise, 2018), does not require 'extern crate' in most cases. If the dependency is 
+listed in the Cargo.toml, only 'use crate_name' is needed.  Older sample code may indicate otherwise.</p>
+<pre><pre class="playpen"><code class="language-rust">
+# #![allow(unused_variables)]
+#fn main() {
+ extern crate colored; // not needed in Rust 2018
+    
+use colored::*;
+#}</code></pre></pre>
+<h2><a class="header" href="#syntax-variations-for-crates-and-modules" id="syntax-variations-for-crates-and-modules">Syntax variations for crates and modules</a></h2>
+<p>For  somecrate::somemodule::somesubmodule::somefunction</p>
+<pre><pre class="playpen"><code class="language-rust">
+# #![allow(unused_variables)]
+#fn main() {
+use somecrate::*;
+#}</code></pre></pre>
+<p>Syntax will be:</p>
+<pre><pre class="playpen"><code class="language-rust">
+# #![allow(unused_variables)]
+#fn main() {
+somemodule::somesubmodule::somefunction()
+#}</code></pre></pre>
+<p>The invocation starts where the the use ends.</p>
+<p>We can also: </p>
+<pre><pre class="playpen"><code class="language-rust">
+# #![allow(unused_variables)]
+#fn main() {
+use somecrate::{SomeStruct, somefunction};
+#}</code></pre></pre>
+<p>Or:</p>
+<pre><pre class="playpen"><code class="language-rust">
+# #![allow(unused_variables)]
+#fn main() {
+use somecrate::{SomeStruct, somefunction};
+#}</code></pre></pre>
+<p>Or:</p>
+<pre><pre class="playpen"><code class="language-rust">
+# #![allow(unused_variables)]
+#fn main() {
+use somecrate::somesubmodule::{SomeStruct, somefunction};
+#}</code></pre></pre>
+<h2><a class="header" href="#project-structure" id="project-structure">Project Structure</a></h2>
+<p>There is a 'top level' to any library or binary (executable)
+and it is named in the cargo.toml</p>
+<p>The 'top level' is also responsible for exporting public members (using the <code>pub</code> keyword)</p>
+<p>Typical Project Structure:</p>
+<pre><code>  main.rs    or   lib.rs               
+              |      
+</code></pre>
+<p>subdirectory_01  subdirectory_02<br />
+|              |<br />
+mod.rs         mod.rs</p>
+<ul>
+<li>You can use <code>mod</code> to create modules anywhere</li>
+<li>The <em>parent</em> controls the visibility of the children who are public by 'reexposing' them, e.g.:
+<code>pub mychildmod</code></li>
+</ul>
+<h3><a class="header" href="#importing-macros" id="importing-macros">Importing Macros</a></h3>
+<p>This needs to happen at the top level of the crate</p>
+<pre><code>#[macro_use]
+extern crate criterion;
+</code></pre>
+<h3><a class="header" href="#tuples-multiple-types---one-data-structure" id="tuples-multiple-types---one-data-structure">Tuples: Multiple Types - One Data Structure</a></h3>
+<pre><pre class="playpen"><code class="language-rust">
+# #![allow(unused_variables)]
+#fn main() {
+let (a, b, c, d) = (&quot;I'm&quot;.to_string(), &quot;a&quot;.to_string(), &quot;tuple&quot;.to_string(), 32);
+#}</code></pre></pre>
+<h3><a class="header" href="#vectors---a-common-rust-datastructure" id="vectors---a-common-rust-datastructure">Vectors - A Common Rust Datastructure</a></h3>
+<p>For vectors, we get some 'standard' operations: push, pop, index (e.g. our_vector[0])</p>
+<pre><pre class="playpen"><code class="language-rust">
+# #![allow(unused_variables)]
+#fn main() {
+let mut collected_iterator: Vec&lt;i32&gt; = (0..10).collect();
+println!(&quot;Collected (0..10) into: {:?}&quot;, collected_iterator);
+
+// The `vec!` macro can be used to initialize a vector
+let mut xs = vec![1i32, 2, 3];
+println!(&quot;Initial vector: {:?}&quot;, xs);
+
+// Thanks to `iter_mut`, mutable `Vector`s can also be iterated
+// over in a way that allows modifying each value, note the dereference operator
+for x in xs.iter_mut() {
+    *x *= 3;
+    println!(&quot;Updated vector: {:?}&quot;, xs);
+}
+#}</code></pre></pre>
+<h3><a class="header" href="#cargotoml" id="cargotoml">Cargo.toml</a></h3>
+<p>The <a href="https://doc.rust-lang.org/cargo/reference/manifest.html">Cargo.toml manifest</a> is extremely powerful and flexible.</p>
+<p>At a high-level, you can:</p>
+<ul>
+<li>Split 'features' within your crate to make optional dependencies</li>
+<li>Split the workspace for multiple crates joined in a single toml.lock</li>
+<li>Override dependencies</li>
+<li>Use files or git repositories as the source of dependencies</li>
+<li>Support multiple libraries or binaries</li>
+</ul>
+<p>one example:</p>
+<pre><pre class="playpen"><code class="language-rust">
+# #![allow(unused_variables)]
+#fn main() {
+[dependencies]
+rand = { git = &quot;https://github.com/rust-lang-nursery/rand.git&quot; }
+#}</code></pre></pre>
+<p>Homework:</p>
+<ol>
+<li>Create a project that has multiple directories (more than 2!) with separate modules.</li>
+<li>Use a Vec in the project</li>
+<li>Use a tuple in the project</li>
+</ol>
+<h1><a class="header" href="#lesson-eight-closures-and-lifetime-preview" id="lesson-eight-closures-and-lifetime-preview">Lesson Eight: Closures and Lifetime Preview</a></h1>
+<h2><a class="header" href="#objectives-8" id="objectives-8">Objectives</a></h2>
+<ul>
+<li>Understand the basics of closures</li>
+<li>Preview lifetime annotations </li>
+</ul>
+<h3><a class="header" href="#closure-essentials" id="closure-essentials">Closure Essentials</a></h3>
+<ul>
+<li>Closures look <em>a lot</em> like functions</li>
+</ul>
+<pre><pre class="playpen"><code class="language-rust">
+# #![allow(unused_variables)]
+#fn main() {
+fn  plus_one_v1   (x: i32) -&gt; i32 { x + 1 };
+let plus_one_v2 = |x: i32| -&gt; i32 { x + 1 };
+let plus_one_v3 = |x: i32|          x + 1  ;
+#}</code></pre></pre>
+<ul>
+<li>
+<p>Closures can be parameters to functions, return values from functions, 'in-line' as lambda expressions,
+and assigned to a variable and 'invoked' later.  They are <code>lazy</code> initialized. </p>
+</li>
+<li>
+<p>Closures that mutate values must be annotated as <code>mut</code> </p>
+</li>
+</ul>
+<pre><pre class="playpen"><code class="language-rust">
+# #![allow(unused_variables)]
+#fn main() {
+  let mut a_closure = |t| t = t + 1; 
+#}</code></pre></pre>
+<ul>
+<li>The <code>move</code> keyword makes the closure take ownership of the referenced values.  (x in this case) </li>
+</ul>
+<pre><pre class="playpen"><code class="language-rust">fn main() {
+    let x = vec![1, 2, 3];
+    let equal_to_x = move |z| z == x;
+
+    println!(&quot;can't use x here: {:?}&quot;, x);
+
+    let y = vec![1, 2, 3];
+
+    assert!(equal_to_x(y));
+}
+</code></pre></pre>
+<ul>
+<li>A closure with an explicit type annotation</li>
+</ul>
+<pre><pre class="playpen"><code class="language-rust">
+# #![allow(unused_variables)]
+#fn main() {
+    let haystack = vec![1, 2, 3];
+
+    let contains = |needle: &amp;i32| haystack.contains(needle);
+
+    println!(&quot;{}&quot;, contains(&amp;1));
+#}</code></pre></pre>
+<p>The closure above is called <em>exactly</em> as a method/function is called.</p>
+<p>The <code>iter()</code> trait exposes some excellent functions detailed <a href="https://doc.rust-lang.org/std/iter/trait.Iterator.html#provided-methods">here</a>
+and summarized with <em>impressive fonts</em> <a href="https://danielkeep.github.io/itercheat_baked.html">here</a></p>
+<h3><a class="header" href="#introduction-to-lifetimes" id="introduction-to-lifetimes">Introduction to Lifetimes</a></h3>
+<p>We know Rust is good at throwing away things.  Out of scope, out of memory.  That, however, introduces a problem.  We don't always want to throw away associated values.  We want them to <em>live</em> longer.  The compiler tracks the 'lifetime' of values (all of them actually), but when it sees code that uses values beyond the obvious scope (lifetime), it requies an explicit annotation of the lifetime.</p>
+<p>For now - just read <code>'a</code> as 'lifetime annotation' and note (obviously?), that type parameters (like 'a) have to be used. </p>
+<pre><pre class="playpen"><code class="language-rust">
+# #![allow(unused_variables)]
+#fn main() {
+struct Foo&lt;'a&gt; {
+    x: &amp;'a i32,
+}
+#}</code></pre></pre>
+<h3><a class="header" href="#homework-2" id="homework-2">Homework</a></h3>
+<p>The homework task touches on a few topics: Vectors, iterators, and closures.</p>
+<p>The <code>iter</code> trait has many functions like <code>map</code> and <code>filter</code> that take closures as arguments. 
+They do this by implementing FnMut, which is one way, together with <code>FnOnce</code> and ```Fn`` to control how closures capture their surrounding values.</p>
+<p>Practically, this let's us pipe the ```iter`` results to other functions in a nice, functional style.</p>
+<p>Note: this homework contains <em>2</em> binaries.  See the Crate.toml to see how that is done.  ```cargo run`` will not work, however.  You need to specify
+which binary you want to run.  In our case, either:</p>
+<p><code>cargo run --bin buggy</code>
+or
+```cargo run --bin iterclosures``</p>
+<p>The first exercise is to fix a bug in the <code>buggy</code> app.  See the source file for TODO and details. (extra credit with prize!: there's a bug in the simple fix, handle it.)</p>
+<p>The second exercise is to chain some <code>iter()</code> results and <code>collect()</code> them.  Play with some of the operators <a href="https://danielkeep.github.io/itercheat_baked.html">here</a>
+But, make sure you use at least <em>two closures</em> in your solution.</p>
+<h1><a class="header" href="#lesson-nine-lifetime-annotations" id="lesson-nine-lifetime-annotations">Lesson Nine: Lifetime Annotations</a></h1>
+<h2><a class="header" href="#objectives-9" id="objectives-9">Objectives</a></h2>
+<ul>
+<li>Understand the basics of Lifetime Annotations</li>
+</ul>
+<h2><a class="header" href="#the-problem" id="the-problem">The problem</a></h2>
+<p>Java, .NET, Go and others use garbage collection to manage the 'generations' of object references and release them.</p>
+<p>Rust does not use a garbage collection process. Consequently, memory utilization is extremely efficient.  One of the trade-off's, however, is that we sometimes need to explictly provide instructions regarding how long objects are intended to live.</p>
+<p>Look at the code below.  We pass our &amp;str's to a function, that does an evaluation, and then returns one of the str's
+After the function returns, the parameter &amp;str's, go out of scope.</p>
+<p>The borrow-checker efficiently wants to drop the references at the end of the scoped block, <em>but</em> the returned value is referencing one of them.</p>
+<p>The compiler needs explicit instructions.  This is done with a special 'marker' called the 'lifetime annotation.'</p>
+<pre><pre class="playpen"><code class="language-rust">
+fn main() {
+
+    let target: &amp;str;
+
+    //Narrow our scope
+    {
+        let string1 = &quot;abcd&quot;;
+        let string2 = &quot;xyzwkrp&quot;;
+
+        target = longest(string1, string2);
+
+        println!(&quot;The longest string is {}&quot;, target);
+    } // &lt;- goodbye string1, string2... I think...
+
+    println!(&quot;The longest string is {}&quot;, target);
+}
+
+fn longest&lt;'a&gt;(x: &amp;'a str, y: &amp;'a str) -&gt; &amp;'a str {  // &lt;- without 'a this fails.
+    if x.len() &gt; y.len() {
+        x
+    } else {
+        y
+    }
+}
+
+</code></pre></pre>
+<p>Actually, Rust requires lifetimes on all parameter and return value references, but it became a pain to type:</p>
+<pre><code>fn longest(x: &amp;'a str, y: &amp;'a str) -&gt; &amp;'a str ... 
+</code></pre>
+<p>So, 'they' dropped the cases where it was obvious and gave the heruistics a French name, 'lifetime elision rules' so no one would ask anymore questions. </p>
+<h2><a class="header" href="#exercise-1" id="exercise-1">Exercise</a></h2>
+<p>Create a binary tree datastructure.</p>
+<p>Each node may have a parent, a node to the left, and a node to the right.</p>
+<p>Add one function/method that allows insertion of a node.</p>
+<p>You will almost certainly need to use lifetime annotations and possibly Box<T>.  If you cannot complete the exercise, have no fear and keep moving forward.</p>
+<h4><a class="header" href="#related-fun" id="related-fun">Related Fun:</a></h4>
+<ul>
+<li>A pretty node-free Graph implementation
+<a href="https://github.com/EbTech/rust-algorithms/blob/master/src/graph/mod.rs">Contest Algorithms, Graph:</a></li>
+</ul>
+<h1><a class="header" href="#lesson-nine-unit-testing" id="lesson-nine-unit-testing">Lesson Nine: Unit Testing</a></h1>
+<h2><a class="header" href="#objectives-10" id="objectives-10">Objectives</a></h2>
+<ul>
+<li>Unit Testing</li>
+<li>Tests directory, benches, and examples </li>
+</ul>
+<h2><a class="header" href="#testing" id="testing">Testing</a></h2>
+<p>By convention, integration tests are added in the /tests directory.  They import the crate(s) they are testing.</p>
+<p>Standard unit tests are normally added in the source files, sometimes inside a separate <code>mod tests</code></p>
+<p>The #[cfg(test)] macro attribute gives some control over how they are run and exluded from releases.</p>
+<h3><a class="header" href="#unit-tests-are-normally-created-with" id="unit-tests-are-normally-created-with">Unit Tests are normally created with:</a></h3>
+<p><code>#[test]</code></p>
+<pre><pre class="playpen"><code class="language-rust">
+# #![allow(unused_variables)]
+#fn main() {
+assert!(expression)
+assert_eq!(left, right)
+assert_ne!(left, right)
+#}</code></pre></pre>
+<p>And run with <code>cargo test</code></p>
+<h3><a class="header" href="#running-unit-tests-with-output" id="running-unit-tests-with-output">Running Unit Tests with Output</a></h3>
+<p>If you use output in unit tests, like println!(), the output is hidden unless you add --no-capture</p>
+<pre><code>cargo test -- --nocapture
+</code></pre>
+<h2><a class="header" href="#examples" id="examples">Examples</a></h2>
+<p>It's common in rust code, especially on github, to put examples in an <code>/examples</code> directory.  Cargo/Rust supports that
+convention:</p>
+<p><code>cargo run --example [example_name]</code></p>
+<h3><a class="header" href="#test" id="test">TEST!!!</a></h3>
+<p>This is a refresher on borrowing and mutablity.</p>
+<ul>
+<li>In the /demos/test_lesson_10 you will find a set of functions calls commented out.</li>
+<li>Review the functions and ask yourself, &quot;does this compile?&quot;</li>
+</ul>
+<h3><a class="header" href="#homework-3" id="homework-3">Homework</a></h3>
+<p>This is homework is a short one:
+Create a simple function, and write a unit test for that function</p>
+<h1><a class="header" href="#lesson-eleven-boxt-and-optiont-resultt-err-again" id="lesson-eleven-boxt-and-optiont-resultt-err-again">Lesson Eleven: Box<T> and Option<T> Result&lt;T, Err&gt; (Again!)</a></h1>
+<h2><a class="header" href="#objectives-11" id="objectives-11">Objectives</a></h2>
+<ul>
+<li>Drive home Option and Result Usage </li>
+<li>How to use dyn and boxing </li>
+</ul>
+<h2><a class="header" href="#homework-4" id="homework-4">Homework:</a></h2>
+<p>Catchup day 2.  No new assignment.</p>
+<h1><a class="header" href="#lesson-twelve--trait-bounds" id="lesson-twelve--trait-bounds">Lesson Twelve:  Trait Bounds</a></h1>
+<h2><a class="header" href="#objectives-12" id="objectives-12">Objectives</a></h2>
+<ul>
+<li>Trait Bounds Basics</li>
+</ul>
+<h3><a class="header" href="#trait-bounds" id="trait-bounds">Trait Bounds</a></h3>
+<p>As an OO programmer, you already know generics (hopefully!).  It's quite similar in Rust. </p>
+<p>But, what about 'traits'?</p>
+<p>You can pass a trait <code>impl</code> as a parameter:</p>
+<pre><pre class="playpen"><code class="language-rust no_run">
+# #![allow(unused_variables)]
+#fn main() {
+pub fn notify(item: impl Summary) {
+    println!(&quot;Breaking news! {}&quot;, item.summarize());
+}
+#}</code></pre></pre>
+<p>But, what about traits as <em>generics</em>?  Perhaps:</p>
+<pre><pre class="playpen"><code class="language-rust no_run">
+# #![allow(unused_variables)]
+#fn main() {
+pub fn notify&lt;T&gt;(item: T) {
+    println!(&quot;Breaking news! {}&quot;, item.summarize()); //&lt;- what's a summarize?
+}
+#}</code></pre></pre>
+<p>In the code above, the Rust toolchain has <em>no</em> information on the types' functions, etc. and will not compile. It needs more information. </p>
+<p>To solve the issue in the context of generics, Rust uses <code>trait bounds</code> </p>
+<pre><pre class="playpen"><code class="language-rust no_run">
+# #![allow(unused_variables)]
+#fn main() {
+pub fn notify&lt;T: Summary&gt;(item: T) {
+    ...
+}
+#}</code></pre></pre>
+<p>which is the same as:</p>
+<pre><pre class="playpen"><code class="language-rust no_run">
+# #![allow(unused_variables)]
+#fn main() {
+pub fn notify(item: impl Summary) {
+}
+#}</code></pre></pre>
+<p>For better clarity, this can also be written as:</p>
+<pre><pre class="playpen"><code class="language-rust no_run">
+# #![allow(unused_variables)]
+#fn main() {
+pub fn notify&lt;T&gt;(item: T) 
+where T: Summary {
+    ...
+}
+#}</code></pre></pre>
+<p>And, applied across multiple traits with:</p>
+<pre><pre class="playpen"><code class="language-rust no_run">
+# #![allow(unused_variables)]
+#fn main() {
+pub fn notify&lt;T: Summary + Display&gt;(item: T) 
+where T: Summary + Display {
+    ...
+}
+#}</code></pre></pre>
+<p>Read the above, &quot;the notify function is bound by the behavior of the Summary and Display traits.&quot;</p>
+<h3><a class="header" href="#key-points-on-traits" id="key-points-on-traits">Key Points on Traits</a></h3>
+<ul>
+<li>Trait objects are dynamically sized and are behind a reference of some type.</li>
+<li>Consequently, and unlike generics and plain functions/methods, they are dynamically dispatched at runtime. </li>
+</ul>
+<h3><a class="header" href="#function-overloading-ish" id="function-overloading-ish">Function Overloading-ish</a></h3>
+<p>As an OO programmer, note that no-inhertiance != no-indirection.  The <code>SimpleTaxer</code> resolves the appropriate calculation method.</p>
+<pre><pre class="playpen"><code class="language-rust">fn main() {
+    let usa = USA {
+        tax_calculator: Box::new(SimpleTaxer {}),
+    };
+
+    let thailand = Thailand {
+        tax_calculator: Box::new(SimpleTaxer {}),
+    };
+
+    println!(
+        &quot;USA tax: {}&quot;,
+        usa.tax_calculator.compound_tax(333.0, 2.3, 3.3)
+    );
+    println!(
+        &quot;Thailand tax: {}&quot;,
+        thailand.tax_calculator.calculate_tax(333.0, 2.3)
+    );
+}
+
+trait SimpleTax {
+    fn calculate_tax(&amp;self, amount: f32, rate: f32) -&gt; f32;
+}
+
+trait CompoundTax: SimpleTax {
+    fn compound_tax(&amp;self, amount: f32, base_rate: f32, rate: f32) -&gt; f32;
+}
+
+struct USA {
+    pub tax_calculator: Box&lt;dyn CompoundTax&gt;,
+}
+
+struct Thailand {
+    pub tax_calculator: Box&lt;dyn SimpleTax&gt;,
+}
+
+struct SimpleTaxer {}
+
+impl SimpleTax for SimpleTaxer {
+    fn calculate_tax(&amp;self, amount: f32, rate: f32) -&gt; f32 {
+        amount * rate
+    }
+}
+impl CompoundTax for SimpleTaxer {
+    fn compound_tax(&amp;self, amount: f32, base_rate: f32, compound_rate: f32) -&gt; f32 {
+        let base_tax = &amp;self.calculate_tax(amount, base_rate);
+        base_tax + amount * compound_rate
+    }
+}
+</code></pre></pre>
+<ul>
+<li>As a side note, if the content here, the API doc, and 'The Book' still leave you unclear on a topic,
+try <a href="https://doc.rust-lang.org/stable/reference/">The Reference</a> Some of the explanations are excellent.  Remarkably
+similar to some of the content here.  ;)</li>
+</ul>
+<h3><a class="header" href="#exercise-2" id="exercise-2">Exercise</a></h3>
+<p>In the below below, using a trait, create a converter between Kilos, Pounds, and Stone</p>
+<pre><pre class="playpen"><code class="language-rust">enum Uom_Weight { Kilos, Pounds, Stone }  //UOM -&gt; Unit of Measure
+
+// 2.20462 =&gt; Kilos to Pounds
+// 0.157473 =&gt; Kilos to Stone
+
+struct InventoryItem {} //...more code
+
+fn main() {
+    //1: create an inventory item
+    //3: output the converted value 
+    // Use a trait
+}
+
+
+</code></pre></pre>
+<h1><a class="header" href="#lesson-thirteen-constructors-patterns" id="lesson-thirteen-constructors-patterns">Lesson Thirteen: Constructors Patterns</a></h1>
+<p>OO programmers often think of Objects as the launching point of code, particularly, 'newing up' an object.</p>
+<p>Although powerful, this approach can lead to monolithic 'engine' classes and that become black-boxes when the API or surface is exposed to other developers (though it needn't - we are aware). </p>
+<p>Rust programmers often think first in terms of shared behavior or functionality, so it's at least worth asking, &quot;Is this shared functionality and is it best abstracted into a trait?&quot;</p>
+<p>Here we'll peek at some of the patterns (mostly from std::lib) used to construct things.</p>
+<h2><a class="header" href="#objectives-13" id="objectives-13">Objectives</a></h2>
+<ul>
+<li>Understand Constructor/Initalization Forms </li>
+</ul>
+<h3><a class="header" href="#constructor-patterns-comments-in-code" id="constructor-patterns-comments-in-code">Constructor Patterns (Comments in code)</a></h3>
+<p>Notes: </p>
+<pre><pre class="playpen"><code class="language-rust">//PATTERN ONE: static, default impl 
+//This is the default impl for the struct 
+//There's nothing special about `new` as function name here.
+//`Self` or `&amp;self` is never used. 
+#[derive(Debug, PartialEq)]
+struct Counter {
+    count: u32,
+}
+
+impl Counter {
+    fn new() -&gt; Counter {
+        Counter { count: 0 }
+    }
+}
+
+//PATTERN TWO: static, Self
+//Exactly the same. Basic struct, but with 'Self' as return type
+struct SelfishCounter {
+    count: u32,
+}
+
+impl SelfishCounter {
+    fn new() -&gt; Self {
+        SelfishCounter { count: 0 }
+    }
+}
+
+//PATTERN THREE: Self -&gt; Self
+//Exactly the same as above, but `Self` is used for the 
+//return value and return type, rather than the struct name 
+struct ABitSelfishCounter {
+    count: u32,
+}
+
+//Using the 'Self' constructor
+impl ABitSelfishCounter {
+    fn new() -&gt; Self {
+        Self { count: 0 }
+    }
+}
+
+fn main() {
+    //PATTERN ONE
+    let counter = Counter::new();
+    assert_eq!(counter.count, 0);
+
+    //PATTERN TWO 
+    let selfish_counter = SelfishCounter::new();
+    assert_eq!(selfish_counter.count, 0);
+
+    //PATTERN THREE 
+    let a_bit_selfish_counter = ABitSelfishCounter::new();
+    assert_eq!(a_bit_selfish_counter.count, 0);
+
+    #println!(&quot;If we ran to here without an error in the asserts, it was successful.&quot;);
+
+}
+</code></pre></pre>
+<h3><a class="header" href="#builder-pattern" id="builder-pattern">Builder Pattern</a></h3>
+<p>https://docs.rs/derive_builder/0.7.2/derive_builder/</p>
+<pre><pre class="playpen"><code class="language-rust no_run">
+# #![allow(unused_variables)]
+#fn main() {
+ let person = PersonBuilder::default().name(&quot;krishnab&quot;).build();
+#}</code></pre></pre>
+<h3><a class="header" href="#tuple-struct" id="tuple-struct">Tuple Struct</a></h3>
+<pre><pre class="playpen"><code class="language-rust no_run">
+# #![allow(unused_variables)]
+#fn main() {
+//PATTERN FOUR: Tuple Struct
+pub struct Fingerprint(u64, u64);
+
+impl Fingerprint {
+    pub const ZERO: Fingerprint = Fingerprint(0, 0);
+    pub fn hi() {} //... more code
+}
+
+
+#}</code></pre></pre>
+<p>Usage:</p>
+<pre><code>let zero_zero_tuple_struct = Fingerprint::ZERO;
+</code></pre>
+<p>or, equivilantly:</p>
+<pre><pre class="playpen"><code class="language-rust no_run">
+# #![allow(unused_variables)]
+#fn main() {
+let zero_zero_tuple_struct = Fingerprint(0, 0);
+#}</code></pre></pre>
+<pre><pre class="playpen"><code class="language-rust">
+#[derive(Debug, PartialEq)]
+pub struct Fingerprint(u64, u64);
+
+impl Fingerprint {
+    pub const ZERO: Fingerprint = Fingerprint(0, 0);
+    pub fn hi() {} //... more code
+}
+
+fn main() {
+    let fp = Fingerprint(7, 7);
+    assert_eq!(fp.0, 7);
+
+    let zeroed = Fingerprint::ZERO;
+    assert_ne!(zeroed.0, fp.0);
+
+    let zeroed_two = Fingerprint(0, 0);
+    assert_eq!(zeroed, zeroed_two);
+
+    #println!(&quot;If we ran to here without an error in the asserts, it was successful.&quot;);
+}
+</code></pre></pre>
+<h1><a class="header" href="#lesson-thirteen-iterator-patterns" id="lesson-thirteen-iterator-patterns">Lesson Thirteen: Iterator Patterns</a></h1>
+<h2><a class="header" href="#objectives-14" id="objectives-14">Objectives</a></h2>
+<ul>
+<li>Understand Some of the main patterns used for iteration </li>
+</ul>
+<pre><pre class="playpen"><code class="language-rust">///Working with iterators
+///
+/// An iterator has an associated type and a next method
+///
+///trait Iterator {
+///  type Item;
+///  fn next(&amp;mut self) -&gt; Option&lt;Self::Item&gt;;
+///}
+///
+fn main() {
+    standard_iteration();
+    iteration_with_enumerate();
+    iterate_with_into_iter();
+    iter_little_things();
+}
+
+fn standard_iteration() {
+    for i in 0..3 {
+        println!(&quot;Standard Iterator: {:?}&quot;, i);
+    }
+}
+
+///enumerate() takes an iterator and returns the value and index of the iteration
+///increment the index
+fn iteration_with_enumerate() {
+    for (mut i, j) in (5..8).enumerate() {
+        i += 1;
+        println!(
+            &quot;Enumerate with increment on value - value {:?}, loop iteration: {:?}&quot;,
+            i, j
+        );
+    }
+}
+
+///into_iter iterates the value instead of the reference
+fn iterate_with_into_iter() {
+    let q = vec![&quot;Jim&quot;, &quot;John&quot;, &quot;Mary&quot;, &quot;Kim&quot;, &quot;Marcus&quot;];
+
+    //Standard iter() iterates over the reference &amp;T
+    for name in q.iter() {
+        println!(&quot;Name is: {:?}&quot;, *name);   // &lt;- Dereferencing (*) here, is equivilant 
+                                            //    to .into_iter() below
+    }
+
+    //into_iter() iterates over just T
+    //This code will error if
+    for name in q.into_iter() {            // &lt;- into_iter here is equivilant to * above 
+        println!(&quot;Name is: {:?}&quot;, name);
+    }
+}
+
+//A good example of iterators in an idomatic rust style from tools::tidy
+fn iter_little_things() {
+    let semantic_version_number = &quot;1.2.3&quot;;
+
+    //1 - Take the elements from the split method and return a new iterator
+    //2 - Take that iterator and use .map to create another iterator
+    //3 - Create a closure that takes an iterator and invokes the next method
+    //4 - The iterator holds our state and when the function of the closure exceeds
+    //    the bounds of the mapped string, an error is returned 
+
+    let mut iterator = semantic_version_number
+        .split('.')
+        .map(|part| part.parse::&lt;u32&gt;());
+
+    let mut part = || {
+        match iterator.next() {
+            None =&gt; println!(&quot;Error in referencing semantic version number.  Be sure the parts are split with '.', are integer types, and that there are no more than 3.&quot;),
+            Some(e) =&gt; println!(&quot;{:?}&quot;, e.unwrap()), 
+        };
+    };
+
+    part();
+    part();
+    part();
+    part(); // &lt;- greater than 3 bombs 
+}
+
+
+</code></pre></pre>
+<h1><a class="header" href="#lesson-fifteen-copy-and-clone-traits-problem-preview" id="lesson-fifteen-copy-and-clone-traits-problem-preview">Lesson Fifteen: Copy and Clone Traits, Problem Preview</a></h1>
+<h2><a class="header" href="#objectives-15" id="objectives-15">Objectives</a></h2>
+<ul>
+<li>Understand The Copy and Clone Traits </li>
+</ul>
+<h3><a class="header" href="#lesson-12-assignment-reviewdiscussion" id="lesson-12-assignment-reviewdiscussion">Lesson 12 Assignment Review/Discussion</a></h3>
+<p><a href="https://play.rust-lang.org/?version=stable&amp;mode=debug&amp;edition=2018&amp;gist=183d5e20941f9d96071260c036c12e10">One Solution</a></p>
+<h3><a class="header" href="#two-special-traits-copy-clone" id="two-special-traits-copy-clone">Two Special Traits: Copy, Clone</a></h3>
+<p>The <code>Copy</code> trait uses mem::copy underneath and is implicit (you can use = operator),  <code>Clone</code> is explicit (.clone()) </p>
+<pre><pre class="playpen"><code class="language-rust">
+# #![allow(unused_variables)]
+#fn main() {
+#[derive(Copy, Clone)]
+struct Motocy;
+#}</code></pre></pre>
+<pre><pre class="playpen"><code class="language-rust">
+# #![allow(unused_variables)]
+#fn main() {
+struct Motorcy;
+
+impl Copy for Motorcy { }
+
+impl Clone for Motorcy {
+    fn clone(&amp;self) -&gt; Motorcy {
+        *self
+    }
+}
+#}</code></pre></pre>
+<p><a href="https://play.rust-lang.org/?version=stable&amp;mode=debug&amp;edition=2018&amp;gist=291d8a0f3d018fd84909a45475b1af57">Copy/Clone Playground</a></p>
+<h3><a class="header" href="#problem-preview-box-ref-refcell" id="problem-preview-box-ref-refcell">Problem Preview (Box, Ref, RefCell)</a></h3>
+<p>The exercise/assigment is to review the problem presented in this code.</p>
+<pre><pre class="playpen"><code class="language-rust">#[allow(dead_code)]
+
+///
+/// We have a hypothetical neighborhood that looks like this:
+///
+///                   HOUSE_A   HOUSE_B    HOUSE_C     HOUS
+///                   ---------------------------------   E
+///                            SOI 13                  |  _
+///                   ---------------------------|     |  D
+///                                              |     |  
+///                                              |  S  |  
+///                                              |  O  |
+///                                              |  I  |
+///                                              |     |  H
+///                                              |  1  |  O
+///                                              |  2  |  U
+///                                              |     |  S
+///                                              |     |  E
+///                                              |     |  _
+///                                              |     |  E
+///
+///
+/// Noteably, HOUSE_D, is on both Soi 12 and 13
+///
+/// If street contains N houses, we have a problem with this simple implementation.
+///
+/// We have 3 first solutions to consider:
+/// 1: Box&lt;T&gt;: Heap allocate and wrap with a stack reference
+/// 2: Rc&lt;T&gt;: Wrap with a counted, shareable immutable reference, compile-time checked, for single threaded scenarios
+/// 3: RcCell&lt;T&gt; Wrap with a counted, shareable mutable reference, runtime checked
+
+fn main() {
+    //setup a house
+    let house_a = House::new().setup_house(5, 2);
+    let house_e = House::new().setup_house(3, 2);
+    let house_d = House::new().setup_house(3, 2);
+
+    //Create the streets
+    let mut street_0 = Street { houses: Vec::new() };
+    let mut street_1 = Street { houses: Vec::new() };
+
+    street_0.houses.push(house_a);
+    street_0.houses.push(house_e);
+
+    //house_d is on both streets
+    street_1.houses.push(house_d);
+    street_0.houses.push(house_d); // &lt;- Here's where the trouble begins
+}
+
+struct Room {
+    name: String,
+    room_size: i32,
+}
+
+struct House {
+    rooms: Vec&lt;Room&gt;,
+}
+
+struct Street {
+    houses: Vec&lt;House&gt;,
+}
+
+impl House {
+    pub fn new() -&gt; House {
+        House { rooms: Vec::new() }
+    }
+
+    pub fn get_house_size(&amp;self) -&gt; i32 {
+        self.rooms.iter().map(|x| x.room_size).sum()
+    }
+
+    pub fn setup_house(mut self, bedrooms: i8, living_rooms: i8) -&gt; House {
+        for i in 0..bedrooms {
+            let bedroom: Room = Room {
+                name: format!(&quot;bedroom number {}&quot;, i),
+                room_size: 20,
+            };
+            self.rooms.push(bedroom);
+        }
+
+        for i in 0..living_rooms {
+            let living_room: Room = Room {
+                name: format!(&quot;living room number {}&quot;, i),
+                room_size: 34,
+            };
+            self.rooms.push(living_room);
+        }
+        self
+    }
+}
+
+</code></pre></pre>
+<h1><a class="header" href="#lesson-sixteen-rc-refcell" id="lesson-sixteen-rc-refcell">Lesson Sixteen: Rc, RefCell</a></h1>
+<h2><a class="header" href="#objectives-16" id="objectives-16">Objectives</a></h2>
+<ul>
+<li>Look at Rc, and RefCell </li>
+</ul>
+<p>Consider the following scenario:</p>
+<p>A family of five has two parents and three grown-children.<br />
+The grown-children all drive.<br />
+The family has 3 cars: a Subaru, a Ferrari, and a Daihatsu Mira.</p>
+<p>All members of the family can drive the Mira.
+All members of the family can drive the Subaru.
+Only the parents can drive the Ferrari.</p>
+<table><thead><tr><th>Option</th><th>Details</th><th>Issue</th></tr></thead><tbody>
+<tr><td>Clone</td><td>Makes a Copy</td><td>Lose shared state</td></tr>
+<tr><td>Borrow with Lifetime Annotations</td><td>&amp;'a structs</td><td>None</td></tr>
+<tr><td>Rc<T></td><td></td><td></td></tr>
+</tbody></table>
+<h3><a class="header" href="#rct" id="rct">Rc<T></a></h3>
+<pre><pre class="playpen"><code class="language-rust">
+# #![allow(unused_variables)]
+#fn main() {
+  --&gt; src/main.rs:47:26
+   |
+36 |     let house_d = House::new(2, &quot;Douglas&quot;.to_string());
+   |         ------- move occurs because `house_d` has type `House`, which does not implement the `Copy` trait
+...
+44 |     street_0.houses.push(house_d);
+   |                          ------- value moved here
+...
+47 |     street_1.houses.push(house_d);
+   |                          ^^^^^^^ value used here after move
+
+#}</code></pre></pre>
+<h2><a class="header" href="#solution-one-lifetime-annoations" id="solution-one-lifetime-annoations">Solution One: Lifetime Annoations</a></h2>
+<h2><a class="header" href="#solution-two-rct-reference-counting" id="solution-two-rct-reference-counting">Solution Two: Rc<T> Reference Counting</a></h2>
+<p>The type Rc<T> provides shared ownership of a value of type T</p>
+<p>{#playpen src/main.rs}}</p>
+<p>Exercise</p>
+<ul>
+<li>Create a sample that mutates the contents of something behind a Rc<T></li>
+</ul>
+<h1><a class="header" href="#lesson-sixteen-rc-refcell-1" id="lesson-sixteen-rc-refcell-1">Lesson Sixteen: Rc, RefCell</a></h1>
+<h2><a class="header" href="#objectives-17" id="objectives-17">Objectives</a></h2>
+<ul>
+<li>Look at Rc, and RefCell </li>
+</ul>
+<p>Consider the following scenario:</p>
+<p>A family of five has two parents and three grown-children.<br />
+The grown-children all drive.<br />
+The family has 3 cars: a Subaru, a Ferrari, and a Daihatsu Mira.</p>
+<p>All members of the family can drive the Mira.
+All members of the family can drive the Subaru.
+Only the parents can drive the Ferrari.</p>
+<table><thead><tr><th>Option</th><th>Details</th><th>Issue</th></tr></thead><tbody>
+<tr><td>Clone</td><td>Makes a Copy</td><td>Lose shared state</td></tr>
+<tr><td>Borrow with Lifetime Annotations</td><td>&amp;'a structs</td><td>None</td></tr>
+<tr><td>Rc<T></td><td></td><td></td></tr>
+</tbody></table>
+<h3><a class="header" href="#rct-1" id="rct-1">Rc<T></a></h3>
+<pre><pre class="playpen"><code class="language-rust">
+# #![allow(unused_variables)]
+#fn main() {
+  --&gt; src/main.rs:47:26
+   |
+36 |     let house_d = House::new(2, &quot;Douglas&quot;.to_string());
+   |         ------- move occurs because `house_d` has type `House`, which does not implement the `Copy` trait
+...
+44 |     street_0.houses.push(house_d);
+   |                          ------- value moved here
+...
+47 |     street_1.houses.push(house_d);
+   |                          ^^^^^^^ value used here after move
+
+#}</code></pre></pre>
+<h2><a class="header" href="#solution-one-lifetime-annoations-1" id="solution-one-lifetime-annoations-1">Solution One: Lifetime Annoations</a></h2>
+<h2><a class="header" href="#solution-two-rct-reference-counting-1" id="solution-two-rct-reference-counting-1">Solution Two: Rc<T> Reference Counting</a></h2>
+<p>The type Rc<T> provides shared ownership of a value of type T</p>
+<p>{#playpen src/main.rs}}</p>
+<p>Exercise</p>
+<ul>
+<li>Create a sample that mutates the contents of something behind a Rc<T></li>
+</ul>
+<h1><a class="header" href="#lesson-sixteen-rc-refcell-2" id="lesson-sixteen-rc-refcell-2">Lesson Sixteen: Rc, RefCell</a></h1>
+<h2><a class="header" href="#objectives-18" id="objectives-18">Objectives</a></h2>
+<ul>
+<li>Look at Rc, and RefCell </li>
+</ul>
+<p>Consider the following scenario:</p>
+<p>A family of five has two parents and three grown-children.<br />
+The grown-children all drive.<br />
+The family has 3 cars: a Subaru, a Ferrari, and a Daihatsu Mira.</p>
+<p>All members of the family can drive the Mira.
+All members of the family can drive the Subaru.
+Only the parents can drive the Ferrari.</p>
+<table><thead><tr><th>Option</th><th>Details</th><th>Issue</th></tr></thead><tbody>
+<tr><td>Clone</td><td>Makes a Copy</td><td>Lose shared state</td></tr>
+<tr><td>Borrow with Lifetime Annotations</td><td>&amp;'a structs</td><td>None</td></tr>
+<tr><td>Rc<T></td><td></td><td></td></tr>
+</tbody></table>
+<h3><a class="header" href="#rct-2" id="rct-2">Rc<T></a></h3>
+<pre><pre class="playpen"><code class="language-rust">
+# #![allow(unused_variables)]
+#fn main() {
+  --&gt; src/main.rs:47:26
+   |
+36 |     let house_d = House::new(2, &quot;Douglas&quot;.to_string());
+   |         ------- move occurs because `house_d` has type `House`, which does not implement the `Copy` trait
+...
+44 |     street_0.houses.push(house_d);
+   |                          ------- value moved here
+...
+47 |     street_1.houses.push(house_d);
+   |                          ^^^^^^^ value used here after move
+
+#}</code></pre></pre>
+<h2><a class="header" href="#solution-one-lifetime-annoations-2" id="solution-one-lifetime-annoations-2">Solution One: Lifetime Annoations</a></h2>
+<h2><a class="header" href="#solution-two-rct-reference-counting-2" id="solution-two-rct-reference-counting-2">Solution Two: Rc<T> Reference Counting</a></h2>
+<p>The type Rc<T> provides shared ownership of a value of type T</p>
+<p>{#playpen src/main.rs}}</p>
+<p>Exercise</p>
+<ul>
+<li>Create a sample that mutates the contents of something behind a Rc<T></li>
+</ul>
+<h1><a class="header" href="#contributors" id="contributors">Contributors</a></h1>
+<p><a href="https://mycostech.com">The Mycos Team</a></p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                        
+
+                        
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                
+
+                
+            </nav>
+
+        </div>
+
+        
+
+        
+
+        
+        <script src="ace.js" type="text/javascript" charset="utf-8"></script>
+        <script src="editor.js" type="text/javascript" charset="utf-8"></script>
+        <script src="mode-rust.js" type="text/javascript" charset="utf-8"></script>
+        <script src="theme-dawn.js" type="text/javascript" charset="utf-8"></script>
+        <script src="theme-tomorrow_night.js" type="text/javascript" charset="utf-8"></script>
+        
+
+        
+        <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
+        
+
+        <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        
+
+        
+        
+        <script type="text/javascript">
+        window.addEventListener('load', function() {
+            window.setTimeout(window.print, 100);
+        });
+        </script>
+        
+        
+
+    </body>
+</html>
