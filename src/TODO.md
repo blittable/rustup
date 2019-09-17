@@ -22,6 +22,8 @@
 - [ ] Review Lesson 15 
 - [ ] Review Lesson 16 
 - [ ] Review Lesson 17 
+- [ ] Review Lesson 17 
+- [ ] Review Lesson 17 
 - [ ] Demo code triage/structure
 - [ ] Add more constructor patterns 
 - [ ] Add more iterator patterns 

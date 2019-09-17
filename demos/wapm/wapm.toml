@@ -1,0 +1,8 @@
+[package]
+name = "loops"
+version = "0.1.0"
+description = ""
+
+[[module]]
+name = "loops"
+source = "loops/src/loops.wasm"
