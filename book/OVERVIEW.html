@@ -78,7 +78,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="affix"><a href="index.html">Rust for OO Programmers</a></li><li class="affix"><a href="OVERVIEW.html" class="active">Overview from an OO Perspective</a></li><li class="affix"><a href="lessons/LESSONS.html">Lessons</a></li><li><a href="lessons/lesson_one/index.html"><strong aria-hidden="true">1.</strong> Setup And A Function</a></li><li><ol class="section"><li><a href="lessons/lesson_one/ex_function_parameter_return.html"><strong aria-hidden="true">1.1.</strong> Calling a Function</a></li></ol></li><li><a href="lessons/lesson_two/index.html"><strong aria-hidden="true">2.</strong> Standard Lib, Types, Immutability</a></li><li><a href="lessons/lesson_three/index.html"><strong aria-hidden="true">3.</strong> Intro to Traits</a></li><li><a href="lessons/lesson_four/index.html"><strong aria-hidden="true">4.</strong> Enum Wrappers, Option and Matching</a></li><li><a href="lessons/lesson_five/index.html"><strong aria-hidden="true">5.</strong> Error Handling</a></li><li><a href="lessons/lesson_six/index.html"><strong aria-hidden="true">6.</strong> Almighty Iterators</a></li><li><a href="lessons/lesson_seven/index.html"><strong aria-hidden="true">7.</strong> Housekeeping #1</a></li><li><a href="lessons/lesson_eight/index.html"><strong aria-hidden="true">8.</strong> Closures and Lifetime Preview</a></li><li><a href="lessons/lesson_nine/index.html"><strong aria-hidden="true">9.</strong> Lifetime Annotations</a></li><li><a href="lessons/lesson_ten/index.html"><strong aria-hidden="true">10.</strong> Unit Testing</a></li><li><a href="lessons/lesson_eleven/index.html"><strong aria-hidden="true">11.</strong> TBD</a></li><li><a href="lessons/lesson_twelve/index.html"><strong aria-hidden="true">12.</strong> Trait Bounds</a></li><li><a href="lessons/lesson_thirteen/index.html"><strong aria-hidden="true">13.</strong> Constructor Patterns</a></li><li><a href="lessons/lesson_fourteen/index.html"><strong aria-hidden="true">14.</strong> Iterator Patterns</a></li><li><a href="lessons/lesson_fifteen/index.html"><strong aria-hidden="true">15.</strong> Copy/Clone Traits</a></li><li><a href="lessons/lesson_sixteen/index.html"><strong aria-hidden="true">16.</strong> Box, Rc, RefCell</a></li><li><a href="lessons/lesson_seventeen/index.html"><strong aria-hidden="true">17.</strong> Generics and Associated Types</a></li><li><a href="lessons/lesson_seventeen/index.html"><strong aria-hidden="true">18.</strong> Bit Fiddling</a></li><li class="affix"><a href="misc/contributors.html">Contributors</a></li></ol>
+                <ol class="chapter"><li class="affix"><a href="index.html">Rust for OO Programmers</a></li><li class="affix"><a href="OVERVIEW.html" class="active">Overview from an OO Perspective</a></li><li class="affix"><a href="lessons/LESSONS.html">Lessons</a></li><li><a href="lessons/lesson_one/index.html"><strong aria-hidden="true">1.</strong> Setup And A Function</a></li><li><ol class="section"><li><a href="lessons/lesson_one/ex_function_parameter_return.html"><strong aria-hidden="true">1.1.</strong> Calling a Function</a></li></ol></li><li><a href="lessons/lesson_two/index.html"><strong aria-hidden="true">2.</strong> Standard Lib, Types, Immutability</a></li><li><a href="lessons/lesson_three/index.html"><strong aria-hidden="true">3.</strong> Intro to Traits</a></li><li><a href="lessons/lesson_four/index.html"><strong aria-hidden="true">4.</strong> Enum Wrappers, Option and Matching</a></li><li><a href="lessons/lesson_five/index.html"><strong aria-hidden="true">5.</strong> Error Handling</a></li><li><a href="lessons/lesson_six/index.html"><strong aria-hidden="true">6.</strong> Almighty Iterators</a></li><li><a href="lessons/lesson_seven/index.html"><strong aria-hidden="true">7.</strong> Housekeeping #1</a></li><li><a href="lessons/lesson_eight/index.html"><strong aria-hidden="true">8.</strong> Closures and Lifetime Preview</a></li><li><a href="lessons/lesson_nine/index.html"><strong aria-hidden="true">9.</strong> Lifetime Annotations</a></li><li><a href="lessons/lesson_ten/index.html"><strong aria-hidden="true">10.</strong> Unit Testing</a></li><li><a href="lessons/lesson_eleven/index.html"><strong aria-hidden="true">11.</strong> TBD</a></li><li><a href="lessons/lesson_twelve/index.html"><strong aria-hidden="true">12.</strong> Trait Bounds</a></li><li><a href="lessons/lesson_thirteen/index.html"><strong aria-hidden="true">13.</strong> Constructor Patterns</a></li><li><a href="lessons/lesson_fourteen/index.html"><strong aria-hidden="true">14.</strong> Iterator Patterns</a></li><li><a href="lessons/lesson_fifteen/index.html"><strong aria-hidden="true">15.</strong> Copy/Clone/Sized Traits</a></li><li><a href="lessons/lesson_sixteen/index.html"><strong aria-hidden="true">16.</strong> TBD</a></li><li><a href="lessons/lesson_seventeen/index.html"><strong aria-hidden="true">17.</strong> Reference Counting and Interior Mutability with RefCell and Rc</a></li><li><a href="lessons/lesson_eighteen/index.html"><strong aria-hidden="true">18.</strong> Bit Fiddling</a></li><li><a href="lessons/lesson_nineteen/index.html"><strong aria-hidden="true">19.</strong> Web Assembly - WASM</a></li><li><a href="lessons/lesson_twenty/index.html"><strong aria-hidden="true">20.</strong> Threads</a></li><li><a href="lessons/lesson_twenty_one/index.html"><strong aria-hidden="true">21.</strong> TBD</a></li><li><a href="lessons/lesson_twenty_two/RustFSExample/index.html"><strong aria-hidden="true">22.</strong> File I/O and Image Transformations</a></li><li><a href="lessons/lesson_twenty_three/index.html"><strong aria-hidden="true">23.</strong> Unsafe Code</a></li><li class="affix"><a href="misc/contributors.html">Contributors</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -146,24 +146,38 @@
                 <div id="content" class="content">
                     <main>
                         <h1><a class="header" href="#the-oo-perspective" id="the-oo-perspective">The OO Perspective</a></h1>
-<p>For the OO programmer, the primary differences (and therefore challenges) are the following:</p>
+<p>For the OO programmer:</p>
 <ul>
-<li>Functionality (often traits), is decoupled from data structures (structs or enums). </li>
-<li>&quot;You get what you get&quot; - there's very little in the way of 'inherited' functionality.</li>
-<li>NULL is replaced by wrapping <code>Option&lt;T&gt;</code></li>
-<li>You're accountable for the memory life of your allocations, though Rust, through compile-time rules, does most of the heavy lifting. </li>
-<li>Iteration and closures are first-class citizens in code composition. </li>
-<li>Error handling wraps a structure that may be of type error or not.</li>
-<li>Self-referential types (Parent A has a child B and they have references to one-another) require special handling</li>
-</ul>
-<p>There are exceptions to most of the above.  If it sounds challenges, keep in mind that it buys us:</p>
-<ul>
-<li>A garbage-collection free lightweight runtime that is memory safe.</li>
-<li>Incredible performance.</li>
-<li>The ability to go small (embedded devices).</li>
-<li>Granular control over memory allocation.</li>
-<li>Generics</li>
-<li>Fearless concurrency</li>
+<li>
+<p>Functionality (often traits), is decoupled from data structures (structs or enums). </p>
+</li>
+<li>
+<p>&quot;You get what you get&quot; - there's very little in the way of 'inherited' functionality.</p>
+</li>
+<li>
+<p>There is no NULL.  It is replaced, by convention, by wrapping <code>None</code> in an <code>Option&lt;T&gt;</code></p>
+</li>
+<li>
+<p>You're accountable for the memory life of your allocations, though Rust, through compile-time rules, assists, vigorously. </p>
+</li>
+<li>
+<p>Iteration and closures are first-class citizens in code composition. </p>
+</li>
+<li>
+<p>The allocation-related rules above have significant consequences, especially for recursive-types (e.g. graph nodes), associated types, and thread-safe types. </p>
+</li>
+<li>
+<p>A garbage-collection free, lightweight runtime that is memory safe.</p>
+</li>
+<li>
+<p>Incredible performance.</p>
+</li>
+<li>
+<p>Generics</p>
+</li>
+<li>
+<p>Fearless concurrency</p>
+</li>
 </ul>
 
                     </main>
