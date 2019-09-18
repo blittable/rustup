@@ -4,6 +4,7 @@ use std::fs;
 use std::io;
 use std::io::prelude::*;
 use serde::{Serialize, Deserialize};
+use array2d::Array2D;
 
 #[derive(Debug)]
 struct Bitmap<'a> {
@@ -16,9 +17,12 @@ struct Bitmap<'a> {
 impl<'a> Bitmap<'a> {
     const content_offset: usize = 10;
     const weight_offset: usize = 18;
+    const height_offset: usize = 22;
 
     fn new(name: &'a str, content: Vec<u8>) -> Self {
         let weight: i16 = bincode::deserialize(&content[Bitmap::weight_offset..Bitmap::weight_offset+3]).unwrap();
+        let height: i16 = bincode::deserialize(&content[Bitmap::height_offset..Bitmap::height_offset+3]).unwrap();
+
         let offset: i16 = bincode::deserialize(&content[Bitmap::content_offset..Bitmap::content_offset+3]).unwrap();
         let seek: usize = offset as usize;
         let mut data = content[seek..].to_vec();
@@ -86,11 +90,22 @@ impl Filter for InverseColorFilter {
 
 impl Filter for FlipFilter {
     fn apply(&self, data: Vec<Vec<(u8, u8, u8)>>) -> Vec<(u8, u8, u8)> {
-        data
-            .iter()
-            .flat_map(|array| array.iter().rev())
-            .map(|&t| t)
-            .collect::<Vec<_>>()
+        let matrix = Array2D::from_rows(&data);
+        match self.flip {
+            Flip::Vertical => matrix
+                .as_rows()
+                .iter()
+                .rev()
+                .flat_map(|array| array.iter())
+                .map(|&t| t)
+                .collect::<Vec<_>>(),
+            _ => matrix
+                .as_rows()
+                .iter()
+                .flat_map(|array| array.iter().rev())
+                .map(|&t| t)
+                .collect::<Vec<_>>()
+        }
     }
 }
 
@@ -101,6 +116,9 @@ fn main() {
             .apply(Box::new(InverseColorFilter{}))
             .apply(Box::new(FlipFilter{
                 flip: Flip::Holizontal
+            }))
+            .apply(Box::new(FlipFilter{
+                flip: Flip::Vertical
             }));
 
     let mut fp = fs::OpenOptions::new()
