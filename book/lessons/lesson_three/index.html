@@ -152,7 +152,7 @@
 </ul>
 <h2><a class="header" href="#pay-for-what-you-use" id="pay-for-what-you-use">Pay for What you Use</a></h2>
 <p>One of the philosophies of Rust is 'Pay only for what you use'.  Make no assumptions about what a type does - dive into the api doc.</p>
-<p>The functionality that is on a type is from a <code>trait</code>.</p>
+<p>The functionality that is on a type is from a <code>trait</code>, which from an OO perspective looks and feels like an interface.</p>
 <p>In an OO language like .NET, the root object <code>Object</code> implements <code>Object.MemberwiseClone</code> and is accessible to all classes/objects.</p>
 <p>Not so in Rust:</p>
 <pre><pre class="playpen"><code class="language-rust">
@@ -172,7 +172,7 @@
     let vv: Vec&lt;i32&gt; = v.to_owned();
     let vv: Vec&lt;i32&gt; = v.clone()        &lt;---  Compile Error, the clone trait is not implemented
 #}</code></pre></pre>
-<h2><a class="header" href="#a-simple-trait-syntax" id="a-simple-trait-syntax">A Simple Trait Syntax</a></h2>
+<h2><a class="header" href="#simple-trait-syntax" id="simple-trait-syntax">Simple Trait Syntax</a></h2>
 <pre><pre class="playpen"><code class="language-rust">
 # #![allow(unused_variables)]
 #fn main() {
@@ -190,7 +190,13 @@ impl Pay for Company {
   }
 }
 #}</code></pre></pre>
-<p>From an OO perspective, <code>traits</code> look, feel and walk interfaces. In fact, they are more than just interfaces, as we shall see later.</p>
+<p>The 'Company' struct can then be invoked via its <code>trait</code> impl or implementation:</p>
+<pre><pre class="playpen"><code class="language-rust no_run">
+# #![allow(unused_variables)]
+#fn main() {
+let company = Company { name: &quot;Mycos&quot; };
+company.pay();
+#}</code></pre></pre>
 
                     </main>
 

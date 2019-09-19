@@ -217,7 +217,7 @@
     i32.const 1048576
   (func (;8;) (type 6) (param i32 i32 i32)
 #}</code></pre></pre>
-<p><a href="https://asciinema.org/a/dLEdBBNjYLJYUjsJmBjFRjOKb">Optional: Generating WAT from WASM</a></p>
+<p><a href="https://asciinema.org/a/dLEdBBNjYLJYUjsJmBjFRjOKb">Screencast: Generating WAT (wasm in readable text format) from WASM</a></p>
 <hr />
 <h2><a class="header" href="#getting-started-with-wasm-in-rust" id="getting-started-with-wasm-in-rust">Getting Started with WASM in Rust</a></h2>
 <p><a href="https://asciinema.org/a/QnwFimNAYwDZWPyBc8qfUJrbU">Video Overview: Getting Started with WASM in Rust</a></p>
@@ -321,6 +321,9 @@ Browser         WebWorker      Rust   ||
 <p>2 - No current threading model.  (in progress)</p>
 <p>3 - No native socket calls (but web api network calls are supported)</p>
 <p>4 - All the major browsers support WASM, but for those that do not <a href="https://github.com/WebAssembly/binaryen">wasm2js</a> is a library to convert wasm to js</p>
+<p>Regarding the threading model, if you actually try to spawn a thread then it will panic, because wasm is single-threaded only right now.</p>
+<p>However, most &quot;thread-specific&quot; things like Mutex, Arc, and atomics will work just fine.</p>
+<p>They'll compile down into an efficient single-threaded implementation so it's only really spawning a thread which isn't supported right now.</p>
 <hr />
 <h2><a class="header" href="#the-bleeding-edge-wasmtime-and-wasi" id="the-bleeding-edge-wasmtime-and-wasi">The Bleeding Edge: Wasmtime and WASI</a></h2>
 <p>There is a proposal to extend the he shared assembly standard beyond the browser.  The proposal is for <code>wasi</code> which is a runtime with file system access, but sandboxed.</p>
