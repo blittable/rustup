@@ -3,6 +3,8 @@
 ## Objectives 
 - Understand Web Assembly Essentials with Rust 
 
+_______
+
 ## Overview 
 
 Because of some limitations with javascript *and* to allow programmers to write web application code in other languages, web assembly (WASM) was approved and implemented. 
@@ -41,10 +43,6 @@ Here is HelloWorld in .NET 4.0:
 
 
 
-
-
-
-
 ```rust
 (module
   (type (;0;) (func (result i32)))
@@ -73,32 +71,14 @@ Here is HelloWorld in .NET 4.0:
     call 12
     call 11)
   (func (;5;) (type 4)
+...
     i32.const 1048576
-    call 10
-    i32.const 18
-    call 1)
-  (func (;6;) (type 4)
-    call 25
-    i32.const 11
-    call 0
-    i32.const 0
-    call 0
-    i32.const 0
-    call 0
-    call 11)
-  (func (;7;) (type 5) (param i32 i32) (result i32)
-    (local i32)
-    local.get 0
-    local.get 1
-    call 36
-    local.set 2
-    local.get 2
-    return)
   (func (;8;) (type 6) (param i32 i32 i32)
-```  <- and much more!
+```
 
 [Optional: Generating WAT from WASM](https://asciinema.org/a/dLEdBBNjYLJYUjsJmBjFRjOKb)
 
+_______
 
 ## Getting Started with WASM in Rust
 
@@ -130,6 +110,7 @@ Running in Firefox:
 
 ![wasm running in firefox](artifacts/wasm_inff.png)
 
+_______
 
 ### The basics with `wasm-bindgen` + webpack
 
@@ -204,17 +185,25 @@ rust
 ```
 
 
+_______
+
 ## Why use WASM?
 
 The primary reasons for using `wasm` are:
 
-1 - Use existing code libraries in a browser without rewriting them,
-
-    e.g. the large scientific libraries in python: [pyodide](https://hacks.mozilla.org/2019/04/pyodide-bringing-the-scientific-python-stack-to-the-browser)
+1 - Use existing code libraries in a browser without rewriting them 
 
 2 - Letting developers work in their preferred language,
 
 3 - Performance
+
+
+   #### Sample library in WASM: e.g. the large scientific libraries in python: [pyodide](https://hacks.mozilla.org/2019/04/pyodide-bringing-the-scientific-python-stack-to-the-browser)
+
+
+_______
+## Performance Details
+
 
 There's overhead associated with calls between the browser and a web assembly:
 
@@ -238,7 +227,8 @@ The rough conclusions from this research: is that WASM is ~1.2 - ~2x slower than
 SIMD (single instruction multiple data) support (currently in beta for WASM) could massively increase performance for matrix-style operations. 
 
 
-## Known limitation: 
+_______
+## Known Limitations: 
 
 1 - Boxed by javascript, so the number of calls between `wasm` and `javascript` has a negative performance impact.
 
@@ -249,6 +239,7 @@ SIMD (single instruction multiple data) support (currently in beta for WASM) cou
 4 - All the major browsers support WASM, but for those that do not [wasm2js](https://github.com/WebAssembly/binaryen) is a library to convert wasm to js
 
 
+_______
 ## The Bleeding Edge: Wasmtime and WASI 
 
 There is a proposal to extend the he shared assembly standard beyond the browser.  The proposal is for `wasi` which is a runtime with file system access, but sandboxed.
@@ -263,6 +254,13 @@ There is a proposal to extend the he shared assembly standard beyond the browser
 
 5 - run the code above with: ` wasmtime demo.wasm`
 
+_______
+
+## Resources
+
+The web api samples here are excellent.  Some of the them are broken and evolving with the specication for wasm.  [bindgen](https://github.com/rustwasm/wasm-bindgen)
+
+### Exercise - Similar to the exercise on File I/O, use wasm to transform an image.  There is a skeleton of the project in /demos/khems_bird/
 
 
 
