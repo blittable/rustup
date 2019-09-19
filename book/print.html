@@ -187,38 +187,21 @@ of the type heirarchy, such as any .NET language or Java.</p>
 <li>Rust code can be a bit intimidating at first glance (and even after a few more glances). However you're not obliged to use the advanced features of the language to get moving.  There are solid applications and libraries that are light on generics, inter-thread communication, macros, unsafe code, etc.</li>
 </ul>
 <h1><a class="header" href="#the-oo-perspective" id="the-oo-perspective">The OO Perspective</a></h1>
-<p>For the OO programmer:</p>
+<p>For the OO programmer, a few things about Rust stand out:</p>
 <ul>
-<li>
-<p>Functionality (often traits), is decoupled from data structures (structs or enums). </p>
-</li>
-<li>
-<p>&quot;You get what you get&quot; - there's very little in the way of 'inherited' functionality.</p>
-</li>
-<li>
-<p>There is no NULL.  It is replaced, by convention, by wrapping <code>None</code> in an <code>Option&lt;T&gt;</code></p>
-</li>
-<li>
-<p>You're accountable for the memory life of your allocations, though Rust, through compile-time rules, assists, vigorously. </p>
-</li>
-<li>
-<p>Iteration and closures are first-class citizens in code composition. </p>
-</li>
-<li>
-<p>The allocation-related rules above have significant consequences, especially for recursive-types (e.g. graph nodes), associated types, and thread-safe types. </p>
-</li>
-<li>
-<p>A garbage-collection free, lightweight runtime that is memory safe.</p>
-</li>
-<li>
-<p>Incredible performance.</p>
-</li>
-<li>
-<p>Generics</p>
-</li>
-<li>
-<p>Fearless concurrency</p>
-</li>
+<li>Functionality (often traits), is decoupled from data structures (structs or enums). </li>
+<li>&quot;You get what you get&quot; - there's very little in the way of 'inherited' functionality.</li>
+<li>There is no NULL.  It is replaced, by convention, by wrapping <code>None</code> in an <code>Option&lt;T&gt;</code></li>
+<li>You're accountable for the memory life of your allocations, though Rust, through compile-time rules, assists, vigorously. </li>
+<li>Iteration and closures are first-class citizens in code composition. </li>
+<li>The allocation-related rules above have significant consequences, especially for recursive-types (e.g. graph nodes), associated types, and thread-safe types. </li>
+</ul>
+<p>Some of the language's appeal:</p>
+<ul>
+<li>A garbage-collection free, lightweight runtime that is memory safe.</li>
+<li>Incredible performance.</li>
+<li>Generics</li>
+<li>Fearless concurrency</li>
 </ul>
 <h1><a class="header" href="#lessons" id="lessons">Lessons</a></h1>
 <table><thead><tr><th>Lesson</th><th>Content</th></tr></thead><tbody>
@@ -237,22 +220,22 @@ of the type heirarchy, such as any .NET language or Java.</p>
 <tr><td>Lesson Thirteen</td><td>Patterns of Constructors</td></tr>
 <tr><td>Lesson Fourteen</td><td>Patterns of Iterators</td></tr>
 <tr><td>Lesson Fifteen</td><td>The Copy, Clone and Sized Traits</td></tr>
+<tr><td>Lesson Sixteen</td><td>and returning Traits</td></tr>
+<tr><td>Lesson Seventeen</td><td>Functions vs. methods and impl on structs</td></tr>
+<tr><td>Lesson Eighteen</td><td>Slices in Retrospect</td></tr>
+<tr><td>Lesson Nineteen</td><td>Web Assembly (WASM)</td></tr>
+<tr><td>Lesson 20</td><td>The Sized Trait</td></tr>
+<tr><td>Lesson 21</td><td>Environment variables and the command line</td></tr>
+<tr><td>Lesson 22</td><td>Threads</td></tr>
+<tr><td>Lesson 23</td><td>Ref Stuff</td></tr>
+<tr><td>Lesson 24</td><td>Associated types on traits</td></tr>
+<tr><td>Lesson 25</td><td>The Sized Trait</td></tr>
+<tr><td>Lesson 26</td><td>Housekeeping Part 3</td></tr>
+<tr><td>Lesson 27</td><td>Web (and other) Assembly</td></tr>
+<tr><td>Lesson 28</td><td>TBD</td></tr>
+<tr><td>Lesson 29</td><td>Futures</td></tr>
+<tr><td>Lesson 30</td><td>Pluggable Runtimes and Async/Await</td></tr>
 </tbody></table>
-<p>| Lesson Sixteen  | and returning Traits                   |<br />
-| Lesson Seventeen| Functions vs. methods and impl on structs           |<br />
-| Lesson Eighteen | Slices in Retrospect                                |<br />
-| Lesson Nineteen | Housekeeping: pinning runtime and rnd crate         |<br />
-| Lesson 20       | The Sized Trait                                     |<br />
-| Lesson 21       | Environment variables and the command line          |<br />
-| Lesson 22       | Threads                                             |<br />
-| Lesson 23       | Ref Stuff                                           |<br />
-| Lesson 24       | Associated types on traits                          |<br />
-| Lesson 25       | The Sized Trait                                     |<br />
-| Lesson 26       | Housekeeping Part 3                                 |<br />
-| Lesson 27       | Web (and other) Assembly                            |<br />
-| Lesson 28       | TBD                                                 |<br />
-| Lesson 29       | Futures                                             |<br />
-| Lesson 30       | Pluggable Runtimes and Async/Await                  |</p>
 <h1><a class="header" href="#lesson-one-setup-and-returning-a-string" id="lesson-one-setup-and-returning-a-string">Lesson One: Setup and returning a String</a></h1>
 <h2><a class="header" href="#objectives-1" id="objectives-1">Objectives</a></h2>
 <ul>
@@ -438,10 +421,8 @@ x = 12;
 <li><code>mut MyVariable</code> can be borrowed by <em>one</em> borrower.</li>
 </ol>
 <p>The second rule is our guard against unwittingly introducing or exposing a race condition.</p>
-<h2><a class="header" href="#task-1" id="task-1">Task:</a></h2>
-<p>Review borrowing_101 and borrowing_102 in the demos directory.</p>
-<h2><a class="header" href="#task-2" id="task-2">Task:</a></h2>
-<p>This section of chapter 4 from the Rust book is great.  Highly recommended:
+<h2><a class="header" href="#chapter-for-from-the-book" id="chapter-for-from-the-book">Chapter for from The Book</a></h2>
+<p>Chapter 4 from the Rust book has an excellent overview of this critical topic:
 <a href="https://doc.rust-lang.org/book/ch04-01-what-is-ownership.html">The stack, heap, ownership and borrowing</a></p>
 <h2><a class="header" href="#general-notes" id="general-notes">General Notes</a></h2>
 <p>Borrowing gets us control over the scope and lifetime of memory allocations.  But, there is a price.  Recursive functions, when optimized, become an exercise in handling the borrows.  That's why a fibonacci sequence in a dynamically typed language can look like this:</p>
@@ -453,7 +434,7 @@ x = 12;
  return fib(n - 1) + fib(n - 2)
 end
 </code></pre>
-<p>and in Rust, look like this:</p>
+<p>and in Rust (albeit a complex, optimized form) look like this:</p>
 <p>(Rust)</p>
 <pre><pre class="playpen"><code class="language-rust">
 # #![allow(unused_variables)]
@@ -475,8 +456,6 @@ fn fib(n_dyn: Rc&lt;Any&gt;) -&gt; Rc&lt;Any&gt; {
 <ul>
 <li><a href="http://cs242.stanford.edu/f18/assets/lectures/09-2-future-of-pl.pdf">source</a></li>
 </ul>
-<h2><a class="header" href="#homework" id="homework">Homework</a></h2>
-<p>Playtime!  Lesson 2 src is empty.  Try working with stack and heap assigned variables. Try to break the rules and review the compiler messages.</p>
 <h1><a class="header" href="#lesson-three-pay-for-what-you-use-introduction-to-traits-and-enum-wrappers" id="lesson-three-pay-for-what-you-use-introduction-to-traits-and-enum-wrappers">Lesson Three: Pay for What You Use, Introduction to Traits and Enum Wrappers</a></h1>
 <h2><a class="header" href="#objectives-3" id="objectives-3">Objectives</a></h2>
 <ul>
@@ -504,7 +483,7 @@ fn fib(n_dyn: Rc&lt;Any&gt;) -&gt; Rc&lt;Any&gt; {
     let vv: Vec&lt;i32&gt; = v.to_owned();
     let vv: Vec&lt;i32&gt; = v.clone()        &lt;---  Compile Error, the clone trait is not implemented
 #}</code></pre></pre>
-<h2><a class="header" href="#simple-trait-syntax" id="simple-trait-syntax">Simple Trait Syntax</a></h2>
+<h2><a class="header" href="#a-simple-trait-syntax" id="a-simple-trait-syntax">A Simple Trait Syntax</a></h2>
 <pre><pre class="playpen"><code class="language-rust">
 # #![allow(unused_variables)]
 #fn main() {
@@ -522,13 +501,12 @@ impl Pay for Company {
   }
 }
 #}</code></pre></pre>
-<h2><a class="header" href="#homework-1" id="homework-1">Homework</a></h2>
-<p>The instructions are in the code (lesson 3) - implement a trait - feel free to do more!</p>
-<h1><a class="header" href="#lesson-four-enum-wrappers-and-some-type-basics" id="lesson-four-enum-wrappers-and-some-type-basics">Lesson Four: Enum Wrappers and Some Type Basics</a></h1>
+<p>From an OO perspective, <code>traits</code> look, feel and walk interfaces. In fact, they are more than just interfaces, as we shall see later.</p>
+<h1><a class="header" href="#lesson-four-enums-and-type-basics" id="lesson-four-enums-and-type-basics">Lesson Four: Enums and Type Basics</a></h1>
 <h2><a class="header" href="#objectives-4" id="objectives-4">Objectives</a></h2>
 <ul>
 <li>Understand working without NULL (you won't miss it) </li>
-<li>The std lib enum wrappers <code>Option&lt;T&gt;</code> <code>Result&lt;Err, T&gt;</code> </li>
+<li>Get familar with the standard library's enum wrappers <code>Option&lt;T&gt;</code> <code>Result&lt;Err, T&gt;</code> </li>
 <li>Understand how to import a library/crate and reference it in a source file </li>
 </ul>
 <h2><a class="header" href="#null-stdoption-and-enum-wrappers" id="null-stdoption-and-enum-wrappers">NULL, std::option and Enum Wrappers</a></h2>
@@ -556,8 +534,8 @@ struct Dieter {
     daily_calories: &lt;Option&lt;u8&gt;&gt;   // &lt;- tough diet, u8 is an unsigned 8 bit byte
 }
 #}</code></pre></pre>
-<p>The dieter object may or may not have a defined amount of <code>daily_calories</code> and access to the value (if defined) must be preceded by a check for its presence (Some or None).</p>
-<p>Another built-in enum in the std library is the Result&lt;T, E&gt;  which is used for returning values which can then be 'unwrapped' for errors OR propograted/thrown further up the call stack.</p>
+<p>The dieter object may or may not have a defined amount of <code>daily_calories</code> and access to the value must be preceded by a check for its presence (Some or None).</p>
+<p>Another built-in enum in the std library is the <code>Result&lt;T, E&gt;</code> which is used for returning values which can then be 'unwrapped' for errors OR propograted/thrown further up the call stack.</p>
 <p>The definition, likewise, is simple:</p>
 <pre><code>enum Result&lt;T, E&gt; {
    Ok(T),
@@ -583,7 +561,7 @@ fn main() {
 }
 
 </code></pre></pre>
-<p>*** See demo match_101 and match_102 for examples </p>
+<p>REF: match_101 and match_102 </p>
 <h1><a class="header" href="#lesson-five-error-handling" id="lesson-five-error-handling">Lesson Five: Error Handling</a></h1>
 <h2><a class="header" href="#objectives-5" id="objectives-5">Objectives</a></h2>
 <ul>
@@ -698,7 +676,7 @@ TODO: Enumerate Sample
 
 </code></pre></pre>
 <h3><a class="header" href="#homework-notes" id="homework-notes">Homework Notes</a></h3>
-<h1><a class="header" href="#lesson-seven-housekeeping" id="lesson-seven-housekeeping">Lesson Seven: HouseKeeping</a></h1>
+<h1><a class="header" href="#lesson-seven-import-syntax-and-project-structure" id="lesson-seven-import-syntax-and-project-structure">Lesson Seven: Import Syntax and Project Structure</a></h1>
 <h2><a class="header" href="#objectives-7" id="objectives-7">Objectives</a></h2>
 <p>We've covered quite a few of the fundamentals. Housekeeping lessons are quick visit on a series of topics.</p>
 <h2><a class="header" href="#importuse-syntax" id="importuse-syntax">Import/Use syntax</a></h2>
@@ -724,7 +702,7 @@ use somecrate::*;
 #fn main() {
 somemodule::somesubmodule::somefunction()
 #}</code></pre></pre>
-<p>The invocation starts where the the use ends.</p>
+<p>The invocation starts where the the use statement ends.</p>
 <p>We can also: </p>
 <pre><pre class="playpen"><code class="language-rust">
 # #![allow(unused_variables)]
@@ -744,8 +722,7 @@ use somecrate::{SomeStruct, somefunction};
 use somecrate::somesubmodule::{SomeStruct, somefunction};
 #}</code></pre></pre>
 <h2><a class="header" href="#project-structure" id="project-structure">Project Structure</a></h2>
-<p>There is a 'top level' to any library or binary (executable)
-and it is named in the cargo.toml</p>
+<p>There is a 'top level' to any library or binary (executable) and it is named in the cargo.toml</p>
 <p>The 'top level' is also responsible for exporting public members (using the <code>pub</code> keyword)</p>
 <p>Typical Project Structure:</p>
 <pre><code>  main.rs    or   lib.rs               
@@ -755,9 +732,16 @@ and it is named in the cargo.toml</p>
 |              |<br />
 mod.rs         mod.rs</p>
 <ul>
-<li>You can use <code>mod</code> to create modules anywhere</li>
-<li>The <em>parent</em> controls the visibility of the children who are public by 'reexposing' them, e.g.:
-<code>pub mychildmod</code></li>
+<li>
+<p>You can use <code>mod</code> to create modules anywhere</p>
+</li>
+<li>
+<p>The <em>parent</em> controls the visibility of the children who are public by 're-exposing' them, e.g.:
+<code>pub mychildmod</code></p>
+</li>
+<li>
+<p>This likewise applies to the top-level crate which selectively makes other crates and functions public</p>
+</li>
 </ul>
 <h3><a class="header" href="#importing-macros" id="importing-macros">Importing Macros</a></h3>
 <p>This needs to happen at the top level of the crate</p>
@@ -806,13 +790,7 @@ for x in xs.iter_mut() {
 [dependencies]
 rand = { git = &quot;https://github.com/rust-lang-nursery/rand.git&quot; }
 #}</code></pre></pre>
-<p>Homework:</p>
-<ol>
-<li>Create a project that has multiple directories (more than 2!) with separate modules.</li>
-<li>Use a Vec in the project</li>
-<li>Use a tuple in the project</li>
-</ol>
-<h1><a class="header" href="#lesson-eight-closures-and-lifetime-preview" id="lesson-eight-closures-and-lifetime-preview">Lesson Eight: Closures and Lifetime Preview</a></h1>
+<h1><a class="header" href="#lesson-eight-closures-and-lifetimes-preview" id="lesson-eight-closures-and-lifetimes-preview">Lesson Eight: Closures and Lifetimes Preview</a></h1>
 <h2><a class="header" href="#objectives-8" id="objectives-8">Objectives</a></h2>
 <ul>
 <li>Understand the basics of closures</li>
@@ -822,7 +800,7 @@ rand = { git = &quot;https://github.com/rust-lang-nursery/rand.git&quot; }
 <ul>
 <li>Closures look <em>a lot</em> like functions</li>
 </ul>
-<pre><pre class="playpen"><code class="language-rust">
+<pre><pre class="playpen"><code class="language-rust no_run">
 # #![allow(unused_variables)]
 #fn main() {
 fn  plus_one_v1   (x: i32) -&gt; i32 { x + 1 };
@@ -830,13 +808,12 @@ let plus_one_v2 = |x: i32| -&gt; i32 { x + 1 };
 let plus_one_v3 = |x: i32|          x + 1  ;
 #}</code></pre></pre>
 <ul>
-<li>
-<p>Closures can be parameters to functions, return values from functions, 'in-line' as lambda expressions,
-and assigned to a variable and 'invoked' later.  They are <code>lazy</code> initialized. </p>
-</li>
-<li>
-<p>Closures that mutate values must be annotated as <code>mut</code> </p>
-</li>
+<li>Closures can be parameters to functions, return values from functions, 'in-line' as lambda expressions,
+and assigned to a variable and 'invoked' later.</li>
+</ul>
+<p>They are <code>lazy</code> initialized. </p>
+<ul>
+<li>Closures that mutate values must be annotated as <code>mut</code> </li>
 </ul>
 <pre><pre class="playpen"><code class="language-rust">
 # #![allow(unused_variables)]
@@ -844,8 +821,9 @@ and assigned to a variable and 'invoked' later.  They are <code>lazy</code> init
   let mut a_closure = |t| t = t + 1; 
 #}</code></pre></pre>
 <ul>
-<li>The <code>move</code> keyword makes the closure take ownership of the referenced values.  (x in this case) </li>
+<li>The <code>move</code> keyword makes the closure take ownership of the referenced values.</li>
 </ul>
+<p>Note the error generated by the following code:</p>
 <pre><pre class="playpen"><code class="language-rust">fn main() {
     let x = vec![1, 2, 3];
     let equal_to_x = move |z| z == x;
@@ -882,19 +860,11 @@ struct Foo&lt;'a&gt; {
     x: &amp;'a i32,
 }
 #}</code></pre></pre>
-<h3><a class="header" href="#homework-2" id="homework-2">Homework</a></h3>
-<p>The homework task touches on a few topics: Vectors, iterators, and closures.</p>
+<h3><a class="header" href="#exercise-1" id="exercise-1">Exercise</a></h3>
+<p>This exercise touches on a few topics: Vectors, iterators, and closures.</p>
 <p>The <code>iter</code> trait has many functions like <code>map</code> and <code>filter</code> that take closures as arguments. 
 They do this by implementing FnMut, which is one way, together with <code>FnOnce</code> and ```Fn`` to control how closures capture their surrounding values.</p>
 <p>Practically, this let's us pipe the ```iter`` results to other functions in a nice, functional style.</p>
-<p>Note: this homework contains <em>2</em> binaries.  See the Crate.toml to see how that is done.  ```cargo run`` will not work, however.  You need to specify
-which binary you want to run.  In our case, either:</p>
-<p><code>cargo run --bin buggy</code>
-or
-```cargo run --bin iterclosures``</p>
-<p>The first exercise is to fix a bug in the <code>buggy</code> app.  See the source file for TODO and details. (extra credit with prize!: there's a bug in the simple fix, handle it.)</p>
-<p>The second exercise is to chain some <code>iter()</code> results and <code>collect()</code> them.  Play with some of the operators <a href="https://danielkeep.github.io/itercheat_baked.html">here</a>
-But, make sure you use at least <em>two closures</em> in your solution.</p>
 <h1><a class="header" href="#lesson-nine-lifetime-annotations" id="lesson-nine-lifetime-annotations">Lesson Nine: Lifetime Annotations</a></h1>
 <h2><a class="header" href="#objectives-9" id="objectives-9">Objectives</a></h2>
 <ul>
@@ -938,7 +908,7 @@ fn longest&lt;'a&gt;(x: &amp;'a str, y: &amp;'a str) -&gt; &amp;'a str {  // &lt
 <pre><code>fn longest(x: &amp;'a str, y: &amp;'a str) -&gt; &amp;'a str ... 
 </code></pre>
 <p>So, 'they' dropped the cases where it was obvious and gave the heruistics a French name, 'lifetime elision rules' so no one would ask anymore questions. </p>
-<h2><a class="header" href="#exercise-1" id="exercise-1">Exercise</a></h2>
+<h2><a class="header" href="#exercise-2" id="exercise-2">Exercise</a></h2>
 <p>Create a binary tree datastructure.</p>
 <p>Each node may have a parent, a node to the left, and a node to the right.</p>
 <p>Add one function/method that allows insertion of a node.</p>
@@ -982,7 +952,7 @@ convention:</p>
 <li>In the /demos/test_lesson_10 you will find a set of functions calls commented out.</li>
 <li>Review the functions and ask yourself, &quot;does this compile?&quot;</li>
 </ul>
-<h3><a class="header" href="#homework-3" id="homework-3">Homework</a></h3>
+<h3><a class="header" href="#homework" id="homework">Homework</a></h3>
 <p>This is homework is a short one:
 Create a simple function, and write a unit test for that function</p>
 <h1><a class="header" href="#lesson-eleven-boxt-and-optiont-resultt-err-again" id="lesson-eleven-boxt-and-optiont-resultt-err-again">Lesson Eleven: Box<T> and Option<T> Result&lt;T, Err&gt; (Again!)</a></h1>
@@ -991,7 +961,7 @@ Create a simple function, and write a unit test for that function</p>
 <li>Drive home Option and Result Usage </li>
 <li>How to use dyn and boxing </li>
 </ul>
-<h2><a class="header" href="#homework-4" id="homework-4">Homework:</a></h2>
+<h2><a class="header" href="#homework-1" id="homework-1">Homework:</a></h2>
 <p>Catchup day 2.  No new assignment.</p>
 <h1><a class="header" href="#lesson-twelve--trait-bounds" id="lesson-twelve--trait-bounds">Lesson Twelve:  Trait Bounds</a></h1>
 <h2><a class="header" href="#objectives-12" id="objectives-12">Objectives</a></h2>
@@ -1113,7 +1083,7 @@ impl CompoundTax for SimpleTaxer {
 try <a href="https://doc.rust-lang.org/stable/reference/">The Reference</a> Some of the explanations are excellent.  Remarkably
 similar to some of the content here.  ;)</li>
 </ul>
-<h3><a class="header" href="#exercise-2" id="exercise-2">Exercise</a></h3>
+<h3><a class="header" href="#exercise-3" id="exercise-3">Exercise</a></h3>
 <p>In the below below, using a trait, create a converter between Kilos, Pounds, and Stone</p>
 <pre><pre class="playpen"><code class="language-rust">enum Uom_Weight { Kilos, Pounds, Stone }  //UOM -&gt; Unit of Measure
 
@@ -1336,10 +1306,10 @@ fn iter_little_things() {
 
 
 </code></pre></pre>
-<h1><a class="header" href="#lesson-fifteen-copy-clone-and-sized-traits-problem-preview" id="lesson-fifteen-copy-clone-and-sized-traits-problem-preview">Lesson Fifteen: Copy, Clone, and Sized Traits, Problem Preview</a></h1>
+<h1><a class="header" href="#lesson-fifteen-copy-clone-drop-and-sized-traits-problem-preview" id="lesson-fifteen-copy-clone-drop-and-sized-traits-problem-preview">Lesson Fifteen: Copy, Clone, Drop and Sized Traits, Problem Preview</a></h1>
 <h2><a class="header" href="#objectives-15" id="objectives-15">Objectives</a></h2>
 <ul>
-<li>Understand The Copy and Clone Traits </li>
+<li>Understand The Copy, Clone, Drop and Sized Traits </li>
 </ul>
 <h3><a class="header" href="#lesson-12-assignment-reviewdiscussion" id="lesson-12-assignment-reviewdiscussion">Lesson 12 Assignment Review/Discussion</a></h3>
 <p><a href="https://play.rust-lang.org/?version=stable&amp;mode=debug&amp;edition=2018&amp;gist=183d5e20941f9d96071260c036c12e10">One Solution</a></p>

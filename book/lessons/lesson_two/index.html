@@ -188,10 +188,8 @@ x = 12;
 <li><code>mut MyVariable</code> can be borrowed by <em>one</em> borrower.</li>
 </ol>
 <p>The second rule is our guard against unwittingly introducing or exposing a race condition.</p>
-<h2><a class="header" href="#task" id="task">Task:</a></h2>
-<p>Review borrowing_101 and borrowing_102 in the demos directory.</p>
-<h2><a class="header" href="#task-1" id="task-1">Task:</a></h2>
-<p>This section of chapter 4 from the Rust book is great.  Highly recommended:
+<h2><a class="header" href="#chapter-for-from-the-book" id="chapter-for-from-the-book">Chapter for from The Book</a></h2>
+<p>Chapter 4 from the Rust book has an excellent overview of this critical topic:
 <a href="https://doc.rust-lang.org/book/ch04-01-what-is-ownership.html">The stack, heap, ownership and borrowing</a></p>
 <h2><a class="header" href="#general-notes" id="general-notes">General Notes</a></h2>
 <p>Borrowing gets us control over the scope and lifetime of memory allocations.  But, there is a price.  Recursive functions, when optimized, become an exercise in handling the borrows.  That's why a fibonacci sequence in a dynamically typed language can look like this:</p>
@@ -203,7 +201,7 @@ x = 12;
  return fib(n - 1) + fib(n - 2)
 end
 </code></pre>
-<p>and in Rust, look like this:</p>
+<p>and in Rust (albeit a complex, optimized form) look like this:</p>
 <p>(Rust)</p>
 <pre><pre class="playpen"><code class="language-rust">
 # #![allow(unused_variables)]
@@ -225,8 +223,6 @@ fn fib(n_dyn: Rc&lt;Any&gt;) -&gt; Rc&lt;Any&gt; {
 <ul>
 <li><a href="http://cs242.stanford.edu/f18/assets/lectures/09-2-future-of-pl.pdf">source</a></li>
 </ul>
-<h2><a class="header" href="#homework" id="homework">Homework</a></h2>
-<p>Playtime!  Lesson 2 src is empty.  Try working with stack and heap assigned variables. Try to break the rules and review the compiler messages.</p>
 
                     </main>
 
