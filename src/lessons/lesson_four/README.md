@@ -1,9 +1,9 @@
-# Lesson Four: Enum Wrappers and Some Type Basics 
+# Lesson Four: Enums and Type Basics 
 
 ## Objectives 
 
 * Understand working without NULL (you won't miss it) 
-* The std lib enum wrappers `Option<T>` `Result<Err, T>` 
+* Get familar with the standard library's enum wrappers `Option<T>` `Result<Err, T>` 
 * Understand how to import a library/crate and reference it in a source file 
 
 ## NULL, std::option and Enum Wrappers
@@ -35,9 +35,9 @@ struct Dieter {
 }
 ```
 
-The dieter object may or may not have a defined amount of `daily_calories` and access to the value (if defined) must be preceded by a check for its presence (Some or None).  
+The dieter object may or may not have a defined amount of `daily_calories` and access to the value must be preceded by a check for its presence (Some or None).  
 
-Another built-in enum in the std library is the Result<T, E>  which is used for returning values which can then be 'unwrapped' for errors OR propograted/thrown further up the call stack.
+Another built-in enum in the std library is the `Result<T, E>` which is used for returning values which can then be 'unwrapped' for errors OR propograted/thrown further up the call stack.
 
 The definition, likewise, is simple:
 
@@ -70,5 +70,5 @@ fn main() {
 
 ```
 
-*** See demo match_101 and match_102 for examples 
+REF: match_101 and match_102 
 

@@ -3,8 +3,8 @@
 - [x] Proof OVERVIEW 
 - [ ] Proof One 
 - [ ] Proof Two 
-- [ ] Proof Three
-- [ ] Proof Four
+- [x] Proof Three - Sparse
+- [x] Proof Four
 - [ ] Proof Five 
 
 ### Content Review

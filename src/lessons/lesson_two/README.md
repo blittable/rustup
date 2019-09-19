@@ -57,13 +57,9 @@ Ownership is a central concept in Rust and all heap allocated data has an owner.
 The second rule is our guard against unwittingly introducing or exposing a race condition.
 
 
-## Task:
+## Chapter for from The Book
 
-Review borrowing_101 and borrowing_102 in the demos directory.
-
-## Task:
-
-This section of chapter 4 from the Rust book is great.  Highly recommended:
+Chapter 4 from the Rust book has an excellent overview of this critical topic:
 [The stack, heap, ownership and borrowing](https://doc.rust-lang.org/book/ch04-01-what-is-ownership.html)
 
 
@@ -80,7 +76,7 @@ function fib(n)
 end
 ```
 
-and in Rust, look like this:
+and in Rust (albeit a complex, optimized form) look like this:
 
 (Rust)
 ```rust
@@ -101,8 +97,6 @@ fn fib(n_dyn: Rc<Any>) -> Rc<Any> {
 - [source](http://cs242.stanford.edu/f18/assets/lectures/09-2-future-of-pl.pdf)
 
 
-## Homework 
-Playtime!  Lesson 2 src is empty.  Try working with stack and heap assigned variables. Try to break the rules and review the compiler messages.  
 
 
 
