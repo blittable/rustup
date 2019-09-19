@@ -267,32 +267,33 @@ module.exports = {
 
 </code></pre>
 <p><code>main.rs</code></p>
-<pre><pre class="playpen"><code class="language-rust">
+<pre><pre class="playpen"><code class="language-rust no_run">
 # #![allow(unused_variables)]
 #fn main() {
-const path = require('path');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const webpack = require('webpack');
-const WasmPackPlugin = require(&quot;@wasm-tool/wasm-pack-plugin&quot;);
+use wasm_bindgen::prelude::*;
+use wasm_bindgen::Clamped;
+use web_sys::console::log;
+use web_sys::{console, CanvasRenderingContext2d, ImageData};
 
-module.exports = {
-    entry: './index.js',
-    output: {
-        path: path.resolve(__dirname, 'dist'),
-        filename: 'index.js',
-    },
-    plugins: [
-        new HtmlWebpackPlugin(),
-        new WasmPackPlugin({
-            crateDirectory: path.resolv
+
+#[wasm_bindgen]
+pub fn transform_bird(
+    ctx: &amp;CanvasRenderingContext2d,
+    width: u32,
+    height: u32,
+) -&gt; Result&lt;(), JsValue&gt; {
+
+    let mut data = render(width, height);
+    let data = ImageData::new_with_u8_clamped_array_and_sh(Clamped(&amp;mut data), width, height)?;
+    ctx.put_image_data(&amp;data, 0.0, 0.0)
+}
+
+fn render(width: u32, height: u32) -&gt; Vec&lt;u8&gt; {
+    let mut data = Vec::new();
+
+    data
+}
 #}</code></pre></pre>
-<p><code>index.js</code></p>
-<pre><code class="language-javascript">const rust = import('./pkg');
-
-rust
-  .then(m =&gt; m.greet('World!'))
-  .catch(console.error);
-</code></pre>
 <hr />
 <h2><a class="header" href="#why-use-wasm" id="why-use-wasm">Why use WASM?</a></h2>
 <p>The primary reasons for using <code>wasm</code> are:</p>

@@ -156,34 +156,31 @@ module.exports = {
 
 `main.rs`
 
-```rust
-const path = require('path');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const webpack = require('webpack');
-const WasmPackPlugin = require("@wasm-tool/wasm-pack-plugin");
+```rust, no_run
+use wasm_bindgen::prelude::*;
+use wasm_bindgen::Clamped;
+use web_sys::console::log;
+use web_sys::{console, CanvasRenderingContext2d, ImageData};
 
-module.exports = {
-    entry: './index.js',
-    output: {
-        path: path.resolve(__dirname, 'dist'),
-        filename: 'index.js',
-    },
-    plugins: [
-        new HtmlWebpackPlugin(),
-        new WasmPackPlugin({
-            crateDirectory: path.resolv
+
+#[wasm_bindgen]
+pub fn transform_bird(
+    ctx: &CanvasRenderingContext2d,
+    width: u32,
+    height: u32,
+) -> Result<(), JsValue> {
+
+    let mut data = render(width, height);
+    let data = ImageData::new_with_u8_clamped_array_and_sh(Clamped(&mut data), width, height)?;
+    ctx.put_image_data(&data, 0.0, 0.0)
+}
+
+fn render(width: u32, height: u32) -> Vec<u8> {
+    let mut data = Vec::new();
+
+    data
+}
 ```
-
-`index.js`
-
-```javascript
-const rust = import('./pkg');
-
-rust
-  .then(m => m.greet('World!'))
-  .catch(console.error);
-```
-
 
 _______
 
