@@ -8,7 +8,7 @@
 
 One of the philosophies of Rust is 'Pay only for what you use'.  Make no assumptions about what a type does - dive into the api doc.
 
-The functionality that is on a type is from a `trait`.
+The functionality that is on a type is from a `trait`, which from an OO perspective looks and feels like an interface.
 
 In an OO language like .NET, the root object `Object` implements ```Object.MemberwiseClone``` and is accessible to all classes/objects.
 
@@ -30,7 +30,7 @@ Not so in Rust:
     let vv: Vec<i32> = v.clone()        <---  Compile Error, the clone trait is not implemented
 ```
 
-## A Simple Trait Syntax
+## Simple Trait Syntax
 
 ```rust
 trait Pay {
@@ -48,6 +48,13 @@ impl Pay for Company {
 }
 ```
 
-From an OO perspective, `traits` look, feel and walk interfaces. In fact, they are more than just interfaces, as we shall see later.
+The 'Company' struct can then be invoked via its `trait` impl or implementation:
+
+```rust, no_run
+let company = Company { name: "Mycos" };
+company.pay();
+```
+
+
 
 

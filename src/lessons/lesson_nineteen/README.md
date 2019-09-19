@@ -76,7 +76,7 @@ Here is HelloWorld in .NET 4.0:
   (func (;8;) (type 6) (param i32 i32 i32)
 ```
 
-[Optional: Generating WAT from WASM](https://asciinema.org/a/dLEdBBNjYLJYUjsJmBjFRjOKb)
+[Screencast: Generating WAT (wasm in readable text format) from WASM](https://asciinema.org/a/dLEdBBNjYLJYUjsJmBjFRjOKb)
 
 _______
 
@@ -223,7 +223,6 @@ The rough conclusions from this research: is that WASM is ~1.2 - ~2x slower than
 
 SIMD (single instruction multiple data) support (currently in beta for WASM) could massively increase performance for matrix-style operations. 
 
-
 _______
 ## Known Limitations: 
 
@@ -235,6 +234,12 @@ _______
 
 4 - All the major browsers support WASM, but for those that do not [wasm2js](https://github.com/WebAssembly/binaryen) is a library to convert wasm to js
 
+
+Regarding the threading model, if you actually try to spawn a thread then it will panic, because wasm is single-threaded only right now.
+
+However, most "thread-specific" things like Mutex, Arc, and atomics will work just fine.
+
+They'll compile down into an efficient single-threaded implementation so it's only really spawning a thread which isn't supported right now.
 
 _______
 ## The Bleeding Edge: Wasmtime and WASI 
