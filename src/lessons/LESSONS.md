@@ -24,7 +24,7 @@
 | Lesson Nineteen | Web Assembly (WASM)                                 |                                 
 | Lesson 20       | The Sized Trait                                     |   
 | Lesson 21       | Environment variables and the command line          |                                 
-| Lesson 22       | Threads                                             |                                 
+| Lesson 22       | File I/O and Serde                                  |                                 
 | Lesson 23       | Ref Stuff                                           |                                 
 | Lesson 24       | Associated types on traits                          |   
 | Lesson 25       | The Sized Trait                                     |   
