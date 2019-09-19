@@ -228,11 +228,11 @@ _______
 
 1 - Boxed by javascript, so the number of calls between `wasm` and `javascript` has a negative performance impact.
 
-2 - No current threading model.  (in progress)  
+2 - Currently, no support for multi-threading.  
 
-3 - No native socket calls (but web api network calls are supported)
+3 - No native socket calls (but web api calls are supported)
 
-4 - All the major browsers support WASM, but for those that do not [wasm2js](https://github.com/WebAssembly/binaryen) is a library to convert wasm to js
+4 - All the major browsers support WASM, but some do not.  (as a work-around, [wasm2js](https://github.com/WebAssembly/binaryen) is a library to convert wasm to js)
 
 
 Regarding the threading model, if you actually try to spawn a thread then it will panic, because wasm is single-threaded only right now.
@@ -244,7 +244,7 @@ They'll compile down into an efficient single-threaded implementation so it's on
 _______
 ## The Bleeding Edge: Wasmtime and WASI 
 
-There is a proposal to extend the he shared assembly standard beyond the browser.  The proposal is for `wasi` which is a runtime with file system access, but sandboxed.
+There is a proposal to extend the he shared assembly standard beyond the browser.  The proposal is for `wasi` which is a runtime with file system access and other standard POSIX-like features, but securely sandboxed.
 
 1 - `cargo new --bin demo` 
 

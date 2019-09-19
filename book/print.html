@@ -1670,15 +1670,15 @@ Browser         WebWorker      Rust   ||
 <hr />
 <h2><a class="header" href="#known-limitations" id="known-limitations">Known Limitations:</a></h2>
 <p>1 - Boxed by javascript, so the number of calls between <code>wasm</code> and <code>javascript</code> has a negative performance impact.</p>
-<p>2 - No current threading model.  (in progress)</p>
-<p>3 - No native socket calls (but web api network calls are supported)</p>
-<p>4 - All the major browsers support WASM, but for those that do not <a href="https://github.com/WebAssembly/binaryen">wasm2js</a> is a library to convert wasm to js</p>
+<p>2 - Currently, no support for multi-threading.</p>
+<p>3 - No native socket calls (but web api calls are supported)</p>
+<p>4 - All the major browsers support WASM, but some do not.  (as a work-around, <a href="https://github.com/WebAssembly/binaryen">wasm2js</a> is a library to convert wasm to js)</p>
 <p>Regarding the threading model, if you actually try to spawn a thread then it will panic, because wasm is single-threaded only right now.</p>
 <p>However, most &quot;thread-specific&quot; things like Mutex, Arc, and atomics will work just fine.</p>
 <p>They'll compile down into an efficient single-threaded implementation so it's only really spawning a thread which isn't supported right now.</p>
 <hr />
 <h2><a class="header" href="#the-bleeding-edge-wasmtime-and-wasi" id="the-bleeding-edge-wasmtime-and-wasi">The Bleeding Edge: Wasmtime and WASI</a></h2>
-<p>There is a proposal to extend the he shared assembly standard beyond the browser.  The proposal is for <code>wasi</code> which is a runtime with file system access, but sandboxed.</p>
+<p>There is a proposal to extend the he shared assembly standard beyond the browser.  The proposal is for <code>wasi</code> which is a runtime with file system access and other standard POSIX-like features, but securely sandboxed.</p>
 <p>1 - <code>cargo new --bin demo</code> </p>
 <p>2 - <code>rustup target add wasm32-wasi</code></p>
 <p>3 - <code>cargo build --target wasm32-wasi</code></p>
@@ -2158,6 +2158,21 @@ x = !x              // x is now 1
 
         </div>
 
+        
+        <!-- Livereload script (if served using the cli tool) -->
+        <script type="text/javascript">
+            var socket = new WebSocket("ws://localhost:3001");
+            socket.onmessage = function (event) {
+                if (event.data === "reload") {
+                    socket.close();
+                    location.reload(true); // force reload from server (not from cache)
+                }
+            };
+
+            window.onbeforeunload = function() {
+                socket.close();
+            }
+        </script>
         
 
         
