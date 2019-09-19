@@ -1,14 +1,13 @@
 ### Proofing
 - [x] Proof  README 
 - [x] Proof OVERVIEW 
-- [ ] Proof One 
-- [ ] Proof Two 
+- [x] Proof One 
+- [x] Proof Two 
 - [x] Proof Three - Sparse
 - [x] Proof Four
 - [ ] Proof Five 
 
 ### Content Review
-- [ ] Review Lesson 5 
 - [ ] Review Lesson 5 
 - [ ] Review Lesson 6 
 - [ ] Review Lesson 7 
@@ -22,12 +21,11 @@
 - [ ] Review Lesson 15 
 - [ ] Review Lesson 16 
 - [ ] Review Lesson 17 
-- [ ] Review Lesson 17 
-- [ ] Review Lesson 17 
+- [ ] Review Lesson 18 
+- [ ] Review Lesson 19 
 - [ ] Demo code triage/structure
 - [ ] Add more constructor patterns 
 - [ ] Add more iterator patterns 
 
 ### Lessons
-
 
