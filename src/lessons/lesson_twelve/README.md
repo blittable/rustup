@@ -7,7 +7,6 @@
 
 As an OO programmer, you already know generics (hopefully!).  It's quite similar in Rust. 
 
-
 But, what about 'traits'?
 
 You can pass a trait `impl` as a parameter:

@@ -1,7 +1,7 @@
-# Lesson Fifteen: Copy, Clone, and Sized Traits, Problem Preview 
+# Lesson Fifteen: Copy, Clone, Drop and Sized Traits, Problem Preview 
 
 ## Objectives 
-- Understand The Copy and Clone Traits 
+- Understand The Copy, Clone, Drop and Sized Traits 
 
 ### Lesson 12 Assignment Review/Discussion
 
