@@ -76,7 +76,7 @@ fn main() {
             print!("*");
         }
         println!("");
-    }
+    };
 
     split(45);
     thread_lifetime();
@@ -108,12 +108,13 @@ fn thread_lifetime() {
 
 #### Move values into the Threads closure
 
-```rust
+
+```rust, no_run
 let k = [1, 2, 3];
     thread::spawn(|| { let n = k[0]; });  // <- Compile Error
 ```
 
-```rust
+```rust, no_run
 let k = [1, 2, 3];
     thread::spawn(move || { let n = k[0]; }); 
 ```
