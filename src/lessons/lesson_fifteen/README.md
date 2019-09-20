@@ -7,7 +7,7 @@
 
 [One Solution](https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&gist=183d5e20941f9d96071260c036c12e10)
 
-### Three Special Traits: Copy, Clone, Size
+## Three Special Traits: Copy, Clone, Size
 
 The ```Copy``` trait uses mem::copy underneath and is implicit (you can use = operator),  ```Clone``` is explicit (.clone()) 
 
@@ -30,6 +30,7 @@ impl Clone for Motorcy {
 
 [Copy/Clone Playground](https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&gist=291d8a0f3d018fd84909a45475b1af57)
 
+## Three Special Traits: Copy, Clone, Size
 <!-- 
 https://stackoverflow.com/questions/30938499/why-is-the-sized-bound-necessary-in-this-trait
 let x: Display = ...;

@@ -24,7 +24,7 @@
 - [Bit Fiddling](./lessons/lesson_eighteen/README.md))
 - [Web Assembly - WASM](./lessons/lesson_nineteen/README.md))
 - [Threads](./lessons/lesson_twenty/README.md))
-- [TBD](./lessons/lesson_twenty_one/README.md))
+- [Async Essentials](./lessons/lesson_twenty_one/README.md))
 - [File I/O and Image Transformations](./lessons/lesson_twenty_two/RustFSExample/README.md))
 - [Unsafe Code](./lessons/lesson_twenty_three/README.md))
 
