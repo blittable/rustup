@@ -1,4 +1,4 @@
-# Lesson Seven: HouseKeeping 
+# Lesson Seven: Import Syntax and Project Structure 
 
 ## Objectives 
 
@@ -28,7 +28,7 @@ Syntax will be:
 somemodule::somesubmodule::somefunction()
 ```
 
-The invocation starts where the the use ends.
+The invocation starts where the the use statement ends.
 
 We can also: 
 
@@ -48,8 +48,7 @@ use somecrate::somesubmodule::{SomeStruct, somefunction};
 
 ## Project Structure
 
-There is a 'top level' to any library or binary (executable)
-and it is named in the cargo.toml
+There is a 'top level' to any library or binary (executable) and it is named in the cargo.toml
 
 The 'top level' is also responsible for exporting public members (using the ```pub``` keyword)
 
@@ -64,8 +63,11 @@ Typical Project Structure:
 
 
 - You can use `mod` to create modules anywhere
-- The *parent* controls the visibility of the children who are public by 'reexposing' them, e.g.:
+
+- The *parent* controls the visibility of the children who are public by 're-exposing' them, e.g.:
 ```pub mychildmod```
+
+- This likewise applies to the top-level crate which selectively makes other crates and functions public
 
 
 ### Importing Macros
@@ -118,13 +120,3 @@ one example:
 [dependencies]
 rand = { git = "https://github.com/rust-lang-nursery/rand.git" }
 ```
-
-Homework:
-
-1) Create a project that has multiple directories (more than 2!) with separate modules.
-2) Use a Vec in the project
-3) Use a tuple in the project
-
-
-
-

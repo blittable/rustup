@@ -1,18 +1,15 @@
 ### Proofing
 - [x] Proof  README 
 - [x] Proof OVERVIEW 
-- [ ] Proof One 
-- [ ] Proof Two 
-- [ ] Proof Three
-- [ ] Proof Four
+- [x] Proof One 
+- [x] Proof Two 
+- [x] Proof Three - Sparse
+- [x] Proof Four
 - [ ] Proof Five 
-
-### Content Review
-- [ ] Review Lesson 5 
 - [ ] Review Lesson 5 
 - [ ] Review Lesson 6 
 - [ ] Review Lesson 7 
-- [ ] Review Lesson 8 
+- [x ] Review Lesson 8 - Needs detailed review and assignment config 
 - [ ] Review Lesson 9 
 - [ ] Review Lesson 10
 - [ ] Review Lesson 11 
@@ -20,14 +17,13 @@
 - [ ] Review Lesson 13 
 - [ ] Review Lesson 14 
 - [ ] Review Lesson 15 
-- [ ] Review Lesson 16 
+- [x] Review Lesson 16 - Need detailed review and material on Drop, better explanation of Clone, Copy 
 - [ ] Review Lesson 17 
-- [ ] Review Lesson 17 
-- [ ] Review Lesson 17 
+- [ ] Review Lesson 18 
+- [ ] Review Lesson 19 
 - [ ] Demo code triage/structure
 - [ ] Add more constructor patterns 
 - [ ] Add more iterator patterns 
 
 ### Lessons
-
 

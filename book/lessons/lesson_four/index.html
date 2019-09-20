@@ -145,11 +145,11 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1><a class="header" href="#lesson-four-enum-wrappers-and-some-type-basics" id="lesson-four-enum-wrappers-and-some-type-basics">Lesson Four: Enum Wrappers and Some Type Basics</a></h1>
+                        <h1><a class="header" href="#lesson-four-enums-and-type-basics" id="lesson-four-enums-and-type-basics">Lesson Four: Enums and Type Basics</a></h1>
 <h2><a class="header" href="#objectives" id="objectives">Objectives</a></h2>
 <ul>
 <li>Understand working without NULL (you won't miss it) </li>
-<li>The std lib enum wrappers <code>Option&lt;T&gt;</code> <code>Result&lt;Err, T&gt;</code> </li>
+<li>Get familar with the standard library's enum wrappers <code>Option&lt;T&gt;</code> <code>Result&lt;Err, T&gt;</code> </li>
 <li>Understand how to import a library/crate and reference it in a source file </li>
 </ul>
 <h2><a class="header" href="#null-stdoption-and-enum-wrappers" id="null-stdoption-and-enum-wrappers">NULL, std::option and Enum Wrappers</a></h2>
@@ -177,8 +177,8 @@ struct Dieter {
     daily_calories: &lt;Option&lt;u8&gt;&gt;   // &lt;- tough diet, u8 is an unsigned 8 bit byte
 }
 #}</code></pre></pre>
-<p>The dieter object may or may not have a defined amount of <code>daily_calories</code> and access to the value (if defined) must be preceded by a check for its presence (Some or None).</p>
-<p>Another built-in enum in the std library is the Result&lt;T, E&gt;  which is used for returning values which can then be 'unwrapped' for errors OR propograted/thrown further up the call stack.</p>
+<p>The dieter object may or may not have a defined amount of <code>daily_calories</code> and access to the value must be preceded by a check for its presence (Some or None).</p>
+<p>Another built-in enum in the std library is the <code>Result&lt;T, E&gt;</code> which is used for returning values which can then be 'unwrapped' for errors OR propograted/thrown further up the call stack.</p>
 <p>The definition, likewise, is simple:</p>
 <pre><code>enum Result&lt;T, E&gt; {
    Ok(T),
@@ -204,7 +204,7 @@ fn main() {
 }
 
 </code></pre></pre>
-<p>*** See demo match_101 and match_102 for examples </p>
+<p>REF: match_101 and match_102 </p>
 
                     </main>
 

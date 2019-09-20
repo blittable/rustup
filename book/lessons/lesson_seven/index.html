@@ -145,7 +145,7 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1><a class="header" href="#lesson-seven-housekeeping" id="lesson-seven-housekeeping">Lesson Seven: HouseKeeping</a></h1>
+                        <h1><a class="header" href="#lesson-seven-import-syntax-and-project-structure" id="lesson-seven-import-syntax-and-project-structure">Lesson Seven: Import Syntax and Project Structure</a></h1>
 <h2><a class="header" href="#objectives" id="objectives">Objectives</a></h2>
 <p>We've covered quite a few of the fundamentals. Housekeeping lessons are quick visit on a series of topics.</p>
 <h2><a class="header" href="#importuse-syntax" id="importuse-syntax">Import/Use syntax</a></h2>
@@ -171,7 +171,7 @@ use somecrate::*;
 #fn main() {
 somemodule::somesubmodule::somefunction()
 #}</code></pre></pre>
-<p>The invocation starts where the the use ends.</p>
+<p>The invocation starts where the the use statement ends.</p>
 <p>We can also: </p>
 <pre><pre class="playpen"><code class="language-rust">
 # #![allow(unused_variables)]
@@ -191,8 +191,7 @@ use somecrate::{SomeStruct, somefunction};
 use somecrate::somesubmodule::{SomeStruct, somefunction};
 #}</code></pre></pre>
 <h2><a class="header" href="#project-structure" id="project-structure">Project Structure</a></h2>
-<p>There is a 'top level' to any library or binary (executable)
-and it is named in the cargo.toml</p>
+<p>There is a 'top level' to any library or binary (executable) and it is named in the cargo.toml</p>
 <p>The 'top level' is also responsible for exporting public members (using the <code>pub</code> keyword)</p>
 <p>Typical Project Structure:</p>
 <pre><code>  main.rs    or   lib.rs               
@@ -202,9 +201,16 @@ and it is named in the cargo.toml</p>
 |              |<br />
 mod.rs         mod.rs</p>
 <ul>
-<li>You can use <code>mod</code> to create modules anywhere</li>
-<li>The <em>parent</em> controls the visibility of the children who are public by 'reexposing' them, e.g.:
-<code>pub mychildmod</code></li>
+<li>
+<p>You can use <code>mod</code> to create modules anywhere</p>
+</li>
+<li>
+<p>The <em>parent</em> controls the visibility of the children who are public by 're-exposing' them, e.g.:
+<code>pub mychildmod</code></p>
+</li>
+<li>
+<p>This likewise applies to the top-level crate which selectively makes other crates and functions public</p>
+</li>
 </ul>
 <h3><a class="header" href="#importing-macros" id="importing-macros">Importing Macros</a></h3>
 <p>This needs to happen at the top level of the crate</p>
@@ -253,12 +259,6 @@ for x in xs.iter_mut() {
 [dependencies]
 rand = { git = &quot;https://github.com/rust-lang-nursery/rand.git&quot; }
 #}</code></pre></pre>
-<p>Homework:</p>
-<ol>
-<li>Create a project that has multiple directories (more than 2!) with separate modules.</li>
-<li>Use a Vec in the project</li>
-<li>Use a tuple in the project</li>
-</ol>
 
                     </main>
 
