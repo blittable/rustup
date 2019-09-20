@@ -244,10 +244,8 @@ fn get_hashables(terminus: i32) -> Vec<i64> {
     (0..terminus).map(|x| i64::from(x)).collect()
 }
 ```
-_______
 
 
-Congratulations... you have survived Rust 101
 
 
 
