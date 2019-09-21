@@ -90,17 +90,14 @@ impl Filter for InverseColorFilter {
 
 impl Filter for FlipFilter {
     fn apply(&self, data: Vec<Vec<(u8, u8, u8)>>) -> Vec<(u8, u8, u8)> {
-        let matrix = Array2D::from_rows(&data);
         match self.flip {
-            Flip::Vertical => matrix
-                .as_rows()
+            Flip::Vertical => data
                 .iter()
                 .rev()
                 .flat_map(|array| array.iter())
                 .map(|&t| t)
                 .collect::<Vec<_>>(),
-            _ => matrix
-                .as_rows()
+            _ => data
                 .iter()
                 .flat_map(|array| array.iter().rev())
                 .map(|&t| t)
