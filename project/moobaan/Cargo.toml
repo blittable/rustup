@@ -1,0 +1,29 @@
+[package]
+name = "lesson_sixteen"
+version = "0.1.0"
+authors = ["blittable <blittable-bits@gmail.com>"]
+edition = "2018"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+clap = "2.33.0"
+
+[lib]
+name = "moobaan"
+path = "src/lib.rs"
+
+[[bin]]
+name = "cli"
+path = "src/cli/cli.rs"
+
+[[bin]]
+name = "server"
+path = "src/server/server.rs"
+
+[[bin]]
+name = "report_generator"
+path = "src/report/report_generator.rs"
+
