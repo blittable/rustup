@@ -64,20 +64,11 @@ impl<'a> Bitmap<'a> {
     }
 }
 
-struct InverseColorFilter {}
-
-enum Flip {
-    Holizontal,
-    Vertical
-}
-struct FlipFilter {
-    flip: Flip
-}
-
 trait Filter {
     fn apply(&self, data: Vec<Vec<(u8, u8, u8)>>) -> Vec<(u8, u8, u8)>;
 }
 
+struct InverseColorFilter {}
 impl Filter for InverseColorFilter {
     fn apply(&self, data: Vec<Vec<(u8, u8, u8)>>) -> Vec<(u8, u8, u8)> {
         data
@@ -88,6 +79,13 @@ impl Filter for InverseColorFilter {
     }
 }
 
+enum Flip {
+    Holizontal,
+    Vertical
+}
+struct FlipFilter {
+    flip: Flip
+}
 impl Filter for FlipFilter {
     fn apply(&self, data: Vec<Vec<(u8, u8, u8)>>) -> Vec<(u8, u8, u8)> {
         match self.flip {
