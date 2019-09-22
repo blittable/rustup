@@ -17,14 +17,14 @@
 | Lesson Twelve   | Trait Bounds                                        |
 | Lesson Thirteen | Patterns of Constructors                            |
 | Lesson Fourteen | Patterns of Iterators                               |                                 
-| Lesson Fifteen  | Rc<T>, RcCell<T>, Box<T> (again)                    |                                 
-| Lesson Sixteen  | and returning Traits                   |                                 
+| Lesson Fifteen  | The Copy, Clone and Sized Traits                    |
+| Lesson Sixteen  | and returning Traits                                |                                 
 | Lesson Seventeen| Functions vs. methods and impl on structs           |                                 
 | Lesson Eighteen | Slices in Retrospect                                |                                 
-| Lesson Nineteen | Housekeeping: pinning runtime and rnd crate         |                                 
+| Lesson Nineteen | Web Assembly (WASM)                                 |                                 
 | Lesson 20       | The Sized Trait                                     |   
 | Lesson 21       | Environment variables and the command line          |                                 
-| Lesson 22       | Threads                                             |                                 
+| Lesson 22       | File I/O and Serde                                  |                                 
 | Lesson 23       | Ref Stuff                                           |                                 
 | Lesson 24       | Associated types on traits                          |   
 | Lesson 25       | The Sized Trait                                     |   

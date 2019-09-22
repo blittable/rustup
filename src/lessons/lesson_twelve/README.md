@@ -3,12 +3,46 @@
 ## Objectives 
 - Trait Bounds Basics
 
+________
 ### Trait Bounds
 
-As an OO programmer, you already know generics (hopefully!).  It's quite similar in Rust. 
+As an OO programmer, you are likely already familiar with generics. 
+
+In Rust there are similarities and differences.
 
 
-But, what about 'traits'?
+
+First, it's important to get clear on some terminology.
+
+```rust
+fn apply<F, T>(f: F, t: T)
+where
+    F: FnOnce(),
+{
+    f();
+
+    do_something(t);
+}
+
+fn do_something<T>(t: T) {
+    let z: Box<T> = Box::new(t);
+}
+```
+
+In the code above, 
+
+`fn apply<F, T>(f: F, t: T) where F: FnOnce()`
+
+is the entire type signature.
+
+`<F, T>` specifies two type parameters.  We know nothing about them, other than they are types.
+
+`where F: FnOnce()` is a trait bound.  It's a constrait that requires any generic type used in the function to implement the FnOnce() trait.
+
+
+
+Additionally:
+
 
 You can pass a trait `impl` as a parameter:
 

@@ -48,7 +48,7 @@ You can switch the active toolchain or compile with a specific toolchain.  Look 
 
 #### Cool Note  
 
-Type ``rustc``, and look at the option for ```emit``` that specifies the output format, including asm (think web assembly) and llvm-ir 
+Type ``rustc``, and look at the option for ```emit``` that specifies the output format, including asm (assembly) and llvm-ir 
 
 ```
 --emit [asm|llvm-bc|llvm-ir|obj|metadata|link|dep-info|mir]

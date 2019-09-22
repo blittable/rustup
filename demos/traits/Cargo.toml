@@ -1,0 +1,24 @@
+[package]
+name = "traits"
+version = "0.1.0"
+authors = ["blittable <blittable-bits@gmail.com>"]
+edition = "2018"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+
+[[bin]]
+name = "all"
+path = "src/all.rs"
+
+[[bin]]
+name = "simplest"
+path = "src/simplest_01.rs"
+
+[[bin]]
+name = "dynamic_dispatch"
+path = "src/dynamic_dispatch_10.rs"
+
+
+

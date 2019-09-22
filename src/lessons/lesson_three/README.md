@@ -8,9 +8,9 @@
 
 One of the philosophies of Rust is 'Pay only for what you use'.  Make no assumptions about what a type does - dive into the api doc.
 
-The functionality that is on a type is from a ```trait```.
+The functionality that is on a type is from a `trait`, which from an OO perspective looks and feels like an interface.
 
-In an OO language like .NET, the root object ```Object``` implements ```Object.MemberwiseClone``` and is accessible to all classes/objects.
+In an OO language like .NET, the root object `Object` implements ```Object.MemberwiseClone``` and is accessible to all classes/objects.
 
 Not so in Rust:
 
@@ -48,7 +48,13 @@ impl Pay for Company {
 }
 ```
 
-## Homework 
+The 'Company' struct can then be invoked via its `trait` impl or implementation:
 
-The instructions are in the code (lesson 3) - implement a trait - feel free to do more!
+```rust, no_run
+let company = Company { name: "Mycos" };
+company.pay();
+```
+
+
+
 
