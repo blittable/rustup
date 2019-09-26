@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Rust for OO Programmers</title>
+        <title>Rust Top-Down</title>
         
         <meta name="robots" content="noindex" />
         
@@ -112,7 +112,7 @@
                             
                         </div>
 
-                        <h1 class="menu-title">Rust for OO Programmers</h1>
+                        <h1 class="menu-title">Rust Top-Down</h1>
 
                         <div class="right-buttons">
                             <a href="print.html" title="Print this book" aria-label="Print this book">
@@ -575,11 +575,11 @@ fn main() {
 <li>Review matching in the context of error handling</li>
 </ul>
 <h2><a class="header" href="#errors" id="errors">Errors:</a></h2>
-<p>This is an excellent article on error handling in Rust.  https://blog.burntsushi.net/rust-error-handling/</p>
+<p>This is an excellent article on error handling in Rust here:  <a href="https://blog.burntsushi.net/rust-error-handling/">error handling</a></p>
 <p>The Rust Book and Rust By Example are a bit thin in this category, so the article is highly recommended.</p>
-<p>Frankly, handling errors in Rust requires more effort than OO programmers are accustomed to. </p>
+<p>Frankly, handling errors in Rust requires more effort than programmers from dynmaically typed languages are accustomed to. </p>
 <p>There are efforts like the <a href="https://github.com/rust-lang-nursery/failure">Failure</a> library which attempt to make it more ergonomic/friendly to use.</p>
-<p>Here are the basics: </p>
+<p>But, Here are the basics using only Rust's built-in types: </p>
 <h2><a class="header" href="#error-propogation" id="error-propogation">Error Propogation</a></h2>
 <p>Like <code>Options</code>, <code>Results</code> can use <code>.unwrap()</code>  As of Rust 2018, a nicer way to handle errors is to propogate via the <code>?</code> operator.</p>
 <p>It's analogous to throwing an Exception in an OO language. If it unwraps to an <code>Err</code>, throw it up the chain. </p>
@@ -609,7 +609,7 @@ We know our T and get to work       We *might* have an Error (a trait)
                                     with full knowledge of its underlying type
 </code></pre>
 <p>In OO programming we have the luxury of handling errors without knowing all the details, because if an error is thrown or I throw an error, we at least know it derives from an Error (typically an Exception class).</p>
-<p>In Rust, however, we <em>must</em> know the exact content of the Result's Err in order to handle it.  In fact the <code>E</code> in <code>Result&lt;T, E&gt;</code> needn't be an <code>Error</code> (deriving from the Error trait) at all (a String here for illustrative purpose):</p>
+<p>In Rust, however, we <em>must</em> know the exact content of the Result's Err in order to handle it completely.  In fact the <code>E</code> in <code>Result&lt;T, E&gt;</code> needn't be an <code>Error</code> (deriving from the Error trait) at all (a String here for illustrative purpose):</p>
 <pre><pre class="playpen"><code class="language-rust">
 fn main() -&gt; Result&lt;(), Box&lt;String&gt;&gt; {
     let function_result = is_positive(-2);
@@ -649,14 +649,26 @@ fn is_positive(number: i64) -&gt; AliasedResult&lt;()&gt; {
 }
 
 </code></pre></pre>
+<h2><a class="header" href="#using-dyn-error-to-wrap-errors" id="using-dyn-error-to-wrap-errors">Using dyn Error to wrap errors</a></h2>
+<p>The next challenge in Rust error handling is dealing with errors thrown by <em>other</em> libraries.  Althoug the specifics of the underlying error are unknown, if we know that the error is an Error of std::error::Error type, we can still <code>Box&lt;dyn Error&gt;</code> the error as shown below:</p>
+<pre><pre class="playpen"><code class="language-rust no_run">
+# #![allow(unused_variables)]
+#fn main() {
+pub fn build_config(args: Vec&lt;String&gt;) -&gt; Result&lt;SuiteConfig, Box&lt;dyn std::error::Error&gt;&gt; {
+//.. ommitted code
+
+            Err(e) =&gt; {
+                println!(&quot;Error opening the file: {:?}&quot;, e.description());
+                return Err(Box::new(e));
+            }
+#}</code></pre></pre>
 <p>To summarize:</p>
 <ol>
 <li>Using the <code>?</code> makes errors easier to read and makes higher-level code flow more sensibly.</li>
-<li>If you are using a Result (your own or from a function you invoke), first determine the type behind the Err.</li>
+<li>If you are using a Result (your own or from a function you invoke), first determine the type unwrapped by Err.</li>
 <li>Make no assumptions that the Err wraps a type implementing the Error trait.</li>
+<li>If you are handling other libraries' errors, you can use <code>Box</code> to wrap the libraries errors. </li>
 </ol>
-<h3><a class="header" href="#exercise" id="exercise">Exercise</a></h3>
-<p>There's a simple command-line application in lesson_five that takes one parameter.  If the parameter is great than 125, the program errors.  Use a Result&lt;T, E&gt; to improve the error handling.</p>
 <h1><a class="header" href="#lesson-six-almighty-iterators" id="lesson-six-almighty-iterators">Lesson Six: Almighty Iterators</a></h1>
 <h2><a class="header" href="#objectives-6" id="objectives-6">Objectives</a></h2>
 <ul>
@@ -866,7 +878,7 @@ struct Foo&lt;'a&gt; {
     x: &amp;'a i32,
 }
 #}</code></pre></pre>
-<h3><a class="header" href="#exercise-1" id="exercise-1">Exercise</a></h3>
+<h3><a class="header" href="#exercise" id="exercise">Exercise</a></h3>
 <p>This exercise touches on a few topics: Vectors, iterators, and closures.</p>
 <p>The <code>iter</code> trait has many functions like <code>map</code> and <code>filter</code> that take closures as arguments. 
 They do this by implementing FnMut, which is one way, together with <code>FnOnce</code> and ```Fn`` to control how closures capture their surrounding values.</p>
@@ -914,7 +926,7 @@ fn longest&lt;'a&gt;(x: &amp;'a str, y: &amp;'a str) -&gt; &amp;'a str {  // &lt
 <pre><code>fn longest(x: &amp;'a str, y: &amp;'a str) -&gt; &amp;'a str ... 
 </code></pre>
 <p>So, 'they' dropped the cases where it was obvious and gave the heruistics a French name, 'lifetime elision rules' so no one would ask anymore questions. </p>
-<h2><a class="header" href="#exercise-2" id="exercise-2">Exercise</a></h2>
+<h2><a class="header" href="#exercise-1" id="exercise-1">Exercise</a></h2>
 <p>Create a binary tree datastructure.</p>
 <p>Each node may have a parent, a node to the left, and a node to the right.</p>
 <p>Add one function/method that allows insertion of a node.</p>
@@ -1113,7 +1125,7 @@ impl CompoundTax for SimpleTaxer {
 try <a href="https://doc.rust-lang.org/stable/reference/">The Reference</a> Some of the explanations are excellent.  Remarkably
 similar to some of the content here.  ;)</li>
 </ul>
-<h3><a class="header" href="#exercise-3" id="exercise-3">Exercise</a></h3>
+<h3><a class="header" href="#exercise-2" id="exercise-2">Exercise</a></h3>
 <p>In the below below, using a trait, create a converter between Kilos, Pounds, and Stone</p>
 <pre><pre class="playpen"><code class="language-rust">enum Uom_Weight { Kilos, Pounds, Stone }  //UOM -&gt; Unit of Measure
 
@@ -1996,262 +2008,7 @@ async fn main() -&gt; Result&lt;(), Box&lt;dyn std::error::Error&gt;&gt; {
     }
 }
 </code></pre></pre>
-<h1><a class="header" href="#basic-file-io-in-rust" id="basic-file-io-in-rust">Basic File I/O in Rust</a></h1>
-<h2><a class="header" href="#opening-a-file-and-writing-some-data" id="opening-a-file-and-writing-some-data">Opening a file and writing some data</a></h2>
-<pre><pre class="playpen"><code class="language-rust">use std::fs;
-use std::io;
-use std::io::{SeekFrom};
-use std::io::prelude::*;
-
-fn main() {
-    let mut fp = fs::OpenOptions::new()
-        .create(true)
-        .write(true)
-        .open(&quot;test.txt&quot;)
-        .unwrap();
-    
-    fp.write_all(b&quot;1&quot;);
-    fp.write_all(b&quot;2&quot;);
-    fp.write_all(b&quot;3&quot;);
-    fp.seek(SeekFrom::Start(0));
-    fp.write_all(b&quot;4&quot;);
-    fp.write_all(b&quot;5&quot;);
-}
-</code></pre></pre>
-<h3><a class="header" href="#output-file-testtxt" id="output-file-testtxt">Output file (test.txt)</a></h3>
-<pre><code>453
-</code></pre>
-<h3><a class="header" href="#points" id="points">Points</a></h3>
-<ul>
-<li>We use the <code>std::fs::OpenOptions</code> builder class to create a <code>File</code> (file handle object).</li>
-<li><code>create(true)</code> - create a new file if t does not exist</li>
-<li><code>write(true)</code> - open file with write permission</li>
-<li>After calling <code>open(filepath)</code>, the builder class returns <code>Result&lt;File&gt;</code> - we can handle an error here</li>
-<li><code>write_all</code> - get bytes as input, and write to file.</li>
-<li>File handle cursor will be repositioned after calling <code>write_all</code>, but we can manually move it with the <code>seek</code> function (because <code>File</code> implement Trait <code>io::Seek</code>)</li>
-<li><code>seek</code> receives a parameter <code>SeekFrom</code> object in 3 variants
-<ul>
-<li>Start(u64) : Seek from beginning of file</li>
-<li>Current(u64) : Seek from current position of <code>Cursor</code></li>
-<li>End(u64) : Current size of file plus position</li>
-</ul>
-</li>
-<li>The file handle automatically closes after the lifetime of file handle object ends. (In C/C++ we need to call fclose(FILE *fp) manually)</li>
-</ul>
-<h2><a class="header" href="#serializedeserialize-file-by-json" id="serializedeserialize-file-by-json">Serialize/Deserialize file by JSON</a></h2>
-<p>There's a wonderful library called <code>serde_json</code>. With this, we can easily/safely serialize/deserialize structured data to a text format.</p>
-<pre><pre class="playpen"><code class="language-rust">use serde::{Deserialize, Serialize};
-use serde_json::Result;
-use std::fs;
-use std::io::prelude::*;
-
-#[derive(Debug, Serialize, Deserialize)]
-enum Role {
-    Attacker,
-    Support,
-    Tanker
-}
-
-#[derive(Debug, Serialize, Deserialize)]
-struct Player {
-    id: u32,
-    name: String,
-    role: Role
-}
-
-#[derive(Debug, Serialize, Deserialize)]
-struct Party {
-    name: String,
-    members: Vec&lt;Player&gt;
-}
-
-fn main() {
-    let alice = Player { id: 1, name: &quot;Alice&quot;.to_string(), role: Role::Support };
-    let bob = Player { id: 2, name: &quot;Bob&quot;.to_string(), role: Role::Tanker };
-    let prim = Player { id: 3, name: &quot;Primula&quot;.to_string(), role: Role::Attacker };
-
-    let x = Party { name: &quot;For Fun&quot;.to_string(), members: vec!(alice, bob, prim) };
-
-    let json = serde_json::to_string(&amp;x).unwrap();
-    println!(&quot;{}&quot;, json);
-    println!();
-
-    {
-        let mut fp = fs::OpenOptions::new()
-            .create(true)
-            .write(true)
-            .open(&quot;party.json&quot;)
-            .unwrap();
-    
-        fp.write_all(json.as_bytes());
-    }
-
-    let mut fp = fs::OpenOptions::new()
-        .read(true)
-        .open(&quot;party.json&quot;)
-        .unwrap();
-    
-    let mut buffer = String::new();
-    fp.read_to_string(&amp;mut buffer);
-
-    let x_ds: Party = serde_json::from_str(&amp;buffer).unwrap();
-    println!(&quot;{:?}&quot;, x_ds);
-}
-</code></pre></pre>
-<h3><a class="header" href="#points-1" id="points-1">Points</a></h3>
-<ul>
-<li>We use <code>serde_json::to_string(&amp;str)</code> to encode struct to JSON, and in the same way, we use <code>serde_json::from_str(&amp;str)</code> to decode JSON back to struct.</li>
-<li>To make structs serializable with serde, we need to <code>#[derive()]</code> the macro called <code>Serialize</code> and <code>Deserialize</code> for deserializing.</li>
-</ul>
-<h2><a class="header" href="#binary-file-with-rust" id="binary-file-with-rust">Binary File with Rust</a></h2>
-<p>Saving a struct with Binary-Encoding in Rust can be done using library called <code>bincode</code> combined with <code>serde</code>'s macro. We migrate our previous code as follows:</p>
-<pre><pre class="playpen"><code class="language-rust">use serde::{Deserialize, Serialize};
-use std::fs;
-use std::io::prelude::*;
-use std::io::SeekFrom;
-
-#[derive(Debug, Serialize, Deserialize)]
-enum Role {
-    Attacker,
-    Support,
-    Tanker
-}
-
-#[derive(Debug, Serialize, Deserialize)]
-struct Player {
-    id: u32,
-    name: String,
-    role: Role,
-    money: u32
-}
-
-#[derive(Debug, Serialize, Deserialize)]
-struct Party {
-    name: String,
-    members: Vec&lt;Player&gt;
-}
-
-fn main() {
-    let alice = Player { id: 10, name: &quot;Alice&quot;.to_string(), role: Role::Support, money: 10 };
-    let bob = Player { id: 1000, name: &quot;Bob&quot;.to_string(), role: Role::Tanker, money: 255 };
-    let prim = Player { id: 100000, name: &quot;Primula&quot;.to_string(), role: Role::Attacker, money: 1000 };
-
-    let x = Party { name: &quot;For Fun&quot;.to_string(), members: vec!(alice, bob, prim) };
-
-    let bin = bincode::serialize(&amp;x).unwrap();
-    println!(&quot;{:?}&quot;, bin);
-    println!();
-
-    let mut fp = fs::OpenOptions::new()
-        .create(true)
-        .write(true)
-        .open(&quot;party.dat&quot;)
-        .unwrap();
-
-    fp.write_all(&amp;bin);
-}
-</code></pre></pre>
-<h3><a class="header" href="#points-2" id="points-2">Points</a></h3>
-<ul>
-<li>Because the output file <code>party.dat</code> is binary file, we cannot open normally in a basic Text Editor (Actually, we can open but it may display badly and/or be missing lots of information)</li>
-<li>To properly open binary files, we use a <code>Hex Editor</code>. there are many free ones:
-<ul>
-<li><a href="https://mh-nexus.de/en/hxd/">HxD</a></li>
-<li><a href="https://hexed.it/">Online Hex Editor</a></li>
-</ul>
-</li>
-</ul>
-<h3><a class="header" href="#understanding-binary-encoding" id="understanding-binary-encoding">Understanding Binary Encoding</a></h3>
-<p>Let's dig a bit deeper on the resulting <code>bincode</code> serialization.</p>
-<p><img src="lessons/lesson_twenty_two/RustFSExample//hex.png" alt="Data in Hex" /></p>
-<p>For those who may not familiar with hex editors, the two numbers in each of the columns represent one byte in file (in Haxadecimal). Let's look at our serialized struct <code>Party</code> again.</p>
-<pre><pre class="playpen"><code class="language-rust">
-# #![allow(unused_variables)]
-#fn main() {
-struct Party {
-    name: String,
-    members: Vec&lt;Player&gt;
-}
-#}</code></pre></pre>
-<p>And let's compare with the first 15 bytes for file</p>
-<pre><code>07 00 00 00 00 00 00 00 46 6F 72 20 46 75 6E
-</code></pre>
-<p>The part <code>46 6F 72 20 46 75 6E</code> in the bytes represents the ASCII number of String 'For Fun'. The first 8 bytes represents the length of this String. Someone may ask why use 8 bytes to store, it might be Rust (or bincode) use <code>u64</code> data format to store the lenght of string. (00 00 00 00 00 00 00 07 is 7 in decimal format)</p>
-<p>Another interesting, why is its order reversed?! The reason is bincode respects the machine's <code>Memory Layout</code>, It's use the same layout, <code>u64</code>, as RAM storage.</p>
-<p>Ok, let's see for next 8 bytes. It's <code>u64</code> again.  By using method above, we got </p>
-<p>03 00 00 00 00 00 00 00 ---&gt; 3 (decimal)</p>
-<p>This is the size of <code>Party.members</code> vector. <code>bincode</code> stores the size of vector before the real vector's content.</p>
-<p>Now that we are familiar with binary files, let's take the next one more quickly. The first item in vector is a struct with data:</p>
-<pre><pre class="playpen"><code class="language-rust">
-# #![allow(unused_variables)]
-#fn main() {
-Player { 
-    id: 10,      // u32
-    name: &quot;Alice&quot;.to_string(),      // lenght = 5
-    role: Role::Support,        // u32's Enum (by default)
-    money: 10                   // u32
-}
-#}</code></pre></pre>
-<p>And here how stored in Hex form:</p>
-<p><img src="lessons/lesson_twenty_two/RustFSExample//hex_alice.png" alt="Alice's Hex data" /></p>
-<pre><code>0x0000000A = 10             ; id
-0x0000000000000005 = 5      ; String.len()
-0x416C696365 = 'Alice'      ;
-0x00000001 = 1              ; Role::Support
-0x0000000A = 10             ; money
-</code></pre>
-<p>I will leave the rest of the data for you to practice.</p>
-<h2><a class="header" href="#cautions-about-using-binary-file" id="cautions-about-using-binary-file">Cautions about using binary file</a></h2>
-<p>Binary files are smaller, and in most cases, faster than json serialization but there's some considerations: </p>
-<ul>
-<li>Binary files are hard to read by humans and cannot be modified by text editors.</li>
-<li>If we change the structure of data, we can no longer use the saved file (without conversion or tweaking the read/write logic). For example:
-<ul>
-<li>Swap the order of struct's member</li>
-<li>Change the size of struct's member</li>
-</ul>
-</li>
-<li>It lacks a universal standard format comparing to JSON.</li>
-</ul>
-<h1><a class="header" href="#homework-playing-with-a-bmp-file" id="homework-playing-with-a-bmp-file">Homework (Playing with a BMP File)</a></h1>
-<p>Let's create an <code>inverse</code> filter for <code>Bitmap File</code> (.bmp) by using Binary File I/O. </p>
-<p>Your program reads an input bmp file, and creates an output bmp file, with the inverse filter applied.</p>
-<p><img src="lessons/lesson_twenty_two/RustFSExample/filter.png" alt="Filter result" /></p>
-<p>The Bitmap file is one of uncompressed image format. In this case we use a normal <code>24-bit RGB</code> image.
-The File header(the beginning of file) of BMP File is 14 bytes long with this information</p>
-<pre><pre class="playpen"><code class="language-rust">
-# #![allow(unused_variables)]
-#fn main() {
-{
-    // MagicNumber: 2 bytes
-    // FileSize: 4 bytes
-    // Reserved: 4 bytes (not important)
-    // StartAddress: 4 bytes
-}
-#}</code></pre></pre>
-<p>two important values in here are <code>FileSize</code> and <code>StartAddress</code>.</p>
-<p><code>FileSize</code> is the size of BMP File on disk, <code>StartAddress</code> is the start address of pixel data.</p>
-<p>if you use hex editor to see the content at <code>StartAddress</code>, you will see each pixel data store in this pattern:</p>
-<pre><code>[blue: u8] [green: u8] [red: u8] ....
-</code></pre>
-<p>The color in each RGB channel is stored in reverse order. And the byte order is from last row of pixels to first row of pixel. (Anyway, this is not important for our exercise)</p>
-<p>To create an inverse filter, we have to invert the bit of pixel data in every bytes. (0 to 1, 1 to 0)</p>
-<p>In rust, we can use the bitwise logical operator <code>!</code> </p>
-<pre><pre class="playpen"><code class="language-rust">
-# #![allow(unused_variables)]
-#fn main() {
-let mut x: u8 = 254u8;
-x = !x              // x is now 1
-
-// 254 (1111 1110) ---&gt; 1 (0000 0001)
-#}</code></pre></pre>
-<p>Ok, I hope you now have enough information to implement this program.</p>
-<h3><a class="header" href="#hint" id="hint">Hint</a></h3>
-<ul>
-<li>In this case, we can skip working on Bitmap's DIB part (the content after header and before pixel data), but we still have to copy all of those bytes to output file.</li>
-<li>You may have to use <code>seek</code> function</li>
-</ul>
-<p>More information about bitmap, you can look at <a href="https://en.wikipedia.org/wiki/BMP_file_format">wiki</a></p>
+<h1><a class="header" href="#file-io-and-image-transformations" id="file-io-and-image-transformations">File I/O and Image Transformations</a></h1>
 <h1><a class="header" href="#unsafe-code" id="unsafe-code">Unsafe Code</a></h1>
 <h1><a class="header" href="#contributors" id="contributors">Contributors</a></h1>
 <p><a href="https://mycostech.com">The Mycos Team</a></p>
@@ -2279,6 +2036,21 @@ x = !x              // x is now 1
 
         </div>
 
+        
+        <!-- Livereload script (if served using the cli tool) -->
+        <script type="text/javascript">
+            var socket = new WebSocket("ws://localhost:3001");
+            socket.onmessage = function (event) {
+                if (event.data === "reload") {
+                    socket.close();
+                    location.reload(true); // force reload from server (not from cache)
+                }
+            };
+
+            window.onbeforeunload = function() {
+                socket.close();
+            }
+        </script>
         
 
         

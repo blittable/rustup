@@ -7,15 +7,15 @@
 
 ## Errors:
 
-This is an excellent article on error handling in Rust.  https://blog.burntsushi.net/rust-error-handling/
+This is an excellent article on error handling in Rust here:  [error handling](https://blog.burntsushi.net/rust-error-handling/)
 
 The Rust Book and Rust By Example are a bit thin in this category, so the article is highly recommended.
 
-Frankly, handling errors in Rust requires more effort than OO programmers are accustomed to. 
+Frankly, handling errors in Rust requires more effort than programmers from dynmaically typed languages are accustomed to. 
 
 There are efforts like the [Failure](https://github.com/rust-lang-nursery/failure) library which attempt to make it more ergonomic/friendly to use.
 
-Here are the basics: 
+But, Here are the basics using only Rust's built-in types: 
 
 ## Error Propogation 
 
@@ -59,7 +59,7 @@ We know our T and get to work       We *might* have an Error (a trait)
 
 In OO programming we have the luxury of handling errors without knowing all the details, because if an error is thrown or I throw an error, we at least know it derives from an Error (typically an Exception class).
 
-In Rust, however, we *must* know the exact content of the Result's Err in order to handle it.  In fact the `E` in `Result<T, E>` needn't be an `Error` (deriving from the Error trait) at all (a String here for illustrative purpose):
+In Rust, however, we *must* know the exact content of the Result's Err in order to handle it completely.  In fact the `E` in `Result<T, E>` needn't be an `Error` (deriving from the Error trait) at all (a String here for illustrative purpose):
 
 ```rust
 
@@ -104,14 +104,34 @@ fn is_positive(number: i64) -> AliasedResult<()> {
 
 ```
 
-To summarize:
+## Using dyn Error to wrap errors
+
+The next challenge in Rust error handling is dealing with errors thrown by *other* libraries.  Althoug the specifics of the underlying error are unknown, if we know that the error is an Error of std::error::Error type, we can still `Box<dyn Error>` the error as shown below:
+
+
+```rust, no_run
+pub fn build_config(args: Vec<String>) -> Result<SuiteConfig, Box<dyn std::error::Error>> {
+
+//.. ommitted code
+
+            Err(e) => {
+                println!("Error opening the file: {:?}", e.description());
+                return Err(Box::new(e));
+            }
+}
+```
+
+
+
+
+
+## Summary:
 
 1) Using the `?` makes errors easier to read and makes higher-level code flow more sensibly.
-2) If you are using a Result (your own or from a function you invoke), first determine the type behind the Err.
+2) If you are using a Result (your own or from a function you invoke), first determine the type unwrapped by Err.
 3) Make no assumptions that the Err wraps a type implementing the Error trait.
+4) If you are handling other libraries' errors, you can use `Box` to wrap the libraries errors. 
 
-### Exercise 
 
-There's a simple command-line application in lesson_five that takes one parameter.  If the parameter is great than 125, the program errors.  Use a Result<T, E> to improve the error handling.
 
 

@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Error Handling - Rust for OO Programmers</title>
+        <title>Error Handling - Rust Top-Down</title>
         
 
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
@@ -110,7 +110,7 @@
                             
                         </div>
 
-                        <h1 class="menu-title">Rust for OO Programmers</h1>
+                        <h1 class="menu-title">Rust Top-Down</h1>
 
                         <div class="right-buttons">
                             <a href="../../print.html" title="Print this book" aria-label="Print this book">
@@ -152,11 +152,11 @@
 <li>Review matching in the context of error handling</li>
 </ul>
 <h2><a class="header" href="#errors" id="errors">Errors:</a></h2>
-<p>This is an excellent article on error handling in Rust.  https://blog.burntsushi.net/rust-error-handling/</p>
+<p>This is an excellent article on error handling in Rust here:  <a href="https://blog.burntsushi.net/rust-error-handling/">error handling</a></p>
 <p>The Rust Book and Rust By Example are a bit thin in this category, so the article is highly recommended.</p>
-<p>Frankly, handling errors in Rust requires more effort than OO programmers are accustomed to. </p>
+<p>Frankly, handling errors in Rust requires more effort than programmers from dynmaically typed languages are accustomed to. </p>
 <p>There are efforts like the <a href="https://github.com/rust-lang-nursery/failure">Failure</a> library which attempt to make it more ergonomic/friendly to use.</p>
-<p>Here are the basics: </p>
+<p>But, Here are the basics using only Rust's built-in types: </p>
 <h2><a class="header" href="#error-propogation" id="error-propogation">Error Propogation</a></h2>
 <p>Like <code>Options</code>, <code>Results</code> can use <code>.unwrap()</code>  As of Rust 2018, a nicer way to handle errors is to propogate via the <code>?</code> operator.</p>
 <p>It's analogous to throwing an Exception in an OO language. If it unwraps to an <code>Err</code>, throw it up the chain. </p>
@@ -186,7 +186,7 @@ We know our T and get to work       We *might* have an Error (a trait)
                                     with full knowledge of its underlying type
 </code></pre>
 <p>In OO programming we have the luxury of handling errors without knowing all the details, because if an error is thrown or I throw an error, we at least know it derives from an Error (typically an Exception class).</p>
-<p>In Rust, however, we <em>must</em> know the exact content of the Result's Err in order to handle it.  In fact the <code>E</code> in <code>Result&lt;T, E&gt;</code> needn't be an <code>Error</code> (deriving from the Error trait) at all (a String here for illustrative purpose):</p>
+<p>In Rust, however, we <em>must</em> know the exact content of the Result's Err in order to handle it completely.  In fact the <code>E</code> in <code>Result&lt;T, E&gt;</code> needn't be an <code>Error</code> (deriving from the Error trait) at all (a String here for illustrative purpose):</p>
 <pre><pre class="playpen"><code class="language-rust">
 fn main() -&gt; Result&lt;(), Box&lt;String&gt;&gt; {
     let function_result = is_positive(-2);
@@ -226,14 +226,26 @@ fn is_positive(number: i64) -&gt; AliasedResult&lt;()&gt; {
 }
 
 </code></pre></pre>
+<h2><a class="header" href="#using-dyn-error-to-wrap-errors" id="using-dyn-error-to-wrap-errors">Using dyn Error to wrap errors</a></h2>
+<p>The next challenge in Rust error handling is dealing with errors thrown by <em>other</em> libraries.  Althoug the specifics of the underlying error are unknown, if we know that the error is an Error of std::error::Error type, we can still <code>Box&lt;dyn Error&gt;</code> the error as shown below:</p>
+<pre><pre class="playpen"><code class="language-rust no_run">
+# #![allow(unused_variables)]
+#fn main() {
+pub fn build_config(args: Vec&lt;String&gt;) -&gt; Result&lt;SuiteConfig, Box&lt;dyn std::error::Error&gt;&gt; {
+//.. ommitted code
+
+            Err(e) =&gt; {
+                println!(&quot;Error opening the file: {:?}&quot;, e.description());
+                return Err(Box::new(e));
+            }
+#}</code></pre></pre>
 <p>To summarize:</p>
 <ol>
 <li>Using the <code>?</code> makes errors easier to read and makes higher-level code flow more sensibly.</li>
-<li>If you are using a Result (your own or from a function you invoke), first determine the type behind the Err.</li>
+<li>If you are using a Result (your own or from a function you invoke), first determine the type unwrapped by Err.</li>
 <li>Make no assumptions that the Err wraps a type implementing the Error trait.</li>
+<li>If you are handling other libraries' errors, you can use <code>Box</code> to wrap the libraries errors. </li>
 </ol>
-<h3><a class="header" href="#exercise" id="exercise">Exercise</a></h3>
-<p>There's a simple command-line application in lesson_five that takes one parameter.  If the parameter is great than 125, the program errors.  Use a Result&lt;T, E&gt; to improve the error handling.</p>
 
                     </main>
 
@@ -272,6 +284,21 @@ fn is_positive(number: i64) -&gt; AliasedResult&lt;()&gt; {
 
         </div>
 
+        
+        <!-- Livereload script (if served using the cli tool) -->
+        <script type="text/javascript">
+            var socket = new WebSocket("ws://localhost:3001");
+            socket.onmessage = function (event) {
+                if (event.data === "reload") {
+                    socket.close();
+                    location.reload(true); // force reload from server (not from cache)
+                }
+            };
+
+            window.onbeforeunload = function() {
+                socket.close();
+            }
+        </script>
         
 
         
