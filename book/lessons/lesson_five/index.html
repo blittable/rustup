@@ -232,14 +232,16 @@ fn is_positive(number: i64) -&gt; AliasedResult&lt;()&gt; {
 # #![allow(unused_variables)]
 #fn main() {
 pub fn build_config(args: Vec&lt;String&gt;) -&gt; Result&lt;SuiteConfig, Box&lt;dyn std::error::Error&gt;&gt; {
+
 //.. ommitted code
 
             Err(e) =&gt; {
                 println!(&quot;Error opening the file: {:?}&quot;, e.description());
                 return Err(Box::new(e));
             }
+}
 #}</code></pre></pre>
-<p>To summarize:</p>
+<h2><a class="header" href="#summary" id="summary">Summary:</a></h2>
 <ol>
 <li>Using the <code>?</code> makes errors easier to read and makes higher-level code flow more sensibly.</li>
 <li>If you are using a Result (your own or from a function you invoke), first determine the type unwrapped by Err.</li>
@@ -284,21 +286,6 @@ pub fn build_config(args: Vec&lt;String&gt;) -&gt; Result&lt;SuiteConfig, Box&lt
 
         </div>
 
-        
-        <!-- Livereload script (if served using the cli tool) -->
-        <script type="text/javascript">
-            var socket = new WebSocket("ws://localhost:3001");
-            socket.onmessage = function (event) {
-                if (event.data === "reload") {
-                    socket.close();
-                    location.reload(true); // force reload from server (not from cache)
-                }
-            };
-
-            window.onbeforeunload = function() {
-                socket.close();
-            }
-        </script>
         
 
         

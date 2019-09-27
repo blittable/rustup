@@ -655,14 +655,16 @@ fn is_positive(number: i64) -&gt; AliasedResult&lt;()&gt; {
 # #![allow(unused_variables)]
 #fn main() {
 pub fn build_config(args: Vec&lt;String&gt;) -&gt; Result&lt;SuiteConfig, Box&lt;dyn std::error::Error&gt;&gt; {
+
 //.. ommitted code
 
             Err(e) =&gt; {
                 println!(&quot;Error opening the file: {:?}&quot;, e.description());
                 return Err(Box::new(e));
             }
+}
 #}</code></pre></pre>
-<p>To summarize:</p>
+<h2><a class="header" href="#summary" id="summary">Summary:</a></h2>
 <ol>
 <li>Using the <code>?</code> makes errors easier to read and makes higher-level code flow more sensibly.</li>
 <li>If you are using a Result (your own or from a function you invoke), first determine the type unwrapped by Err.</li>
@@ -1127,20 +1129,94 @@ similar to some of the content here.  ;)</li>
 </ul>
 <h3><a class="header" href="#exercise-2" id="exercise-2">Exercise</a></h3>
 <p>In the below below, using a trait, create a converter between Kilos, Pounds, and Stone</p>
-<pre><pre class="playpen"><code class="language-rust">enum Uom_Weight { Kilos, Pounds, Stone }  //UOM -&gt; Unit of Measure
+<pre><pre class="playpen"><code class="language-rust">enum UomWeight { 
+    Kilos,
+    Pounds,
+    Stone
+}  //UOM -&gt; Unit of Measure
+
+impl UomWeight {
+    fn value(&amp;self) -&gt; f32 {
+        match *self {
+            UomWeight::Kilos =&gt; 1.0,
+            UomWeight::Pounds =&gt; 2.20462,
+            UomWeight::Stone =&gt; 0.157473,
+        }
+    }
+    fn unit(&amp;self) -&gt; String {
+        match *self {
+            UomWeight::Kilos =&gt; String::from(&quot;Kilogram&quot;),
+            UomWeight::Pounds =&gt; String::from(&quot;Pound&quot;),
+            UomWeight::Stone =&gt; String::from(&quot;Stone&quot;),
+        }
+    }
+}
+
 
 // 2.20462 =&gt; Kilos to Pounds
 // 0.157473 =&gt; Kilos to Stone
 
-struct InventoryItem {} //...more code
+struct InventoryItem {
+    mass: f32,
+    pub convertor: Box&lt;dyn Weightable&gt;
+} //...more code
+
+trait Weightable {
+    fn weight(&amp;self) -&gt; f32;
+}
+
+impl Weightable for InventoryItem {
+    fn weight(&amp;self) -&gt; f32 {
+        self.mass * self.convertor.weight()
+    }
+}
+
+impl Weightable for UomWeight {
+    fn weight(&amp;self) -&gt; f32 {
+        self.value()
+    }
+}
 
 fn main() {
+    let item1 = InventoryItem {
+        mass: 10.0,
+        convertor: Box::new(UomWeight::Kilos),
+    };
+
+    println!(
+        &quot;Weight of Mass {} in {} = {}&quot;,
+        item1.mass,
+        UomWeight::Kilos.unit(),
+        item1.weight()
+    );
+
+    let item2 = InventoryItem {
+        mass: 10.0,
+        convertor: Box::new(UomWeight::Pounds),
+    };
+
+    println!(
+        &quot;Weight of Mass {} in {} = {}&quot;,
+        item2.mass,
+        UomWeight::Pounds.unit(),
+        item2.weight()
+    );
+
+    let item3 = InventoryItem {
+        mass: 10.0,
+        convertor: Box::new(UomWeight::Stone),
+    };
+
+    println!(
+        &quot;Weight of Mass {} in {} = {}&quot;,
+        item3.mass,
+        UomWeight::Stone.unit(),
+        item3.weight()
+    );
     //1: create an inventory item
     //3: output the converted value 
     // Use a trait
 }
-
-
 </code></pre></pre>
 <h1><a class="header" href="#lesson-thirteen-constructors-patterns" id="lesson-thirteen-constructors-patterns">Lesson Thirteen: Constructors Patterns</a></h1>
 <p>OO programmers often think of Objects as the launching point of code, particularly, 'newing up' an object.</p>
@@ -1399,7 +1475,7 @@ fn generic_fn<T: ?Sized>(x: &T) -> u32 { ... } -->
 <h3><a class="header" href="#problem-preview-box-ref-refcell" id="problem-preview-box-ref-refcell">Problem Preview (Box, Ref, RefCell)</a></h3>
 <p>The exercise/assigment is to review the problem presented in this code.</p>
 <pre><pre class="playpen"><code class="language-rust">#[allow(dead_code)]
-
+use std::cell::{ Ref, RefCell};
 ///
 /// We have a hypothetical neighborhood that looks like this:
 ///
@@ -1431,33 +1507,47 @@ fn generic_fn<T: ?Sized>(x: &T) -> u32 { ... } -->
 
 fn main() {
     //setup a house
-    let house_a = House::new().setup_house(5, 2);
+    let house_a = House::new().setup_house(1, 2);
     let house_e = House::new().setup_house(3, 2);
-    let house_d = House::new().setup_house(3, 2);
+    let house_d = House::new().setup_house(2, 1);
 
     //Create the streets
     let mut street_0 = Street { houses: Vec::new() };
     let mut street_1 = Street { houses: Vec::new() };
 
-    street_0.houses.push(house_a);
-    street_0.houses.push(house_e);
+    street_1.houses.push(house_a.borrow());
+    street_0.houses.push(house_e.borrow());
 
     //house_d is on both streets
-    street_1.houses.push(house_d);
-    street_0.houses.push(house_d); // &lt;- Here's where the trouble begins
+    street_1.houses.push(house_d.borrow());
+    street_0.houses.push(house_d.borrow());
+
+    println!(&quot;Street 0:\t\t&quot;);
+    for h in street_0.houses {
+        println!(&quot;\tHouse Size\t:{:?}&quot;, &amp;h.get_house_size());
+        println!(&quot;\tHouse Plan\t:{:?}&quot;, &amp;h.details());
+    }
+    println!(&quot;Street 1:\t\t&quot;);
+    for h in street_1.houses {
+        println!(&quot;\tHouse Size\t:{:?}&quot;, &amp;h.get_house_size());
+        println!(&quot;\tHouse Plan\t:{:?}&quot;, &amp;h.details());
+    }
 }
 
+#[derive(Debug)]
 struct Room {
     name: String,
     room_size: i32,
 }
 
+#[derive(Debug)]
 struct House {
     rooms: Vec&lt;Room&gt;,
 }
 
-struct Street {
-    houses: Vec&lt;House&gt;,
+#[derive(Debug)]
+struct Street&lt;'a&gt; {
+    houses: Vec&lt;Ref&lt;'a,House&gt;&gt;,
 }
 
 impl House {
@@ -1469,7 +1559,7 @@ impl House {
         self.rooms.iter().map(|x| x.room_size).sum()
     }
 
-    pub fn setup_house(mut self, bedrooms: i8, living_rooms: i8) -&gt; House {
+    pub fn setup_house(mut self, bedrooms: i8, living_rooms: i8) -&gt; RefCell&lt;House&gt; {
         for i in 0..bedrooms {
             let bedroom: Room = Room {
                 name: format!(&quot;bedroom number {}&quot;, i),
@@ -1485,10 +1575,13 @@ impl House {
             };
             self.rooms.push(living_room);
         }
-        self
+        RefCell::new(self)
+    }
+
+    pub fn details(&amp;self) -&gt; Vec&lt;String&gt; {
+        self.rooms.iter().map(|r| format!(&quot;{}: {}&quot;, &amp;r.name, &amp;r.room_size)).collect()
     }
 }
-
 </code></pre></pre>
 <h1><a class="header" href="#lesson-sixteen-tbd" id="lesson-sixteen-tbd">Lesson Sixteen: TBD</a></h1>
 <h2><a class="header" href="#objectives-16" id="objectives-16">Objectives</a></h2>
@@ -2036,21 +2129,6 @@ async fn main() -&gt; Result&lt;(), Box&lt;dyn std::error::Error&gt;&gt; {
 
         </div>
 
-        
-        <!-- Livereload script (if served using the cli tool) -->
-        <script type="text/javascript">
-            var socket = new WebSocket("ws://localhost:3001");
-            socket.onmessage = function (event) {
-                if (event.data === "reload") {
-                    socket.close();
-                    location.reload(true); // force reload from server (not from cache)
-                }
-            };
-
-            window.onbeforeunload = function() {
-                socket.close();
-            }
-        </script>
         
 
         

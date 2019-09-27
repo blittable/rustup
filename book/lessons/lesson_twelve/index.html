@@ -291,20 +291,94 @@ similar to some of the content here.  ;)</li>
 </ul>
 <h3><a class="header" href="#exercise" id="exercise">Exercise</a></h3>
 <p>In the below below, using a trait, create a converter between Kilos, Pounds, and Stone</p>
-<pre><pre class="playpen"><code class="language-rust">enum Uom_Weight { Kilos, Pounds, Stone }  //UOM -&gt; Unit of Measure
+<pre><pre class="playpen"><code class="language-rust">enum UomWeight { 
+    Kilos,
+    Pounds,
+    Stone
+}  //UOM -&gt; Unit of Measure
+
+impl UomWeight {
+    fn value(&amp;self) -&gt; f32 {
+        match *self {
+            UomWeight::Kilos =&gt; 1.0,
+            UomWeight::Pounds =&gt; 2.20462,
+            UomWeight::Stone =&gt; 0.157473,
+        }
+    }
+    fn unit(&amp;self) -&gt; String {
+        match *self {
+            UomWeight::Kilos =&gt; String::from(&quot;Kilogram&quot;),
+            UomWeight::Pounds =&gt; String::from(&quot;Pound&quot;),
+            UomWeight::Stone =&gt; String::from(&quot;Stone&quot;),
+        }
+    }
+}
+
 
 // 2.20462 =&gt; Kilos to Pounds
 // 0.157473 =&gt; Kilos to Stone
 
-struct InventoryItem {} //...more code
+struct InventoryItem {
+    mass: f32,
+    pub convertor: Box&lt;dyn Weightable&gt;
+} //...more code
+
+trait Weightable {
+    fn weight(&amp;self) -&gt; f32;
+}
+
+impl Weightable for InventoryItem {
+    fn weight(&amp;self) -&gt; f32 {
+        self.mass * self.convertor.weight()
+    }
+}
+
+impl Weightable for UomWeight {
+    fn weight(&amp;self) -&gt; f32 {
+        self.value()
+    }
+}
 
 fn main() {
+    let item1 = InventoryItem {
+        mass: 10.0,
+        convertor: Box::new(UomWeight::Kilos),
+    };
+
+    println!(
+        &quot;Weight of Mass {} in {} = {}&quot;,
+        item1.mass,
+        UomWeight::Kilos.unit(),
+        item1.weight()
+    );
+
+    let item2 = InventoryItem {
+        mass: 10.0,
+        convertor: Box::new(UomWeight::Pounds),
+    };
+
+    println!(
+        &quot;Weight of Mass {} in {} = {}&quot;,
+        item2.mass,
+        UomWeight::Pounds.unit(),
+        item2.weight()
+    );
+
+    let item3 = InventoryItem {
+        mass: 10.0,
+        convertor: Box::new(UomWeight::Stone),
+    };
+
+    println!(
+        &quot;Weight of Mass {} in {} = {}&quot;,
+        item3.mass,
+        UomWeight::Stone.unit(),
+        item3.weight()
+    );
     //1: create an inventory item
     //3: output the converted value 
     // Use a trait
 }
-
-
 </code></pre></pre>
 
                     </main>
@@ -344,21 +418,6 @@ fn main() {
 
         </div>
 
-        
-        <!-- Livereload script (if served using the cli tool) -->
-        <script type="text/javascript">
-            var socket = new WebSocket("ws://localhost:3001");
-            socket.onmessage = function (event) {
-                if (event.data === "reload") {
-                    socket.close();
-                    location.reload(true); // force reload from server (not from cache)
-                }
-            };
-
-            window.onbeforeunload = function() {
-                socket.close();
-            }
-        </script>
         
 
         

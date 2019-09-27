@@ -1,5 +1,5 @@
 #[allow(dead_code)]
-
+use std::cell::{ Ref, RefCell};
 ///
 /// We have a hypothetical neighborhood that looks like this:
 ///
@@ -31,33 +31,47 @@
 
 fn main() {
     //setup a house
-    let house_a = House::new().setup_house(5, 2);
+    let house_a = House::new().setup_house(1, 2);
     let house_e = House::new().setup_house(3, 2);
-    let house_d = House::new().setup_house(3, 2);
+    let house_d = House::new().setup_house(2, 1);
 
     //Create the streets
     let mut street_0 = Street { houses: Vec::new() };
     let mut street_1 = Street { houses: Vec::new() };
 
-    street_0.houses.push(house_a);
-    street_0.houses.push(house_e);
+    street_1.houses.push(house_a.borrow());
+    street_0.houses.push(house_e.borrow());
 
     //house_d is on both streets
-    street_1.houses.push(house_d);
-    street_0.houses.push(house_d); // <- Here's where the trouble begins
+    street_1.houses.push(house_d.borrow());
+    street_0.houses.push(house_d.borrow());
+
+    println!("Street 0:\t\t");
+    for h in street_0.houses {
+        println!("\tHouse Size\t:{:?}", &h.get_house_size());
+        println!("\tHouse Plan\t:{:?}", &h.details());
+    }
+    println!("Street 1:\t\t");
+    for h in street_1.houses {
+        println!("\tHouse Size\t:{:?}", &h.get_house_size());
+        println!("\tHouse Plan\t:{:?}", &h.details());
+    }
 }
 
+#[derive(Debug)]
 struct Room {
     name: String,
     room_size: i32,
 }
 
+#[derive(Debug)]
 struct House {
     rooms: Vec<Room>,
 }
 
-struct Street {
-    houses: Vec<House>,
+#[derive(Debug)]
+struct Street<'a> {
+    houses: Vec<Ref<'a,House>>,
 }
 
 impl House {
@@ -69,7 +83,7 @@ impl House {
         self.rooms.iter().map(|x| x.room_size).sum()
     }
 
-    pub fn setup_house(mut self, bedrooms: i8, living_rooms: i8) -> House {
+    pub fn setup_house(mut self, bedrooms: i8, living_rooms: i8) -> RefCell<House> {
         for i in 0..bedrooms {
             let bedroom: Room = Room {
                 name: format!("bedroom number {}", i),
@@ -85,6 +99,10 @@ impl House {
             };
             self.rooms.push(living_room);
         }
-        self
+        RefCell::new(self)
+    }
+
+    pub fn details(&self) -> Vec<String> {
+        self.rooms.iter().map(|r| format!("{}: {}", &r.name, &r.room_size)).collect()
     }
 }
