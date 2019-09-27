@@ -12,6 +12,12 @@ use base64::{encode, decode};
 #[global_allocator]
 static ALLOC: wee_alloc::WeeAlloc = wee_alloc::WeeAlloc::INIT;
 
+macro_rules! log {
+    ( $( $t:tt )* ) => {
+        web_sys::console::log_1(&format!( $( $t )* ).into());
+    }
+}
+
 pub struct Bitmap<'a> {
     raw: Vec<u8>,
     content: Vec<Vec<(u8, u8, u8)>>,
@@ -134,6 +140,7 @@ pub fn load_image(id: &str, base64: String, filter: &str) {
 pub fn draw(id: &str, bmp: Bitmap) {
     let document = web_sys::window().unwrap().document().unwrap();
     let canvas = document.get_element_by_id(id).unwrap();
+
     let canvas: web_sys::HtmlCanvasElement = canvas
         .dyn_into::<web_sys::HtmlCanvasElement>()
         .map_err(|_| ())
@@ -145,8 +152,11 @@ pub fn draw(id: &str, bmp: Bitmap) {
         .unwrap()
         .dyn_into::<web_sys::CanvasRenderingContext2d>()
         .unwrap();
+
     
     let pixels = bmp.content;
+    log!("pixels len: {:?}", pixels);
+
     let height = pixels.len();
     let weight = pixels[0].len();
     context.clear_rect(0.0, 0.0, weight as f64, height as f64);

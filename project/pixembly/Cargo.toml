@@ -19,6 +19,7 @@ base64 = "0.10.1"
 [dependencies.web-sys]
 version = "0.3.4"
 features = [
+    'console',
     'CanvasRenderingContext2d',
     'Document',
     'Element',
