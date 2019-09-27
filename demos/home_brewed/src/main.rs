@@ -5,47 +5,34 @@
 //As a question:
 //When I use a closure as an input parameter,
 //I need to specify how the surrounding values
-//are consumed by the closure.  The receiving
-//functions must provide the trait bounds needed
-//for my 'capture' scenario.
+//are consumed by the closure.  
 
 fn main() {
-    let mut b = false;
-    let x = &mut b;
-
-    let mut c = || {
-        *x = true;
-    };
-    // The following line is an error:
-    // let y = &x;
-    c();
-
-    let z = &x;
-
     closure_tests();
 }
 
+fn flexi_function(count: i8, f: &dyn Fn(i8) -> i8) -> i8 {
+    println!("{}", f(count));
+    count 
+}
+
+fn age_in_20<T>(current: T) -> T where T: std::ops::Add<Output=T> {
+    current //TODO
+}
+
 fn closure_tests() {
-    let owned_value = "Mycos".to_string();
-    let static_ref_str_value = "Mycos";
-    let owned_mut_value: String = "Mycos".to_string();
+    flexi_function(4, &age_in_20);
+}
 
-    let closure = move || {
-        println!("{}", owned_value);
-        println!("{}", static_ref_str_value);
-        println!("{}", owned_mut_value);
-    };
-
-    apply_once(closure);
-    //apply_once(closure);
-    //apply_mut(closure);
+fn greet() {
+   println!("Wonderful"); 
 }
 
 fn apply_once<F>(f: F)
 where
     F: FnOnce(),
 {
-    return f();
+    f();
 }
 
 fn apply_alot<F>(f: F)
