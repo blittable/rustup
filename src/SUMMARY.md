@@ -19,7 +19,7 @@
 - [Constructor Patterns](./lessons/lesson_thirteen/README.md))
 - [Iterator Patterns](./lessons/lesson_fourteen/README.md))
 - [Copy/Clone/Sized Traits](./lessons/lesson_fifteen/README.md))
-- [TBD](./lessons/lesson_sixteen/README.md))
+- [Closure Patterns](./lessons/lesson_sixteen/README.md))
 - [Reference Counting and Interior Mutability with RefCell<T> and Rc<T>](./lessons/lesson_seventeen/README.md))
 - [Bit Fiddling](./lessons/lesson_eighteen/README.md))
 - [Web Assembly - WASM](./lessons/lesson_nineteen/README.md))
