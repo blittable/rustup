@@ -4,7 +4,7 @@ language = "en"
 multilingual = true 
 src = "src"
 title = "Rust Top-Down"
-categories = "tutorial, oo, learning rust"
+categories = "tutorial, training notes, oo, learning rust"
 
 [output.html.playpen]
 editable = true
