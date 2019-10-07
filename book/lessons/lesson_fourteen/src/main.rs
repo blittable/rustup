@@ -38,13 +38,14 @@ fn iterate_with_into_iter() {
 
     //Standard iter() iterates over the reference &T
     for name in q.iter() {
-        println!("Name is: {:?}", *name);   // <- Dereferencing (*) here, is equivilant 
-                                            //    to .into_iter() below
+        println!("Name is: {:?}", *name); // <- Dereferencing (*) here, is equivilant
+                                          //    to .into_iter() below
     }
 
     //into_iter() iterates over just T
     //This code will error if
-    for name in q.into_iter() {            // <- into_iter here is equivilant to * above 
+    for name in q.into_iter() {
+        // <- into_iter here is equivilant to * above
         println!("Name is: {:?}", name);
     }
 }
@@ -57,7 +58,7 @@ fn iter_little_things() {
     //2 - Take that iterator and use .map to create another iterator
     //3 - Create a closure that takes an iterator and invokes the next method
     //4 - The iterator holds our state and when the function of the closure exceeds
-    //    the bounds of the mapped string, an error is returned 
+    //    the bounds of the mapped string, an error is returned
 
     let mut iterator = semantic_version_number
         .split('.')
@@ -73,6 +74,5 @@ fn iter_little_things() {
     part();
     part();
     part();
-    part(); // <- greater than 3 bombs 
+    part(); // <- greater than 3 bombs
 }
-

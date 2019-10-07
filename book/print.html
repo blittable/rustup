@@ -1339,7 +1339,7 @@ fn main() {
     #println!(&quot;If we ran to here without an error in the asserts, it was successful.&quot;);
 }
 </code></pre></pre>
-<h1><a class="header" href="#lesson-thirteen-iterator-patterns" id="lesson-thirteen-iterator-patterns">Lesson Thirteen: Iterator Patterns</a></h1>
+<h1><a class="header" href="#lesson-fourteen-iterator-patterns" id="lesson-fourteen-iterator-patterns">Lesson Fourteen: Iterator Patterns</a></h1>
 <h2><a class="header" href="#objectives-14" id="objectives-14">Objectives</a></h2>
 <ul>
 <li>Understand Some of the main patterns used for iteration </li>
@@ -1384,13 +1384,14 @@ fn iterate_with_into_iter() {
 
     //Standard iter() iterates over the reference &amp;T
     for name in q.iter() {
-        println!(&quot;Name is: {:?}&quot;, *name);   // &lt;- Dereferencing (*) here, is equivilant 
-                                            //    to .into_iter() below
+        println!(&quot;Name is: {:?}&quot;, *name); // &lt;- Dereferencing (*) here, is equivilant
+                                          //    to .into_iter() below
     }
 
     //into_iter() iterates over just T
     //This code will error if
-    for name in q.into_iter() {            // &lt;- into_iter here is equivilant to * above 
+    for name in q.into_iter() {
+        // &lt;- into_iter here is equivilant to * above
         println!(&quot;Name is: {:?}&quot;, name);
     }
 }
@@ -1403,7 +1404,7 @@ fn iter_little_things() {
     //2 - Take that iterator and use .map to create another iterator
     //3 - Create a closure that takes an iterator and invokes the next method
     //4 - The iterator holds our state and when the function of the closure exceeds
-    //    the bounds of the mapped string, an error is returned 
+    //    the bounds of the mapped string, an error is returned
 
     let mut iterator = semantic_version_number
         .split('.')
@@ -1419,11 +1420,35 @@ fn iter_little_things() {
     part();
     part();
     part();
-    part(); // &lt;- greater than 3 bombs 
+    part(); // &lt;- greater than 3 bombs
 }
 
-
 </code></pre></pre>
+<p>enum Permissions {
+Sys(u8),
+Org(u8),
+Group(u8),
+User(u8),
+}</p>
+<p>impl Permissions {
+pub fn new() -&gt; Self {
+PMask {
+sys: 0b00000000,
+org: 0b00000000,
+group: 0b00000000,
+user: 0b00000000,
+}
+}
+}</p>
+<pre><code>fn apply(&amp;self) -&gt; impl Iterator&lt;Item = u8&gt; {
+    let s = iter::once(self.sys);
+    let o = iter::once(self.org);
+    let g = iter::once(self.group);
+    let u = iter::once(self.user);
+    s.chain(o).chain(g).chain(u)
+}
+</code></pre>
+<p>}</p>
 <h1><a class="header" href="#lesson-fifteen-copy-clone-drop-and-sized-traits-problem-preview" id="lesson-fifteen-copy-clone-drop-and-sized-traits-problem-preview">Lesson Fifteen: Copy, Clone, Drop and Sized Traits, Problem Preview</a></h1>
 <h2><a class="header" href="#objectives-15" id="objectives-15">Objectives</a></h2>
 <ul>
@@ -2101,7 +2126,262 @@ async fn main() -&gt; Result&lt;(), Box&lt;dyn std::error::Error&gt;&gt; {
     }
 }
 </code></pre></pre>
-<h1><a class="header" href="#file-io-and-image-transformations" id="file-io-and-image-transformations">File I/O and Image Transformations</a></h1>
+<h1><a class="header" href="#basic-file-io-in-rust" id="basic-file-io-in-rust">Basic File I/O in Rust</a></h1>
+<h2><a class="header" href="#opening-a-file-and-writing-some-data" id="opening-a-file-and-writing-some-data">Opening a file and writing some data</a></h2>
+<pre><pre class="playpen"><code class="language-rust">use std::fs;
+use std::io;
+use std::io::{SeekFrom};
+use std::io::prelude::*;
+
+fn main() {
+    let mut fp = fs::OpenOptions::new()
+        .create(true)
+        .write(true)
+        .open(&quot;test.txt&quot;)
+        .unwrap();
+    
+    fp.write_all(b&quot;1&quot;);
+    fp.write_all(b&quot;2&quot;);
+    fp.write_all(b&quot;3&quot;);
+    fp.seek(SeekFrom::Start(0));
+    fp.write_all(b&quot;4&quot;);
+    fp.write_all(b&quot;5&quot;);
+}
+</code></pre></pre>
+<h3><a class="header" href="#output-file-testtxt" id="output-file-testtxt">Output file (test.txt)</a></h3>
+<pre><code>453
+</code></pre>
+<h3><a class="header" href="#points" id="points">Points</a></h3>
+<ul>
+<li>We use the <code>std::fs::OpenOptions</code> builder class to create a <code>File</code> (file handle object).</li>
+<li><code>create(true)</code> - create a new file if t does not exist</li>
+<li><code>write(true)</code> - open file with write permission</li>
+<li>After calling <code>open(filepath)</code>, the builder class returns <code>Result&lt;File&gt;</code> - we can handle an error here</li>
+<li><code>write_all</code> - get bytes as input, and write to file.</li>
+<li>File handle cursor will be repositioned after calling <code>write_all</code>, but we can manually move it with the <code>seek</code> function (because <code>File</code> implement Trait <code>io::Seek</code>)</li>
+<li><code>seek</code> receives a parameter <code>SeekFrom</code> object in 3 variants
+<ul>
+<li>Start(u64) : Seek from beginning of file</li>
+<li>Current(u64) : Seek from current position of <code>Cursor</code></li>
+<li>End(u64) : Current size of file plus position</li>
+</ul>
+</li>
+<li>The file handle automatically closes after the lifetime of file handle object ends. (In C/C++ we need to call fclose(FILE *fp) manually)</li>
+</ul>
+<h2><a class="header" href="#serializedeserialize-file-by-json" id="serializedeserialize-file-by-json">Serialize/Deserialize file by JSON</a></h2>
+<p>There's a wonderful library called <code>serde_json</code>. With this, we can easily/safely serialize/deserialize structured data to a text format.</p>
+<pre><pre class="playpen"><code class="language-rust">use serde::{Deserialize, Serialize};
+use serde_json::Result;
+use std::fs;
+use std::io::prelude::*;
+
+#[derive(Debug, Serialize, Deserialize)]
+enum Role {
+    Attacker,
+    Support,
+    Tanker
+}
+
+#[derive(Debug, Serialize, Deserialize)]
+struct Player {
+    id: u32,
+    name: String,
+    role: Role
+}
+
+#[derive(Debug, Serialize, Deserialize)]
+struct Party {
+    name: String,
+    members: Vec&lt;Player&gt;
+}
+
+fn main() {
+    let alice = Player { id: 1, name: &quot;Alice&quot;.to_string(), role: Role::Support };
+    let bob = Player { id: 2, name: &quot;Bob&quot;.to_string(), role: Role::Tanker };
+    let prim = Player { id: 3, name: &quot;Primula&quot;.to_string(), role: Role::Attacker };
+
+    let x = Party { name: &quot;For Fun&quot;.to_string(), members: vec!(alice, bob, prim) };
+
+    let json = serde_json::to_string(&amp;x).unwrap();
+    println!(&quot;{}&quot;, json);
+    println!();
+
+    {
+        let mut fp = fs::OpenOptions::new()
+            .create(true)
+            .write(true)
+            .open(&quot;party.json&quot;)
+            .unwrap();
+    
+        fp.write_all(json.as_bytes());
+    }
+
+    let mut fp = fs::OpenOptions::new()
+        .read(true)
+        .open(&quot;party.json&quot;)
+        .unwrap();
+    
+    let mut buffer = String::new();
+    fp.read_to_string(&amp;mut buffer);
+
+    let x_ds: Party = serde_json::from_str(&amp;buffer).unwrap();
+    println!(&quot;{:?}&quot;, x_ds);
+}
+</code></pre></pre>
+<h3><a class="header" href="#points-1" id="points-1">Points</a></h3>
+<ul>
+<li>We use <code>serde_json::to_string(&amp;str)</code> to encode struct to JSON, and in the same way, we use <code>serde_json::from_str(&amp;str)</code> to decode JSON back to struct.</li>
+<li>To make structs serializable with serde, we need to <code>#[derive()]</code> the macro called <code>Serialize</code> and <code>Deserialize</code> for deserializing.</li>
+</ul>
+<h2><a class="header" href="#binary-file-with-rust" id="binary-file-with-rust">Binary File with Rust</a></h2>
+<p>Saving a struct with Binary-Encoding in Rust can be done using library called <code>bincode</code> combined with <code>serde</code>'s macro. We migrate our previous code as follows:</p>
+<pre><pre class="playpen"><code class="language-rust">use serde::{Deserialize, Serialize};
+use std::fs;
+use std::io::prelude::*;
+use std::io::SeekFrom;
+
+#[derive(Debug, Serialize, Deserialize)]
+enum Role {
+    Attacker,
+    Support,
+    Tanker
+}
+
+#[derive(Debug, Serialize, Deserialize)]
+struct Player {
+    id: u32,
+    name: String,
+    role: Role,
+    money: u32
+}
+
+#[derive(Debug, Serialize, Deserialize)]
+struct Party {
+    name: String,
+    members: Vec&lt;Player&gt;
+}
+
+fn main() {
+    let alice = Player { id: 10, name: &quot;Alice&quot;.to_string(), role: Role::Support, money: 10 };
+    let bob = Player { id: 1000, name: &quot;Bob&quot;.to_string(), role: Role::Tanker, money: 255 };
+    let prim = Player { id: 100000, name: &quot;Primula&quot;.to_string(), role: Role::Attacker, money: 1000 };
+
+    let x = Party { name: &quot;For Fun&quot;.to_string(), members: vec!(alice, bob, prim) };
+
+    let bin = bincode::serialize(&amp;x).unwrap();
+    println!(&quot;{:?}&quot;, bin);
+    println!();
+
+    let mut fp = fs::OpenOptions::new()
+        .create(true)
+        .write(true)
+        .open(&quot;party.dat&quot;)
+        .unwrap();
+
+    fp.write_all(&amp;bin);
+}
+</code></pre></pre>
+<h3><a class="header" href="#points-2" id="points-2">Points</a></h3>
+<ul>
+<li>Because the output file <code>party.dat</code> is binary file, we cannot open normally in a basic Text Editor (Actually, we can open but it may display badly and/or be missing lots of information)</li>
+<li>To properly open binary files, we use a <code>Hex Editor</code>. there are many free ones:
+<ul>
+<li><a href="https://mh-nexus.de/en/hxd/">HxD</a></li>
+<li><a href="https://hexed.it/">Online Hex Editor</a></li>
+</ul>
+</li>
+</ul>
+<h3><a class="header" href="#understanding-binary-encoding" id="understanding-binary-encoding">Understanding Binary Encoding</a></h3>
+<p>Let's dig a bit deeper on the resulting <code>bincode</code> serialization.</p>
+<p><img src="lessons/lesson_twenty_two/RustFSExample//hex.png" alt="Data in Hex" /></p>
+<p>For those who may not familiar with hex editors, the two numbers in each of the columns represent one byte in file (in Haxadecimal). Let's look at our serialized struct <code>Party</code> again.</p>
+<pre><pre class="playpen"><code class="language-rust">
+# #![allow(unused_variables)]
+#fn main() {
+struct Party {
+    name: String,
+    members: Vec&lt;Player&gt;
+}
+#}</code></pre></pre>
+<p>And let's compare with the first 15 bytes for file</p>
+<pre><code>07 00 00 00 00 00 00 00 46 6F 72 20 46 75 6E
+</code></pre>
+<p>The part <code>46 6F 72 20 46 75 6E</code> in the bytes represents the ASCII number of String 'For Fun'. The first 8 bytes represents the length of this String. Someone may ask why use 8 bytes to store, it might be Rust (or bincode) use <code>u64</code> data format to store the lenght of string. (00 00 00 00 00 00 00 07 is 7 in decimal format)</p>
+<p>Another interesting, why is its order reversed?! The reason is bincode respects the machine's <code>Memory Layout</code>, It's use the same layout, <code>u64</code>, as RAM storage.</p>
+<p>Ok, let's see for next 8 bytes. It's <code>u64</code> again.  By using method above, we got </p>
+<p>03 00 00 00 00 00 00 00 ---&gt; 3 (decimal)</p>
+<p>This is the size of <code>Party.members</code> vector. <code>bincode</code> stores the size of vector before the real vector's content.</p>
+<p>Now that we are familiar with binary files, let's take the next one more quickly. The first item in vector is a struct with data:</p>
+<pre><pre class="playpen"><code class="language-rust">
+# #![allow(unused_variables)]
+#fn main() {
+Player { 
+    id: 10,      // u32
+    name: &quot;Alice&quot;.to_string(),      // lenght = 5
+    role: Role::Support,        // u32's Enum (by default)
+    money: 10                   // u32
+}
+#}</code></pre></pre>
+<p>And here how stored in Hex form:</p>
+<p><img src="lessons/lesson_twenty_two/RustFSExample//hex_alice.png" alt="Alice's Hex data" /></p>
+<pre><code>0x0000000A = 10             ; id
+0x0000000000000005 = 5      ; String.len()
+0x416C696365 = 'Alice'      ;
+0x00000001 = 1              ; Role::Support
+0x0000000A = 10             ; money
+</code></pre>
+<p>I will leave the rest of the data for you to practice.</p>
+<h2><a class="header" href="#cautions-about-using-binary-file" id="cautions-about-using-binary-file">Cautions about using binary file</a></h2>
+<p>Binary files are smaller, and in most cases, faster than json serialization but there's some considerations: </p>
+<ul>
+<li>Binary files are hard to read by humans and cannot be modified by text editors.</li>
+<li>If we change the structure of data, we can no longer use the saved file (without conversion or tweaking the read/write logic). For example:
+<ul>
+<li>Swap the order of struct's member</li>
+<li>Change the size of struct's member</li>
+</ul>
+</li>
+<li>It lacks a universal standard format comparing to JSON.</li>
+</ul>
+<h1><a class="header" href="#homework-playing-with-a-bmp-file" id="homework-playing-with-a-bmp-file">Homework (Playing with a BMP File)</a></h1>
+<p>Let's create an <code>inverse</code> filter for <code>Bitmap File</code> (.bmp) by using Binary File I/O. </p>
+<p>Your program reads an input bmp file, and creates an output bmp file, with the inverse filter applied.</p>
+<p><img src="lessons/lesson_twenty_two/RustFSExample/filter.png" alt="Filter result" /></p>
+<p>The Bitmap file is one of uncompressed image format. In this case we use a normal <code>24-bit RGB</code> image.
+The File header(the beginning of file) of BMP File is 14 bytes long with this information</p>
+<pre><pre class="playpen"><code class="language-rust">
+# #![allow(unused_variables)]
+#fn main() {
+{
+    // MagicNumber: 2 bytes
+    // FileSize: 4 bytes
+    // Reserved: 4 bytes (not important)
+    // StartAddress: 4 bytes
+}
+#}</code></pre></pre>
+<p>two important values in here are <code>FileSize</code> and <code>StartAddress</code>.</p>
+<p><code>FileSize</code> is the size of BMP File on disk, <code>StartAddress</code> is the start address of pixel data.</p>
+<p>if you use hex editor to see the content at <code>StartAddress</code>, you will see each pixel data store in this pattern:</p>
+<pre><code>[blue: u8] [green: u8] [red: u8] ....
+</code></pre>
+<p>The color in each RGB channel is stored in reverse order. And the byte order is from last row of pixels to first row of pixel. (Anyway, this is not important for our exercise)</p>
+<p>To create an inverse filter, we have to invert the bit of pixel data in every bytes. (0 to 1, 1 to 0)</p>
+<p>In rust, we can use the bitwise logical operator <code>!</code> </p>
+<pre><pre class="playpen"><code class="language-rust">
+# #![allow(unused_variables)]
+#fn main() {
+let mut x: u8 = 254u8;
+x = !x              // x is now 1
+
+// 254 (1111 1110) ---&gt; 1 (0000 0001)
+#}</code></pre></pre>
+<p>Ok, I hope you now have enough information to implement this program.</p>
+<h3><a class="header" href="#hint" id="hint">Hint</a></h3>
+<ul>
+<li>In this case, we can skip working on Bitmap's DIB part (the content after header and before pixel data), but we still have to copy all of those bytes to output file.</li>
+<li>You may have to use <code>seek</code> function</li>
+</ul>
+<p>More information about bitmap, you can look at <a href="https://en.wikipedia.org/wiki/BMP_file_format">wiki</a></p>
 <h1><a class="header" href="#unsafe-code" id="unsafe-code">Unsafe Code</a></h1>
 <h1><a class="header" href="#contributors" id="contributors">Contributors</a></h1>
 <p><a href="https://mycostech.com">The Mycos Team</a></p>
@@ -2129,6 +2409,21 @@ async fn main() -&gt; Result&lt;(), Box&lt;dyn std::error::Error&gt;&gt; {
 
         </div>
 
+        
+        <!-- Livereload script (if served using the cli tool) -->
+        <script type="text/javascript">
+            var socket = new WebSocket("ws://localhost:3001");
+            socket.onmessage = function (event) {
+                if (event.data === "reload") {
+                    socket.close();
+                    location.reload(true); // force reload from server (not from cache)
+                }
+            };
+
+            window.onbeforeunload = function() {
+                socket.close();
+            }
+        </script>
         
 
         

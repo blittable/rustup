@@ -2,49 +2,46 @@
 #[allow(unused_variables)]
 #[allow(dead_code)]
 
-//As a question:
-//When I use a closure as an input parameter,
-//I need to specify how the surrounding values
-//are consumed by the closure.  
-
 fn main() {
-    closure_tests();
+    let mut x = 9;
+    let mut c = || x * 2;
+
+    let result_1 = flexi_function_fnonce(&c);
+    println!("Result 2: {:?}", result_1);
+
+    let result_2 = flexi_function_fn(&c);
+    println!("Result 2: {:?}", result_2);
+
+    let result_3 = flexi_function_fnmut(&c);
+    println!("Result 3: {:?}", result_3);
+
+    let mut x: usize = 1;
+    {
+        let add_two_to_x = || x += 2;
+        do_twice(add_two_to_x);
+    }
+
+    assert_eq!(x, 5);
 }
 
-fn flexi_function(count: i8, f: &dyn Fn(i8) -> i8) -> i8 {
-    println!("{}", f(count));
-    count 
+fn flexi_function_fnonce(f: impl FnOnce() -> i8) -> i8 {
+    2 * &f()
 }
 
-fn age_in_20<T>(current: T) -> T where T: std::ops::Add<Output=T> {
-    current //TODO
+fn flexi_function_fn(f: impl Fn() -> i8) -> i8 {
+    2 * &f();
+    2 * &f()
 }
 
-fn closure_tests() {
-    flexi_function(4, &age_in_20);
-}
-
-fn greet() {
-   println!("Wonderful"); 
-}
-
-fn apply_once<F>(f: F)
-where
-    F: FnOnce(),
-{
+fn flexi_function_fnmut(mut f: impl FnMut() -> i8) -> i8 {
     f();
+    f()
 }
 
-fn apply_alot<F>(f: F)
-where
-    F: Fn(),
-{
-    return f();
-}
-
-fn apply_mut<F>(mut f: F)
+fn do_twice<F>(mut func: F)
 where
     F: FnMut(),
 {
-    return f();
+    func();
+    func();
 }

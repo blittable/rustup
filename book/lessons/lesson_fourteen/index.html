@@ -145,7 +145,7 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1><a class="header" href="#lesson-thirteen-iterator-patterns" id="lesson-thirteen-iterator-patterns">Lesson Thirteen: Iterator Patterns</a></h1>
+                        <h1><a class="header" href="#lesson-fourteen-iterator-patterns" id="lesson-fourteen-iterator-patterns">Lesson Fourteen: Iterator Patterns</a></h1>
 <h2><a class="header" href="#objectives" id="objectives">Objectives</a></h2>
 <ul>
 <li>Understand Some of the main patterns used for iteration </li>
@@ -190,13 +190,14 @@ fn iterate_with_into_iter() {
 
     //Standard iter() iterates over the reference &amp;T
     for name in q.iter() {
-        println!(&quot;Name is: {:?}&quot;, *name);   // &lt;- Dereferencing (*) here, is equivilant 
-                                            //    to .into_iter() below
+        println!(&quot;Name is: {:?}&quot;, *name); // &lt;- Dereferencing (*) here, is equivilant
+                                          //    to .into_iter() below
     }
 
     //into_iter() iterates over just T
     //This code will error if
-    for name in q.into_iter() {            // &lt;- into_iter here is equivilant to * above 
+    for name in q.into_iter() {
+        // &lt;- into_iter here is equivilant to * above
         println!(&quot;Name is: {:?}&quot;, name);
     }
 }
@@ -209,7 +210,7 @@ fn iter_little_things() {
     //2 - Take that iterator and use .map to create another iterator
     //3 - Create a closure that takes an iterator and invokes the next method
     //4 - The iterator holds our state and when the function of the closure exceeds
-    //    the bounds of the mapped string, an error is returned 
+    //    the bounds of the mapped string, an error is returned
 
     let mut iterator = semantic_version_number
         .split('.')
@@ -225,11 +226,35 @@ fn iter_little_things() {
     part();
     part();
     part();
-    part(); // &lt;- greater than 3 bombs 
+    part(); // &lt;- greater than 3 bombs
 }
 
-
 </code></pre></pre>
+<p>enum Permissions {
+Sys(u8),
+Org(u8),
+Group(u8),
+User(u8),
+}</p>
+<p>impl Permissions {
+pub fn new() -&gt; Self {
+PMask {
+sys: 0b00000000,
+org: 0b00000000,
+group: 0b00000000,
+user: 0b00000000,
+}
+}
+}</p>
+<pre><code>fn apply(&amp;self) -&gt; impl Iterator&lt;Item = u8&gt; {
+    let s = iter::once(self.sys);
+    let o = iter::once(self.org);
+    let g = iter::once(self.group);
+    let u = iter::once(self.user);
+    s.chain(o).chain(g).chain(u)
+}
+</code></pre>
+<p>}</p>
 
                     </main>
 
@@ -268,6 +293,21 @@ fn iter_little_things() {
 
         </div>
 
+        
+        <!-- Livereload script (if served using the cli tool) -->
+        <script type="text/javascript">
+            var socket = new WebSocket("ws://localhost:3001");
+            socket.onmessage = function (event) {
+                if (event.data === "reload") {
+                    socket.close();
+                    location.reload(true); // force reload from server (not from cache)
+                }
+            };
+
+            window.onbeforeunload = function() {
+                socket.close();
+            }
+        </script>
         
 
         
