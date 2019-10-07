@@ -1,16 +1,14 @@
-# Rust for OO Programmers
+# Rust Top-Down 
 
-This is an overview/tutorial of the Rust programming language targeting object oriented programmers.  
+This is an overview/tutorial of the Rust programming language for progrmamers coming from 'higher' level languages.
 
-Rust is best groked from a C++/C perspective, so some content that attends to the background of OO programmers lets us skip a few topics, but more importantly post warning signs 
-where OO thinking may introduce obstacles to success.  By OO, we mean a statically-typed language where 'Object' sits at the top
-of the type heirarchy, such as any .NET language or Java.
+Rust is best groked from a C++/C perspective, so some content that attends to the background of programmers with Java/.NET/Python backgrounds lets us skip a few topics, but more importantly post warning signs where OO thinking may introduce obstacles to success. 
 
 [The Rust Programming Language - aka 'The Book'](https://doc.rust-lang.org/book/) is a *great* resource and should certainly be used in conjuction with the content if you are new to Rust programming.  
 
-Rust code and libraries are also easily 'self-documented', and one of the best examples is the std crate.  (a `crate` being the equivilant of an npm or nuget package).  [std](https://doc.rust-lang.org/std/)  For core concepts (e.g. references, types, etc.), the api documentation often provides conceptual context that is very helpful. 
+Rust code and libraries are also easily 'self-documented', and one of the best examples is the `std` crate.  (a `crate` being the equivilant of an npm or nuget package).  [std](https://doc.rust-lang.org/std/)  For core concepts (e.g. references, types, etc.), the api documentation often provides conceptual context that is very helpful. 
 
-A personal favorite, though sparse in parts, is the [reference book](https://doc.rust-lang.org/stable/reference/) It's readable and not strictly a formal reference.
+A personal favorite, though sparse in parts, is the [reference book].(https://doc.rust-lang.org/stable/reference/) It's readable and not strictly a formal reference.
 
 Keep in mind that post-install, you have the core documentation installed locally.  Launch with ```rustup doc```
 
